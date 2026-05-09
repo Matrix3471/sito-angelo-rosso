@@ -1,0 +1,24 @@
+# Dati pazienti e operativi — NON committare
+Pazienti.csv
+consultazioni.csv
+bilanci.csv
+newsletter.csv
+chatbot_interactions.csv
+richieste_contatto.csv
+agenda_disponibilita.csv
+
+# Mirror Excel
+excel/
+
+# Log server
+server-out.log
+server-err.log
+
+# File temporanei Windows
+Nuovo Documento di testo.txt
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+*.swp

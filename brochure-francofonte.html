@@ -1,0 +1,776 @@
+﻿<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Brochure pieghevole per Francofonte: telemedicina e servizi sanitari a domicilio con ECG, Holter ECG, Holter pressorio e assistenza infermieristica domiciliare.">
+  <title>Brochure | Francofonte, la telemedicina arriva a casa tua</title>
+  <style>
+    :root {
+      --bg: #eef3f8;
+      --paper: #ffffff;
+      --paper-soft: #f7fafc;
+      --text: #122033;
+      --muted: #5b687a;
+      --line: rgba(18, 32, 51, 0.10);
+      --dark: #0f1d2f;
+      --dark-2: #162842;
+      --accent: #ff7a18;
+      --accent-2: #24c7b9;
+      --accent-soft: rgba(255, 122, 24, 0.12);
+      --shadow: 0 22px 60px rgba(15, 28, 45, 0.12);
+      --radius: 24px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(36, 199, 185, 0.14), transparent 28%),
+        radial-gradient(circle at 100% 0%, rgba(255, 122, 24, 0.14), transparent 24%),
+        linear-gradient(180deg, #fbfcfe 0%, #eef3f8 100%);
+      min-height: 100vh;
+      padding: 24px;
+    }
+
+    .doc {
+      width: min(1180px, 100%);
+      margin: 0 auto;
+      display: grid;
+      gap: 20px;
+    }
+
+    .note {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.45;
+      margin: 0 0 2px;
+    }
+
+    .sheet {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      min-height: 420px;
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(18, 32, 51, 0.08);
+      background: var(--paper);
+    }
+
+    .sheet--balanced .panel {
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+    }
+
+    .sheet--balanced {
+      min-height: 540px;
+    }
+
+    .sheet--balanced .panel.balance-space {
+      justify-content: flex-start;
+      gap: 18px;
+    }
+
+    .sheet--balanced .panel.balance-space .section-title {
+      margin-bottom: 0;
+    }
+
+    .sheet--balanced .panel.balance-space .spread {
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: 18px;
+      flex: 1;
+      min-height: 360px;
+    }
+
+    .sheet--balanced .panel.balance-space .spread .top-block {
+      position: static;
+    }
+
+    .sheet--balanced .panel.balance-space .spread .bottom-block {
+      position: static;
+    }
+
+    .sheet--balanced .panel.balance-space .spread .panel-divider {
+      align-self: stretch;
+      border-radius: 999px;
+      background:
+        linear-gradient(90deg, rgba(36, 199, 185, 0), rgba(36, 199, 185, 0.30), rgba(36, 199, 185, 0)),
+        rgba(18, 32, 51, 0.04);
+      min-height: 18px;
+    }
+
+    .sheet--balanced .panel.dark.balance-space .spread .panel-divider {
+      background:
+        linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.20), rgba(255, 255, 255, 0)),
+        rgba(255, 255, 255, 0.05);
+    }
+
+    .panel {
+      position: relative;
+      padding: 28px 24px 22px;
+      overflow: hidden;
+      border-right: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,255,255,0.94));
+    }
+
+    .panel:last-child { border-right: 0; }
+
+    .panel::before {
+      content: "";
+      position: absolute;
+      inset: auto -40px -40px auto;
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(36, 199, 185, 0.10), transparent 70%);
+      pointer-events: none;
+    }
+
+    .dark {
+      background:
+        linear-gradient(135deg, rgba(15, 29, 47, 0.98), rgba(22, 40, 66, 0.98)),
+        radial-gradient(circle at 20% 20%, rgba(36, 199, 185, 0.18), transparent 34%),
+        radial-gradient(circle at 90% 0%, rgba(255, 122, 24, 0.18), transparent 28%);
+      color: #f7fbff;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .mark {
+      width: 44px;
+      height: 44px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--accent), #ffb66b);
+      box-shadow: 0 10px 24px rgba(255, 122, 24, 0.25);
+      flex: 0 0 auto;
+    }
+
+    .mark svg { width: 24px; height: 24px; color: #fff; }
+
+    .brand-text strong {
+      display: block;
+      font-size: 0.95rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .brand-text span {
+      display: block;
+      margin-top: 2px;
+      font-size: 0.88rem;
+      color: rgba(247, 251, 255, 0.75);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: rgba(247, 251, 255, 0.92);
+      font-size: 0.82rem;
+      margin-bottom: 16px;
+      letter-spacing: 0.02em;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent-2);
+      box-shadow: 0 0 0 5px rgba(36, 199, 185, 0.14);
+    }
+
+    h1, h2, h3, p { margin: 0; }
+
+    .hero-title {
+      font-size: clamp(2rem, 3.7vw, 3.7rem);
+      line-height: 0.98;
+      letter-spacing: -0.05em;
+      max-width: 12ch;
+      margin-bottom: 12px;
+    }
+
+    .hero-copy {
+      font-size: 1rem;
+      line-height: 1.55;
+      max-width: 36ch;
+      color: rgba(247, 251, 255, 0.84);
+    }
+
+    .bullets {
+      list-style: none;
+      padding: 0;
+      margin: 18px 0 0;
+      display: grid;
+      gap: 10px;
+    }
+
+    .bullets li {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      line-height: 1.45;
+      font-size: 0.92rem;
+    }
+
+    .bullets li::before {
+      content: "";
+      width: 9px;
+      height: 9px;
+      margin-top: 6px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), #ffb66b);
+      box-shadow: 0 0 0 4px rgba(255, 122, 24, 0.12);
+      flex: 0 0 auto;
+    }
+
+    .hero-card {
+      margin-top: 18px;
+      border-radius: 22px;
+      padding: 16px 16px 14px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .monitor {
+      border-radius: 18px;
+      padding: 14px;
+      background:
+        radial-gradient(circle at center, rgba(36,199,185,0.10), transparent 58%),
+        linear-gradient(180deg, #0b1421 0%, #09111b 100%);
+      border: 1px solid rgba(36, 199, 185, 0.18);
+    }
+
+    .monitor-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.72rem;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: rgba(217, 255, 246, 0.84);
+      margin-bottom: 10px;
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .status::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent-2);
+      box-shadow: 0 0 0 5px rgba(36, 199, 185, 0.14);
+    }
+
+    .ecg {
+      height: 118px;
+      border-radius: 16px;
+      border: 1px solid rgba(36, 199, 185, 0.12);
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, rgba(11, 20, 33, 0.18), rgba(11, 20, 33, 0.62));
+      display: grid;
+      place-items: center;
+    }
+
+    .ecg svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+      color: var(--accent-2);
+      filter:
+        drop-shadow(0 0 8px rgba(36, 199, 185, 0.24))
+        drop-shadow(0 0 16px rgba(36, 199, 185, 0.14));
+    }
+
+    .ecg path {
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2.3;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .monitor-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .metric {
+      border-radius: 14px;
+      padding: 10px 10px 9px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(125, 255, 178, 0.12);
+      min-width: 0;
+    }
+
+    .metric small {
+      display: block;
+      color: rgba(217, 255, 246, 0.72);
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 0.9rem;
+      line-height: 1.15;
+      color: #f7fffc;
+    }
+
+    .section-title {
+      margin-bottom: 12px;
+    }
+
+    .section-title h2 {
+      font-size: 1.18rem;
+      letter-spacing: -0.03em;
+      margin-bottom: 6px;
+    }
+
+    .section-title p {
+      font-size: 0.9rem;
+      line-height: 1.5;
+      color: var(--muted);
+    }
+
+    .list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 12px;
+    }
+
+    .list li {
+      padding: 12px 12px 13px;
+      border-radius: 18px;
+      background: var(--paper-soft);
+      border: 1px solid rgba(18, 32, 51, 0.08);
+    }
+
+    .list li strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 0.96rem;
+    }
+
+    .list li span {
+      display: block;
+      color: var(--muted);
+      line-height: 1.45;
+      font-size: 0.88rem;
+    }
+
+    .step-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 10px;
+      counter-reset: step;
+    }
+
+    .step-list li {
+      counter-increment: step;
+      padding: 11px 12px 12px;
+      border-radius: 18px;
+      border: 1px solid rgba(18, 32, 51, 0.08);
+      background: var(--paper-soft);
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .step-list li::before {
+      content: counter(step);
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+      background: linear-gradient(135deg, var(--accent), #ffb66b);
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.88rem;
+      box-shadow: 0 8px 18px rgba(255, 122, 24, 0.22);
+    }
+
+    .step-list strong {
+      display: block;
+      margin-bottom: 3px;
+      font-size: 0.95rem;
+    }
+
+    .step-list span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.88rem;
+      line-height: 1.45;
+    }
+
+    .callout {
+      padding: 16px;
+      border-radius: 20px;
+      background:
+        linear-gradient(135deg, rgba(255, 122, 24, 0.14), rgba(36, 199, 185, 0.08)),
+        var(--paper-soft);
+      border: 1px solid rgba(255, 122, 24, 0.18);
+    }
+
+    .callout strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 0.98rem;
+    }
+
+    .callout p,
+    .callout li {
+      color: var(--muted);
+      font-size: 0.88rem;
+      line-height: 1.48;
+    }
+
+    .device-figure {
+      margin-top: 14px;
+      border-radius: 22px;
+      overflow: hidden;
+      border: 1px solid rgba(18, 32, 51, 0.10);
+      background: #fff;
+      box-shadow: 0 10px 26px rgba(15, 28, 45, 0.08);
+    }
+
+    .device-figure img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .device-figure figcaption {
+      padding: 10px 12px 12px;
+      font-size: 0.84rem;
+      line-height: 1.45;
+      color: var(--muted);
+      background: var(--paper-soft);
+      border-top: 1px solid rgba(18, 32, 51, 0.08);
+    }
+
+    .contact-box {
+      padding: 16px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, var(--dark), var(--dark-2));
+      color: #f7fbff;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .contact-box h3 {
+      font-size: 1.05rem;
+      margin-bottom: 8px;
+    }
+
+    .contact-box p {
+      color: rgba(247, 251, 255, 0.82);
+      font-size: 0.9rem;
+      line-height: 1.5;
+      margin-bottom: 12px;
+    }
+
+    .phone {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 16px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, var(--accent), #ffb35e);
+      color: #fff;
+      text-decoration: none;
+      font-weight: 800;
+      box-shadow: 0 14px 26px rgba(255, 122, 24, 0.28);
+    }
+
+    .footer-note {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 0.84rem;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    .cover-cta {
+      margin-top: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .cover-figure {
+      margin: 16px 0 0;
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.06);
+      box-shadow: 0 14px 30px rgba(15, 28, 45, 0.18);
+    }
+
+    .cover-figure img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .cover-figure figcaption {
+      padding: 10px 12px 12px;
+      font-size: 0.82rem;
+      line-height: 1.45;
+      color: rgba(247, 251, 255, 0.78);
+      border-top: 1px solid rgba(255,255,255,0.10);
+    }
+
+    .cover-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 13px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: rgba(247, 251, 255, 0.92);
+      font-size: 0.85rem;
+    }
+
+    .cover-pill::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent-2);
+    }
+
+    @media (max-width: 1080px) {
+      body { padding: 16px; }
+      .sheet { grid-template-columns: 1fr; }
+      .panel { border-right: 0; border-bottom: 1px solid var(--line); }
+      .panel:last-child { border-bottom: 0; }
+    }
+
+    @media print {
+      body {
+        background: #fff;
+        padding: 0;
+      }
+
+      .doc {
+        width: 100%;
+        gap: 0;
+      }
+
+      .sheet {
+        width: 297mm;
+        min-height: 210mm;
+        border-radius: 0;
+        box-shadow: none;
+        break-after: page;
+      }
+
+      .sheet--balanced {
+        min-height: 210mm;
+      }
+
+      .sheet--balanced .panel.balance-space .spread {
+        display: grid;
+      }
+
+      .panel {
+        padding: 14mm 12mm 12mm;
+      }
+
+      .note,
+      .footer-note {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="doc">
+    <p class="note">Brochure pieghevole A4 a 3 ante. Stampa fronte-retro e piega sul tracciato interno.</p>
+
+    <section class="sheet">
+      <article class="panel dark">
+        <div class="brand">
+          <div class="mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 12h4l2-5 4 10 2-5h4"></path>
+            </svg>
+          </div>
+          <div class="brand-text">
+            <strong>Angelo Rosso</strong>
+            <span>Telemedicina e servizi a domicilio</span>
+          </div>
+        </div>
+        <div class="eyebrow">Nuova telemedicina a domicilio per Francofonte</div>
+        <h1 class="hero-title">Francofonte, la telemedicina arriva a casa tua</h1>
+        <p class="hero-copy">
+          ECG, Holter ECG, Holter pressorio e assistenza infermieristica domiciliare.
+          Un servizio pensato per unire comodità, tempi chiari e un supporto concreto vicino a casa.
+        </p>
+        <div class="cover-cta">
+          <div class="cover-pill">Servizio locale</div>
+          <div class="cover-pill">A domicilio</div>
+          <div class="cover-pill">Contatto diretto</div>
+        </div>
+        <figure class="cover-figure">
+          <img src="assets/brochure/ecg-holter-pressorio.png" alt="ECG e Holter pressorio a domicilio">
+          <figcaption>Strumenti professionali per i servizi domiciliari: ECG e Holter pressorio.</figcaption>
+        </figure>
+        <div class="hero-card">
+          <div class="monitor">
+            <div class="monitor-top">
+              <div class="status">Monitor telemedicina attivo</div>
+            </div>
+            <div class="ecg" aria-hidden="true">
+              <svg viewBox="0 0 800 150" preserveAspectRatio="none">
+                <path d="M0,80 C42,80 76,80 108,80 L142,80 C156,80 164,78 170,74 C176,70 181,62 184,49 C188,64 193,80 200,80 C206,80 214,80 221,80 C228,80 236,80 244,80 C250,80 256,79 261,78 C268,78 274,79 282,80 L316,80 C330,80 341,79 348,75 C355,71 360,63 364,48 C368,63 372,79 379,80 C385,80 391,80 397,80 C404,80 411,80 418,80 C424,80 431,80 437,80 C443,80 449,79 455,78 C462,78 470,79 478,80 L512,80 C526,80 536,79 543,75 C550,71 555,63 559,47 C563,62 567,79 574,80 C580,80 586,80 592,80 C598,80 604,80 611,80 C617,80 623,79 629,78 C636,78 643,79 651,80 L686,80 C709,80 735,80 800,80"></path>
+              </svg>
+            </div>
+            <div class="monitor-grid">
+              <div class="metric"><small>HR</small><strong>72 bpm</strong></div>
+              <div class="metric"><small>SpO2</small><strong>98%</strong></div>
+              <div class="metric"><small>PA</small><strong>118/76</strong></div>
+              <div class="metric"><small>FR</small><strong>14/min</strong></div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="panel">
+        <div class="section-title">
+          <h2>Cosa offre</h2>
+          <p>Servizi chiari, immediati e facili da capire anche per chi cerca una soluzione pratica per sé o per un familiare.</p>
+        </div>
+        <ul class="list">
+          <li><strong>ECG a domicilio</strong><span>Elettrocardiogramma eseguito direttamente a casa.</span></li>
+          <li><strong>Holter ECG</strong><span>Monitoraggio cardiaco continuo per un periodo definito.</span></li>
+          <li><strong>Holter pressorio</strong><span>Controllo della pressione durante la giornata.</span></li>
+          <li><strong>Assistenza infermieristica domiciliare</strong><span>Supporto pratico per bisogni assistenziali e controlli a casa.</span></li>
+        </ul>
+      </article>
+
+      <article class="panel">
+        <div class="section-title">
+          <h2>Perché può convenire</h2>
+          <p>Una soluzione più comoda, più semplice da organizzare e spesso più sostenibile per la famiglia.</p>
+        </div>
+        <div class="callout">
+          <strong>Più vicino, più semplice, più utile.</strong>
+          <ul class="bullets">
+            <li>Riduce spostamenti e attese inutili.</li>
+            <li>Rende più facile organizzare un controllo o un'assistenza.</li>
+            <li>Aiuta chi cerca un servizio sanitario locale e comprensibile.</li>
+            <li>Nasce per Francofonte, con un approccio concreto e moderno.</li>
+          </ul>
+        </div>
+        <div style="height:14px"></div>
+        <div class="contact-box">
+          <h3>Contatto diretto</h3>
+          <p>Per capire subito se il servizio è adatto alla tua situazione, contatta Angelo Rosso.</p>
+          <a class="phone" href="tel:+393315677922">331 567 7922</a>
+        </div>
+      </article>
+    </section>
+
+    <section class="sheet sheet--balanced">
+      <article class="panel">
+        <div class="section-title">
+          <h2>Come funziona</h2>
+          <p>Pochi passaggi, nessuna complicazione superflua.</p>
+        </div>
+        <ol class="step-list">
+          <li><div><strong>Ci contatti</strong><span>Spieghi la necessità e il tipo di servizio richiesto.</span></div></li>
+          <li><div><strong>Valutiamo insieme</strong><span>Si verifica la disponibilità e si definiscono tempi e modalità.</span></div></li>
+          <li><div><strong>Intervento a domicilio</strong><span>Il servizio viene organizzato direttamente a casa.</span></div></li>
+          <li><div><strong>Supporto chiaro</strong><span>Indicazioni semplici, contatto diretto, percorso essenziale.</span></div></li>
+        </ol>
+      </article>
+
+      <article class="panel balance-space">
+        <div class="section-title">
+          <h2>Per chi è pensato</h2>
+          <p>Per cittadini, pazienti e familiari che vogliono una soluzione vicina, comprensibile e concreta.</p>
+        </div>
+        <div class="spread">
+          <div class="top-block callout">
+            <strong>Un servizio nato per i cittadini di Francofonte.</strong>
+            <p>
+              È pensato per chi preferisce evitare spostamenti inutili, per chi cerca
+              un contatto diretto e per chi vuole gestire una necessità sanitaria con più
+              comodità e meno stress.
+            </p>
+          </div>
+          <div class="panel-divider" aria-hidden="true"></div>
+          <ul class="list bottom-block">
+            <li><strong>Per te o per un familiare</strong><span>Quando serve una soluzione semplice, senza perdere tempo.</span></li>
+            <li><strong>Per chi ha poca mobilità</strong><span>Una risposta più comoda, direttamente a casa.</span></li>
+            <li><strong>Per chi vuole chiarezza</strong><span>Tempi comprensibili e indicazioni pratiche fin dal primo contatto.</span></li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="panel dark balance-space">
+        <div class="section-title">
+          <h2>Hai bisogno di informazioni?</h2>
+          <p style="color: rgba(247,251,255,0.78);">Un messaggio o una chiamata bastano per capire se il servizio è adatto al tuo caso.</p>
+        </div>
+        <div class="spread">
+          <div class="top-block contact-box" style="background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.12);">
+            <h3>Angelo Rosso</h3>
+            <p style="color: rgba(247,251,255,0.82);">
+              ECG, Holter ECG, Holter pressorio e assistenza infermieristica domiciliare.
+            </p>
+            <a class="phone" href="tel:+393315677922">331 567 7922</a>
+          </div>
+          <div class="panel-divider" aria-hidden="true"></div>
+          <div class="bottom-block callout" style="background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.12);">
+            <strong style="color:#f7fbff;">Nota professionale</strong>
+            <p style="color: rgba(247,251,255,0.78);">
+              Alcune prestazioni possono richiedere indicazione o prescrizione medica.
+            </p>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <div class="footer-note">Formato consigliato: stampa fronte-retro su A4 orizzontale e piega in tre ante.</div>
+  </main>
+</body>
+</html>
+

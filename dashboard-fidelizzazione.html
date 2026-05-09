@@ -1,0 +1,1306 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Dashboard fidelizzazione | Angelo Rosso</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f6f7f4;
+      --panel: #ffffff;
+      --ink: #17201b;
+      --muted: #657067;
+      --line: #dce2dc;
+      --green: #1f7a57;
+      --green-soft: #e5f4ed;
+      --blue: #235f9c;
+      --blue-soft: #e8f1fb;
+      --amber: #986b17;
+      --amber-soft: #fff4d8;
+      --red: #a93b3b;
+      --red-soft: #fdeaea;
+      --shadow: 0 12px 34px rgba(23, 32, 27, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.45;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+    }
+
+    .app {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 260px 1fr;
+    }
+
+    aside {
+      background: #15241e;
+      color: #f3f7f3;
+      padding: 22px;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-bottom: 28px;
+    }
+
+    .brand strong {
+      font-size: 18px;
+      letter-spacing: 0;
+    }
+
+    .brand span,
+    .side-note {
+      color: #b9c8bf;
+      font-size: 13px;
+    }
+
+    nav {
+      display: grid;
+      gap: 8px;
+    }
+
+    .nav-button {
+      border: 0;
+      background: transparent;
+      color: #d9e4dc;
+      cursor: pointer;
+      padding: 11px 12px;
+      border-radius: 8px;
+      text-align: left;
+    }
+
+    .nav-button.active,
+    .nav-button:hover {
+      background: #21372e;
+      color: #ffffff;
+    }
+
+    .side-note {
+      margin-top: 28px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(255, 255, 255, 0.14);
+    }
+
+    main {
+      padding: 28px;
+      display: grid;
+      gap: 22px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 18px;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin: 0;
+    }
+
+    h1 {
+      font-size: 28px;
+      line-height: 1.15;
+    }
+
+    h2 {
+      font-size: 20px;
+      margin-bottom: 12px;
+    }
+
+    h3 {
+      font-size: 15px;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      margin-top: 6px;
+      max-width: 760px;
+    }
+
+    .status {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px 12px;
+      color: var(--muted);
+      min-width: 220px;
+      text-align: right;
+    }
+
+    .filters {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+      display: grid;
+      grid-template-columns: 1.5fr repeat(3, 1fr);
+      gap: 12px;
+      box-shadow: var(--shadow);
+    }
+
+    .field {
+      display: grid;
+      gap: 6px;
+    }
+
+    label {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    input,
+    select,
+    textarea {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #ffffff;
+      color: var(--ink);
+      padding: 10px 11px;
+      min-width: 0;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 168px;
+      resize: vertical;
+    }
+
+    .grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .kpi-grid {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+
+    .two-col {
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    }
+
+    .card,
+    .table-wrap,
+    .email-preview {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+
+    .card {
+      padding: 16px;
+    }
+
+    .kpi {
+      display: grid;
+      gap: 6px;
+      min-height: 112px;
+    }
+
+    .kpi span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .kpi strong {
+      font-size: 27px;
+      line-height: 1;
+    }
+
+    .kpi small {
+      color: var(--muted);
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      border-radius: 999px;
+      padding: 4px 9px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .tag.green {
+      background: var(--green-soft);
+      color: var(--green);
+    }
+
+    .tag.blue {
+      background: var(--blue-soft);
+      color: var(--blue);
+    }
+
+    .tag.amber {
+      background: var(--amber-soft);
+      color: var(--amber);
+    }
+
+    .tag.red {
+      background: var(--red-soft);
+      color: var(--red);
+    }
+
+    .progress-list {
+      display: grid;
+      gap: 13px;
+    }
+
+    .bar-row {
+      display: grid;
+      gap: 6px;
+    }
+
+    .bar-label {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .bar {
+      height: 10px;
+      border-radius: 999px;
+      background: #edf0ed;
+      overflow: hidden;
+    }
+
+    .bar > span {
+      display: block;
+      height: 100%;
+      border-radius: inherit;
+      background: var(--green);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    th,
+    td {
+      text-align: left;
+      padding: 12px;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+    }
+
+    th {
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      background: #fbfcfb;
+    }
+
+    tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .table-wrap {
+      overflow: auto;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .tab {
+      border: 1px solid var(--line);
+      background: #ffffff;
+      color: var(--ink);
+      border-radius: 8px;
+      padding: 9px 12px;
+      cursor: pointer;
+    }
+
+    .tab.active {
+      background: var(--green);
+      border-color: var(--green);
+      color: #ffffff;
+    }
+
+    .email-layout {
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 16px;
+    }
+
+    .trigger-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .trigger-item {
+      border: 1px solid var(--line);
+      background: #ffffff;
+      border-radius: 8px;
+      padding: 12px;
+      cursor: pointer;
+      display: grid;
+      gap: 6px;
+      text-align: left;
+    }
+
+    .trigger-item.active {
+      outline: 2px solid var(--green);
+      border-color: transparent;
+    }
+
+    .trigger-meta {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .email-preview {
+      padding: 16px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .copy-row {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .primary {
+      border: 0;
+      border-radius: 8px;
+      background: var(--green);
+      color: #ffffff;
+      padding: 10px 13px;
+      cursor: pointer;
+    }
+
+    .primary:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    .notice {
+      border-radius: 8px;
+      padding: 12px;
+      background: var(--amber-soft);
+      color: var(--amber);
+      border: 1px solid #f4dc9f;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    @media (max-width: 1060px) {
+      .app {
+        grid-template-columns: 1fr;
+      }
+
+      aside {
+        position: static;
+        height: auto;
+      }
+
+      nav {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .filters,
+      .kpi-grid,
+      .two-col,
+      .email-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .topbar {
+        flex-direction: column;
+      }
+
+      .status {
+        text-align: left;
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 620px) {
+      main {
+        padding: 18px;
+      }
+
+      nav {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      h1 {
+        font-size: 23px;
+      }
+
+      th,
+      td {
+        padding: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside>
+      <div class="brand">
+        <strong>Angelo Rosso</strong>
+        <span>Analisi dati e fidelizzazione</span>
+      </div>
+      <nav aria-label="Sezioni dashboard">
+        <button class="nav-button active" data-section="overview">Dashboard</button>
+        <button class="nav-button" data-section="triggers">Trigger email</button>
+        <button class="nav-button" data-section="debug">Debug trigger</button>
+        <button class="nav-button" data-section="requests">Nuove richieste</button>
+        <button class="nav-button" data-section="newsletter">Newsletter</button>
+        <button class="nav-button" data-section="segments">Segmenti</button>
+        <button class="nav-button" data-section="data">Dati</button>
+      </nav>
+      <p class="side-note">Invio email manuale assistito. I contatti senza consenso restano esclusi dalle bozze inviabili.</p>
+    </aside>
+
+    <main>
+      <header class="topbar">
+        <div>
+          <h1>Dashboard fidelizzazione</h1>
+          <p class="subtitle">Analisi operativa dei contatti, servizi, incassi e trigger post-prestazione.</p>
+        </div>
+        <div class="status" id="loadStatus">Caricamento dati CSV...</div>
+      </header>
+
+      <section class="filters" aria-label="Filtri">
+        <div class="field">
+          <label for="searchInput">Cerca cliente</label>
+          <input id="searchInput" type="search" placeholder="Nome, cognome, comune o email">
+        </div>
+        <div class="field">
+          <label for="cityFilter">Comune</label>
+          <select id="cityFilter">
+            <option value="">Tutti</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="serviceFilter">Servizio</label>
+          <select id="serviceFilter">
+            <option value="">Tutti</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="statusFilter">Stato</label>
+          <select id="statusFilter">
+            <option value="">Tutti</option>
+          </select>
+        </div>
+      </section>
+
+      <section id="overview" class="section grid">
+        <div class="grid kpi-grid" id="kpiGrid"></div>
+        <div class="grid two-col">
+          <article class="card">
+            <h2>Servizi più richiesti</h2>
+            <div class="progress-list" id="serviceBars"></div>
+          </article>
+          <article class="card">
+            <h2>Canale chatbot</h2>
+            <div class="progress-list" id="chatbotStats"></div>
+          </article>
+        </div>
+      </section>
+
+      <section id="triggers" class="section hidden">
+        <div class="tabs" role="tablist" aria-label="Filtro trigger">
+          <button class="tab active" data-trigger-filter="eligible">Email inviabili</button>
+          <button class="tab" data-trigger-filter="blocked">Bloccate</button>
+          <button class="tab" data-trigger-filter="all">Tutte</button>
+        </div>
+        <div class="email-layout">
+          <div class="card">
+            <h2>Trigger post-prestazione</h2>
+            <div class="trigger-list" id="triggerList"></div>
+          </div>
+          <article class="email-preview" id="emailPreview">
+            <h2>Bozza email</h2>
+            <p class="subtitle">Seleziona un trigger dalla lista per vedere oggetto e testo.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="debug" class="section hidden grid">
+        <article class="card">
+          <h2>Debug trigger</h2>
+          <p class="subtitle">Controllo cliente per cliente: consenso, blocchi, prestazione trovata e risultato finale.</p>
+        </article>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Cliente</th>
+                <th>Consenso</th>
+                <th>Non contattare</th>
+                <th>Prestazione</th>
+                <th>Giorni</th>
+                <th>Risultato</th>
+                <th>Motivo</th>
+              </tr>
+            </thead>
+            <tbody id="debugTable"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="newsletter" class="section hidden grid">
+        <article class="card">
+          <h2>Comunicazioni informative</h2>
+          <p class="subtitle">Modulo predisposto per iscritti newsletter. In questa fase non invia email e non raccoglie dati dal sito.</p>
+        </article>
+        <div class="grid kpi-grid" id="newsletterKpis"></div>
+        <div class="grid two-col">
+          <article class="card">
+            <h2>Iscritti per comune</h2>
+            <div class="progress-list" id="newsletterCityBars"></div>
+          </article>
+          <article class="card">
+            <h2>Fonti iscrizione</h2>
+            <div class="progress-list" id="newsletterSourceBars"></div>
+          </article>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Iscritto</th>
+                <th>Comune</th>
+                <th>Fonte</th>
+                <th>Stato</th>
+                <th>Consenso</th>
+                <th>Data iscrizione</th>
+                <th>Note</th>
+              </tr>
+            </thead>
+            <tbody id="newsletterTable"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="requests" class="section hidden grid">
+        <article class="card">
+          <h2>Nuove richieste</h2>
+          <p class="subtitle">Contatti raccolti dal chatbot o esportati da Airtable. Restano da verificare prima di diventare pazienti o prestazioni.</p>
+        </article>
+        <div class="grid kpi-grid" id="requestKpis"></div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Richiedente</th>
+                <th>Contatto</th>
+                <th>Comune</th>
+                <th>Servizio</th>
+                <th>Appuntamento</th>
+                <th>Disponibilita</th>
+                <th>Consenso</th>
+                <th>Stato</th>
+                <th>Note</th>
+              </tr>
+            </thead>
+            <tbody id="requestsTable"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="segments" class="section hidden grid two-col">
+        <article class="card">
+          <h2>Segmenti per comune</h2>
+          <div class="progress-list" id="cityBars"></div>
+        </article>
+        <article class="card">
+          <h2>Stato contatti</h2>
+          <div class="progress-list" id="statusBars"></div>
+        </article>
+      </section>
+
+      <section id="data" class="section hidden grid">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Cliente</th>
+                <th>Comune</th>
+                <th>Stato</th>
+                <th>Ultimo servizio</th>
+                <th>Ultimo contatto</th>
+                <th>Consenso</th>
+                <th>Da seguire</th>
+              </tr>
+            </thead>
+            <tbody id="contactsTable"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const state = {
+      patients: [],
+      payments: [],
+      chatbot: [],
+      consultations: [],
+      newsletter: [],
+      requests: [],
+      triggerFilter: 'eligible',
+      selectedTriggerId: null
+    };
+
+    const triggerRules = [
+      { day: 1, key: 'feedback', label: '1 giorno', type: 'Ringraziamento e feedback' },
+      { day: 7, key: 'education', label: '7 giorni', type: 'Contenuto educativo' },
+      { day: 30, key: 'relationship', label: '30 giorni', type: 'Relazione e mantenimento' },
+      { day: 90, key: 'soft_reminder', label: '90 giorni', type: 'Promemoria soft' }
+    ];
+
+    const fileMap = {
+      patients: 'Pazienti.csv',
+      payments: 'bilanci.csv',
+      chatbot: 'chatbot_interactions.csv',
+      consultations: 'consultazioni.csv',
+      newsletter: 'newsletter.csv',
+      requests: 'richieste_contatto.csv'
+    };
+
+    const els = {
+      loadStatus: document.getElementById('loadStatus'),
+      searchInput: document.getElementById('searchInput'),
+      cityFilter: document.getElementById('cityFilter'),
+      serviceFilter: document.getElementById('serviceFilter'),
+      statusFilter: document.getElementById('statusFilter'),
+      kpiGrid: document.getElementById('kpiGrid'),
+      serviceBars: document.getElementById('serviceBars'),
+      chatbotStats: document.getElementById('chatbotStats'),
+      cityBars: document.getElementById('cityBars'),
+      statusBars: document.getElementById('statusBars'),
+      contactsTable: document.getElementById('contactsTable'),
+      debugTable: document.getElementById('debugTable'),
+      newsletterKpis: document.getElementById('newsletterKpis'),
+      newsletterCityBars: document.getElementById('newsletterCityBars'),
+      newsletterSourceBars: document.getElementById('newsletterSourceBars'),
+      newsletterTable: document.getElementById('newsletterTable'),
+      requestKpis: document.getElementById('requestKpis'),
+      requestsTable: document.getElementById('requestsTable'),
+      triggerList: document.getElementById('triggerList'),
+      emailPreview: document.getElementById('emailPreview')
+    };
+
+    function parseCsv(text) {
+      const rows = [];
+      let current = '';
+      let row = [];
+      let insideQuotes = false;
+
+      for (let i = 0; i < text.length; i += 1) {
+        const char = text[i];
+        const next = text[i + 1];
+
+        if (char === '"' && insideQuotes && next === '"') {
+          current += '"';
+          i += 1;
+        } else if (char === '"') {
+          insideQuotes = !insideQuotes;
+        } else if (char === ',' && !insideQuotes) {
+          row.push(current.trim());
+          current = '';
+        } else if ((char === '\n' || char === '\r') && !insideQuotes) {
+          if (char === '\r' && next === '\n') i += 1;
+          row.push(current.trim());
+          if (row.some(Boolean)) rows.push(row);
+          row = [];
+          current = '';
+        } else {
+          current += char;
+        }
+      }
+
+      if (current || row.length) {
+        row.push(current.trim());
+        if (row.some(Boolean)) rows.push(row);
+      }
+
+      if (!rows.length) return [];
+      const headers = rows[0].map(normalizeHeader);
+      return rows.slice(1).map((values) => {
+        const record = {};
+        headers.forEach((header, index) => {
+          record[header] = values[index] || '';
+        });
+        return record;
+      });
+    }
+
+    function normalizeHeader(value) {
+      return value.trim().toLowerCase().replace(/\s+/g, '_');
+    }
+
+    function parseDate(value) {
+      if (!value) return null;
+      const date = new Date(`${value}T00:00:00`);
+      return Number.isNaN(date.getTime()) ? null : date;
+    }
+
+    function daysSince(value) {
+      const date = parseDate(value);
+      if (!date) return null;
+      const today = new Date();
+      const start = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+      return Math.floor((start - date) / 86400000);
+    }
+
+    function euro(value) {
+      const number = Number(String(value || '0').replace(',', '.')) || 0;
+      return new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'EUR' }).format(number);
+    }
+
+    function cleanService(value) {
+      return (value || 'Non indicato').replace(/_/g, ' ');
+    }
+
+    function isYes(value) {
+      return ['si', 'sì', 'yes', 'true', '1'].includes(String(value || '').trim().toLowerCase());
+    }
+
+    function groupCount(items, getKey) {
+      return items.reduce((acc, item) => {
+        const key = getKey(item) || 'Non indicato';
+        acc[key] = (acc[key] || 0) + 1;
+        return acc;
+      }, {});
+    }
+
+    function latestConsultationForPatient(patientId) {
+      return state.consultations
+        .filter((consultation) => consultation.id_paziente === patientId)
+        .sort((a, b) => String(b.data_consultazione).localeCompare(String(a.data_consultazione)))[0] || null;
+    }
+
+    function enrichPatients() {
+      return state.patients.map((patient) => {
+        const latestConsultation = latestConsultationForPatient(patient.id);
+        return {
+          ...patient,
+          latestConsultation,
+          ultimo_servizio: latestConsultation ? cleanService(latestConsultation.tipo_servizio) : 'Non indicato',
+          data_ultimo_servizio: latestConsultation ? latestConsultation.data_consultazione : '',
+          consenso_ok: isYes(patient.consenso_email),
+          non_contattare_ok: isYes(patient.non_contattare),
+          giorni_da_servizio: latestConsultation ? daysSince(latestConsultation.data_consultazione) : null
+        };
+      });
+    }
+
+    function getFilteredPatients() {
+      const search = els.searchInput.value.trim().toLowerCase();
+      const city = els.cityFilter.value;
+      const service = els.serviceFilter.value;
+      const status = els.statusFilter.value;
+
+      return enrichPatients().filter((patient) => {
+        const haystack = [
+          patient.nome,
+          patient.cognome,
+          patient.comune,
+          patient.email,
+          patient.telefono
+        ].join(' ').toLowerCase();
+
+        return (!search || haystack.includes(search))
+          && (!city || patient.comune === city)
+          && (!service || patient.ultimo_servizio === service)
+          && (!status || patient.stato === status);
+      });
+    }
+
+    function buildTriggers() {
+      return enrichPatients()
+        .filter((patient) => patient.latestConsultation && patient.giorni_da_servizio !== null && patient.giorni_da_servizio >= 1)
+        .map((patient) => {
+          const dueRule = [...triggerRules].reverse().find((rule) => patient.giorni_da_servizio >= rule.day);
+          const eligible = patient.consenso_ok && !patient.non_contattare_ok;
+          return {
+            id: `${patient.id}-${dueRule.key}`,
+            patient,
+            rule: dueRule,
+            eligible,
+            blockReason: eligible ? '' : getBlockReason(patient),
+            subject: buildSubject(patient, dueRule),
+            body: buildEmailBody(patient, dueRule)
+          };
+        })
+        .sort((a, b) => Number(b.eligible) - Number(a.eligible) || b.patient.giorni_da_servizio - a.patient.giorni_da_servizio);
+    }
+
+    function getBlockReason(patient) {
+      if (patient.non_contattare_ok) return 'Cliente segnato come non contattare';
+      if (!patient.consenso_ok) return 'Consenso email assente';
+      return 'Verifica necessaria';
+    }
+
+    function buildSubject(patient, rule) {
+      const service = patient.ultimo_servizio.toLowerCase();
+      if (rule.key === 'feedback') return `Un breve riscontro sul servizio ${service}`;
+      if (rule.key === 'education') return `Informazioni utili dopo il servizio ${service}`;
+      if (rule.key === 'relationship') return 'Un saluto e alcune informazioni utili';
+      return 'Restiamo a disposizione per necessita organizzative';
+    }
+
+    function buildEmailBody(patient, rule) {
+      const name = patient.nome || 'Gentile cliente';
+      const service = patient.ultimo_servizio;
+
+      if (rule.key === 'feedback') {
+        return `Buongiorno ${name},\n\nla ringrazio per aver scelto il servizio ${service} a domicilio.\n\nSe ha piacere, puo rispondere a questa email con un breve riscontro sull'organizzazione del servizio: puntualita, chiarezza delle informazioni e comodita dell'assistenza ricevuta.\n\nIl suo feedback aiuta a migliorare il servizio sul territorio.\n\nQuesta comunicazione ha finalita informativa e organizzativa, non sostituisce il parere del medico.\n\nCordiali saluti,\nAngelo Rosso`;
+      }
+
+      if (rule.key === 'education') {
+        return `Buongiorno ${name},\n\nle invio alcune informazioni generali collegate al servizio ${service}.\n\nConservi sempre eventuali referti e indicazioni ricevute dal medico curante o dallo specialista. Per dubbi clinici, sintomi nuovi o peggioramento delle condizioni, il riferimento resta il medico o il servizio di emergenza nei casi urgenti.\n\nPer necessita organizzative o per informazioni sui servizi domiciliari puo rispondere a questa email.\n\nCordiali saluti,\nAngelo Rosso`;
+      }
+
+      if (rule.key === 'relationship') {
+        return `Buongiorno ${name},\n\nspero che il servizio svolto sia stato utile e organizzato in modo chiaro.\n\nResto a disposizione per informazioni sui servizi domiciliari disponibili nel territorio di Francofonte, Lentini e Carlentini.\n\nQuesta email ha solo finalita informativa e di relazione con il cliente.\n\nCordiali saluti,\nAngelo Rosso`;
+      }
+
+      return `Buongiorno ${name},\n\nle scrivo solo per restare a disposizione in caso di necessita organizzative legate ai servizi domiciliari.\n\nPer qualsiasi dubbio clinico o sanitario e sempre opportuno rivolgersi al medico di riferimento. In caso di sintomi urgenti o importanti, contattare i servizi di emergenza.\n\nCordiali saluti,\nAngelo Rosso`;
+    }
+
+    function renderKpis(patients) {
+      const totalRevenue = state.payments.reduce((sum, payment) => sum + (Number(payment.importo) || 0), 0);
+      const unpaid = state.payments
+        .filter((payment) => String(payment.modalita_pagamento || '').toLowerCase().includes('non pagato'))
+        .reduce((sum, payment) => sum + (Number(payment.importo) || 0), 0);
+      const triggers = buildTriggers();
+      const conversions = state.chatbot.filter((row) => row.outcome === 'Conversione_Whatsapp').length;
+      const consentCount = patients.filter((patient) => patient.consenso_ok).length;
+      const requestsToVerify = state.requests.filter((item) => String(field(item, ['stato']) || '').toLowerCase() === 'da verificare').length;
+
+      const kpis = [
+        { label: 'Clienti filtrati', value: patients.length, note: `${consentCount} con consenso`, color: 'green' },
+        { label: 'Prestazioni registrate', value: state.consultations.length, note: 'Da consultazioni.csv', color: 'blue' },
+        { label: 'Incassi totali', value: euro(totalRevenue), note: `${euro(unpaid)} da incassare`, color: unpaid > 0 ? 'amber' : 'green' },
+        { label: 'Trigger email', value: triggers.filter((item) => item.eligible).length, note: `${triggers.filter((item) => !item.eligible).length} bloccati`, color: 'green' },
+        { label: 'Conversioni WhatsApp', value: conversions, note: 'Da chatbot', color: 'blue' },
+        { label: 'Nuove richieste', value: state.requests.length, note: `${requestsToVerify} da verificare`, color: requestsToVerify ? 'amber' : 'blue' }
+      ];
+
+      els.kpiGrid.innerHTML = kpis.map((item) => `
+        <article class="card kpi">
+          <span>${item.label}</span>
+          <strong>${item.value}</strong>
+          <small class="tag ${item.color}">${item.note}</small>
+        </article>
+      `).join('');
+    }
+
+    function renderBars(container, counts) {
+      const entries = Object.entries(counts).sort((a, b) => b[1] - a[1]);
+      const max = Math.max(...entries.map((entry) => entry[1]), 1);
+      container.innerHTML = entries.length ? entries.map(([label, count]) => `
+        <div class="bar-row">
+          <div class="bar-label"><strong>${label}</strong><span>${count}</span></div>
+          <div class="bar"><span style="width: ${(count / max) * 100}%"></span></div>
+        </div>
+      `).join('') : '<p class="subtitle">Nessun dato disponibile.</p>';
+    }
+
+    function renderChatbot() {
+      const counts = groupCount(state.chatbot, (item) => item.outcome || 'Non indicato');
+      renderBars(els.chatbotStats, counts);
+    }
+
+    function renderContactsTable(patients) {
+      els.contactsTable.innerHTML = patients.map((patient) => {
+        const follow = patient.giorni_da_servizio !== null && patient.giorni_da_servizio >= 7;
+        return `
+          <tr>
+            <td><strong>${patient.nome} ${patient.cognome}</strong><br><span class="subtitle">${patient.email || 'Email assente'}</span></td>
+            <td>${patient.comune || '-'}</td>
+            <td>${patient.stato || '-'}</td>
+            <td>${patient.ultimo_servizio}<br><span class="subtitle">${patient.data_ultimo_servizio || '-'}</span></td>
+            <td>${patient.data_ultimo_contatto || '-'}</td>
+            <td><span class="tag ${patient.consenso_ok ? 'green' : 'red'}">${patient.consenso_ok ? 'Sì' : 'No'}</span></td>
+            <td><span class="tag ${follow ? 'amber' : 'blue'}">${follow ? 'Verifica' : 'Non urgente'}</span></td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function getTriggerDebug(patient) {
+      const hasService = Boolean(patient.latestConsultation);
+      const hasValidDays = patient.giorni_da_servizio !== null && patient.giorni_da_servizio >= 1;
+
+      if (!patient.consenso_ok) {
+        return {
+          result: 'Bloccato',
+          color: 'red',
+          reason: 'Consenso email assente'
+        };
+      }
+
+      if (patient.non_contattare_ok) {
+        return {
+          result: 'Bloccato',
+          color: 'red',
+          reason: 'Cliente segnato come non contattare'
+        };
+      }
+
+      if (!hasService) {
+        return {
+          result: 'Nessun trigger',
+          color: 'amber',
+          reason: 'Nessuna prestazione trovata in consultazioni.csv'
+        };
+      }
+
+      if (!hasValidDays) {
+        return {
+          result: 'In attesa',
+          color: 'blue',
+          reason: 'Prestazione troppo recente o data non valida'
+        };
+      }
+
+      return {
+        result: 'Email inviabile',
+        color: 'green',
+        reason: 'Consenso presente, nessun blocco, prestazione valida'
+      };
+    }
+
+    function renderDebugTable(patients) {
+      els.debugTable.innerHTML = patients.map((patient) => {
+        const debug = getTriggerDebug(patient);
+        return `
+          <tr>
+            <td><strong>${patient.nome} ${patient.cognome}</strong><br><span class="subtitle">${patient.email || 'Email assente'}</span></td>
+            <td><span class="tag ${patient.consenso_ok ? 'green' : 'red'}">${patient.consenso_ok ? 'Sì' : 'No'}</span></td>
+            <td><span class="tag ${patient.non_contattare_ok ? 'red' : 'green'}">${patient.non_contattare_ok ? 'Sì' : 'No'}</span></td>
+            <td>${patient.latestConsultation ? `${patient.ultimo_servizio}<br><span class="subtitle">${patient.data_ultimo_servizio}</span>` : '<span class="subtitle">Non trovata</span>'}</td>
+            <td>${patient.giorni_da_servizio === null ? '-' : patient.giorni_da_servizio}</td>
+            <td><span class="tag ${debug.color}">${debug.result}</span></td>
+            <td>${debug.reason}</td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function renderNewsletter() {
+      const active = state.newsletter.filter((item) => String(item.stato || '').toLowerCase() === 'attivo');
+      const consent = state.newsletter.filter((item) => isYes(item.consenso_newsletter));
+      const unsubscribed = state.newsletter.filter((item) => String(item.stato || '').toLowerCase() === 'disiscritto');
+      const toVerify = state.newsletter.filter((item) => !isYes(item.consenso_newsletter) || String(item.stato || '').toLowerCase() === 'da_verificare');
+
+      const kpis = [
+        { label: 'Iscritti totali', value: state.newsletter.length, note: 'Da newsletter.csv', color: 'blue' },
+        { label: 'Attivi', value: active.length, note: 'Ricevibili solo con consenso', color: 'green' },
+        { label: 'Consensi validi', value: consent.length, note: 'Consenso newsletter = sì', color: 'green' },
+        { label: 'Da verificare', value: toVerify.length, note: 'Non usare per invio', color: toVerify.length ? 'amber' : 'green' },
+        { label: 'Disiscritti', value: unsubscribed.length, note: 'Esclusi sempre', color: unsubscribed.length ? 'red' : 'blue' }
+      ];
+
+      els.newsletterKpis.innerHTML = kpis.map((item) => `
+        <article class="card kpi">
+          <span>${item.label}</span>
+          <strong>${item.value}</strong>
+          <small class="tag ${item.color}">${item.note}</small>
+        </article>
+      `).join('');
+
+      renderBars(els.newsletterCityBars, groupCount(state.newsletter, (item) => item.comune));
+      renderBars(els.newsletterSourceBars, groupCount(state.newsletter, (item) => item.fonte));
+
+      els.newsletterTable.innerHTML = state.newsletter.length ? state.newsletter.map((item) => {
+        const consentOk = isYes(item.consenso_newsletter);
+        const status = item.stato || 'Non indicato';
+        const blocked = !consentOk || status.toLowerCase() === 'disiscritto';
+        return `
+          <tr>
+            <td><strong>${item.nome || '-'}</strong><br><span class="subtitle">${item.email || 'Email assente'}</span></td>
+            <td>${item.comune || '-'}</td>
+            <td>${item.fonte || '-'}</td>
+            <td><span class="tag ${blocked ? 'red' : 'green'}">${status}</span></td>
+            <td><span class="tag ${consentOk ? 'green' : 'red'}">${consentOk ? 'Sì' : 'No'}</span></td>
+            <td>${item.data_iscrizione || '-'}</td>
+            <td>${item.note || '-'}</td>
+          </tr>
+        `;
+      }).join('') : `
+        <tr>
+          <td colspan="7">
+            <strong>Nessun iscritto registrato.</strong><br>
+            <span class="subtitle">Il modulo e pronto, ma la raccolta newsletter non e ancora attiva sul sito.</span>
+          </td>
+        </tr>
+      `;
+    }
+
+    function field(row, names) {
+      for (const name of names) {
+        if (row[name]) return row[name];
+      }
+
+      return '';
+    }
+
+    function renderRequests() {
+      const activeRequests = state.requests.filter((item) => Object.values(item).some(Boolean));
+      const toVerify = activeRequests.filter((item) => String(field(item, ['stato']) || '').toLowerCase() === 'da verificare');
+      const withConsent = activeRequests.filter((item) => isYes(field(item, ['consenso_ricontatto'])));
+      const booked = activeRequests.filter((item) => String(field(item, ['stato']) || '').toLowerCase() === 'prenotato');
+
+      const kpis = [
+        { label: 'Richieste totali', value: activeRequests.length, note: 'Da richieste_contatto.csv', color: 'blue' },
+        { label: 'Da verificare', value: toVerify.length, note: 'Controllo manuale', color: toVerify.length ? 'amber' : 'green' },
+        { label: 'Con consenso', value: withConsent.length, note: 'Ricontatto autorizzato', color: 'green' },
+        { label: 'Prenotate', value: booked.length, note: 'Convertite manualmente', color: 'blue' }
+      ];
+
+      els.requestKpis.innerHTML = kpis.map((item) => `
+        <article class="card kpi">
+          <span>${item.label}</span>
+          <strong>${item.value}</strong>
+          <small class="tag ${item.color}">${item.note}</small>
+        </article>
+      `).join('');
+
+      els.requestsTable.innerHTML = activeRequests.length ? activeRequests.map((item) => {
+        const consentOk = isYes(field(item, ['consenso_ricontatto']));
+        const status = field(item, ['stato']) || 'Da verificare';
+        const requester = field(item, ['nome_richiedente']);
+        const patient = field(item, ['nome_paziente']);
+        const phone = field(item, ['telefono']);
+        const email = field(item, ['email']);
+        const requestedDay = field(item, ['giorno_richiesto']);
+        const requestedTime = field(item, ['orario_richiesto', 'orario_preferito']);
+        const availability = field(item, ['esito_disponibilita']) || 'Da verificare';
+        const alternatives = field(item, ['alternative_proposte']);
+        const availabilityClass = availability.toLowerCase().includes('disponibile') ? 'green' : availability.toLowerCase().includes('occupato') ? 'red' : 'amber';
+        return `
+          <tr>
+            <td><strong>${requester || '-'}</strong><br><span class="subtitle">${patient ? `Paziente: ${patient}` : 'Paziente non indicato'}</span></td>
+            <td>${phone || '-'}<br><span class="subtitle">${email || 'Email assente'}</span></td>
+            <td>${field(item, ['comune']) || '-'}</td>
+            <td>${field(item, ['servizio_richiesto']) || '-'}</td>
+            <td>${requestedDay || '-'}<br><span class="subtitle">${requestedTime || 'Orario assente'}</span></td>
+            <td><span class="tag ${availabilityClass}">${availability}</span>${alternatives ? `<br><span class="subtitle">${alternatives}</span>` : ''}</td>
+            <td><span class="tag ${consentOk ? 'green' : 'red'}">${consentOk ? 'Si' : 'No'}</span></td>
+            <td><span class="tag ${status.toLowerCase() === 'da verificare' ? 'amber' : 'blue'}">${status}</span></td>
+            <td>${field(item, ['note_pratiche', 'motivo_breve', 'note_operatore']) || '-'}</td>
+          </tr>
+        `;
+      }).join('') : `
+        <tr>
+          <td colspan="9">
+            <strong>Nessuna richiesta importata.</strong><br>
+            <span class="subtitle">Esporta Airtable in CSV e sostituisci richieste_contatto.csv per visualizzare i nuovi contatti.</span>
+          </td>
+        </tr>
+      `;
+    }
+
+    function renderTriggers() {
+      const allTriggers = buildTriggers();
+      const filtered = allTriggers.filter((trigger) => {
+        if (state.triggerFilter === 'eligible') return trigger.eligible;
+        if (state.triggerFilter === 'blocked') return !trigger.eligible;
+        return true;
+      });
+
+      if (!filtered.length) {
+        els.triggerList.innerHTML = '<p class="subtitle">Nessun trigger per questo filtro.</p>';
+        renderEmailPreview(null);
+        return;
+      }
+
+      if (!state.selectedTriggerId || !filtered.some((trigger) => trigger.id === state.selectedTriggerId)) {
+        state.selectedTriggerId = filtered[0].id;
+      }
+
+      els.triggerList.innerHTML = filtered.map((trigger) => `
+        <button class="trigger-item ${trigger.id === state.selectedTriggerId ? 'active' : ''}" data-trigger-id="${trigger.id}">
+          <strong>${trigger.patient.nome} ${trigger.patient.cognome}</strong>
+          <span>${trigger.rule.type} - ${trigger.patient.ultimo_servizio}</span>
+          <span class="trigger-meta">
+            <span class="tag ${trigger.eligible ? 'green' : 'red'}">${trigger.eligible ? 'Inviabile' : 'Bloccata'}</span>
+            <span class="tag blue">${trigger.patient.giorni_da_servizio} giorni</span>
+          </span>
+        </button>
+      `).join('');
+
+      const selected = allTriggers.find((trigger) => trigger.id === state.selectedTriggerId);
+      renderEmailPreview(selected);
+    }
+
+    function renderEmailPreview(trigger) {
+      if (!trigger) {
+        els.emailPreview.innerHTML = `
+          <h2>Bozza email</h2>
+          <p class="subtitle">Non ci sono bozze disponibili per il filtro selezionato.</p>
+        `;
+        return;
+      }
+
+      els.emailPreview.innerHTML = `
+        <div class="copy-row">
+          <div>
+            <h2>Bozza email</h2>
+            <p class="subtitle">${trigger.patient.email || 'Email assente'}</p>
+          </div>
+          <button class="primary" id="copyEmailButton" ${trigger.eligible ? '' : 'disabled'}>Copia testo</button>
+        </div>
+        ${trigger.eligible ? '' : `<div class="notice">${trigger.blockReason}. La bozza resta solo consultabile.</div>`}
+        <div class="field">
+          <label>Oggetto</label>
+          <input value="${escapeAttribute(trigger.subject)}" readonly>
+        </div>
+        <div class="field">
+          <label>Testo</label>
+          <textarea readonly>${trigger.body}</textarea>
+        </div>
+      `;
+    }
+
+    function escapeAttribute(value) {
+      return String(value).replace(/"/g, '&quot;');
+    }
+
+    function populateFilters() {
+      const patients = enrichPatients();
+      fillSelect(els.cityFilter, [...new Set(patients.map((patient) => patient.comune).filter(Boolean))]);
+      fillSelect(els.serviceFilter, [...new Set(patients.map((patient) => patient.ultimo_servizio).filter(Boolean))]);
+      fillSelect(els.statusFilter, [...new Set(patients.map((patient) => patient.stato).filter(Boolean))]);
+    }
+
+    function fillSelect(select, values) {
+      const current = select.value;
+      select.innerHTML = '<option value="">Tutti</option>' + values.sort().map((value) => `<option value="${value}">${value}</option>`).join('');
+      select.value = current;
+    }
+
+    function render() {
+      const patients = getFilteredPatients();
+      renderKpis(patients);
+      renderBars(els.serviceBars, groupCount(patients, (patient) => patient.ultimo_servizio));
+      renderBars(els.cityBars, groupCount(patients, (patient) => patient.comune));
+      renderBars(els.statusBars, groupCount(patients, (patient) => patient.stato));
+      renderChatbot();
+      renderContactsTable(patients);
+      renderDebugTable(patients);
+      renderNewsletter();
+      renderRequests();
+      renderTriggers();
+    }
+
+    async function loadCsvFiles() {
+      const entries = Object.entries(fileMap);
+      const optionalFiles = new Set(['requests']);
+      const results = await Promise.all(entries.map(async ([key, path]) => {
+        const response = await fetch(path, { cache: 'no-store' });
+        if (!response.ok && optionalFiles.has(key)) return [key, []];
+        if (!response.ok) throw new Error(`File non trovato: ${path}`);
+        return [key, parseCsv(await response.text())];
+      }));
+
+      results.forEach(([key, rows]) => {
+        state[key] = rows;
+      });
+
+      els.loadStatus.textContent = `Dati caricati: ${state.patients.length} clienti, ${state.consultations.length} prestazioni, ${state.requests.length} richieste`;
+      populateFilters();
+      render();
+    }
+
+    document.querySelectorAll('.nav-button').forEach((button) => {
+      button.addEventListener('click', () => {
+        document.querySelectorAll('.nav-button').forEach((item) => item.classList.remove('active'));
+        button.classList.add('active');
+        document.querySelectorAll('.section').forEach((section) => section.classList.add('hidden'));
+        document.getElementById(button.dataset.section).classList.remove('hidden');
+      });
+    });
+
+    document.querySelectorAll('.tab').forEach((button) => {
+      button.addEventListener('click', () => {
+        document.querySelectorAll('.tab').forEach((item) => item.classList.remove('active'));
+        button.classList.add('active');
+        state.triggerFilter = button.dataset.triggerFilter;
+        state.selectedTriggerId = null;
+        renderTriggers();
+      });
+    });
+
+    [els.searchInput, els.cityFilter, els.serviceFilter, els.statusFilter].forEach((control) => {
+      control.addEventListener('input', render);
+    });
+
+    els.triggerList.addEventListener('click', (event) => {
+      const item = event.target.closest('[data-trigger-id]');
+      if (!item) return;
+      state.selectedTriggerId = item.dataset.triggerId;
+      renderTriggers();
+    });
+
+    document.addEventListener('click', async (event) => {
+      if (event.target.id !== 'copyEmailButton') return;
+      const trigger = buildTriggers().find((item) => item.id === state.selectedTriggerId);
+      if (!trigger || !trigger.eligible) return;
+      await navigator.clipboard.writeText(`Oggetto: ${trigger.subject}\n\n${trigger.body}`);
+      event.target.textContent = 'Copiato';
+      setTimeout(() => {
+        event.target.textContent = 'Copia testo';
+      }, 1400);
+    });
+
+    loadCsvFiles().catch((error) => {
+      els.loadStatus.textContent = 'Errore caricamento CSV';
+      els.kpiGrid.innerHTML = `
+        <article class="card">
+          <h2>Dati non caricati</h2>
+          <p class="subtitle">${error.message}. Apri questa dashboard tramite un server locale, non direttamente con doppio clic sul file.</p>
+        </article>
+      `;
+    });
+  </script>
+</body>
+</html>

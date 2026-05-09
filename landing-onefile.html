@@ -1,0 +1,4062 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Cache-Control" content="no-store">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ECG, Holter e assistenza infermieristica a domicilio | Angelo Rosso</title>
+  <meta
+    name="description"
+    content="Servizi a domicilio tra Francofonte, Lentini e Carlentini: ECG, Holter ECG, Holter pressorio e assistenza infermieristica. Contatto diretto via telefono, WhatsApp o email."
+  >
+  <meta name="robots" content="index,follow">
+  <meta name="theme-color" content="#090c10">
+  <meta property="og:locale" content="it_IT">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="ECG, Holter e assistenza infermieristica a domicilio | Angelo Rosso">
+  <meta
+    property="og:description"
+    content="Servizi a domicilio tra Francofonte, Lentini e Carlentini: ECG, Holter ECG, Holter pressorio e assistenza infermieristica. Contatto diretto e territorio operativo chiaro."
+  >
+  <script>
+    document.documentElement.classList.add("js");
+  </script>
+  <style>
+    :root {
+      --bg: #090c10;
+      --bg-soft: #10151d;
+      --panel: rgba(16, 21, 29, 0.88);
+      --panel-strong: rgba(20, 27, 36, 0.95);
+      --line: rgba(255, 255, 255, 0.1);
+      --line-strong: rgba(255, 255, 255, 0.18);
+      --text: #f5f7fb;
+      --muted: #b1bccb;
+      --accent: #ff7a1a;
+      --accent-soft: rgba(255, 122, 26, 0.18);
+      --accent-strong: #ff9347;
+      --success: #6fe2b3;
+      --ecg-signal: #7dffb2;
+      --ecg-grid: rgba(125, 255, 178, 0.08);
+      --ecg-grid-strong: rgba(125, 255, 178, 0.14);
+      --shadow: 0 24px 70px rgba(0, 0, 0, 0.45);
+      --radius-xl: 28px;
+      --radius-lg: 22px;
+      --radius-md: 16px;
+      --radius-sm: 12px;
+      --font-display: Georgia, "Times New Roman", serif;
+      --font-body: "Aptos", "Segoe UI", "Trebuchet MS", sans-serif;
+      --max: 1180px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--text);
+      font-family: var(--font-body);
+      background:
+        radial-gradient(circle at top left, rgba(255, 122, 26, 0.18), transparent 28%),
+        radial-gradient(circle at 85% 15%, rgba(255, 122, 26, 0.12), transparent 20%),
+        linear-gradient(180deg, #06080b 0%, #0b1016 52%, #090c10 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+      background-size: 30px 30px;
+      mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.55), transparent 78%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img,
+    svg {
+      display: block;
+      max-width: 100%;
+    }
+
+    button,
+    input,
+    textarea {
+      font: inherit;
+    }
+
+    .page-shell {
+      position: relative;
+      z-index: 1;
+      overflow: clip;
+    }
+
+    .intro-overlay {
+      display: none;
+    }
+
+    html.js body:not(.page-ready) {
+      overflow: hidden;
+    }
+
+    html.js .intro-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 120;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at center, rgba(34, 98, 72, 0.24), transparent 26%),
+        linear-gradient(180deg, rgba(4, 10, 14, 0.98), rgba(5, 11, 15, 0.96) 46%, rgba(4, 10, 14, 0.98));
+      opacity: 1;
+      visibility: visible;
+      transition: opacity 0.8s ease, visibility 0.8s ease, transform 0.8s ease;
+    }
+
+    html.js .intro-overlay::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--ecg-grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--ecg-grid) 1px, transparent 1px),
+        linear-gradient(var(--ecg-grid-strong) 1px, transparent 1px),
+        linear-gradient(90deg, var(--ecg-grid-strong) 1px, transparent 1px);
+      background-size: 16px 16px, 16px 16px, 64px 64px, 64px 64px;
+      mask-image: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.92) 18%, rgba(0, 0, 0, 0.92) 82%, transparent 100%);
+      opacity: 0.55;
+    }
+
+    html.js body.page-ready .intro-overlay {
+      opacity: 0;
+      visibility: hidden;
+      transform: scale(1.015);
+    }
+
+    .intro-signal-field {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 50% 46%, rgba(125, 255, 178, 0.08), transparent 28%),
+        linear-gradient(180deg, rgba(3, 9, 10, 0.94), rgba(2, 7, 8, 0.98));
+    }
+
+    .intro-signal-field::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(rgba(125, 255, 178, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(125, 255, 178, 0.03) 1px, transparent 1px);
+      background-size: 18px 18px, 18px 18px;
+      opacity: 0.26;
+    }
+
+    .intro-signal-field::after {
+      content: "";
+      position: absolute;
+      inset: -10%;
+      background:
+        radial-gradient(circle at center, transparent 34%, rgba(0, 0, 0, 0.34) 72%, rgba(0, 0, 0, 0.62) 100%);
+    }
+
+    .intro-panorama {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      display: grid;
+      align-items: center;
+      opacity: 0.98;
+      mix-blend-mode: screen;
+    }
+
+    .intro-panorama svg {
+      width: 100%;
+      height: 100%;
+      color: rgba(125, 255, 178, 0.96);
+      filter:
+        drop-shadow(0 0 10px rgba(125, 255, 178, 0.22))
+        drop-shadow(0 0 22px rgba(125, 255, 178, 0.12));
+    }
+
+    .intro-panorama path {
+      fill: none;
+      stroke: currentColor;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      vector-effect: non-scaling-stroke;
+    }
+
+    .intro-panorama path.intro-panorama-trail {
+      stroke-width: 2.4;
+      opacity: 0.32;
+    }
+
+    .intro-panorama path.intro-panorama-main {
+      stroke-width: 1.9;
+    }
+
+    .intro-inner {
+      position: relative;
+      z-index: 2;
+      width: min(1080px, calc(100% - 48px));
+      display: grid;
+      gap: 18px;
+      justify-items: center;
+      text-align: center;
+    }
+
+    .intro-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #ebf8ef;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
+    html.js .intro-label {
+      opacity: 0;
+      transform: translateY(12px);
+      animation: intro-fade-up 0.72s cubic-bezier(0.22, 1, 0.36, 1) 0.14s both;
+    }
+
+    .intro-label-mark {
+      display: grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      background: linear-gradient(160deg, rgba(125, 255, 178, 0.2), rgba(125, 255, 178, 0.42));
+      color: #04120c;
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    .intro-monitor {
+      position: relative;
+      width: min(100%, 980px);
+      padding: 22px 24px 20px;
+      border-radius: 32px;
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, rgba(10, 18, 18, 0.96), rgba(7, 14, 14, 0.98));
+      border: 1px solid rgba(125, 255, 178, 0.1);
+      box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.02),
+        0 28px 80px rgba(0, 0, 0, 0.34);
+    }
+
+    .intro-monitor::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at top right, rgba(125, 255, 178, 0.1), transparent 26%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent 20%);
+      pointer-events: none;
+    }
+
+    html.js .intro-monitor {
+      opacity: 0;
+      transform: translateY(22px) scale(0.982);
+      animation: intro-monitor-in 0.96s cubic-bezier(0.22, 1, 0.36, 1) 0.78s both;
+    }
+
+    .intro-monitor-head,
+    .intro-monitor-foot {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      color: rgba(226, 244, 234, 0.72);
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .intro-monitor-tag,
+    .intro-monitor-state,
+    .intro-monitor-foot span {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      white-space: nowrap;
+    }
+
+    .intro-monitor-tag::before,
+    .intro-monitor-state::before,
+    .intro-monitor-foot span::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(125, 255, 178, 0.82);
+      box-shadow: 0 0 0 5px rgba(125, 255, 178, 0.08);
+    }
+
+    .intro-traces {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      height: 96px;
+      margin-top: 2px;
+      border-radius: 22px;
+      overflow: hidden;
+      background:
+        linear-gradient(rgba(125, 255, 178, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(125, 255, 178, 0.03) 1px, transparent 1px),
+        linear-gradient(rgba(125, 255, 178, 0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(125, 255, 178, 0.07) 1px, transparent 1px),
+        linear-gradient(180deg, rgba(4, 18, 15, 0.94), rgba(3, 12, 10, 0.98));
+      background-size: 12px 12px, 12px 12px, 48px 48px, 48px 48px, auto;
+      border: 1px solid rgba(125, 255, 178, 0.1);
+      box-shadow:
+        inset 0 0 0 1px rgba(125, 255, 178, 0.04),
+        0 18px 44px rgba(0, 0, 0, 0.22);
+    }
+
+    html.js .intro-traces {
+      opacity: 0;
+      transform: translateY(14px);
+      animation: intro-fade-up 0.88s cubic-bezier(0.22, 1, 0.36, 1) 1.14s both;
+    }
+
+    .intro-traces svg {
+      width: 100%;
+      height: 100%;
+      color: var(--ecg-signal);
+      filter:
+        drop-shadow(0 0 10px rgba(125, 255, 178, 0.28))
+        drop-shadow(0 0 18px rgba(125, 255, 178, 0.16));
+    }
+
+    .intro-traces path {
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2.25;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      vector-effect: non-scaling-stroke;
+    }
+
+    .intro-title {
+      position: relative;
+      z-index: 2;
+      max-width: 34ch;
+      margin: 18px auto 20px;
+      color: rgba(240, 248, 243, 0.92);
+      font-size: clamp(1rem, 1.8vw, 1.22rem);
+      line-height: 1.55;
+      letter-spacing: 0.01em;
+      text-transform: none;
+    }
+
+    html.js .intro-title {
+      opacity: 0;
+      transform: translateY(12px);
+      animation: intro-fade-up 0.82s cubic-bezier(0.22, 1, 0.36, 1) 1.02s both;
+    }
+
+    @keyframes intro-monitor-in {
+      0% {
+        opacity: 0;
+        transform: translateY(22px) scale(0.982);
+      }
+      100% {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    @keyframes intro-fade-up {
+      0% {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+      100% {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    html.js .page-shell {
+      opacity: 0;
+      transform: translateY(28px) scale(0.985);
+      transition:
+        opacity 1s cubic-bezier(0.22, 1, 0.36, 1) 0.08s,
+        transform 1.05s cubic-bezier(0.22, 1, 0.36, 1) 0.08s;
+    }
+
+    html.js body.page-ready .page-shell {
+      opacity: 1;
+      transform: none;
+    }
+
+    .container {
+      width: min(var(--max), calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .section {
+      padding: 88px 0;
+    }
+
+    .eyebrow {
+      margin: 0 0 14px;
+      color: var(--accent-strong);
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 0;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      font-family: var(--font-display);
+    }
+
+    h1 {
+      font-size: clamp(2.6rem, 6.2vw, 4.9rem);
+    }
+
+    h2 {
+      font-size: clamp(2rem, 4vw, 3.35rem);
+    }
+
+    h3 {
+      font-size: clamp(1.2rem, 2vw, 1.55rem);
+    }
+
+    p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(18px);
+      background: rgba(8, 11, 15, 0.72);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      min-height: 86px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 0;
+    }
+
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      background: linear-gradient(160deg, rgba(255, 122, 26, 0.18), rgba(255, 122, 26, 0.48));
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text);
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 700;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+    }
+
+    .brand-copy {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      min-width: 0;
+    }
+
+    .brand-copy strong {
+      font-size: 1rem;
+      letter-spacing: 0.02em;
+    }
+
+    .brand-copy span {
+      font-size: 0.86rem;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .site-nav {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      font-size: 0.95rem;
+      color: #d8dfeb;
+    }
+
+    .site-nav a {
+      position: relative;
+      padding: 6px 0;
+    }
+
+    .site-nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 1px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.25s ease;
+    }
+
+    .site-nav a:hover::after,
+    .site-nav a:focus-visible::after {
+      transform: scaleX(1);
+    }
+
+    .header-actions,
+    .hero-actions,
+    .cta-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 50px;
+      padding: 0 22px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-weight: 700;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .button:hover,
+    .button:focus-visible {
+      transform: translateY(-1px);
+    }
+
+    .button-primary {
+      background: linear-gradient(135deg, var(--accent), #ff9e5c);
+      color: #1a120c;
+      box-shadow: 0 16px 32px rgba(255, 122, 26, 0.24);
+    }
+
+    .button-secondary {
+      border-color: rgba(255, 255, 255, 0.15);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text);
+    }
+
+    .button-ghost {
+      color: var(--muted);
+      padding-inline: 0;
+      min-height: auto;
+    }
+
+    .hero {
+      position: relative;
+      padding: 48px 0 34px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.18fr) minmax(320px, 0.82fr);
+      gap: 34px;
+      align-items: stretch;
+      perspective: 1600px;
+    }
+
+    .hero-copy,
+    .hero-panel,
+    .benefit-card,
+    .service-card,
+    .steps-card,
+    .competence-panel,
+    .faq-item,
+    .cta-banner,
+    .territory-panel,
+    .list-panel {
+      background: var(--panel);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+    }
+
+    .hero-copy {
+      position: relative;
+      padding: 52px;
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+    }
+
+    .hero-copy::before {
+      content: "";
+      position: absolute;
+      inset: auto auto -90px -70px;
+      width: 240px;
+      height: 240px;
+      border-radius: 50%;
+      background: rgba(255, 122, 26, 0.12);
+      filter: blur(10px);
+    }
+
+    .hero-copy::after {
+      content: "";
+      position: absolute;
+      inset: -18% auto auto -14%;
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle, rgba(255, 173, 110, 0.34) 0%, rgba(255, 122, 26, 0.14) 38%, transparent 72%);
+      filter: blur(18px);
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .hero-copy .lead {
+      margin-top: 20px;
+      font-size: 1.08rem;
+      max-width: 700px;
+    }
+
+    .hero-copy h1 {
+      max-width: 11ch;
+      text-wrap: balance;
+    }
+
+    .hero-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .hero-pill,
+    .territory-tag,
+    .service-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.03);
+      color: #e6ebf3;
+      font-size: 0.92rem;
+    }
+
+    .hero-pill strong {
+      color: var(--accent-strong);
+      font-weight: 700;
+    }
+
+    .hero-actions {
+      margin-top: 28px;
+    }
+
+    .hero-microcopy {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      margin-top: 24px;
+      color: #d5dde8;
+      font-size: 0.95rem;
+    }
+
+    .hero-microcopy span {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .hero-microcopy span::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--success);
+      box-shadow: 0 0 0 6px rgba(111, 226, 179, 0.12);
+    }
+
+    .hero-panel {
+      position: relative;
+      padding: 28px;
+      border-radius: var(--radius-xl);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      overflow: hidden;
+    }
+
+    .hero-panel::after {
+      content: "";
+      position: absolute;
+      inset: auto -60px -100px auto;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: rgba(255, 122, 26, 0.16);
+      filter: blur(24px);
+    }
+
+    html.js .hero-copy.reveal,
+    html.js .hero-panel.reveal {
+      transition: none;
+      will-change: transform, opacity, filter;
+    }
+
+    html.js .hero-copy.reveal {
+      opacity: 0;
+      transform: translate3d(0, 40px, 0) scale(0.962);
+      filter: blur(14px);
+      transform-origin: left center;
+    }
+
+    html.js .hero-panel.reveal {
+      opacity: 0;
+      transform: translate3d(56px, 24px, 0) scale(0.925) rotateY(-13deg);
+      filter: blur(16px);
+      transform-origin: right center;
+    }
+
+    .hero-copy.reveal.is-visible {
+      animation: hero-copy-cinematic 1.26s cubic-bezier(0.19, 1, 0.22, 1) 0.04s both;
+    }
+
+    .hero-panel.reveal.is-visible {
+      animation: hero-panel-cinematic 1.34s cubic-bezier(0.19, 1, 0.22, 1) 0.18s both;
+    }
+
+    html.js .hero-copy.reveal > *,
+    html.js .hero-panel.reveal > *,
+    html.js .hero-panel.reveal .stat-card {
+      opacity: 0;
+      transform: translateY(22px) scale(0.985);
+      filter: blur(8px);
+    }
+
+    .hero-copy.reveal.is-visible > *,
+    .hero-panel.reveal.is-visible > *,
+    .hero-panel.reveal.is-visible .stat-card {
+      animation: hero-layer-in 0.92s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    .hero-copy.reveal.is-visible::after {
+      animation: hero-glow-sweep 1.8s ease-out 0.24s both;
+    }
+
+    .hero-panel.reveal.is-visible::after {
+      animation: hero-panel-bloom 1.55s ease-out 0.32s both;
+    }
+
+    .hero-copy.reveal.is-visible > .hero-pills {
+      animation-delay: 0.08s;
+    }
+
+    .hero-copy.reveal.is-visible > .eyebrow {
+      animation-delay: 0.18s;
+    }
+
+    .hero-copy.reveal.is-visible > h1 {
+      animation: hero-title-impact 1.18s cubic-bezier(0.19, 1, 0.22, 1) 0.24s both;
+    }
+
+    .hero-copy.reveal.is-visible > .lead {
+      animation-delay: 0.52s;
+    }
+
+    .hero-copy.reveal.is-visible > .hero-actions {
+      animation-delay: 0.7s;
+    }
+
+    .hero-copy.reveal.is-visible > .hero-microcopy {
+      animation-delay: 0.86s;
+    }
+
+    .hero-panel.reveal.is-visible > .panel-label {
+      animation-delay: 0.3s;
+    }
+
+    .hero-panel.reveal.is-visible > .panel-title {
+      animation-delay: 0.46s;
+    }
+
+    .hero-panel.reveal.is-visible > p {
+      animation-delay: 0.6s;
+    }
+
+    .hero-panel.reveal.is-visible > .stats-grid {
+      animation-delay: 0.76s;
+    }
+
+    .hero-panel.reveal.is-visible > .ecg-box {
+      animation-delay: 1.02s;
+    }
+
+    .hero-panel.reveal.is-visible .stat-card:nth-child(1) {
+      animation-delay: 0.92s;
+    }
+
+    .hero-panel.reveal.is-visible .stat-card:nth-child(2) {
+      animation-delay: 1s;
+    }
+
+    .hero-panel.reveal.is-visible .stat-card:nth-child(3) {
+      animation-delay: 1.08s;
+    }
+
+    .hero-panel.reveal.is-visible .stat-card:nth-child(4) {
+      animation-delay: 1.16s;
+    }
+
+    @keyframes hero-copy-cinematic {
+      0% {
+        opacity: 0;
+        transform: translate3d(0, 40px, 0) scale(0.962);
+        filter: blur(14px);
+      }
+      64% {
+        opacity: 1;
+        transform: translate3d(0, -4px, 0) scale(1.008);
+        filter: blur(0);
+      }
+      100% {
+        opacity: 1;
+        transform: none;
+        filter: blur(0);
+      }
+    }
+
+    @keyframes hero-panel-cinematic {
+      0% {
+        opacity: 0;
+        transform: translate3d(56px, 24px, 0) scale(0.925) rotateY(-13deg);
+        filter: blur(16px);
+      }
+      62% {
+        opacity: 1;
+        transform: translate3d(-6px, -2px, 0) scale(1.014) rotateY(1.4deg);
+        filter: blur(0);
+      }
+      100% {
+        opacity: 1;
+        transform: none;
+        filter: blur(0);
+      }
+    }
+
+    @keyframes hero-layer-in {
+      0% {
+        opacity: 0;
+        transform: translateY(22px) scale(0.985);
+        filter: blur(8px);
+      }
+      68% {
+        opacity: 1;
+        transform: translateY(-2px) scale(1.002);
+        filter: blur(0);
+      }
+      100% {
+        opacity: 1;
+        transform: none;
+        filter: blur(0);
+      }
+    }
+
+    @keyframes hero-title-impact {
+      0% {
+        opacity: 0;
+        transform: translate3d(0, 34px, 0) scale(0.9);
+        filter: blur(14px);
+        letter-spacing: -0.08em;
+      }
+      58% {
+        opacity: 1;
+        transform: translate3d(0, -2px, 0) scale(1.02);
+        filter: blur(0);
+        letter-spacing: -0.04em;
+      }
+      100% {
+        opacity: 1;
+        transform: none;
+        filter: blur(0);
+        letter-spacing: -0.03em;
+      }
+    }
+
+    @keyframes hero-glow-sweep {
+      0% {
+        opacity: 0;
+        transform: translate3d(-12%, 10%, 0) scale(0.82);
+      }
+      30% {
+        opacity: 0.55;
+      }
+      100% {
+        opacity: 0;
+        transform: translate3d(26%, -16%, 0) scale(1.16);
+      }
+    }
+
+    @keyframes hero-panel-bloom {
+      0% {
+        opacity: 0;
+        transform: translate3d(18%, 18%, 0) scale(0.78);
+      }
+      35% {
+        opacity: 0.7;
+      }
+      100% {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) scale(1);
+      }
+    }
+
+    .panel-label {
+      color: var(--accent-strong);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
+    .panel-title {
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .stat-card {
+      padding: 18px;
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .stat-card strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 1.28rem;
+      color: var(--text);
+    }
+
+    .stat-card span {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.55;
+    }
+
+    .ecg-box {
+      padding: 18px;
+      border-radius: var(--radius-lg);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.03));
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .ecg-topline {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    .ecg-topline strong {
+      font-size: 1.05rem;
+    }
+
+    .ecg-topline span {
+      color: rgba(200, 255, 220, 0.78);
+      font-size: 0.92rem;
+    }
+
+    .ecg-screen {
+      height: 120px;
+      padding: 14px;
+      border-radius: var(--radius-md);
+      background:
+        linear-gradient(var(--ecg-grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--ecg-grid) 1px, transparent 1px),
+        linear-gradient(var(--ecg-grid-strong) 1px, transparent 1px),
+        linear-gradient(90deg, var(--ecg-grid-strong) 1px, transparent 1px),
+        linear-gradient(180deg, rgba(8, 17, 15, 0.98), rgba(5, 12, 11, 0.98));
+      background-size: 12px 12px, 12px 12px, 48px 48px, 48px 48px, auto;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      overflow: hidden;
+    }
+
+    .ecg-screen svg {
+      width: 100%;
+      height: 100%;
+      color: var(--ecg-signal);
+      filter:
+        drop-shadow(0 0 8px rgba(125, 255, 178, 0.32))
+        drop-shadow(0 0 16px rgba(125, 255, 178, 0.16));
+    }
+
+    .ecg-screen path {
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2.35;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      vector-effect: non-scaling-stroke;
+    }
+
+    .benefits {
+      padding-top: 34px;
+    }
+
+    .benefits-grid,
+    .services-grid,
+    .competence-grid,
+    .faq-grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .benefits-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .benefit-card {
+      padding: 28px;
+      border-radius: var(--radius-lg);
+    }
+
+    .icon-wrap {
+      display: inline-grid;
+      place-items: center;
+      width: 56px;
+      height: 56px;
+      border-radius: 18px;
+      margin-bottom: 18px;
+      background: linear-gradient(180deg, rgba(255, 122, 26, 0.2), rgba(255, 122, 26, 0.08));
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--accent-strong);
+    }
+
+    .benefit-card p {
+      margin-top: 12px;
+    }
+
+    .section-heading {
+      max-width: 760px;
+      margin-bottom: 34px;
+    }
+
+    .section-heading p:last-child {
+      margin-top: 16px;
+    }
+
+    .services-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .service-card {
+      position: relative;
+      padding: 28px;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+
+    .service-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto auto 0;
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(255, 122, 26, 0.5), transparent 70%);
+    }
+
+    .service-card p {
+      margin-top: 14px;
+    }
+
+    .service-tag {
+      margin-bottom: 18px;
+      color: var(--accent-strong);
+      font-size: 0.82rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .split-section {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 20px;
+    }
+
+    .steps-card,
+    .list-panel,
+    .territory-panel,
+    .cta-banner {
+      border-radius: var(--radius-xl);
+      padding: 32px;
+    }
+
+    .steps-list {
+      display: grid;
+      gap: 16px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .steps-list li {
+      display: grid;
+      grid-template-columns: 60px minmax(0, 1fr);
+      gap: 16px;
+      padding: 16px;
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .step-number {
+      display: inline-grid;
+      place-items: center;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(255, 122, 26, 0.16);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--accent-strong);
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+
+    .steps-list li p,
+    .faq-item p {
+      margin-top: 8px;
+    }
+
+    .list-panel ul,
+    .competence-list,
+    .contact-list {
+      margin: 20px 0 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 12px;
+    }
+
+    .list-panel li,
+    .competence-list li,
+    .contact-list li {
+      position: relative;
+      padding-left: 24px;
+      color: #dce3ee;
+      line-height: 1.6;
+    }
+
+    .list-panel li::before,
+    .competence-list li::before,
+    .contact-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 11px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 6px rgba(255, 122, 26, 0.12);
+    }
+
+    .territory-panel {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .territory-panel::after {
+      content: "";
+      position: absolute;
+      inset: auto -80px -80px auto;
+      width: 240px;
+      height: 240px;
+      border-radius: 50%;
+      background: rgba(255, 122, 26, 0.12);
+      filter: blur(30px);
+    }
+
+    .territory-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .territory-tag {
+      background: rgba(255, 122, 26, 0.12);
+      border-color: rgba(255, 122, 26, 0.3);
+      color: #ffd1b2;
+    }
+
+    .competence-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .competence-panel {
+      padding: 26px;
+      border-radius: var(--radius-lg);
+    }
+
+    .competence-panel p {
+      margin-top: 12px;
+    }
+
+    .faq-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .faq-item {
+      padding: 24px;
+      border-radius: var(--radius-lg);
+    }
+
+    .newsletter-panel {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(320px, 0.65fr);
+      gap: 28px;
+      align-items: start;
+      padding: 30px;
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(15, 23, 42, 0.1);
+      background: #ffffff;
+      box-shadow: var(--shadow-soft);
+      color: #142033;
+    }
+
+    .newsletter-copy p {
+      margin-top: 14px;
+      color: #344054;
+    }
+
+    .newsletter-list {
+      margin: 18px 0 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 10px;
+      color: #344054;
+    }
+
+    .newsletter-list li {
+      display: flex;
+      gap: 10px;
+    }
+
+    .newsletter-list li::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--accent);
+      flex: 0 0 auto;
+      margin-top: 9px;
+    }
+
+    .newsletter-topics {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .newsletter-topic {
+      padding: 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(15, 23, 42, 0.08);
+      background: #f8fafc;
+      color: #142033;
+    }
+
+    .newsletter-topic strong {
+      display: block;
+      color: #142033;
+      margin-bottom: 6px;
+    }
+
+    .newsletter-topic span {
+      color: #475467;
+      line-height: 1.5;
+      font-size: 0.93rem;
+    }
+
+    .newsletter-form {
+      display: grid;
+      gap: 14px;
+      padding: 22px;
+      border-radius: var(--radius-lg);
+      background: #f8fafc;
+      border: 1px solid rgba(15, 23, 42, 0.08);
+      color: #142033;
+    }
+
+    .newsletter-form p {
+      color: #475467;
+      line-height: 1.65;
+    }
+
+    .newsletter-form label {
+      display: grid;
+      gap: 7px;
+      color: #344054;
+      font-size: 0.93rem;
+      font-weight: 700;
+    }
+
+    .newsletter-form input,
+    .newsletter-form select {
+      width: 100%;
+      border: 1px solid rgba(15, 23, 42, 0.16);
+      border-radius: 12px;
+      padding: 12px 13px;
+      color: var(--text);
+      background: #ffffff;
+      font: inherit;
+    }
+
+    .newsletter-form input:disabled,
+    .newsletter-form select:disabled {
+      color: #7b8794;
+      background: #eef2f6;
+      cursor: not-allowed;
+    }
+
+    .newsletter-form .button {
+      width: fit-content;
+      margin-top: 4px;
+    }
+
+    .newsletter-form .button:disabled {
+      opacity: 0.68;
+      cursor: not-allowed;
+    }
+
+    .newsletter-consent {
+      display: grid;
+      grid-template-columns: 18px 1fr;
+      gap: 10px;
+      align-items: start;
+      color: #344054;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .newsletter-consent input {
+      width: 18px;
+      height: 18px;
+      margin-top: 2px;
+    }
+
+    .cta-banner {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(260px, 0.9fr);
+      gap: 24px;
+      align-items: center;
+      background:
+        radial-gradient(circle at top right, rgba(255, 122, 26, 0.22), transparent 28%),
+        rgba(15, 20, 28, 0.94);
+    }
+
+    .cta-banner p {
+      margin-top: 14px;
+      max-width: 760px;
+    }
+
+    .contact-panel {
+      display: grid;
+      gap: 16px;
+      padding: 22px;
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .contact-panel strong {
+      font-size: 1.18rem;
+    }
+
+    .footer {
+      padding: 28px 0 40px;
+    }
+
+    .footer-shell {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 20px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .footer small,
+    .footer p {
+      color: #93a0b0;
+      line-height: 1.65;
+    }
+
+    .chat-widget {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 90;
+      width: min(380px, calc(100vw - 24px));
+      pointer-events: none;
+    }
+
+    .chat-fab {
+      pointer-events: auto;
+      margin-left: auto;
+      display: inline-flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 2px;
+      padding: 13px 16px 12px;
+      border: 0;
+      border-radius: 18px;
+      color: #f7fbff;
+      background: linear-gradient(135deg, #182437, #101826);
+      border: 1px solid rgba(36, 199, 185, 0.22);
+      box-shadow: 0 18px 34px rgba(12, 18, 28, 0.24);
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .chat-fab:hover,
+    .chat-fab:focus-visible {
+      transform: translateY(-2px);
+      box-shadow: 0 22px 38px rgba(12, 18, 28, 0.30);
+      outline: none;
+    }
+
+    .chat-fab span {
+      font-size: 0.76rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      opacity: 0.72;
+    }
+
+    .chat-fab strong {
+      font-size: 1rem;
+      line-height: 1.15;
+    }
+
+    .chat-panel {
+      pointer-events: auto;
+      position: absolute;
+      right: 0;
+      bottom: 66px;
+      width: 100%;
+      border-radius: 22px;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.98);
+      border: 1px solid rgba(18, 32, 51, 0.10);
+      box-shadow: 0 24px 70px rgba(15, 28, 45, 0.20);
+      backdrop-filter: blur(12px);
+      opacity: 0;
+      transform: translateY(14px) scale(0.98);
+      pointer-events: none;
+      transition: opacity 0.22s ease, transform 0.22s ease;
+    }
+
+    .chat-widget.is-open .chat-panel {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+    }
+
+    .chat-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 18px 18px 16px;
+      border-bottom: 1px solid rgba(18, 32, 51, 0.08);
+      background: linear-gradient(180deg, rgba(247,250,252,0.98), rgba(255,255,255,0.98));
+    }
+
+    .chat-kicker {
+      display: block;
+      margin-bottom: 4px;
+      color: #1a6f6b;
+      font-size: 0.74rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .chat-header strong {
+      display: block;
+      font-size: 1.08rem;
+      line-height: 1.25;
+      color: var(--text);
+    }
+
+    .chat-subtitle {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.45;
+    }
+
+    .chat-close {
+      width: 36px;
+      height: 36px;
+      flex: 0 0 auto;
+      border: 1px solid rgba(18, 32, 51, 0.08);
+      border-radius: 50%;
+      background: #fff;
+      color: var(--muted);
+      font-size: 1.2rem;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    .chat-body {
+      max-height: min(42vh, 420px);
+      overflow: auto;
+      padding: 18px;
+      display: grid;
+      gap: 14px;
+      background: linear-gradient(180deg, rgba(247,250,252,0.98), rgba(241,245,250,0.98));
+    }
+
+    .chat-message {
+      max-width: 96%;
+      padding: 15px 16px;
+      border-radius: 18px;
+      font-size: 1rem;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .chat-message.bot {
+      background: #fff;
+      border: 1px solid rgba(18, 32, 51, 0.08);
+      color: #000;
+      justify-self: start;
+    }
+
+    .chat-message.user {
+      background: linear-gradient(135deg, #244563, #355d7e);
+      color: #fff;
+      justify-self: end;
+    }
+
+    .chat-summary {
+      padding: 15px 16px;
+      border-radius: 18px;
+      background: #eefaf8;
+      border: 1px solid rgba(20, 130, 122, 0.28);
+      color: #102033;
+      font-size: 0.98rem;
+      line-height: 1.58;
+    }
+
+    .chat-summary strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 1.02rem;
+      color: #0f2938;
+    }
+
+    .chat-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 0 18px 12px;
+      background: rgba(247,250,252,0.98);
+    }
+
+    .chat-chip {
+      border: 1px solid rgba(18, 32, 51, 0.22);
+      background: #ffffff;
+      color: #122033;
+      padding: 9px 11px;
+      border-radius: 999px;
+      font-size: 0.84rem;
+      font-weight: 700;
+      line-height: 1.2;
+      cursor: pointer;
+    }
+
+    .chat-chip:hover,
+    .chat-chip:focus-visible {
+      background: rgba(36, 199, 185, 0.10);
+      border-color: rgba(36, 199, 185, 0.28);
+      outline: none;
+    }
+
+    .chat-form {
+      display: flex;
+      gap: 8px;
+      padding: 14px 18px 16px;
+      background: rgba(247,250,252,0.98);
+      border-top: 1px solid rgba(18, 32, 51, 0.08);
+    }
+
+    .chat-input {
+      flex: 1;
+      min-width: 0;
+      border: 1px solid rgba(18, 32, 51, 0.12);
+      background: #fff;
+      color: #122033;
+      border-radius: 14px;
+      padding: 13px 14px;
+      font-size: 1rem;
+      line-height: 1.35;
+      min-height: 48px;
+      max-height: 124px;
+      resize: vertical;
+      overflow: auto;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
+
+    .chat-input::placeholder {
+      color: #7b8796;
+    }
+
+    .chat-send {
+      border: 0;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #1f5f76, #2f7a95);
+      color: #fff;
+      font-weight: 700;
+      padding: 0 15px;
+      min-width: 92px;
+      cursor: pointer;
+    }
+
+    .chat-hint {
+      padding: 0 18px 15px;
+      background: rgba(247,250,252,0.98);
+      color: #516173;
+      font-size: 0.85rem;
+      line-height: 1.35;
+    }
+
+    .assistant-guide-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .assistant-guide-card {
+      padding: 18px;
+      border-radius: 20px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(247,250,252,0.96));
+      border: 1px solid rgba(18, 32, 51, 0.08);
+      color: #142033;
+    }
+
+    .assistant-guide-card strong {
+      display: block;
+      font-size: 1rem;
+      margin-bottom: 8px;
+      letter-spacing: -0.02em;
+      color: #142033;
+    }
+
+    .assistant-guide-card p {
+      color: #475467;
+      font-size: 0.92rem;
+      line-height: 1.55;
+      margin: 0;
+    }
+
+    .chat-action-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .chat-action {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: 1px solid #16384b;
+      background: #122033;
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 700;
+      box-shadow: 0 8px 18px rgba(18, 32, 51, 0.16);
+    }
+
+    .chat-action:hover,
+    .chat-action:focus-visible {
+      background: #1f5f76;
+      border-color: #1f5f76;
+      color: #ffffff;
+      outline: none;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .hero-copy.reveal {
+      transition-delay: 0.1s;
+    }
+
+    .hero-panel.reveal {
+      transition-delay: 0.28s;
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html.js body:not(.page-ready) {
+        overflow-y: auto;
+      }
+
+      html.js .intro-overlay {
+        display: none;
+      }
+
+      html.js .page-shell {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+
+      html.js .hero-copy.reveal,
+      html.js .hero-panel.reveal {
+        opacity: 1;
+        transform: none;
+        filter: none;
+        animation: none;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+
+      .hero-copy.reveal > *,
+      .hero-panel.reveal > *,
+      .hero-panel.reveal .stat-card {
+        opacity: 1;
+        transform: none;
+        filter: none;
+        animation: none;
+      }
+
+      .hero-copy::after,
+      .hero-panel::after {
+        animation: none;
+      }
+    }
+
+    @media (max-width: 1080px) {
+      .intro-panorama {
+        opacity: 0.92;
+      }
+
+      .site-nav {
+        display: none;
+      }
+
+      .hero-grid,
+      .split-section,
+      .cta-banner,
+      .competence-grid,
+      .faq-grid,
+      .newsletter-panel {
+        grid-template-columns: 1fr;
+      }
+
+      .newsletter-topics {
+        grid-template-columns: 1fr;
+      }
+
+      .benefits-grid,
+      .services-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 740px) {
+      .intro-panorama {
+        opacity: 0.88;
+      }
+
+      .intro-inner {
+        width: min(var(--max), calc(100% - 24px));
+        gap: 20px;
+      }
+
+      .intro-monitor {
+        padding: 18px 16px 16px;
+        border-radius: 24px;
+      }
+
+      .intro-monitor-head,
+      .intro-monitor-foot {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        letter-spacing: 0.12em;
+      }
+
+      .intro-traces {
+        height: 84px;
+      }
+
+      .intro-title {
+        max-width: 24ch;
+        margin: 14px 0 16px;
+        font-size: 0.96rem;
+      }
+
+      .container {
+        width: min(var(--max), calc(100% - 24px));
+      }
+
+      .section {
+        padding: 72px 0;
+      }
+
+      .header-inner {
+        min-height: 76px;
+      }
+
+      .brand-copy span {
+        display: none;
+      }
+
+      .header-actions {
+        display: flex;
+      }
+
+      .header-actions .button-secondary {
+        display: none;
+      }
+
+      .header-actions .button {
+        min-height: 44px;
+        padding: 0 16px;
+      }
+
+      .hero-copy,
+      .hero-panel,
+      .steps-card,
+      .list-panel,
+      .territory-panel,
+      .cta-banner {
+        padding: 24px;
+      }
+
+      .hero-copy .lead {
+        font-size: 1rem;
+      }
+
+      .benefits-grid,
+      .services-grid,
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .steps-list li {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-shell {
+        flex-direction: column;
+      }
+
+      .assistant-guide-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .chat-widget {
+        right: 12px;
+        bottom: 12px;
+        width: calc(100vw - 24px);
+      }
+
+      .chat-panel {
+        bottom: 62px;
+        max-height: calc(100vh - 86px);
+        display: flex;
+        flex-direction: column;
+      }
+
+      .chat-body {
+        flex: 1;
+        min-height: 140px;
+        max-height: none;
+      }
+
+      .chat-actions {
+        max-height: 94px;
+        overflow: auto;
+      }
+
+      .chat-form,
+      .chat-hint {
+        flex-shrink: 0;
+      }
+    }
+
+    @media print {
+      .chat-widget {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+  <body>
+    <div class="intro-overlay" aria-hidden="true">
+      <div class="intro-signal-field">
+        <div class="intro-panorama">
+          <svg viewBox="0 0 1920 320" preserveAspectRatio="none" aria-hidden="true">
+            <path id="intro-ecg-panorama-trail" class="intro-panorama-trail" d="M0 160 L1920 160"></path>
+            <path id="intro-ecg-panorama-main" class="intro-panorama-main" d="M0 160 L1920 160"></path>
+          </svg>
+        </div>
+    </div>
+    <div class="intro-inner">
+      <div class="intro-label">
+        <span class="intro-label-mark">RA</span>
+        <span>Angelo Rosso</span>
+      </div>
+      <div class="intro-monitor">
+        <div class="intro-monitor-head">
+          <span class="intro-monitor-tag">Tracciato ECG</span>
+          <span class="intro-monitor-state">Monitor attivo</span>
+        </div>
+        <p class="intro-title">Servizi a domicilio tra Francofonte, Lentini e Carlentini</p>
+        <div class="intro-traces">
+          <svg viewBox="0 0 1440 108" preserveAspectRatio="none" aria-hidden="true">
+            <path id="intro-ecg-line-main" d="M0 54 L1440 54"></path>
+          </svg>
+        </div>
+        <div class="intro-monitor-foot">
+          <span>Francofonte &middot; Lentini &middot; Carlentini</span>
+          <span>Servizio domiciliare</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="page-shell">
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="#top" aria-label="Vai in alto">
+          <span class="brand-mark">RA</span>
+          <span class="brand-copy">
+            <strong>Rosso Angelo</strong>
+            <span>Servizi a domicilio | Francofonte, Lentini, Carlentini</span>
+          </span>
+        </a>
+
+        <nav class="site-nav" aria-label="Navigazione principale">
+          <a href="#servizi">Servizi</a>
+          <a href="#prestazioni">Prestazioni</a>
+          <a href="#come-funziona">Come funziona</a>
+          <a href="#territorio">Territorio</a>
+          <a href="#contatti">Contatti</a>
+        </nav>
+
+        <div class="header-actions">
+          <a class="button button-secondary" href="tel:+393315677922">Chiama ora</a>
+          <a class="button button-primary" href="https://wa.me/393315677922?text=Buongiorno%2C%20vorrei%20avere%20informazioni%20sui%20servizi%20a%20domicilio." target="_blank" rel="noopener noreferrer">WhatsApp</a>
+        </div>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero section">
+        <div class="container hero-grid">
+          <div class="hero-copy reveal">
+            <div class="hero-pills">
+              <span class="hero-pill"><strong>Contatto</strong> rapido</span>
+              <span class="hero-pill"><strong>Referto</strong> digitale</span>
+              <span class="hero-pill"><strong>Servizio</strong> a domicilio</span>
+            </div>
+
+            <p class="eyebrow">Servizi infermieristici e telemedicina a domicilio</p>
+            <h1>ECG, Holter e assistenza infermieristica direttamente a domicilio.</h1>
+            <p class="lead">
+              Se vivi a <strong>Francofonte</strong>, <strong>Lentini</strong> o <strong>Carlentini</strong>,
+              puoi richiedere un servizio domiciliare pensato per pazienti, familiari e caregiver che cercano
+              un contatto semplice, meno spostamenti e indicazioni chiare fin dal primo messaggio.
+            </p>
+
+            <div class="hero-actions">
+              <a class="button button-primary" href="https://wa.me/393315677922?text=Buongiorno%2C%20vorrei%20avere%20informazioni%20sui%20servizi%20a%20domicilio." target="_blank" rel="noopener noreferrer">Richiedi su WhatsApp</a>
+              <a class="button button-secondary" href="tel:+393315677922">Chiama il 331 567 7922</a>
+              <button class="button button-ghost" type="button" id="open-chat-hero">Parla con l'assistente</button>
+            </div>
+
+            <div class="hero-microcopy" aria-label="Punti chiave">
+              <span>Contatto diretto con un referente locale</span>
+              <span>Strumentazione moderna e servizio a domicilio</span>
+              <span>Tempi e disponibilit&agrave; chiariti subito</span>
+            </div>
+          </div>
+
+          <aside class="hero-panel reveal" aria-label="Pannello informativo">
+            <span class="panel-label">Perch&eacute; scegliere questo servizio</span>
+            <h2 class="panel-title">Più semplice, più vicino, più rapido.</h2>
+            <p>
+              Per pazienti e famiglie significa meno spostamenti, contatto diretto e una gestione
+              pi&ugrave; semplice di esami e assistenza direttamente a domicilio.
+            </p>
+
+            <div class="stats-grid">
+              <div class="stat-card">
+                <strong>Risposta rapida</strong>
+                <span>Tempi e disponibilit&agrave; vengono confermati subito al primo contatto.</span>
+              </div>
+              <div class="stat-card">
+                <strong>3 comuni</strong>
+                <span>Operativit&agrave; dedicata solo a Francofonte, Lentini e Carlentini.</span>
+              </div>
+              <div class="stat-card">
+                <strong>Digitale</strong>
+                <span>Referti inviati in formato digitale, senza perdere tempo in ritiri inutili.</span>
+              </div>
+              <div class="stat-card">
+                <strong>Conveniente</strong>
+                <span>Servizio pensato per offrire un risparmio concreto alle famiglie.</span>
+              </div>
+            </div>
+
+            <div class="ecg-box">
+              <div class="ecg-topline">
+                <strong>Tracciato ECG</strong>
+                <span id="ecg-status">ritmo regolare</span>
+              </div>
+              <div class="ecg-screen">
+                <svg viewBox="0 0 420 120" preserveAspectRatio="none" aria-hidden="true">
+                  <path
+                    id="ecg-line"
+                    d="M0 62 L420 62"
+                  ></path>
+                </svg>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="benefits">
+        <div class="container benefits-grid">
+          <article class="benefit-card reveal">
+            <span class="icon-wrap" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M12 6V12L16 14M22 12C22 17.523 17.523 22 12 22C6.477 22 2 17.523 2 12C2 6.477 6.477 2 12 2C17.523 2 22 6.477 22 12Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            </span>
+            <h3>Rapidit&agrave; reale</h3>
+            <p>
+              Contatto diretto, risposta chiara e organizzazione veloce del servizio in base
+              alla prestazione richiesta e alla zona di intervento.
+            </p>
+          </article>
+
+          <article class="benefit-card reveal">
+            <span class="icon-wrap" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M12 2V22M17 5H9.5C7.567 5 6 6.567 6 8.5C6 10.433 7.567 12 9.5 12H14.5C16.433 12 18 13.567 18 15.5C18 17.433 16.433 19 14.5 19H6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            </span>
+            <h3>Risparmio importante</h3>
+            <p>
+              Una proposta pi&ugrave; sostenibile per chi vuole un servizio privato serio,
+              senza costi gonfiati e senza rinunciare alla qualit&agrave;.
+            </p>
+          </article>
+
+          <article class="benefit-card reveal">
+            <span class="icon-wrap" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M3 11.5L12 3L21 11.5V21H3V11.5Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M9 21V13H15V21" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            </span>
+            <h3>Davvero a domicilio</h3>
+            <p>
+              Il servizio nasce per evitare spostamenti inutili, soprattutto per anziani,
+              persone fragili e famiglie che hanno bisogno di soluzioni pratiche.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="servizi">
+        <div class="container">
+          <div class="section-heading reveal">
+            <p class="eyebrow">Servizi principali</p>
+            <h2>Servizi principali disponibili a domicilio.</h2>
+            <p>
+              ECG, Holter ECG, Holter pressorio e assistenza infermieristica disponibili
+              con contatto diretto e copertura locale tra Francofonte, Lentini e Carlentini.
+            </p>
+          </div>
+
+          <div class="services-grid">
+            <article class="service-card reveal">
+              <span class="service-tag">ECG a domicilio</span>
+              <h3>Elettrocardiogramma eseguito direttamente a casa</h3>
+              <p>
+                Servizio rapido per chi ha bisogno di un ECG senza affrontare code, spostamenti e tempi
+                poco sostenibili. Il tracciato viene gestito con invio digitale del referto.
+              </p>
+            </article>
+
+            <article class="service-card reveal">
+              <span class="service-tag">Holter ECG</span>
+              <h3>Monitoraggio cardiaco nelle 24 ore o secondo indicazione</h3>
+              <p>
+                Utile quando serve approfondire palpitazioni, alterazioni del ritmo o controlli richiesti dal medico,
+                mantenendo tutto il percorso il pi&ugrave; semplice possibile.
+              </p>
+            </article>
+
+            <article class="service-card reveal">
+              <span class="service-tag">Holter pressorio</span>
+              <h3>Monitoraggio della pressione durante la giornata</h3>
+              <p>
+                Soluzione pratica per ottenere una visione pi&ugrave; completa dell'andamento pressorio,
+                con applicazione e spiegazioni direttamente a domicilio.
+              </p>
+            </article>
+
+            <article class="service-card reveal">
+              <span class="service-tag">Assistenza infermieristica</span>
+              <h3>Supporto domiciliare tradizionale per pazienti e caregiver</h3>
+              <p>
+                Assistenza pensata per il bisogno quotidiano: medicazioni, controlli, educazione sanitaria,
+                supporto alla terapia e altre prestazioni infermieristiche domiciliari.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="come-funziona">
+        <div class="container split-section">
+          <article class="steps-card reveal">
+            <p class="eyebrow">Come funziona</p>
+            <h2>Dalla richiesta all'intervento, in quattro passaggi.</h2>
+            <ol class="steps-list">
+              <li>
+                <span class="step-number">1</span>
+                <div>
+                  <h3>Primo contatto</h3>
+                  <p>Mi scrivi su WhatsApp o mi chiami, spieghi il bisogno e ricevi una risposta chiara sui tempi.</p>
+                </div>
+              </li>
+              <li>
+                <span class="step-number">2</span>
+                <div>
+                  <h3>Conferma del servizio</h3>
+                  <p>Verifico zona, tipo di prestazione richiesta ed eventuale necessit&agrave; di indicazione medica.</p>
+                </div>
+              </li>
+              <li>
+                <span class="step-number">3</span>
+                <div>
+                  <h3>Intervento a domicilio</h3>
+                  <p>Mi reco direttamente a casa del paziente con strumentazione dedicata e approccio pratico.</p>
+                </div>
+              </li>
+              <li>
+                <span class="step-number">4</span>
+                <div>
+                  <h3>Referto e follow-up</h3>
+                  <p>Il referto viene gestito in formato digitale secondo tempi e modalit&agrave; comunicati al momento dell'organizzazione.</p>
+                </div>
+              </li>
+            </ol>
+          </article>
+
+          <article class="territory-panel reveal" id="territorio">
+            <p class="eyebrow">Area operativa</p>
+            <h2>Servizio attivo a Francofonte, Lentini e Carlentini.</h2>
+            <p>
+              Il servizio &egrave; disponibile in questi tre comuni. La disponibilit&agrave; viene confermata
+              al primo contatto in base alla prestazione richiesta.
+            </p>
+            <div class="territory-tags">
+              <span class="territory-tag">Francofonte</span>
+              <span class="territory-tag">Lentini</span>
+              <span class="territory-tag">Carlentini</span>
+            </div>
+            <ul class="contact-list">
+              <li>Copertura locale su Francofonte, Lentini e Carlentini.</li>
+              <li>Disponibilit&agrave; confermata direttamente al primo contatto.</li>
+              <li>Rapporto diretto con paziente, familiari e caregiver.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="prestazioni">
+        <div class="container split-section">
+          <article class="list-panel reveal">
+            <p class="eyebrow">Altre prestazioni domiciliari</p>
+            <h2>Prestazioni infermieristiche disponibili a domicilio.</h2>
+            <p>
+              Oltre agli esami cardiologici domiciliari, sono disponibili anche prestazioni
+              infermieristiche utili nella gestione quotidiana del paziente e del caregiver.
+            </p>
+            <ul>
+              <li>Misurazione parametri vitali e monitoraggio clinico di base.</li>
+              <li>Medicazioni semplici e complesse, gestione ferite e lesioni cutanee.</li>
+              <li>Medicazioni avanzate per ulcere, piaghe da pressione e ferite difficili.</li>
+              <li>Iniezioni intramuscolari e sottocutanee, quando appropriate.</li>
+              <li>Terapie endovenose e infusioni su prescrizione medica quando richiesto.</li>
+              <li>Gestione e sostituzione del catetere vescicale secondo indicazione.</li>
+              <li>Assistenza e gestione stomie.</li>
+              <li>Controllo glicemia capillare e supporto al monitoraggio diabetologico.</li>
+              <li>Prelievi venosi e raccolta campioni, se previsti nel servizio attivo.</li>
+            </ul>
+          </article>
+
+          <article class="list-panel reveal">
+            <p class="eyebrow">Supporto assistenziale</p>
+            <h2>Supporto domiciliare per pazienti, familiari e caregiver.</h2>
+            <ul>
+              <li>Assistenza infermieristica post-dimissione ospedaliera.</li>
+              <li>Supporto alla gestione della terapia e verifica aderenza terapeutica.</li>
+              <li>Educazione sanitaria per paziente, familiari e caregiver.</li>
+              <li>Supporto nella gestione del paziente anziano, fragile o cronico.</li>
+              <li>Controlli periodici programmati a domicilio.</li>
+              <li>Applicazione, rimozione e gestione di Holter ECG e Holter pressorio.</li>
+              <li>ECG a domicilio con invio digitale per refertazione.</li>
+              <li>Orientamento pratico su esami, tempi e modalit&agrave; del servizio.</li>
+              <li>Valutazione iniziale della richiesta per indirizzare il paziente nel modo pi&ugrave; corretto.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="section-heading reveal">
+            <p class="eyebrow">Affidabilit&agrave; del servizio</p>
+            <h2>Un approccio professionale, chiaro e umano.</h2>
+            <p>
+              Ogni intervento viene gestito con attenzione pratica, comunicazione semplice
+              e continuit&agrave; nel rapporto con paziente e familiari.
+            </p>
+          </div>
+
+          <div class="competence-grid">
+            <article class="competence-panel reveal">
+              <h3>Approccio umano e diretto</h3>
+              <p>
+                Comunicazione semplice, attenzione concreta al paziente e capacit&agrave; di rassicurare senza creare confusione.
+              </p>
+            </article>
+
+            <article class="competence-panel reveal">
+              <h3>Esperienza domiciliare</h3>
+              <p>
+                Organizzazione del servizio a casa del paziente con attenzione ai tempi, alla praticit&agrave; e al comfort.
+              </p>
+            </article>
+
+            <article class="competence-panel reveal">
+              <h3>Gestione tecnologica del percorso</h3>
+              <p>
+                Utilizzo di strumenti aggiornati e gestione della refertazione digitale per ridurre distanze e attese.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="section-heading reveal">
+            <p class="eyebrow">Domande frequenti</p>
+            <h2>Risposte alle domande pi&ugrave; frequenti.</h2>
+          </div>
+
+          <div class="faq-grid">
+            <article class="faq-item reveal">
+              <h3>In quanto tempo posso richiedere il servizio?</h3>
+              <p>
+                I tempi vengono confermati al primo contatto, in base alla prestazione richiesta,
+                alla zona e alla disponibilit&agrave; operativa.
+              </p>
+            </article>
+
+            <article class="faq-item reveal">
+              <h3>Come ricevo il referto?</h3>
+              <p>
+                Il referto viene inviato in formato digitale secondo le modalit&agrave; e i tempi
+                comunicati durante l'organizzazione del servizio.
+              </p>
+            </article>
+
+            <article class="faq-item reveal">
+              <h3>Il servizio &egrave; solo per esami cardiologici?</h3>
+              <p>
+                No. ECG, Holter ECG e Holter pressorio sono i servizi principali, ma &egrave; disponibile anche assistenza infermieristica domiciliare tradizionale.
+              </p>
+            </article>
+
+            <article class="faq-item reveal">
+              <h3>Perch&eacute; il prezzo &egrave; pi&ugrave; accessibile?</h3>
+              <p>
+                La gestione locale del servizio aiuta a mantenere costi pi&ugrave; sostenibili
+                e un'organizzazione pi&ugrave; semplice per paziente e famiglia.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="section-heading reveal">
+            <p class="eyebrow">Assistente virtuale</p>
+            <h2>Come usare il chatbot del sito.</h2>
+            <p>
+              Serve per avere risposte rapide, vedere i prezzi solo se li chiedi e preparare una richiesta semplice su WhatsApp.
+            </p>
+          </div>
+
+          <div class="assistant-guide-grid">
+            <article class="assistant-guide-card reveal">
+              <strong>1. Fai una domanda</strong>
+              <p>
+                Puoi scrivere cosa ti serve: servizi, tempi, prezzi, zona coperta o prescrizione.
+              </p>
+            </article>
+
+            <article class="assistant-guide-card reveal">
+              <strong>2. Ricevi una risposta chiara</strong>
+              <p>
+                Il chatbot risponde in modo semplice e breve, senza parole complicate.
+              </p>
+            </article>
+
+            <article class="assistant-guide-card reveal">
+              <strong>3. Se vuoi, vai su WhatsApp</strong>
+              <p>
+                Quando sei pronto, il chatbot ti prepara il riepilogo per chiedere informazioni o prenotare.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="informazioni-utili">
+        <div class="container">
+          <div class="newsletter-panel reveal">
+            <div class="newsletter-copy">
+              <p class="eyebrow">Comunicazioni informative</p>
+              <h2>Resta aggiornato su assistenza e telemedicina.</h2>
+              <p>
+                Uno spazio pensato per chi vuole ricevere contenuti chiari e pratici sul mondo dell'assistenza,
+                della telemedicina, dell'ADI e piu in generale della sanita, con spazio anche a notizie e
+                aggiornamenti di vario genere quando possono essere utili a pazienti, famiglie e caregiver.
+              </p>
+              <ul class="newsletter-list">
+                <li>Notizie e aggiornamenti spiegati in modo semplice, con attenzione particolare ai servizi territoriali.</li>
+                <li>Argomenti di vario genere collegati alla salute, all'organizzazione delle cure e alle novita utili per i cittadini.</li>
+                <li>Contenuti utili per pazienti, familiari e caregiver che vogliono orientarsi meglio tra assistenza, controlli e percorsi di cura.</li>
+                <li>Informazioni divulgative su sanita e innovazione, senza diagnosi online e senza sostituire il parere del medico.</li>
+              </ul>
+
+              <div class="newsletter-topics" aria-label="Temi trattati">
+                <div class="newsletter-topic">
+                  <strong>ADI e territorio</strong>
+                  <span>Aggiornamenti su assistenza domiciliare integrata, servizi locali e continuita delle cure.</span>
+                </div>
+                <div class="newsletter-topic">
+                  <strong>Telemedicina e digitale</strong>
+                  <span>Novita su controlli a distanza, referti digitali, strumenti tecnologici e servizi sanitari innovativi.</span>
+                </div>
+                <div class="newsletter-topic">
+                  <strong>Sanita e temi vari</strong>
+                  <span>Notizie di vario genere su salute, prevenzione, accesso ai servizi e cambiamenti nel sistema sanitario.</span>
+                </div>
+                <div class="newsletter-topic">
+                  <strong>Caregiver e famiglia</strong>
+                  <span>Consigli pratici per chi assiste anziani, persone fragili o pazienti con difficolta di spostamento.</span>
+                </div>
+              </div>
+            </div>
+
+            <form class="newsletter-form" aria-label="Modulo comunicazioni informative">
+              <h3>Iscrizione alle comunicazioni informative</h3>
+              <p>
+                Il modulo sara attivato piu avanti, dopo la preparazione dell'informativa privacy e della gestione della cancellazione.
+                L'obiettivo e permettere a chi lo desidera di ricevere aggiornamenti utili su assistenza, ADI, telemedicina
+                sanita e altri argomenti di interesse generale, non comunicazioni invasive.
+              </p>
+              <label>
+                Nome
+                <input type="text" name="nome" placeholder="Il tuo nome" disabled>
+              </label>
+              <label>
+                Email
+                <input type="email" name="email" placeholder="nome@email.it" disabled>
+              </label>
+              <label>
+                Comune
+                <select name="comune" disabled>
+                  <option>Seleziona comune</option>
+                  <option>Francofonte</option>
+                  <option>Lentini</option>
+                  <option>Carlentini</option>
+                  <option>Altro comune</option>
+                </select>
+              </label>
+              <label class="newsletter-consent">
+                <input type="checkbox" disabled>
+                <span>Acconsento a ricevere comunicazioni informative su assistenza, ADI, telemedicina, sanita e argomenti di vario genere collegati alla salute.</span>
+              </label>
+              <button class="button button-secondary" type="button" disabled>Disponibile prossimamente</button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="contatti">
+        <div class="container">
+          <div class="cta-banner reveal">
+            <div>
+              <p class="eyebrow">Contatto diretto</p>
+              <h2>Se hai bisogno di un servizio rapido a domicilio, scrivimi adesso.</h2>
+              <p>
+                Ti rispondo in modo chiaro, verifico subito la prestazione richiesta e ti confermo se posso intervenire
+                rapidamente tra Francofonte, Lentini e Carlentini.
+              </p>
+              <div class="cta-actions">
+                <a class="button button-primary" href="https://wa.me/393315677922?text=Buongiorno%2C%20vorrei%20avere%20informazioni%20sui%20servizi%20a%20domicilio." target="_blank" rel="noopener noreferrer">Apri WhatsApp</a>
+                <a class="button button-secondary" href="tel:+393315677922">Chiama ora</a>
+              </div>
+            </div>
+
+            <aside class="contact-panel" aria-label="Riepilogo contatti">
+              <strong>Rosso Angelo</strong>
+              <ul class="contact-list">
+                <li>Telefono e WhatsApp: <a href="tel:+393315677922">331 567 7922</a></li>
+                <li>Email: <a href="mailto:angelo.rosso073@gmail.com">angelo.rosso073@gmail.com</a></li>
+                <li>Area operativa: Francofonte, Lentini, Carlentini</li>
+                <li>Servizi: ECG, Holter ECG, Holter pressorio, assistenza infermieristica domiciliare</li>
+                <li>Nota importante: alcune prestazioni vengono eseguite secondo indicazione o prescrizione medica, quando necessaria.</li>
+              </ul>
+            </aside>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-shell">
+        <div>
+          <strong>Rosso Angelo</strong>
+          <p>Infermiere a domicilio per Francofonte, Lentini e Carlentini.</p>
+        </div>
+        <small>
+          Sito informativo e di contatto. Per urgenze o emergenze sanitarie non usare questo numero:
+          contatta i servizi di emergenza. Alcune prestazioni vengono eseguite solo quando appropriate o su indicazione medica.
+        </small>
+      </div>
+    </footer>
+
+    <div class="chat-widget" id="chat-widget">
+      <section class="chat-panel" id="chat-panel" aria-label="Assistente virtuale telemedicina" aria-hidden="true">
+        <div class="chat-header">
+          <div>
+            <span class="chat-kicker">Supporto informativo</span>
+            <strong>Telemedicina e appuntamenti</strong>
+            <span class="chat-subtitle">Informazioni semplici, prezzi solo se richiesti e passaggio su WhatsApp.</span>
+          </div>
+          <button class="chat-close" type="button" id="chat-close" aria-label="Chiudi assistente">&times;</button>
+        </div>
+
+        <div class="chat-body" id="chat-body" role="log" aria-live="polite" aria-relevant="additions text"></div>
+
+        <div class="chat-actions" id="chat-actions" aria-label="Suggerimenti rapidi"></div>
+
+        <form class="chat-form" id="chat-form">
+          <textarea
+            class="chat-input"
+            id="chat-input"
+            inputmode="text"
+            autocomplete="off"
+            rows="2"
+            placeholder="Scrivi una domanda o il tuo bisogno"
+            aria-label="Scrivi al chatbot"
+          ></textarea>
+          <button class="chat-send" type="submit">Invia</button>
+        </form>
+
+        <div class="chat-hint">Prezzi solo se richiesti. Per appuntamenti trovi il passaggio su WhatsApp.</div>
+      </section>
+
+      <button class="chat-fab" type="button" id="chat-fab" aria-controls="chat-panel" aria-expanded="false">
+        <span>Supporto</span>
+        <strong>Apri assistenza</strong>
+      </button>
+    </div>
+  </div>
+
+  <script>
+    const ecgLine = document.getElementById("ecg-line");
+    const ecgStatus = document.getElementById("ecg-status");
+    const introPanoramaLineTrail = document.getElementById("intro-ecg-panorama-trail");
+    const introPanoramaLineMain = document.getElementById("intro-ecg-panorama-main");
+    const introEcgLineMain = document.getElementById("intro-ecg-line-main");
+    const revealNodes = document.querySelectorAll(".reveal");
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const ecgViewWidth = 420;
+    const ecgBaseline = 62;
+    const ecgStep = 1;
+    const ecgCycleWidth = 122;
+    const ecgScrollSpeed = 142;
+    const introDurationMs = 3600;
+    const introPanoramaWidth = 1920;
+    const introPanoramaBaseline = 160;
+    const introPanoramaStep = 3;
+    const ecgBeatProfiles = [
+      { p: 2.6, q: 1.7, r: 31.5, s: 9.2, t: 6.8, st: 0.26, drift: 0.10 },
+      { p: 2.4, q: 1.9, r: 30.8, s: 9.7, t: 6.4, st: 0.22, drift: -0.06 },
+      { p: 2.7, q: 1.8, r: 32.2, s: 9.4, t: 7.0, st: 0.28, drift: 0.04 }
+    ];
+
+    ecgStatus.textContent = "ritmo regolare";
+
+    function gaussianPulse(phase, center, width, amplitude) {
+      const distance = (phase - center) / width;
+      return amplitude * Math.exp(-(distance * distance));
+    }
+
+    function asymmetricPulse(phase, center, leftWidth, rightWidth, amplitude) {
+      const width = phase < center ? leftWidth : rightWidth;
+      const distance = (phase - center) / width;
+      return amplitude * Math.exp(-(distance * distance));
+    }
+
+    function plateauSegment(phase, start, end, amplitude, softness) {
+      const rise = 1 / (1 + Math.exp(-(phase - start) / softness));
+      const fall = 1 / (1 + Math.exp(-(phase - end) / softness));
+      return amplitude * (rise - fall);
+    }
+
+    function sampleEcgOffset(phase, cycleIndex, amplitudeScale = 1, driftScale = 1) {
+      const profile = ecgBeatProfiles[cycleIndex % ecgBeatProfiles.length];
+      const baselineDrift =
+        (
+          Math.sin((phase / ecgCycleWidth) * Math.PI * 2 * 0.22 + cycleIndex * 0.18) * 0.22 +
+          Math.sin((phase / ecgCycleWidth) * Math.PI * 2 * 1.35 + cycleIndex * 0.11) * 0.05 +
+          profile.drift
+        ) * driftScale;
+
+      let signalOffset = baselineDrift;
+
+      signalOffset -= gaussianPulse(phase, 18, 3.6, profile.p * amplitudeScale);                    // P
+      signalOffset += gaussianPulse(phase, 46.8, 1.1, profile.q * amplitudeScale);                  // Q
+      signalOffset -= gaussianPulse(phase, 49.2, 0.62, profile.r * amplitudeScale);                 // R
+      signalOffset += gaussianPulse(phase, 52.2, 1.3, profile.s * amplitudeScale);                  // S
+      signalOffset -= plateauSegment(phase, 54.8, 68.5, profile.st * amplitudeScale, 1.2);          // ST
+      signalOffset -= asymmetricPulse(phase, 81.5, 11.5, 6.4, profile.t * amplitudeScale);          // T
+
+      return signalOffset;
+    }
+
+    function buildEcgPath(width, baseline, step, offset, amplitudeScale = 1, driftScale = 1) {
+      let path = "";
+
+      for (let x = 0; x <= width; x += step) {
+        const position = x + offset;
+        const cycleIndex = Math.floor(position / ecgCycleWidth);
+        const phase = position % ecgCycleWidth;
+        const y = (baseline + sampleEcgOffset(phase, cycleIndex, amplitudeScale, driftScale)).toFixed(2);
+
+        path += x === 0 ? `M${x} ${y}` : ` L${x} ${y}`;
+      }
+
+      return path;
+    }
+
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+          }
+        });
+      },
+      {
+        threshold: 0.15
+      }
+    );
+
+    let pageActivated = false;
+
+    function activatePage(skipAnimation = false) {
+      if (pageActivated) {
+        return;
+      }
+
+      pageActivated = true;
+      document.body.classList.add("page-ready");
+
+      if (skipAnimation) {
+        revealNodes.forEach(node => node.classList.add("is-visible"));
+        return;
+      }
+
+      window.setTimeout(() => {
+        revealNodes.forEach(node => observer.observe(node));
+      }, 160);
+    }
+
+    let ecgAnimationStart = 0;
+
+    function animateEcg(timestamp) {
+      if (!ecgAnimationStart) {
+        ecgAnimationStart = timestamp;
+      }
+
+      const elapsedSeconds = (timestamp - ecgAnimationStart) / 1000;
+      const signalSpan = ecgCycleWidth * ecgBeatProfiles.length;
+      const offset = (elapsedSeconds * ecgScrollSpeed) % signalSpan;
+
+      ecgLine.setAttribute("d", buildEcgPath(ecgViewWidth, ecgBaseline, ecgStep, offset));
+
+      if (!pageActivated) {
+        if (introPanoramaLineTrail && introPanoramaLineMain) {
+          const introPanoramaOffset = (elapsedSeconds * 118) % signalSpan;
+          const introPanoramaTrailOffset = (elapsedSeconds * 92 + 22) % signalSpan;
+
+          introPanoramaLineTrail.setAttribute(
+            "d",
+            buildEcgPath(introPanoramaWidth, introPanoramaBaseline, introPanoramaStep, introPanoramaTrailOffset, 0.58, 0.18)
+          );
+          introPanoramaLineMain.setAttribute(
+            "d",
+            buildEcgPath(introPanoramaWidth, introPanoramaBaseline, introPanoramaStep, introPanoramaOffset, 1.06, 0.34)
+          );
+        }
+
+        if (introEcgLineMain) {
+          const introMainOffset = (elapsedSeconds * 86) % signalSpan;
+          introEcgLineMain.setAttribute("d", buildEcgPath(1440, 54, 4, introMainOffset, 1.02, 0.28));
+        }
+      }
+
+      window.requestAnimationFrame(animateEcg);
+    }
+
+    window.requestAnimationFrame(animateEcg);
+
+    if (prefersReducedMotion.matches) {
+      activatePage(true);
+    } else {
+      window.setTimeout(() => {
+        activatePage(false);
+      }, introDurationMs);
+    }
+
+    const chatWidget = document.getElementById("chat-widget");
+    const chatFab = document.getElementById("chat-fab");
+    const chatPanel = document.getElementById("chat-panel");
+    const chatClose = document.getElementById("chat-close");
+    const chatBody = document.getElementById("chat-body");
+    const chatActions = document.getElementById("chat-actions");
+    const chatForm = document.getElementById("chat-form");
+    const chatInput = document.getElementById("chat-input");
+    const openChatHero = document.getElementById("open-chat-hero");
+
+    const whatsappNumber = "393315677922";
+    const airtableRequestFormUrl = "https://airtable.com/appiXIxIc8xDTbAwm/pagKvcJmcIQi3QJZu/form";
+    const availabilityFileUrl = "agenda_disponibilita.csv";
+    const availabilityState = {
+      loaded: false,
+      error: false,
+      loadingPromise: null,
+      slots: []
+    };
+    const chatbotState = {
+      mode: "idle",
+      bookingStep: null,
+      booking: {
+        name: "",
+        service: "",
+        city: "",
+        date: "",
+        time: "",
+        availabilityStatus: "",
+        availabilityAlternatives: "",
+        note: "",
+        phone: "",
+        email: "",
+        consentContact: ""
+      }
+    };
+
+    const quickMenus = {
+      idle: ["Servizi", "Prezzi", "Tempi", "Zona", "Prenotare", "Prescrizione"],
+      booking: ["Annulla", "Prezzi", "Servizi"]
+    };
+
+    function normalizeText(value) {
+      return value
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .trim();
+    }
+
+    function escapeHtml(value) {
+      return value
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#39;");
+    }
+
+    function scrollChatToBottom() {
+      chatBody.scrollTop = chatBody.scrollHeight;
+    }
+
+    function renderQuickActions(mode) {
+      chatActions.innerHTML = "";
+
+      quickMenus[mode].forEach(label => {
+        const chip = document.createElement("button");
+        chip.type = "button";
+        chip.className = "chat-chip";
+        chip.textContent = label;
+        chatActions.appendChild(chip);
+      });
+    }
+
+    function addUserMessage(text) {
+      const bubble = document.createElement("div");
+      bubble.className = "chat-message user";
+      bubble.textContent = text;
+      chatBody.appendChild(bubble);
+      scrollChatToBottom();
+    }
+
+    function addBotMessage(text) {
+      const bubble = document.createElement("div");
+      bubble.className = "chat-message bot";
+      bubble.textContent = text;
+      chatBody.appendChild(bubble);
+      scrollChatToBottom();
+    }
+
+    function parseSimpleCsv(text) {
+      const rows = [];
+      let current = "";
+      let row = [];
+      let insideQuotes = false;
+
+      for (let index = 0; index < text.length; index += 1) {
+        const char = text[index];
+        const next = text[index + 1];
+
+        if (char === '"' && insideQuotes && next === '"') {
+          current += '"';
+          index += 1;
+        } else if (char === '"') {
+          insideQuotes = !insideQuotes;
+        } else if (char === "," && !insideQuotes) {
+          row.push(current.trim());
+          current = "";
+        } else if ((char === "\n" || char === "\r") && !insideQuotes) {
+          if (char === "\r" && next === "\n") index += 1;
+          row.push(current.trim());
+          if (row.some(Boolean)) rows.push(row);
+          row = [];
+          current = "";
+        } else {
+          current += char;
+        }
+      }
+
+      if (current || row.length) {
+        row.push(current.trim());
+        if (row.some(Boolean)) rows.push(row);
+      }
+
+      if (!rows.length) return [];
+      const headers = rows[0].map(value => value.trim().toLowerCase().replace(/\s+/g, "_"));
+      return rows.slice(1).map(values => {
+        const record = {};
+        headers.forEach((header, index) => {
+          record[header] = values[index] || "";
+        });
+        return record;
+      });
+    }
+
+    function timeToMinutes(value) {
+      const match = String(value || "").match(/(\d{1,2})[:.](\d{2})|(?:^|\D)(\d{1,2})(?:\D|$)/);
+      if (!match) return null;
+      const hours = Number(match[1] || match[3]);
+      const minutes = Number(match[2] || 0);
+      if (hours < 0 || hours > 23 || minutes < 0 || minutes > 59) return null;
+      return hours * 60 + minutes;
+    }
+
+    function minutesToTime(value) {
+      const hours = Math.floor(value / 60);
+      const minutes = value % 60;
+      return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}`;
+    }
+
+    function normalizeRequestedTime(value) {
+      const minutes = timeToMinutes(value);
+      return minutes === null ? "" : minutesToTime(minutes);
+    }
+
+    function normalizeRequestedDate(value) {
+      const raw = String(value || "").trim();
+      const normalized = normalizeText(raw);
+      const today = new Date();
+      const currentYear = today.getFullYear();
+
+      if (normalized === "oggi") {
+        return today.toISOString().slice(0, 10);
+      }
+
+      if (normalized === "domani") {
+        const tomorrow = new Date(today);
+        tomorrow.setDate(today.getDate() + 1);
+        return tomorrow.toISOString().slice(0, 10);
+      }
+
+      const isoMatch = normalized.match(/\b(\d{4})-(\d{1,2})-(\d{1,2})\b/);
+      if (isoMatch) {
+        return `${isoMatch[1]}-${isoMatch[2].padStart(2, "0")}-${isoMatch[3].padStart(2, "0")}`;
+      }
+
+      const numericMatch = normalized.match(/\b(\d{1,2})[\/.-](\d{1,2})(?:[\/.-](\d{2,4}))?\b/);
+      if (numericMatch) {
+        const year = numericMatch[3]
+          ? Number(numericMatch[3].length === 2 ? `20${numericMatch[3]}` : numericMatch[3])
+          : currentYear;
+        return `${year}-${numericMatch[2].padStart(2, "0")}-${numericMatch[1].padStart(2, "0")}`;
+      }
+
+      const months = {
+        gennaio: "01",
+        febbraio: "02",
+        marzo: "03",
+        aprile: "04",
+        maggio: "05",
+        giugno: "06",
+        luglio: "07",
+        agosto: "08",
+        settembre: "09",
+        ottobre: "10",
+        novembre: "11",
+        dicembre: "12"
+      };
+      const monthMatch = normalized.match(/\b(\d{1,2})\s+(gennaio|febbraio|marzo|aprile|maggio|giugno|luglio|agosto|settembre|ottobre|novembre|dicembre)(?:\s+(\d{4}))?\b/);
+      if (monthMatch) {
+        const year = monthMatch[3] || currentYear;
+        return `${year}-${months[monthMatch[2]]}-${monthMatch[1].padStart(2, "0")}`;
+      }
+
+      return "";
+    }
+
+    function formatDateForUser(value) {
+      if (!value) return "";
+      const parts = value.split("-");
+      if (parts.length !== 3) return value;
+      return `${parts[2]}/${parts[1]}/${parts[0]}`;
+    }
+
+    function loadAvailabilitySlots() {
+      if (availabilityState.loaded) {
+        return Promise.resolve(availabilityState.slots);
+      }
+
+      if (availabilityState.loadingPromise) {
+        return availabilityState.loadingPromise;
+      }
+
+      availabilityState.loadingPromise = fetch(availabilityFileUrl, { cache: "no-store" })
+        .then(response => {
+          if (!response.ok) throw new Error("Agenda non trovata");
+          return response.text();
+        })
+        .then(text => {
+          availabilityState.slots = parseSimpleCsv(text)
+            .map(row => ({
+              date: row.data || "",
+              start: row.ora_inizio || "",
+              end: row.ora_fine || "",
+              status: row.stato || "",
+              service: row.servizio || "",
+              city: row.comune || "",
+              note: row.note || ""
+            }))
+            .filter(slot => slot.date && slot.start && slot.end);
+          availabilityState.loaded = true;
+          availabilityState.error = false;
+          return availabilityState.slots;
+        })
+        .catch(() => {
+          availabilityState.loaded = false;
+          availabilityState.error = true;
+          availabilityState.slots = [];
+          return availabilityState.slots;
+        })
+        .finally(() => {
+          availabilityState.loadingPromise = null;
+        });
+
+      return availabilityState.loadingPromise;
+    }
+
+    function isFreeAvailabilitySlot(slot) {
+      return normalizeText(slot.status) === "libero";
+    }
+
+    function describeAvailabilitySlot(slot) {
+      return `${formatDateForUser(slot.date)} ${slot.start}-${slot.end}`;
+    }
+
+    function findAvailabilityAlternatives(date, time, limit = 3) {
+      const requestedMinutes = timeToMinutes(time) || 0;
+      return availabilityState.slots
+        .filter(slot => isFreeAvailabilitySlot(slot))
+        .filter(slot => slot.date > date || (slot.date === date && timeToMinutes(slot.start) >= requestedMinutes))
+        .sort((first, second) => `${first.date} ${first.start}`.localeCompare(`${second.date} ${second.start}`))
+        .slice(0, limit)
+        .map(describeAvailabilitySlot);
+    }
+
+    function evaluateAvailability(date, time) {
+      if (!availabilityState.loaded || availabilityState.error) {
+        return {
+          status: "Da verificare",
+          message: "Non riesco a leggere l'agenda in questo momento. Inserisco la richiesta come da verificare.",
+          alternatives: []
+        };
+      }
+
+      const requestedMinutes = timeToMinutes(time);
+      const matchingSlot = availabilityState.slots.find(slot => {
+        const start = timeToMinutes(slot.start);
+        const end = timeToMinutes(slot.end);
+        return slot.date === date && start !== null && end !== null && requestedMinutes >= start && requestedMinutes < end;
+      });
+
+      if (!matchingSlot) {
+        return {
+          status: "Da verificare",
+          message: "Non ho una disponibilita certa per questo giorno e orario. Inserisco la richiesta come da verificare.",
+          alternatives: findAvailabilityAlternatives(date, time)
+        };
+      }
+
+      if (isFreeAvailabilitySlot(matchingSlot)) {
+        return {
+          status: "Sembra disponibile",
+          message: `Questo orario sembra disponibile nello slot ${matchingSlot.start}-${matchingSlot.end}. L'appuntamento viene confermato solo dopo verifica diretta su WhatsApp.`,
+          alternatives: []
+        };
+      }
+
+      const alternatives = findAvailabilityAlternatives(date, time);
+      return {
+        status: "Occupato",
+        message: alternatives.length
+          ? `Per quel giorno e orario risulta gia presente un impegno. Alternative disponibili: ${alternatives.join(", ")}.`
+          : "Per quel giorno e orario risulta gia presente un impegno. Non vedo alternative libere successive nel CSV agenda.",
+        alternatives
+      };
+    }
+
+
+    const urgentSignals = [
+      "dolore al petto",
+      "peso al petto",
+      "oppressione",
+      "mancanza di respiro",
+      "manca il respiro",
+      "fiato corto importante",
+      "difficolta a respirare",
+      "difficoltà a respirare",
+      "svenimento",
+      "svenuto",
+      "perdita di coscienza",
+      "sudorazione fredda",
+      "braccio sinistro",
+      "mandibola",
+      "palpitazioni forti",
+      "palpitazioni intense",
+      "ictus",
+      "bocca storta",
+      "non riesco a parlare",
+      "non riesce a parlare",
+      "forte debolezza",
+      "confusione improvvisa"
+    ];
+
+    quickMenus.idle = ["ECG", "Holter ECG", "Holter pressorio", "Assistenza", "Prezzi", "Prenotare", "Sintomi", "WhatsApp"];
+    quickMenus.booking = ["Annulla", "Prezzi", "Servizi", "Prescrizione", "Sintomi"];
+
+
+    chatbotState.booking = createEmptyBooking();
+
+    function includesAny(normalized, keywords) {
+      return keywords.some(keyword => normalized.includes(normalizeText(keyword)));
+    }
+
+    function hasUrgentSignals(normalized) {
+      return includesAny(normalized, urgentSignals) ||
+        (
+          normalized.includes("palpitazioni") &&
+          includesAny(normalized, ["dolore", "petto", "fiato", "respiro", "sven", "debolezza", "forti", "intense"])
+        );
+    }
+
+    function resetBooking(silent = false) {
+      chatbotState.mode = "idle";
+      chatbotState.bookingStep = null;
+      chatbotState.booking = createEmptyBooking();
+      renderQuickActions("idle");
+
+      if (!silent) {
+        addBotMessage("Va bene. Sono di nuovo nel menu principale.");
+      }
+    }
+
+
+    function startBooking() {
+      if (!availabilityState.loaded && !availabilityState.error) {
+        loadAvailabilitySlots();
+      }
+
+      chatbotState.mode = "booking";
+      chatbotState.bookingStep = 0;
+      chatbotState.booking = createEmptyBooking();
+      renderQuickActions("booking");
+      addBotMessage("Ti aiuto a preparare una richiesta WhatsApp ordinata. Non scrivere dati sanitari non necessari: bastano le informazioni essenziali.");
+      promptBookingStep();
+      chatInput.focus();
+    }
+
+    function answerServices() {
+      addBotMessage(
+        "I servizi principali sono:\n" +
+        "- ECG a domicilio\n" +
+        "- Holter ECG\n" +
+        "- Holter pressorio\n" +
+        "- assistenza infermieristica a casa\n\n" +
+        "Sono servizi informativi e domiciliari: non sostituiscono medico, 112/118 o pronto soccorso. Se vuoi, preparo una richiesta WhatsApp ordinata."
+      );
+    }
+
+    function answerEcg() {
+      addBotMessage(
+        "L'ECG, cioè elettrocardiogramma, registra l'attività elettrica del cuore in quel momento.\n\n" +
+        "Può essere utile quando il medico vuole controllare ritmo, frequenza e alcuni segnali da valutare clinicamente. Non fa diagnosi da solo e non sostituisce una visita.\n\n" +
+        "Se ci sono dolore al petto, difficoltà a respirare, svenimento o sintomi improvvisi importanti, chiama subito 112/118."
+      );
+      addBotMessage("Vuoi richiedere questo servizio a domicilio? Scrivi 'prenotare' oppure clicca il pulsante.");
+    }
+
+    function answerHolterEcg() {
+      addBotMessage(
+        "L'Holter ECG registra il ritmo del cuore per un periodo più lungo, spesso 24 ore o secondo indicazione.\n\n" +
+        "È utile quando un disturbo non compare durante un ECG breve, per esempio palpitazioni, battiti irregolari o episodi da far valutare al medico."
+      );
+      addBotMessage("Vuoi richiedere questo servizio a domicilio? Scrivi 'prenotare' oppure clicca il pulsante.");
+    }
+
+    function answerHolterPressorio() {
+      addBotMessage(
+        "L'Holter pressorio misura la pressione più volte durante giorno e notte.\n\n" +
+        "Aiuta il medico a capire meglio l'andamento della pressione, senza basarsi su una sola misurazione."
+      );
+      addBotMessage("Vuoi richiedere questo servizio a domicilio? Scrivi 'prenotare' oppure clicca il pulsante.");
+    }
+
+    function answerEcgHolterDifference() {
+      addBotMessage(
+        "In modo semplice:\n" +
+        "1. ECG: fotografa l'attività del cuore in un momento preciso.\n" +
+        "2. Holter ECG: controlla il ritmo per più tempo.\n" +
+        "3. Holter pressorio: misura la pressione durante giorno e notte.\n\n" +
+        "La scelta corretta dipende dal medico. Posso aiutarti a preparare la richiesta, ma non posso decidere quale esame sia necessario."
+      );
+      addBotMessage("Vuoi richiedere uno di questi servizi a domicilio? Scrivi 'prenotare' oppure clicca il pulsante.");
+    }
+
+    function answerAssistance() {
+      addBotMessage(
+        "L'assistenza infermieristica a domicilio può includere prestazioni da valutare caso per caso: medicazioni, parametri vitali, iniezioni quando appropriate, gestione catetere, stomie, glicemia e supporto post-dimissione.\n\n" +
+        "Alcune prestazioni richiedono prescrizione o indicazione medica. Per organizzare bene il contatto posso preparare un messaggio WhatsApp."
+      );
+      addBotMessage("Vuoi richiedere assistenza a domicilio? Scrivi 'prenotare' oppure clicca il pulsante.");
+    }
+
+    function answerArea() {
+      addBotMessage(
+        "Il servizio è pensato soprattutto per Francofonte, Lentini e Carlentini.\n" +
+        "Per altri comuni conviene verificare direttamente la disponibilità via WhatsApp."
+      );
+    }
+
+    function answerTimings() {
+      addBotMessage(
+        "I tempi si confermano al primo contatto, in base alla prestazione, al comune e alla disponibilità.\n" +
+        "Non posso promettere urgenze, disponibilità o tempi di refertazione non confermati."
+      );
+    }
+
+    function answerPrescription() {
+      addBotMessage(
+        "Alcune prestazioni possono richiedere una prescrizione o un'indicazione medica.\n" +
+        "Se non sai se serve, scrivi 'non so': verrà verificato al contatto diretto."
+      );
+    }
+
+    function answerBenefits() {
+      addBotMessage(
+        "La telemedicina può essere utile per chi vuole meno spostamenti, meno attese e più tranquillità.\n" +
+        "Resta però un supporto organizzativo: per dubbi clinici serve il medico."
+      );
+    }
+
+    function answerPrices() {
+      addBotMessage(
+        "I prezzi presenti nelle informazioni del sito sono:\n" +
+        "- Referti Fast ECG: 38 euro\n" +
+        "- Holter cardiaco: 60 euro\n" +
+        "- Holter pressorio: 48 euro\n\n" +
+        "La conferma finale dipende dalla prestazione richiesta e dalle modalità operative. Non invento altri prezzi: per evitare errori posso preparare un messaggio WhatsApp."
+      );
+    }
+
+    function answerReferto() {
+      addBotMessage(
+        "Il referto viene gestito in formato digitale secondo tempi e modalità comunicati al momento dell'organizzazione.\n" +
+        "Non posso interpretare referti o tracciati: quella è una valutazione medica."
+      );
+    }
+
+    function answerEmergency() {
+      addBotMessage(
+        "Da quello che descrivi potrebbe esserci una situazione da valutare subito. Non aspettare il chatbot e non usare questo servizio per gestire un'urgenza: chiama immediatamente il 112 o il 118, oppure fai chiamare qualcuno vicino a te.\n\n" +
+        "Se hai dolore al petto, difficoltà a respirare, svenimento, forte debolezza o sintomi improvvisi, è meglio attivare subito i soccorsi.\n\n" +
+        "Posso aiutarti solo con informazioni generali, ma in questo caso la priorità è parlare con l'emergenza sanitaria."
+      );
+    }
+
+    function answerSymptoms() {
+      addBotMessage(
+        "Capisco. Prima cosa importante: hai dolore al petto, fiato corto importante, svenimento, sudorazione fredda, forte debolezza o difficoltà improvvisa a parlare?\n\n" +
+        "Se sì, chiama subito 112/118. Se invece non ci sono questi segnali e vuoi organizzare un controllo o un servizio domiciliare, posso preparare la richiesta per WhatsApp.\n\n" +
+        "Per sintomi che persistono, peggiorano o si ripetono, conviene sentire il medico curante o lo specialista."
+      );
+    }
+
+    function answerMedicalLimits() {
+      addBotMessage(
+        "Questa è una valutazione medica e non posso farla dal chatbot.\n\n" +
+        "Non posso formulare diagnosi, interpretare referti o modificare farmaci. Posso però aiutarti a preparare le informazioni essenziali da riferire al medico o ad Angelo Rosso."
+      );
+    }
+
+    function answerGreeting() {
+      addBotMessage(
+        "Ciao, sono l'assistente virtuale di Angelo Rosso. Posso aiutarti con informazioni su ECG, Holter, Holter pressorio e assistenza infermieristica a domicilio.\n\n" +
+        "Se hai dolore al petto, difficoltà a respirare, svenimento o sintomi improvvisi importanti, chiama subito 112/118. Per il resto, dimmi pure di cosa hai bisogno."
+      );
+    }
+
+    function answerFallback() {
+      addBotMessage(
+        "Posso aiutarti su servizi, prezzi, tempi, area operativa, prescrizione e richiesta WhatsApp.\n" +
+        "Non posso fare diagnosi, interpretare referti o modificare farmaci. Scrivi una parola chiave oppure scegli un pulsante rapido."
+      );
+    }
+
+    function stripSpeechNoise(value) {
+      let cleaned = value.trim().replace(/\s+/g, " ");
+      const patterns = [
+        /^(ho detto|ti ho detto|le ho detto|avevo detto|intendo|volevo dire|cioe|cioè)\s+/i,
+        /^(serve|mi serve|vorrei|devo fare|si tratta di|ha bisogno di)\s+/i,
+        /^(per|a|ad)\s+/i,
+        /^(un|una|uno|il|lo|la|l')\s+/i
+      ];
+
+      let changed = true;
+      while (changed) {
+        changed = false;
+        patterns.forEach(pattern => {
+          const next = cleaned.replace(pattern, "").trim();
+          if (next !== cleaned) {
+            cleaned = next;
+            changed = true;
+          }
+        });
+      }
+
+      return cleaned;
+    }
+
+    function cleanService(value) {
+      const normalized = normalizeText(value);
+
+      if (normalized.includes("holter") && normalized.includes("press")) {
+        return "Holter pressorio";
+      }
+
+      if (normalized.includes("holter") && (normalized.includes("ecg") || normalized.includes("cardiaco"))) {
+        return "Holter ECG";
+      }
+
+      if (normalized.includes("ecg") || normalized.includes("elettrocardiogramma")) {
+        return "ECG";
+      }
+
+      if (
+        normalized.includes("assistenza") ||
+        normalized.includes("infermier") ||
+        normalized.includes("medicaz") ||
+        normalized.includes("iniezion") ||
+        normalized.includes("catetere") ||
+        normalized.includes("stomia")
+      ) {
+        return "Assistenza infermieristica";
+      }
+
+      return stripSpeechNoise(value);
+    }
+
+    function cleanRelation(value) {
+      const normalized = normalizeText(value);
+
+      if (
+        normalized === "io" ||
+        normalized.includes("per me") ||
+        normalized.includes("me stesso") ||
+        normalized.includes("me stessa")
+      ) {
+        return "me stesso/a";
+      }
+
+      if (normalized.includes("mamma") || normalized.includes("madre")) {
+        return "familiare (mamma)";
+      }
+
+      if (normalized.includes("papa") || normalized.includes("papà") || normalized.includes("padre")) {
+        return "familiare (padre)";
+      }
+
+      if (normalized.includes("moglie")) {
+        return "familiare (moglie)";
+      }
+
+      if (normalized.includes("marito")) {
+        return "familiare (marito)";
+      }
+
+      if (normalized.includes("figlia")) {
+        return "familiare (figlia)";
+      }
+
+      if (normalized.includes("figlio")) {
+        return "familiare (figlio)";
+      }
+
+      if (normalized.includes("nonna")) {
+        return "familiare (nonna)";
+      }
+
+      if (normalized.includes("nonno")) {
+        return "familiare (nonno)";
+      }
+
+      if (normalized.includes("paziente assistito") || normalized.includes("assistito")) {
+        return "paziente assistito";
+      }
+
+      if (normalized.includes("familiare")) {
+        return "familiare";
+      }
+
+      return stripSpeechNoise(value);
+    }
+
+    function cleanPrescription(value) {
+      const normalized = normalizeText(value);
+
+      if (normalized.includes("non so") || normalized.includes("non lo so")) {
+        return "non so";
+      }
+
+      if (normalized === "si" || normalized.includes("sì") || normalized.includes("prescrizione") || normalized.includes("impegnativa")) {
+        return "sì";
+      }
+
+      if (normalized === "no" || normalized.includes("non ce") || normalized.includes("non ho")) {
+        return "no";
+      }
+
+      return stripSpeechNoise(value);
+    }
+
+    function cleanFreeText(value) {
+      return stripSpeechNoise(value);
+    }
+
+    function cleanPhone(value) {
+      return value.replace(/[^\d+]/g, "").replace(/(?!^)\+/g, "");
+    }
+
+    function isPositiveAnswer(value) {
+      return value === "si" || value === "yes" || value === "ok";
+    }
+
+    function createEmptyBooking() {
+      return {
+        name: "",
+        patientName: "",
+        service: "",
+        city: "",
+        relation: "",
+        age: "",
+        reason: "",
+        prescription: "",
+        date: "",
+        time: "",
+        availabilityStatus: "",
+        availabilityAlternatives: "",
+        note: "",
+        phone: "",
+        email: "",
+        consentContact: ""
+      };
+    }
+
+    function cleanPersonName(value) {
+      let cleaned = value.trim().replace(/\s+/g, " ");
+      cleaned = cleaned
+        .replace(/^[?:;.,\-\s]+/i, "")
+        .replace(/^e\s+/i, "")
+        .replace(/^(io sono|sono|mi chiamo|il mio nome e|il mio nome è)\s+/i, "")
+        .replace(/^(il|lo|la|un|una)\s+/i, "")
+        .replace(/^(signor|sig\.|signora|sig\.ra|dottor|dott\.|dottoressa|dott\.ssa)\s+/i, "")
+        .trim();
+
+      return cleaned || value.trim();
+    }
+
+    function cleanRequesterName(value) {
+      const firstPart = value
+        .split(/\s+e\s+(?:il\s+)?nome\s+di\s+/i)[0]
+        .split(/\s+e\s+(?:mia|mio|la mia|il mio)\s+/i)[0];
+
+      return cleanPersonName(firstPart);
+    }
+
+    function extractPatientName(value) {
+      const patterns = [
+        /nome\s+di\s+(?:mia|mio|la mia|il mio)?\s*(?:mamma|madre|papa|padre|moglie|marito|figlia|figlio|nonna|nonno)?\s*(?:e|si chiama|si chiami)?\s+(.+)$/i,
+        /(?:mia|mio|la mia|il mio)\s+(?:mamma|madre|papa|padre|moglie|marito|figlia|figlio|nonna|nonno)\s+(?:si chiama|e)\s+(.+)$/i,
+        /(?:paziente|assistito|assistita)\s+(?:si chiama|e)\s+(.+)$/i
+      ];
+
+      for (const pattern of patterns) {
+        const match = value.match(pattern);
+        if (match && match[1]) {
+          return cleanPersonName(match[1]);
+        }
+      }
+
+      return "";
+    }
+
+    function promptBookingStep() {
+      const prompts = {
+        0: "Certo. Come ti chiami? Scrivi solo nome e cognome di chi sta richiedendo il servizio.",
+        1: "Grazie. Quale servizio ti interessa? ECG, Holter ECG, Holter pressorio o assistenza infermieristica?",
+        2: "Perfetto. In quale comune serve il servizio? Il servizio e pensato soprattutto per Francofonte, Lentini e Carlentini.",
+        3: "Il servizio e per te, per un familiare o per un paziente assistito?",
+        4: "Qual e il nome e cognome del paziente?",
+        5: "Qual e l'eta indicativa del paziente?",
+        6: "Qual e il motivo della richiesta, in una frase breve? Per privacy, scrivi solo l'essenziale.",
+        7: "Hai una prescrizione o indicazione medica? Puoi rispondere: si, no o non so.",
+        8: "Per quale giorno vorresti l'appuntamento? Puoi scrivere per esempio 08/05/2026, domani o 12 maggio.",
+        9: "A che ora precisa vorresti l'appuntamento? Per esempio 09:00, 10:30 o 15:45.",
+        10: "Ci sono note pratiche utili? Per esempio difficolta di movimento, piano senza ascensore, paziente allettato o presenza caregiver. Se non serve, scrivi 'no'.",
+        11: "Lascia un numero di telefono per essere ricontattato. Scrivi solo il numero.",
+        12: "Se vuoi, puoi lasciare anche un'email. Se non vuoi, scrivi 'no'.",
+        13: "Acconsenti a essere ricontattato per questa richiesta? Rispondi si o no."
+      };
+
+      if (prompts[chatbotState.bookingStep]) {
+        addBotMessage(prompts[chatbotState.bookingStep]);
+      }
+    }
+
+    function buildAirtablePrefillUrl(data) {
+      // Giorno richiesto in ISO YYYY-MM-DD so Airtable Date field parses correctly for Zapier delay triggers
+      const requestedDate = data.date || "";
+
+      const now = new Date();
+      const contactDate = now.getFullYear() + "-" +
+        String(now.getMonth() + 1).padStart(2, "0") + "-" +
+        String(now.getDate()).padStart(2, "0") + " " +
+        String(now.getHours()).padStart(2, "0") + ":" +
+        String(now.getMinutes()).padStart(2, "0");
+
+      const params = new URLSearchParams({
+        "prefill_Data contatto": contactDate,
+        "prefill_Nome richiedente": data.name || "",
+        "prefill_Nome paziente": data.patientName || "",
+        "prefill_Telefono": data.phone || "",
+        "prefill_Email": data.email || "",
+        "prefill_Comune": data.city || "",
+        "prefill_Servizio richiesto": data.service || "",
+        "prefill_Grado di parentela": data.relation || "",
+        "prefill_Eta indicativa": data.age || "",
+        "prefill_Motivo breve": data.reason || "",
+        "prefill_prescrizione indicazione": data.prescription || "",
+        "prefill_Giorno richiesto": requestedDate,
+        "prefill_Orario preferito": data.time || "",
+        "prefill_Esito disponibilità": data.availabilityStatus || "",
+        "prefill_Alternative proposte": data.availabilityAlternatives || "",
+        "prefill_Note pratiche": data.note || "",
+        "prefill_Consenso ricontatto": data.consentContact || "No",
+        "prefill_fonte": "Chatbot sito",
+        "prefill_Stato": "Da verificare"
+      });
+
+      return `${airtableRequestFormUrl}?${params.toString()}`;
+    }
+
+    function addSummaryCard(data) {
+      const card = document.createElement("div");
+      card.className = "chat-summary";
+
+      const title = document.createElement("strong");
+      title.textContent = "Riepilogo richiesta";
+
+      const text = document.createElement("div");
+      text.style.whiteSpace = "pre-wrap";
+      text.innerHTML = [
+        `Richiedente: ${escapeHtml(data.name)}`,
+        data.patientName ? `Paziente: ${escapeHtml(data.patientName)}` : null,
+        `Rapporto: ${escapeHtml(data.relation)}`,
+        `Servizio: ${escapeHtml(data.service)}`,
+        `Comune: ${escapeHtml(data.city)}`,
+        `Eta indicativa: ${escapeHtml(data.age)}`,
+        `Motivo breve: ${escapeHtml(data.reason)}`,
+        `Prescrizione/indicazione medica: ${escapeHtml(data.prescription)}`,
+        `Giorno richiesto: ${escapeHtml(formatDateForUser(data.date))}`,
+        `Orario appuntamento: ${escapeHtml(data.time)}`,
+        `Esito disponibilita: ${escapeHtml(data.availabilityStatus || "Da verificare")}`,
+        data.availabilityAlternatives ? `Alternative proposte: ${escapeHtml(data.availabilityAlternatives)}` : null,
+        data.note ? `Note pratiche: ${escapeHtml(data.note)}` : "Note pratiche: nessuna",
+        `Telefono: ${escapeHtml(data.phone)}`,
+        data.email ? `Email: ${escapeHtml(data.email)}` : null,
+        `Consenso ricontatto: ${escapeHtml(data.consentContact || "No")}`
+      ].filter(Boolean).join("<br>");
+
+      const message = [
+        "Buongiorno, vorrei richiedere informazioni/prenotare un servizio.",
+        `Richiedente: ${data.name}`,
+        data.patientName ? `Paziente: ${data.patientName}` : null,
+        `Rapporto con il paziente: ${data.relation}`,
+        `Servizio richiesto: ${data.service}`,
+        `Comune: ${data.city}`,
+        `Eta indicativa: ${data.age}`,
+        `Motivo della richiesta: ${data.reason}`,
+        `Indicazione/prescrizione medica: ${data.prescription}`,
+        `Giorno richiesto: ${formatDateForUser(data.date)}`,
+        `Orario appuntamento: ${data.time}`,
+        `Esito disponibilita: ${data.availabilityStatus || "Da verificare"}`,
+        data.availabilityAlternatives ? `Alternative proposte: ${data.availabilityAlternatives}` : null,
+        data.note ? `Note pratiche: ${data.note}` : "Note pratiche: nessuna",
+        `Telefono: ${data.phone}`,
+        data.email ? `Email: ${data.email}` : null,
+        `Consenso al ricontatto: ${data.consentContact || "No"}`
+      ].filter(Boolean).join("\n");
+
+      const actionRow = document.createElement("div");
+      actionRow.className = "chat-action-row";
+
+      const whatsappLink = document.createElement("a");
+      whatsappLink.className = "chat-action";
+      whatsappLink.href = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+      whatsappLink.target = "_blank";
+      whatsappLink.rel = "noopener noreferrer";
+      whatsappLink.textContent = "Apri WhatsApp";
+
+      const airtableLink = document.createElement("a");
+      airtableLink.className = "chat-action";
+      airtableLink.textContent = airtableRequestFormUrl ? "Salva richiesta" : "Configura Airtable";
+
+      if (airtableRequestFormUrl) {
+        airtableLink.href = buildAirtablePrefillUrl(data);
+        airtableLink.target = "_blank";
+        airtableLink.rel = "noopener noreferrer";
+      } else {
+        airtableLink.href = "#";
+        airtableLink.setAttribute("aria-disabled", "true");
+        airtableLink.title = "Inserisci l'URL del form Airtable nella costante airtableRequestFormUrl.";
+        airtableLink.addEventListener("click", event => {
+          event.preventDefault();
+          addBotMessage("Airtable non e ancora configurato. Dopo aver creato il form, inserisci il suo link nel sito.");
+        });
+      }
+
+      const restartButton = document.createElement("button");
+      restartButton.type = "button";
+      restartButton.className = "chat-chip";
+      restartButton.textContent = "Nuova richiesta";
+      restartButton.addEventListener("click", () => resetBooking());
+
+      actionRow.appendChild(whatsappLink);
+      actionRow.appendChild(airtableLink);
+      actionRow.appendChild(restartButton);
+
+      card.appendChild(title);
+      card.appendChild(text);
+      card.appendChild(actionRow);
+      chatBody.appendChild(card);
+      scrollChatToBottom();
+    }
+
+    function handleBookingStep(rawText) {
+      const text = rawText.trim();
+      const normalized = normalizeText(text);
+
+      if (hasUrgentSignals(normalized)) {
+        resetBooking(true);
+        answerEmergency();
+        return;
+      }
+
+      if (normalized === "annulla" || normalized === "stop") {
+        resetBooking();
+        return;
+      }
+
+      if (normalized === "menu" || normalized === "torna al menu" || normalized === "indietro") {
+        resetBooking(true);
+        answerGreeting();
+        renderQuickActions("idle");
+        return;
+      }
+
+      if (
+        normalized.includes("prezz") ||
+        normalized.includes("costo") ||
+        normalized.includes("quanto costa") ||
+        normalized.includes("tariff") ||
+        normalized.includes("quanto viene")
+      ) {
+        answerPrices();
+        promptBookingStep();
+        return;
+      }
+
+      if (
+        normalized.includes("prescr") ||
+        normalized.includes("impegnativa") ||
+        normalized.includes("indicazione medica")
+      ) {
+        answerPrescription();
+        promptBookingStep();
+        return;
+      }
+
+      if (
+        normalized.includes("sintom") ||
+        normalized.includes("palpitazioni") ||
+        normalized.includes("battiti")
+      ) {
+        answerSymptoms();
+        promptBookingStep();
+        return;
+      }
+
+      if (
+        normalized === "servizi" ||
+        normalized.includes("cosa fate") ||
+        normalized.includes("cosa offrite")
+      ) {
+        answerServices();
+        promptBookingStep();
+        return;
+      }
+
+      if (chatbotState.bookingStep === 0) {
+        if (text.length < 2) {
+          addBotMessage("Scrivi nome e cognome di chi sta richiedendo il servizio.");
+          return;
+        }
+
+        chatbotState.booking.name = cleanRequesterName(text);
+        chatbotState.booking.patientName = extractPatientName(text);
+        chatbotState.bookingStep = 1;
+        promptBookingStep();
+        return;
+      }
+
+
+      if (chatbotState.bookingStep === 1) {
+        chatbotState.booking.service = cleanService(text);
+        chatbotState.bookingStep = 2;
+        promptBookingStep();
+        return;
+      }
+
+      if (chatbotState.bookingStep === 2) {
+        chatbotState.booking.city = cleanFreeText(text);
+        chatbotState.bookingStep = 3;
+        promptBookingStep();
+        return;
+      }
+
+      if (chatbotState.bookingStep === 3) {
+        chatbotState.booking.relation = cleanRelation(text);
+        chatbotState.bookingStep = chatbotState.booking.patientName ? 5 : 4;
+        promptBookingStep();
+        return;
+      }
+
+      if (chatbotState.bookingStep === 4) {
+        chatbotState.booking.patientName = cleanPersonName(text);
+        chatbotState.bookingStep = 5;
+        promptBookingStep();
+        return;
+      }
+
+      if (chatbotState.bookingStep === 5) {
+        chatbotState.booking.age = cleanFreeText(text);
+        chatbotState.bookingStep = 6;
+        promptBookingStep();
+        return;
+      }
+
+      if (chatbotState.bookingStep === 6) {
+        chatbotState.booking.reason = cleanFreeText(text);
+        chatbotState.bookingStep = 7;
+        promptBookingStep();
+        return;
+      }
+
+      if (chatbotState.bookingStep === 7) {
+        chatbotState.booking.prescription = cleanPrescription(text);
+        chatbotState.bookingStep = 8;
+        promptBookingStep();
+        return;
+      }
+
+      if (chatbotState.bookingStep === 8) {
+        const requestedDate = normalizeRequestedDate(text);
+        chatbotState.booking.date = requestedDate || text;
+        if (!requestedDate) {
+          addBotMessage("Ok, segnato come \"" + text + "\". Angelo verificherà la disponibilità al contatto diretto.");
+        }
+        chatbotState.bookingStep = 9;
+        promptBookingStep();
+        return;
+      }
+
+      if (chatbotState.bookingStep === 9) {
+        const requestedTime = normalizeRequestedTime(text);
+        if (!requestedTime) {
+          chatbotState.booking.time = text;
+          chatbotState.booking.availabilityStatus = "Da verificare";
+          chatbotState.booking.availabilityAlternatives = "";
+          addBotMessage("Ok, segnato come \"" + text + "\". Angelo confermerà l'orario al contatto diretto.");
+          chatbotState.bookingStep = 10;
+          promptBookingStep();
+          return;
+        }
+
+        if (!availabilityState.loaded && !availabilityState.error) {
+          addBotMessage("Sto caricando l'agenda per controllare la disponibilita. Un momento.");
+          loadAvailabilitySlots().then(() => {
+            if (chatbotState.mode === "booking" && chatbotState.bookingStep === 9) {
+              handleBookingStep(text);
+            }
+          });
+          return;
+        }
+
+        const availability = evaluateAvailability(chatbotState.booking.date, requestedTime);
+        chatbotState.booking.time = requestedTime;
+        chatbotState.booking.availabilityStatus = availability.status;
+        chatbotState.booking.availabilityAlternatives = availability.alternatives.join(", ");
+        addBotMessage(availability.message);
+        chatbotState.bookingStep = 10;
+        promptBookingStep();
+        return;
+      }
+
+      if (chatbotState.bookingStep === 10) {
+        chatbotState.booking.note = normalized === "no" ? "" : cleanFreeText(text);
+        chatbotState.bookingStep = 11;
+        promptBookingStep();
+        return;
+      }
+
+      if (chatbotState.bookingStep === 11) {
+        const phone = cleanPhone(text);
+        if (phone.length < 6) {
+          addBotMessage("Il numero sembra troppo corto. Scrivi un numero di telefono valido, anche solo cellulare.");
+          return;
+        }
+
+        chatbotState.booking.phone = phone;
+        chatbotState.bookingStep = 12;
+        promptBookingStep();
+        return;
+      }
+
+      if (chatbotState.bookingStep === 12) {
+        chatbotState.booking.email = normalized === "no" ? "" : cleanFreeText(text);
+        chatbotState.bookingStep = 13;
+        promptBookingStep();
+        return;
+      }
+
+      if (chatbotState.bookingStep === 13) {
+        chatbotState.booking.consentContact = isPositiveAnswer(normalized) ? "Si" : "No";
+        chatbotState.mode = "summary";
+        chatbotState.bookingStep = null;
+        renderQuickActions("idle");
+        addSummaryCard(chatbotState.booking);
+        addBotMessage("Se vuoi, salva la richiesta su Airtable e apri WhatsApp. In alternativa puoi rifare la richiesta.");
+      }
+    }
+
+    function processUserInput(rawText, fromQuickAction = false) {
+      const text = rawText.trim();
+      if (!text) {
+        return;
+      }
+
+      addUserMessage(text);
+
+      const normalized = normalizeText(text);
+
+      if (hasUrgentSignals(normalized)) {
+        if (chatbotState.mode === "booking") {
+          resetBooking(true);
+        }
+        answerEmergency();
+        return;
+      }
+
+      if (chatbotState.mode === "booking") {
+        handleBookingStep(text);
+        return;
+      }
+
+      if (normalized === "menu" || normalized === "torna al menu" || normalized === "indietro") {
+        answerGreeting();
+        renderQuickActions("idle");
+        return;
+      }
+
+      if (
+        normalized.includes("prenot") ||
+        normalized.includes("appunt") ||
+        normalized.includes("richied") ||
+        normalized.includes("whatsapp")
+      ) {
+        startBooking();
+        return;
+      }
+
+      if (
+        normalized.includes("prezz") ||
+        normalized.includes("costo") ||
+        normalized.includes("quanto costa") ||
+        normalized.includes("tariff") ||
+        normalized.includes("quanto viene")
+      ) {
+        answerPrices();
+        return;
+      }
+
+      if (
+        normalized.includes("differenza") &&
+        normalized.includes("ecg") &&
+        normalized.includes("holter")
+      ) {
+        answerEcgHolterDifference();
+        return;
+      }
+
+      if (
+        normalized.includes("pressione alta") ||
+        normalized.includes("pressione molto alta") ||
+        normalized.includes("pressione bassa")
+      ) {
+        answerSymptoms();
+        return;
+      }
+
+      if (
+        normalized.includes("holter pressorio") ||
+        normalized.includes("holter pressione") ||
+        normalized.includes("monitoraggio pressorio")
+      ) {
+        answerHolterPressorio();
+        return;
+      }
+
+      if (
+        normalized.includes("holter ecg") ||
+        normalized.includes("holter cardiaco")
+      ) {
+        answerHolterEcg();
+        return;
+      }
+
+      if (
+        normalized.includes("ecg") ||
+        normalized.includes("elettrocardiogramma")
+      ) {
+        answerEcg();
+        return;
+      }
+
+      if (
+        normalized.includes("assistenza") ||
+        normalized.includes("infermier") ||
+        normalized.includes("medicaz") ||
+        normalized.includes("iniezion") ||
+        normalized.includes("catetere") ||
+        normalized.includes("stomia")
+      ) {
+        answerAssistance();
+        return;
+      }
+
+      if (
+        normalized.includes("sintom") ||
+        normalized.includes("palpitazioni") ||
+        normalized.includes("battiti") ||
+        normalized.includes("pressione alta") ||
+        normalized.includes("malessere")
+      ) {
+        answerSymptoms();
+        return;
+      }
+
+      if (
+        normalized.includes("diagnosi") ||
+        normalized.includes("referto") ||
+        normalized.includes("farmac") ||
+        normalized.includes("terapia") ||
+        normalized.includes("medicina")
+      ) {
+        if (normalized.includes("referto")) {
+          answerReferto();
+        } else {
+          answerMedicalLimits();
+        }
+        return;
+      }
+
+      if (
+        normalized.includes("serviz") ||
+        normalized.includes("cosa fate") ||
+        normalized.includes("cosa offrite")
+      ) {
+        answerServices();
+        return;
+      }
+
+      if (
+        normalized.includes("dove") ||
+        normalized.includes("zona") ||
+        normalized.includes("territorio") ||
+        normalized.includes("francofonte") ||
+        normalized.includes("lentini") ||
+        normalized.includes("carlentini")
+      ) {
+        answerArea();
+        return;
+      }
+
+      if (
+        normalized.includes("tempo") ||
+        normalized.includes("tempi") ||
+        normalized.includes("quando")
+      ) {
+        answerTimings();
+        return;
+      }
+
+      if (
+        normalized.includes("prescr") ||
+        normalized.includes("impegnativa") ||
+        normalized.includes("indicazione medica")
+      ) {
+        answerPrescription();
+        return;
+      }
+
+      if (
+        normalized.includes("tranquill") ||
+        normalized.includes("comod") ||
+        normalized.includes("spost") ||
+        normalized.includes("anzian") ||
+        normalized.includes("fatica") ||
+        normalized.includes("beneficio")
+      ) {
+        answerBenefits();
+        return;
+      }
+
+      if (
+        normalized.includes("ciao") ||
+        normalized.includes("salve") ||
+        normalized.includes("buongiorno") ||
+        normalized.includes("buonasera")
+      ) {
+        answerGreeting();
+        return;
+      }
+
+      answerFallback();
+    }
+
+    function openChat() {
+      chatWidget.classList.add("is-open");
+      chatPanel.setAttribute("aria-hidden", "false");
+      chatFab.setAttribute("aria-expanded", "true");
+      window.setTimeout(() => {
+        chatInput.focus();
+      }, 50);
+    }
+
+    window.openTelemedicinaChat = openChat;
+
+    function closeChat() {
+      chatWidget.classList.remove("is-open");
+      chatPanel.setAttribute("aria-hidden", "true");
+      chatFab.setAttribute("aria-expanded", "false");
+    }
+
+    chatFab.addEventListener("click", () => {
+      if (chatWidget.classList.contains("is-open")) {
+        closeChat();
+      } else {
+        openChat();
+      }
+    });
+
+    if (openChatHero) {
+      openChatHero.addEventListener("click", openChat);
+    }
+
+    chatClose.addEventListener("click", closeChat);
+
+    chatForm.addEventListener("submit", event => {
+      event.preventDefault();
+      const value = chatInput.value;
+      chatInput.value = "";
+      processUserInput(value, false);
+    });
+
+    chatActions.addEventListener("click", event => {
+      const button = event.target.closest(".chat-chip");
+      if (!button) {
+        return;
+      }
+
+      processUserInput(button.textContent || "", true);
+    });
+
+    loadAvailabilitySlots();
+
+    if (chatBody.childElementCount === 0) {
+      answerGreeting();
+      renderQuickActions("idle");
+    }
+  </script>
+</body>
+</html>
