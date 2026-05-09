@@ -1,5 +1,7 @@
 # AGENTS.md — Sito Angelo Rosso
 
+**Repo GitHub**: https://github.com/Matrix3471/sito-angelo-rosso (privato)
+
 > Contesto per agenti AI (Codex, Claude Code, ecc.) che lavorano su questo progetto.
 
 ## Identità del progetto
