@@ -1367,7 +1367,7 @@
       border: 1px solid rgba(15, 23, 42, 0.16);
       border-radius: 12px;
       padding: 12px 13px;
-      color: var(--text);
+      color: #142033;
       background: #ffffff;
       font: inherit;
     }
@@ -1382,6 +1382,9 @@
     .newsletter-form .button {
       width: fit-content;
       margin-top: 4px;
+      color: #ffffff;
+      background: #142033;
+      border-color: #142033;
     }
 
     .newsletter-form .button:disabled {
@@ -2453,25 +2456,24 @@
               </div>
             </div>
 
-            <form class="newsletter-form" aria-label="Modulo comunicazioni informative">
+            <form class="newsletter-form" id="newsletter-form" aria-label="Modulo comunicazioni informative">
               <h3>Iscrizione alle comunicazioni informative</h3>
               <p>
-                Il modulo sara attivato piu avanti, dopo la preparazione dell'informativa privacy e della gestione della cancellazione.
-                L'obiettivo e permettere a chi lo desidera di ricevere aggiornamenti utili su assistenza, ADI, telemedicina
-                sanita e altri argomenti di interesse generale, non comunicazioni invasive.
+                Ricevi aggiornamenti utili su assistenza domiciliare, ADI, telemedicina e sanita.
+                Nessuna comunicazione invasiva, puoi cancellarti in qualsiasi momento.
               </p>
               <label>
                 Nome
-                <input type="text" name="nome" placeholder="Il tuo nome" disabled>
+                <input type="text" name="nome" placeholder="Il tuo nome" required>
               </label>
               <label>
                 Email
-                <input type="email" name="email" placeholder="nome@email.it" disabled>
+                <input type="email" name="email" placeholder="nome@email.it" required>
               </label>
               <label>
                 Comune
-                <select name="comune" disabled>
-                  <option>Seleziona comune</option>
+                <select name="comune" required>
+                  <option value="">Seleziona comune</option>
                   <option>Francofonte</option>
                   <option>Lentini</option>
                   <option>Carlentini</option>
@@ -2479,10 +2481,11 @@
                 </select>
               </label>
               <label class="newsletter-consent">
-                <input type="checkbox" disabled>
+                <input type="checkbox" name="consenso" required>
                 <span>Acconsento a ricevere comunicazioni informative su assistenza, ADI, telemedicina, sanita e argomenti di vario genere collegati alla salute.</span>
               </label>
-              <button class="button button-secondary" type="button" disabled>Disponibile prossimamente</button>
+              <button class="button button-secondary" type="submit" id="newsletter-btn">Iscriviti</button>
+              <p id="newsletter-msg" style="display:none;margin:0;font-size:0.93rem;"></p>
             </form>
           </div>
         </div>
@@ -3861,6 +3864,41 @@
     if (chatBody.childElementCount === 0) {
       answerGreeting();
       renderQuickActions("idle");
+    }
+
+    const newsletterForm = document.getElementById("newsletter-form");
+    const newsletterBtn = document.getElementById("newsletter-btn");
+    const newsletterMsg = document.getElementById("newsletter-msg");
+
+    if (newsletterForm) {
+      newsletterForm.addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        var nome = newsletterForm.nome.value.trim();
+        var email = newsletterForm.email.value.trim();
+        var comune = newsletterForm.comune.value;
+        var consenso = newsletterForm.consenso.checked ? "Si" : "No";
+
+        if (!nome || !email || !comune || consenso === "No") {
+          newsletterMsg.textContent = "Compila tutti i campi e accetta il consenso.";
+          newsletterMsg.style.color = "#e05c5c";
+          newsletterMsg.style.display = "block";
+          return;
+        }
+
+        newsletterBtn.disabled = true;
+        newsletterBtn.textContent = "Invio in corso...";
+
+        var payload = JSON.stringify({ nome: nome, email: email, comune: comune, consenso: consenso });
+        var url = SHEET_SCRIPT_URL + "?action=newsletter&payload=" + encodeURIComponent(payload);
+        new Image().src = url;
+
+        newsletterForm.reset();
+        newsletterBtn.textContent = "Iscritto";
+        newsletterMsg.textContent = "Iscrizione completata. Grazie!";
+        newsletterMsg.style.color = "#6fe2b3";
+        newsletterMsg.style.display = "block";
+      });
     }
   </script>
 </body>
