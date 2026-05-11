@@ -1236,10 +1236,20 @@
       const entries = Object.entries(fileMap);
       const optionalFiles = new Set(['requests']);
       const results = await Promise.all(entries.map(async ([key, path]) => {
-        const response = await fetch(path, { cache: 'no-store' });
-        if (!response.ok && optionalFiles.has(key)) return [key, []];
-        if (!response.ok) throw new Error(`File non trovato: ${path}`);
-        return [key, parseCsv(await response.text())];
+        try {
+          const response = await fetch(path, { cache: 'no-store' });
+          if (!response.ok && optionalFiles.has(key)) return [key, []];
+          if (!response.ok) throw new Error(`File non trovato: ${path}`);
+          const text = await response.text();
+          try {
+            const json = JSON.parse(text);
+            if (json.csv !== undefined) return [key, parseCsv(json.csv)];
+          } catch (_) {}
+          return [key, parseCsv(text)];
+        } catch (err) {
+          if (optionalFiles.has(key)) return [key, []];
+          throw err;
+        }
       }));
 
       results.forEach(([key, rows]) => {

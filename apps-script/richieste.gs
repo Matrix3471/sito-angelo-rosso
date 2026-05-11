@@ -89,6 +89,10 @@ function doGet(e) {
       return handleNewsletter(e.parameter);
     }
 
+    if (action === "export_richieste") {
+      return exportCsv(SHEET_NAME);
+    }
+
     return handleRichiesta(e.parameter);
   } catch (err) {
     console.log("ERRORE:", err.toString());
@@ -158,6 +162,26 @@ function handleNewsletter(params) {
 
   console.log("newsletter appendRow completato");
   return jsonResponse({ status: "ok" });
+}
+
+function exportCsv(sheetName) {
+  var sheet = SpreadsheetApp.openById(SPREADSHEET_ID).getSheetByName(sheetName);
+  if (!sheet) {
+    return jsonResponse({ status: "error", message: "Foglio non trovato: " + sheetName });
+  }
+
+  var data = sheet.getDataRange().getValues();
+  var csv = data.map(function(row) {
+    return row.map(function(cell) {
+      var val = String(cell);
+      if (val.indexOf(",") !== -1 || val.indexOf('"') !== -1 || val.indexOf("\n") !== -1) {
+        val = '"' + val.replace(/"/g, '""') + '"';
+      }
+      return val;
+    }).join(",");
+  }).join("\n");
+
+  return jsonResponse({ status: "ok", csv: csv });
 }
 
 function jsonResponse(obj) {
