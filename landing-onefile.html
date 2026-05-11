@@ -2739,14 +2739,14 @@
     const openChatHero = document.getElementById("open-chat-hero");
 
     const whatsappNumber = "393315677922";
-    const airtableRequestFormUrl = "https://airtable.com/appiXIxIc8xDTbAwm/pagKvcJmcIQi3QJZu/form";
-    const availabilityFileUrl = "agenda_disponibilita.csv";
-    const availabilityState = {
-      loaded: false,
-      error: false,
-      loadingPromise: null,
-      slots: []
-    };
+    const calComUrl = "https://cal.com/angelo-rosso/visita-domiciliare";
+    const SHEET_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx9jIDN38OdALDsx9cNCIe0gM9BWXqKf47doQ2rruITImL7wug2sT1XWI7rYw5HcRpu5A/exec"; // 
+
+    function sendToSheet(data) {
+      if (!SHEET_SCRIPT_URL) return;
+      var url = SHEET_SCRIPT_URL + "?payload=" + encodeURIComponent(JSON.stringify(data));
+      new Image().src = url;
+    }
     const chatbotState = {
       mode: "idle",
       bookingStep: null,
@@ -2756,8 +2756,6 @@
         city: "",
         date: "",
         time: "",
-        availabilityStatus: "",
-        availabilityAlternatives: "",
         note: "",
         phone: "",
         email: "",
@@ -2819,51 +2817,6 @@
       scrollChatToBottom();
     }
 
-    function parseSimpleCsv(text) {
-      const rows = [];
-      let current = "";
-      let row = [];
-      let insideQuotes = false;
-
-      for (let index = 0; index < text.length; index += 1) {
-        const char = text[index];
-        const next = text[index + 1];
-
-        if (char === '"' && insideQuotes && next === '"') {
-          current += '"';
-          index += 1;
-        } else if (char === '"') {
-          insideQuotes = !insideQuotes;
-        } else if (char === "," && !insideQuotes) {
-          row.push(current.trim());
-          current = "";
-        } else if ((char === "\n" || char === "\r") && !insideQuotes) {
-          if (char === "\r" && next === "\n") index += 1;
-          row.push(current.trim());
-          if (row.some(Boolean)) rows.push(row);
-          row = [];
-          current = "";
-        } else {
-          current += char;
-        }
-      }
-
-      if (current || row.length) {
-        row.push(current.trim());
-        if (row.some(Boolean)) rows.push(row);
-      }
-
-      if (!rows.length) return [];
-      const headers = rows[0].map(value => value.trim().toLowerCase().replace(/\s+/g, "_"));
-      return rows.slice(1).map(values => {
-        const record = {};
-        headers.forEach((header, index) => {
-          record[header] = values[index] || "";
-        });
-        return record;
-      });
-    }
-
     function timeToMinutes(value) {
       const match = String(value || "").match(/(\d{1,2})[:.](\d{2})|(?:^|\D)(\d{1,2})(?:\D|$)/);
       if (!match) return null;
@@ -2898,6 +2851,23 @@
         const tomorrow = new Date(today);
         tomorrow.setDate(today.getDate() + 1);
         return tomorrow.toISOString().slice(0, 10);
+      }
+
+      const weekdays = {
+        "lunedi": 1, "lunedì": 1,
+        "martedi": 2, "martedì": 2,
+        "mercoledi": 3, "mercoledì": 3,
+        "giovedi": 4, "giovedì": 4,
+        "venerdi": 5, "venerdì": 5,
+        "sabato": 6,
+        "domenica": 0
+      };
+      if (weekdays[normalized] !== undefined) {
+        const target = weekdays[normalized];
+        const d = new Date(today);
+        const diff = (target - d.getDay() + 7) % 7;
+        d.setDate(d.getDate() + (diff === 0 ? 7 : diff));
+        return d.toISOString().slice(0, 10);
       }
 
       const isoMatch = normalized.match(/\b(\d{4})-(\d{1,2})-(\d{1,2})\b/);
@@ -2942,110 +2912,6 @@
       if (parts.length !== 3) return value;
       return `${parts[2]}/${parts[1]}/${parts[0]}`;
     }
-
-    function loadAvailabilitySlots() {
-      if (availabilityState.loaded) {
-        return Promise.resolve(availabilityState.slots);
-      }
-
-      if (availabilityState.loadingPromise) {
-        return availabilityState.loadingPromise;
-      }
-
-      availabilityState.loadingPromise = fetch(availabilityFileUrl, { cache: "no-store" })
-        .then(response => {
-          if (!response.ok) throw new Error("Agenda non trovata");
-          return response.text();
-        })
-        .then(text => {
-          availabilityState.slots = parseSimpleCsv(text)
-            .map(row => ({
-              date: row.data || "",
-              start: row.ora_inizio || "",
-              end: row.ora_fine || "",
-              status: row.stato || "",
-              service: row.servizio || "",
-              city: row.comune || "",
-              note: row.note || ""
-            }))
-            .filter(slot => slot.date && slot.start && slot.end);
-          availabilityState.loaded = true;
-          availabilityState.error = false;
-          return availabilityState.slots;
-        })
-        .catch(() => {
-          availabilityState.loaded = false;
-          availabilityState.error = true;
-          availabilityState.slots = [];
-          return availabilityState.slots;
-        })
-        .finally(() => {
-          availabilityState.loadingPromise = null;
-        });
-
-      return availabilityState.loadingPromise;
-    }
-
-    function isFreeAvailabilitySlot(slot) {
-      return normalizeText(slot.status) === "libero";
-    }
-
-    function describeAvailabilitySlot(slot) {
-      return `${formatDateForUser(slot.date)} ${slot.start}-${slot.end}`;
-    }
-
-    function findAvailabilityAlternatives(date, time, limit = 3) {
-      const requestedMinutes = timeToMinutes(time) || 0;
-      return availabilityState.slots
-        .filter(slot => isFreeAvailabilitySlot(slot))
-        .filter(slot => slot.date > date || (slot.date === date && timeToMinutes(slot.start) >= requestedMinutes))
-        .sort((first, second) => `${first.date} ${first.start}`.localeCompare(`${second.date} ${second.start}`))
-        .slice(0, limit)
-        .map(describeAvailabilitySlot);
-    }
-
-    function evaluateAvailability(date, time) {
-      if (!availabilityState.loaded || availabilityState.error) {
-        return {
-          status: "Da verificare",
-          message: "Non riesco a leggere l'agenda in questo momento. Inserisco la richiesta come da verificare.",
-          alternatives: []
-        };
-      }
-
-      const requestedMinutes = timeToMinutes(time);
-      const matchingSlot = availabilityState.slots.find(slot => {
-        const start = timeToMinutes(slot.start);
-        const end = timeToMinutes(slot.end);
-        return slot.date === date && start !== null && end !== null && requestedMinutes >= start && requestedMinutes < end;
-      });
-
-      if (!matchingSlot) {
-        return {
-          status: "Da verificare",
-          message: "Non ho una disponibilita certa per questo giorno e orario. Inserisco la richiesta come da verificare.",
-          alternatives: findAvailabilityAlternatives(date, time)
-        };
-      }
-
-      if (isFreeAvailabilitySlot(matchingSlot)) {
-        return {
-          status: "Sembra disponibile",
-          message: `Questo orario sembra disponibile nello slot ${matchingSlot.start}-${matchingSlot.end}. L'appuntamento viene confermato solo dopo verifica diretta su WhatsApp.`,
-          alternatives: []
-        };
-      }
-
-      const alternatives = findAvailabilityAlternatives(date, time);
-      return {
-        status: "Occupato",
-        message: alternatives.length
-          ? `Per quel giorno e orario risulta gia presente un impegno. Alternative disponibili: ${alternatives.join(", ")}.`
-          : "Per quel giorno e orario risulta gia presente un impegno. Non vedo alternative libere successive nel CSV agenda.",
-        alternatives
-      };
-    }
-
 
     const urgentSignals = [
       "dolore al petto",
@@ -3103,10 +2969,6 @@
 
 
     function startBooking() {
-      if (!availabilityState.loaded && !availabilityState.error) {
-        loadAvailabilitySlots();
-      }
-
       chatbotState.mode = "booking";
       chatbotState.bookingStep = 0;
       chatbotState.booking = createEmptyBooking();
@@ -3403,8 +3265,6 @@
         prescription: "",
         date: "",
         time: "",
-        availabilityStatus: "",
-        availabilityAlternatives: "",
         note: "",
         phone: "",
         email: "",
@@ -3473,40 +3333,25 @@
       }
     }
 
-    function buildAirtablePrefillUrl(data) {
-      // Giorno richiesto in ISO YYYY-MM-DD so Airtable Date field parses correctly for Zapier delay triggers
-      const requestedDate = data.date || "";
-
-      const now = new Date();
-      const contactDate = now.getFullYear() + "-" +
-        String(now.getMonth() + 1).padStart(2, "0") + "-" +
-        String(now.getDate()).padStart(2, "0") + " " +
-        String(now.getHours()).padStart(2, "0") + ":" +
-        String(now.getMinutes()).padStart(2, "0");
+    function buildCalComUrl(data) {
+      const notes = [
+        `Servizio: ${data.service || ""}`,
+        `Paziente: ${data.patientName || data.name || ""}${data.age ? ` (${data.age} anni)` : ""}`,
+        data.patientName && data.name ? `Richiedente: ${data.name}${data.relation ? ` (${data.relation})` : ""}` : null,
+        `Telefono: ${data.phone || ""}`,
+        data.city ? `Comune: ${data.city}` : null,
+        data.time ? `Orario preferito: ${data.time}` : null,
+        data.reason ? `Motivo: ${data.reason}` : null,
+        data.note ? `Note: ${data.note}` : null
+      ].filter(Boolean).join("\n");
 
       const params = new URLSearchParams({
-        "prefill_Data contatto": contactDate,
-        "prefill_Nome richiedente": data.name || "",
-        "prefill_Nome paziente": data.patientName || "",
-        "prefill_Telefono": data.phone || "",
-        "prefill_Email": data.email || "",
-        "prefill_Comune": data.city || "",
-        "prefill_Servizio richiesto": data.service || "",
-        "prefill_Grado di parentela": data.relation || "",
-        "prefill_Eta indicativa": data.age || "",
-        "prefill_Motivo breve": data.reason || "",
-        "prefill_prescrizione indicazione": data.prescription || "",
-        "prefill_Giorno richiesto": requestedDate,
-        "prefill_Orario preferito": data.time || "",
-        "prefill_Esito disponibilità": data.availabilityStatus || "",
-        "prefill_Alternative proposte": data.availabilityAlternatives || "",
-        "prefill_Note pratiche": data.note || "",
-        "prefill_Consenso ricontatto": data.consentContact || "No",
-        "prefill_fonte": "Chatbot sito",
-        "prefill_Stato": "Da verificare"
+        name: data.patientName || data.name || "",
+        email: data.email || "",
+        notes
       });
 
-      return `${airtableRequestFormUrl}?${params.toString()}`;
+      return `${calComUrl}?${params.toString()}`;
     }
 
     function addSummaryCard(data) {
@@ -3528,9 +3373,7 @@
         `Motivo breve: ${escapeHtml(data.reason)}`,
         `Prescrizione/indicazione medica: ${escapeHtml(data.prescription)}`,
         `Giorno richiesto: ${escapeHtml(formatDateForUser(data.date))}`,
-        `Orario appuntamento: ${escapeHtml(data.time)}`,
-        `Esito disponibilita: ${escapeHtml(data.availabilityStatus || "Da verificare")}`,
-        data.availabilityAlternatives ? `Alternative proposte: ${escapeHtml(data.availabilityAlternatives)}` : null,
+        `Orario preferito: ${escapeHtml(data.time)}`,
         data.note ? `Note pratiche: ${escapeHtml(data.note)}` : "Note pratiche: nessuna",
         `Telefono: ${escapeHtml(data.phone)}`,
         data.email ? `Email: ${escapeHtml(data.email)}` : null,
@@ -3548,9 +3391,7 @@
         `Motivo della richiesta: ${data.reason}`,
         `Indicazione/prescrizione medica: ${data.prescription}`,
         `Giorno richiesto: ${formatDateForUser(data.date)}`,
-        `Orario appuntamento: ${data.time}`,
-        `Esito disponibilita: ${data.availabilityStatus || "Da verificare"}`,
-        data.availabilityAlternatives ? `Alternative proposte: ${data.availabilityAlternatives}` : null,
+        `Orario preferito: ${data.time}`,
         data.note ? `Note pratiche: ${data.note}` : "Note pratiche: nessuna",
         `Telefono: ${data.phone}`,
         data.email ? `Email: ${data.email}` : null,
@@ -3567,23 +3408,12 @@
       whatsappLink.rel = "noopener noreferrer";
       whatsappLink.textContent = "Apri WhatsApp";
 
-      const airtableLink = document.createElement("a");
-      airtableLink.className = "chat-action";
-      airtableLink.textContent = airtableRequestFormUrl ? "Salva richiesta" : "Configura Airtable";
-
-      if (airtableRequestFormUrl) {
-        airtableLink.href = buildAirtablePrefillUrl(data);
-        airtableLink.target = "_blank";
-        airtableLink.rel = "noopener noreferrer";
-      } else {
-        airtableLink.href = "#";
-        airtableLink.setAttribute("aria-disabled", "true");
-        airtableLink.title = "Inserisci l'URL del form Airtable nella costante airtableRequestFormUrl.";
-        airtableLink.addEventListener("click", event => {
-          event.preventDefault();
-          addBotMessage("Airtable non e ancora configurato. Dopo aver creato il form, inserisci il suo link nel sito.");
-        });
-      }
+      const calLink = document.createElement("a");
+      calLink.className = "chat-action";
+      calLink.textContent = "Scegli data e orario";
+      calLink.href = buildCalComUrl(data);
+      calLink.target = "_blank";
+      calLink.rel = "noopener noreferrer";
 
       const restartButton = document.createElement("button");
       restartButton.type = "button";
@@ -3591,8 +3421,8 @@
       restartButton.textContent = "Nuova richiesta";
       restartButton.addEventListener("click", () => resetBooking());
 
+      actionRow.appendChild(calLink);
       actionRow.appendChild(whatsappLink);
-      actionRow.appendChild(airtableLink);
       actionRow.appendChild(restartButton);
 
       card.appendChild(title);
@@ -3742,31 +3572,7 @@
 
       if (chatbotState.bookingStep === 9) {
         const requestedTime = normalizeRequestedTime(text);
-        if (!requestedTime) {
-          chatbotState.booking.time = text;
-          chatbotState.booking.availabilityStatus = "Da verificare";
-          chatbotState.booking.availabilityAlternatives = "";
-          addBotMessage("Ok, segnato come \"" + text + "\". Angelo confermerà l'orario al contatto diretto.");
-          chatbotState.bookingStep = 10;
-          promptBookingStep();
-          return;
-        }
-
-        if (!availabilityState.loaded && !availabilityState.error) {
-          addBotMessage("Sto caricando l'agenda per controllare la disponibilita. Un momento.");
-          loadAvailabilitySlots().then(() => {
-            if (chatbotState.mode === "booking" && chatbotState.bookingStep === 9) {
-              handleBookingStep(text);
-            }
-          });
-          return;
-        }
-
-        const availability = evaluateAvailability(chatbotState.booking.date, requestedTime);
-        chatbotState.booking.time = requestedTime;
-        chatbotState.booking.availabilityStatus = availability.status;
-        chatbotState.booking.availabilityAlternatives = availability.alternatives.join(", ");
-        addBotMessage(availability.message);
+        chatbotState.booking.time = requestedTime || text;
         chatbotState.bookingStep = 10;
         promptBookingStep();
         return;
@@ -3803,9 +3609,10 @@
         chatbotState.booking.consentContact = isPositiveAnswer(normalized) ? "Si" : "No";
         chatbotState.mode = "summary";
         chatbotState.bookingStep = null;
+        sendToSheet(chatbotState.booking);
         renderQuickActions("idle");
         addSummaryCard(chatbotState.booking);
-        addBotMessage("Se vuoi, salva la richiesta su Airtable e apri WhatsApp. In alternativa puoi rifare la richiesta.");
+        addBotMessage("Clicca 'Scegli data e orario' per prenotare il tuo slot direttamente. Per qualsiasi dubbio puoi anche contattarmi su WhatsApp.");
       }
     }
 
@@ -4050,8 +3857,6 @@
 
       processUserInput(button.textContent || "", true);
     });
-
-    loadAvailabilitySlots();
 
     if (chatBody.childElementCount === 0) {
       answerGreeting();
