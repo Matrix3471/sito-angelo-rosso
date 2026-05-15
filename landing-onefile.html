@@ -6,41 +6,45 @@
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ECG, Holter e assistenza infermieristica a domicilio | Angelo Rosso</title>
+  <title>elettrocardiogramma, Holter e assistenza infermieristica a domicilio | Angelo Rosso</title>
   <meta
     name="description"
-    content="Servizi a domicilio tra Francofonte, Lentini e Carlentini: ECG, Holter ECG, Holter pressorio e assistenza infermieristica. Contatto diretto via telefono, WhatsApp o email."
+    content="Servizi a domicilio tra Francofonte, Lentini e Carlentini: elettrocardiogramma, Holter ECG, Holter pressorio e assistenza infermieristica. Contatto diretto via telefono, WhatsApp o email."
   >
   <meta name="robots" content="index,follow">
   <meta name="theme-color" content="#0d1320">
   <meta property="og:locale" content="it_IT">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="ECG, Holter e assistenza infermieristica a domicilio | Angelo Rosso">
+  <meta property="og:title" content="elettrocardiogramma, Holter e assistenza infermieristica a domicilio | Angelo Rosso">
   <meta
     property="og:description"
-    content="Servizi a domicilio tra Francofonte, Lentini e Carlentini: ECG, Holter ECG, Holter pressorio e assistenza infermieristica. Contatto diretto e territorio operativo chiaro."
+    content="Servizi a domicilio tra Francofonte, Lentini e Carlentini: elettrocardiogramma, Holter ECG, Holter pressorio e assistenza infermieristica. Contatto diretto e territorio operativo chiaro."
   >
   <script>
     document.documentElement.classList.add("js");
   </script>
   <style>
     :root {
-      --bg: #0d1320;
-      --bg-soft: #131c2b;
-      --panel: rgba(19, 28, 43, 0.88);
-      --panel-strong: rgba(24, 34, 52, 0.95);
-      --line: rgba(255, 255, 255, 0.1);
-      --line-strong: rgba(255, 255, 255, 0.18);
-      --text: #f0f4f8;
-      --muted: #94a3b8;
-      --accent: #ff8c35;
-      --accent-soft: rgba(255, 140, 53, 0.18);
-      --accent-strong: #ffaa60;
-      --success: #6fe2b3;
-      --ecg-signal: #7dffb2;
-      --ecg-grid: rgba(125, 255, 178, 0.08);
-      --ecg-grid-strong: rgba(125, 255, 178, 0.14);
-      --shadow: 0 24px 70px rgba(0, 0, 0, 0.45);
+      --bg: #eef3f8;
+      --bg-soft: #f7fafc;
+      --panel: #ffffff;
+      --panel-strong: rgba(247, 250, 252, 0.98);
+      --line: rgba(18, 32, 51, 0.09);
+      --line-strong: rgba(18, 32, 51, 0.16);
+      --text: #122033;
+      --muted: #5b687a;
+      --accent: #ff7a18;
+      --accent-soft: rgba(255, 122, 24, 0.12);
+      --accent-strong: #ff8c30;
+      --accent2: #24c7b9;
+      --accent2-soft: rgba(36, 199, 185, 0.15);
+      --success: #24c7b9;
+      --ecg-signal: #24c7b9;
+      --ecg-grid: rgba(36, 199, 185, 0.06);
+      --ecg-grid-strong: rgba(36, 199, 185, 0.12);
+      --shadow: 0 22px 56px rgba(15, 28, 45, 0.12);
+      --neon-glow: 0 0 20px rgba(255, 122, 24, 0.25), 0 0 50px rgba(255, 122, 24, 0.10);
+      --violet-glow: 0 0 18px rgba(36, 199, 185, 0.22), 0 0 48px rgba(36, 199, 185, 0.08);
       --radius-xl: 28px;
       --radius-lg: 22px;
       --radius-md: 16px;
@@ -63,9 +67,9 @@
       color: var(--text);
       font-family: var(--font-body);
       background:
-        radial-gradient(circle at top left, rgba(255, 140, 53, 0.07), transparent 28%),
-        radial-gradient(circle at 85% 15%, rgba(255, 140, 53, 0.05), transparent 20%),
-        linear-gradient(180deg, #090e18 0%, #0d1320 52%, #0d1320 100%);
+        radial-gradient(circle at top left,  rgba(36, 199, 185, 0.14), transparent 30%),
+        radial-gradient(circle at top right, rgba(255, 122, 24, 0.12), transparent 26%),
+        linear-gradient(180deg, #fbfcfe 0%, #eef3f8 100%);
       min-height: 100vh;
       overflow-x: hidden;
     }
@@ -75,10 +79,10 @@
       position: fixed;
       inset: 0;
       background-image:
-        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-      background-size: 30px 30px;
-      mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.55), transparent 78%);
+        linear-gradient(rgba(18, 32, 51, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(18, 32, 51, 0.04) 1px, transparent 1px);
+      background-size: 40px 40px;
+      mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.4), transparent 65%);
       pointer-events: none;
       z-index: 0;
     }
@@ -118,294 +122,58 @@
       position: fixed;
       inset: 0;
       z-index: 120;
-      display: grid;
-      place-items: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       overflow: hidden;
-      background:
-        radial-gradient(circle at center, rgba(34, 98, 72, 0.24), transparent 26%),
-        linear-gradient(180deg, rgba(4, 10, 14, 0.98), rgba(5, 11, 15, 0.96) 46%, rgba(4, 10, 14, 0.98));
+      background: #0f1d2f;
       opacity: 1;
       visibility: visible;
-      transition: opacity 0.8s ease, visibility 0.8s ease, transform 0.8s ease;
-    }
-
-    html.js .intro-overlay::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(var(--ecg-grid) 1px, transparent 1px),
-        linear-gradient(90deg, var(--ecg-grid) 1px, transparent 1px),
-        linear-gradient(var(--ecg-grid-strong) 1px, transparent 1px),
-        linear-gradient(90deg, var(--ecg-grid-strong) 1px, transparent 1px);
-      background-size: 16px 16px, 16px 16px, 64px 64px, 64px 64px;
-      mask-image: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.92) 18%, rgba(0, 0, 0, 0.92) 82%, transparent 100%);
-      opacity: 0.55;
+      transition: opacity 1s ease, visibility 1s ease;
     }
 
     html.js body.page-ready .intro-overlay {
       opacity: 0;
       visibility: hidden;
-      transform: scale(1.015);
     }
 
-    .intro-signal-field {
+    #ecg-splash {
       position: absolute;
       inset: 0;
-      z-index: 1;
-      pointer-events: none;
-      overflow: hidden;
-      background:
-        radial-gradient(circle at 50% 46%, rgba(125, 255, 178, 0.08), transparent 28%),
-        linear-gradient(180deg, rgba(3, 9, 10, 0.94), rgba(2, 7, 8, 0.98));
-    }
-
-    .intro-signal-field::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(rgba(125, 255, 178, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(125, 255, 178, 0.03) 1px, transparent 1px);
-      background-size: 18px 18px, 18px 18px;
-      opacity: 0.26;
-    }
-
-    .intro-signal-field::after {
-      content: "";
-      position: absolute;
-      inset: -10%;
-      background:
-        radial-gradient(circle at center, transparent 34%, rgba(0, 0, 0, 0.34) 72%, rgba(0, 0, 0, 0.62) 100%);
-    }
-
-    .intro-panorama {
-      position: absolute;
-      inset: 0;
-      z-index: 1;
-      display: grid;
-      align-items: center;
-      opacity: 0.98;
-      mix-blend-mode: screen;
-    }
-
-    .intro-panorama svg {
       width: 100%;
       height: 100%;
-      color: rgba(125, 255, 178, 0.96);
-      filter:
-        drop-shadow(0 0 10px rgba(125, 255, 178, 0.22))
-        drop-shadow(0 0 22px rgba(125, 255, 178, 0.12));
     }
 
-    .intro-panorama path {
-      fill: none;
-      stroke: currentColor;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-      vector-effect: non-scaling-stroke;
-    }
-
-    .intro-panorama path.intro-panorama-trail {
-      stroke-width: 2.4;
-      opacity: 0.32;
-    }
-
-    .intro-panorama path.intro-panorama-main {
-      stroke-width: 1.9;
-    }
-
-    .intro-inner {
+    .intro-name {
       position: relative;
       z-index: 2;
-      width: min(1080px, calc(100% - 48px));
-      display: grid;
-      gap: 18px;
-      justify-items: center;
       text-align: center;
-    }
-
-    .intro-label {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      padding: 10px 16px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      color: #ebf8ef;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      font-size: 0.78rem;
-      font-weight: 700;
-    }
-
-    html.js .intro-label {
-      opacity: 0;
-      transform: translateY(12px);
-      animation: intro-fade-up 0.72s cubic-bezier(0.22, 1, 0.36, 1) 0.14s both;
-    }
-
-    .intro-label-mark {
-      display: grid;
-      place-items: center;
-      width: 34px;
-      height: 34px;
-      border-radius: 12px;
-      background: linear-gradient(160deg, rgba(125, 255, 178, 0.2), rgba(125, 255, 178, 0.42));
-      color: #04120c;
-      font-family: var(--font-display);
-      font-size: 1rem;
-      font-weight: 700;
-    }
-
-    .intro-monitor {
-      position: relative;
-      width: min(100%, 980px);
-      padding: 22px 24px 20px;
-      border-radius: 32px;
-      overflow: hidden;
-      background:
-        linear-gradient(180deg, rgba(10, 18, 18, 0.96), rgba(7, 14, 14, 0.98));
-      border: 1px solid rgba(125, 255, 178, 0.1);
-      box-shadow:
-        inset 0 0 0 1px rgba(255, 255, 255, 0.02),
-        0 28px 80px rgba(0, 0, 0, 0.34);
-    }
-
-    .intro-monitor::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(circle at top right, rgba(125, 255, 178, 0.1), transparent 26%),
-        linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent 20%);
       pointer-events: none;
     }
 
-    html.js .intro-monitor {
-      opacity: 0;
-      transform: translateY(22px) scale(0.982);
-      animation: intro-monitor-in 0.96s cubic-bezier(0.22, 1, 0.36, 1) 0.78s both;
-    }
-
-    .intro-monitor-head,
-    .intro-monitor-foot {
-      position: relative;
-      z-index: 2;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 18px;
-      color: rgba(226, 244, 234, 0.72);
-      font-size: 0.72rem;
-      letter-spacing: 0.16em;
+    .intro-name strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: clamp(1.4rem, 3vw, 2.2rem);
+      letter-spacing: 0.12em;
       text-transform: uppercase;
+      color: #fff;
+      text-shadow: 0 0 30px rgba(255, 122, 24, 0.55), 0 0 60px rgba(255, 122, 24, 0.28);
     }
 
-    .intro-monitor-tag,
-    .intro-monitor-state,
-    .intro-monitor-foot span {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      white-space: nowrap;
-    }
-
-    .intro-monitor-tag::before,
-    .intro-monitor-state::before,
-    .intro-monitor-foot span::before {
-      content: "";
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: rgba(125, 255, 178, 0.82);
-      box-shadow: 0 0 0 5px rgba(125, 255, 178, 0.08);
-    }
-
-    .intro-traces {
-      position: relative;
-      z-index: 2;
-      width: 100%;
-      height: 96px;
-      margin-top: 2px;
-      border-radius: 22px;
-      overflow: hidden;
-      background:
-        linear-gradient(rgba(125, 255, 178, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(125, 255, 178, 0.03) 1px, transparent 1px),
-        linear-gradient(rgba(125, 255, 178, 0.07) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(125, 255, 178, 0.07) 1px, transparent 1px),
-        linear-gradient(180deg, rgba(4, 18, 15, 0.94), rgba(3, 12, 10, 0.98));
-      background-size: 12px 12px, 12px 12px, 48px 48px, 48px 48px, auto;
-      border: 1px solid rgba(125, 255, 178, 0.1);
-      box-shadow:
-        inset 0 0 0 1px rgba(125, 255, 178, 0.04),
-        0 18px 44px rgba(0, 0, 0, 0.22);
-    }
-
-    html.js .intro-traces {
-      opacity: 0;
-      transform: translateY(14px);
-      animation: intro-fade-up 0.88s cubic-bezier(0.22, 1, 0.36, 1) 1.14s both;
-    }
-
-    .intro-traces svg {
-      width: 100%;
-      height: 100%;
-      color: var(--ecg-signal);
-      filter:
-        drop-shadow(0 0 10px rgba(125, 255, 178, 0.28))
-        drop-shadow(0 0 18px rgba(125, 255, 178, 0.16));
-    }
-
-    .intro-traces path {
-      fill: none;
-      stroke: currentColor;
-      stroke-width: 2.25;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-      vector-effect: non-scaling-stroke;
-    }
-
-    .intro-title {
-      position: relative;
-      z-index: 2;
-      max-width: 34ch;
-      margin: 18px auto 20px;
-      color: rgba(240, 248, 243, 0.92);
-      font-size: clamp(1rem, 1.8vw, 1.22rem);
-      line-height: 1.55;
-      letter-spacing: 0.01em;
-      text-transform: none;
-    }
-
-    html.js .intro-title {
-      opacity: 0;
-      transform: translateY(12px);
-      animation: intro-fade-up 0.82s cubic-bezier(0.22, 1, 0.36, 1) 1.02s both;
-    }
-
-    @keyframes intro-monitor-in {
-      0% {
-        opacity: 0;
-        transform: translateY(22px) scale(0.982);
-      }
-      100% {
-        opacity: 1;
-        transform: none;
-      }
+    .intro-name span {
+      display: block;
+      margin-top: 6px;
+      font-size: clamp(0.75rem, 1.4vw, 0.92rem);
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: rgba(255, 122, 24, 0.65);
     }
 
     @keyframes intro-fade-up {
-      0% {
-        opacity: 0;
-        transform: translateY(12px);
-      }
-      100% {
-        opacity: 1;
-        transform: none;
-      }
+      0% { opacity: 0; transform: translateY(12px); }
+      100% { opacity: 1; transform: none; }
     }
 
     html.js .page-shell {
@@ -470,9 +238,10 @@
       position: sticky;
       top: 0;
       z-index: 50;
-      backdrop-filter: blur(18px);
-      background: rgba(8, 11, 15, 0.72);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      backdrop-filter: blur(24px);
+      background: rgba(15, 29, 47, 0.95);
+      border-bottom: 1px solid rgba(255, 122, 24, 0.15);
+      box-shadow: 0 4px 24px rgba(15, 28, 45, 0.14);
     }
 
     .header-inner {
@@ -496,7 +265,7 @@
       width: 52px;
       height: 52px;
       border-radius: 16px;
-      background: linear-gradient(160deg, rgba(255, 122, 26, 0.18), rgba(255, 122, 26, 0.48));
+      background: linear-gradient(160deg, rgba(36, 199, 185, 0.18), rgba(36, 199, 185, 0.35));
       border: 1px solid rgba(255, 255, 255, 0.1);
       color: var(--text);
       font-family: var(--font-display);
@@ -583,15 +352,28 @@
     }
 
     .button-primary {
-      background: linear-gradient(135deg, var(--accent), #ff9e5c);
-      color: #1a120c;
-      box-shadow: 0 16px 32px rgba(255, 122, 26, 0.24);
+      background: linear-gradient(135deg, #ff7a18, #ffb35e);
+      color: #ffffff;
+      font-weight: 800;
+      box-shadow: 0 0 24px rgba(255, 122, 24, 0.32), 0 14px 28px rgba(255, 122, 24, 0.18);
+    }
+
+    .button-primary:hover,
+    .button-primary:focus-visible {
+      box-shadow: 0 0 36px rgba(255, 122, 24, 0.50), 0 16px 40px rgba(0, 0, 0, 0.5);
     }
 
     .button-secondary {
-      border-color: rgba(255, 255, 255, 0.15);
-      background: rgba(255, 255, 255, 0.04);
-      color: var(--text);
+      border-color: rgba(255, 122, 24, 0.22);
+      background: rgba(36, 199, 185, 0.08);
+      color: var(--accent);
+    }
+
+    .button-secondary:hover,
+    .button-secondary:focus-visible {
+      border-color: rgba(255, 122, 24, 0.45);
+      background: rgba(255, 122, 24, 0.10);
+      box-shadow: 0 0 16px rgba(255, 122, 24, 0.18);
     }
 
     .button-ghost {
@@ -608,13 +390,19 @@
     .hero-grid {
       display: grid;
       grid-template-columns: minmax(0, 1.18fr) minmax(320px, 0.82fr);
-      gap: 34px;
+      gap: 54px;
       align-items: stretch;
       perspective: 1600px;
     }
 
     .hero-copy,
-    .hero-panel,
+    .hero-panel {
+      background: linear-gradient(135deg, rgba(15, 29, 47, 0.98), rgba(22, 40, 66, 0.98));
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: var(--shadow);
+      color: #f7fbff;
+    }
+
     .benefit-card,
     .service-card,
     .steps-card,
@@ -624,16 +412,19 @@
     .territory-panel,
     .list-panel {
       background: var(--panel);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--line);
       box-shadow: var(--shadow);
-      backdrop-filter: blur(12px);
     }
 
     .hero-copy {
       position: relative;
       padding: 52px;
+      padding-top: 80px;
       border-radius: var(--radius-xl);
       overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
 
     .hero-copy::before {
@@ -643,7 +434,7 @@
       width: 240px;
       height: 240px;
       border-radius: 50%;
-      background: rgba(255, 122, 26, 0.12);
+      background: rgba(36, 199, 185, 0.10);
       filter: blur(10px);
     }
 
@@ -655,7 +446,7 @@
       height: 320px;
       border-radius: 50%;
       background:
-        radial-gradient(circle, rgba(255, 173, 110, 0.34) 0%, rgba(255, 122, 26, 0.14) 38%, transparent 72%);
+        radial-gradient(circle, rgba(255, 122, 24, 0.20) 0%, rgba(36, 199, 185, 0.10) 38%, transparent 72%);
       filter: blur(18px);
       opacity: 0;
       pointer-events: none;
@@ -668,7 +459,7 @@
     }
 
     .hero-copy h1 {
-      max-width: 11ch;
+      max-width: 100%;
       text-wrap: balance;
     }
 
@@ -723,7 +514,7 @@
       height: 8px;
       border-radius: 50%;
       background: var(--success);
-      box-shadow: 0 0 0 6px rgba(111, 226, 179, 0.12);
+      box-shadow: 0 0 0 6px rgba(255, 122, 24, 0.13);
     }
 
     .hero-panel {
@@ -743,7 +534,7 @@
       width: 220px;
       height: 220px;
       border-radius: 50%;
-      background: rgba(255, 122, 26, 0.16);
+      background: rgba(36, 199, 185, 0.14);
       filter: blur(24px);
     }
 
@@ -1042,8 +833,8 @@
       height: 100%;
       color: var(--ecg-signal);
       filter:
-        drop-shadow(0 0 8px rgba(125, 255, 178, 0.32))
-        drop-shadow(0 0 16px rgba(125, 255, 178, 0.16));
+        drop-shadow(0 0 8px rgba(0, 245, 255, 0.32))
+        drop-shadow(0 0 16px rgba(0, 245, 255, 0.16));
     }
 
     .ecg-screen path {
@@ -1083,7 +874,7 @@
       height: 56px;
       border-radius: 18px;
       margin-bottom: 18px;
-      background: linear-gradient(180deg, rgba(255, 122, 26, 0.2), rgba(255, 122, 26, 0.08));
+      background: linear-gradient(180deg, rgba(255, 122, 24, 0.14), rgba(36, 199, 185, 0.10));
       border: 1px solid rgba(255, 255, 255, 0.08);
       color: var(--accent-strong);
     }
@@ -1118,7 +909,7 @@
       inset: 0 auto auto 0;
       width: 100%;
       height: 1px;
-      background: linear-gradient(90deg, rgba(255, 122, 26, 0.5), transparent 70%);
+      background: linear-gradient(90deg, rgba(255, 122, 24, 0.45), transparent 70%);
     }
 
     .service-card p {
@@ -1172,7 +963,7 @@
       width: 48px;
       height: 48px;
       border-radius: 50%;
-      background: rgba(255, 122, 26, 0.16);
+      background: rgba(36, 199, 185, 0.14);
       border: 1px solid rgba(255, 255, 255, 0.08);
       color: var(--accent-strong);
       font-family: var(--font-display);
@@ -1215,7 +1006,7 @@
       height: 8px;
       border-radius: 50%;
       background: var(--accent);
-      box-shadow: 0 0 0 6px rgba(255, 122, 26, 0.12);
+      box-shadow: 0 0 0 6px rgba(36, 199, 185, 0.10);
     }
 
     .territory-panel {
@@ -1230,7 +1021,7 @@
       width: 240px;
       height: 240px;
       border-radius: 50%;
-      background: rgba(255, 122, 26, 0.12);
+      background: rgba(36, 199, 185, 0.10);
       filter: blur(30px);
     }
 
@@ -1242,8 +1033,8 @@
     }
 
     .territory-tag {
-      background: rgba(255, 122, 26, 0.12);
-      border-color: rgba(255, 122, 26, 0.3);
+      background: rgba(36, 199, 185, 0.10);
+      border-color: rgba(255, 122, 24, 0.28);
       color: #ffd1b2;
     }
 
@@ -1414,7 +1205,7 @@
       gap: 24px;
       align-items: center;
       background:
-        radial-gradient(circle at top right, rgba(255, 122, 26, 0.22), transparent 28%),
+        radial-gradient(circle at top right, rgba(255, 122, 24, 0.13), transparent 28%),
         rgba(15, 20, 28, 0.94);
     }
 
@@ -1472,20 +1263,21 @@
       align-items: flex-start;
       gap: 2px;
       padding: 13px 16px 12px;
-      border: 0;
       border-radius: 18px;
-      color: #f7fbff;
-      background: linear-gradient(135deg, #182437, #101826);
-      border: 1px solid rgba(36, 199, 185, 0.22);
-      box-shadow: 0 18px 34px rgba(12, 18, 28, 0.24);
+      color: var(--text);
+      background: rgba(15, 29, 47, 0.94);
+      border: 1px solid rgba(255, 122, 24, 0.28);
+      box-shadow: 0 0 20px rgba(255, 122, 24, 0.14), 0 18px 34px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(20px);
       cursor: pointer;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
     }
 
     .chat-fab:hover,
     .chat-fab:focus-visible {
       transform: translateY(-2px);
-      box-shadow: 0 22px 38px rgba(12, 18, 28, 0.30);
+      border-color: rgba(255, 122, 24, 0.55);
+      box-shadow: 0 0 30px rgba(255, 122, 24, 0.22), 0 22px 38px rgba(0, 0, 0, 0.6);
       outline: none;
     }
 
@@ -1493,12 +1285,13 @@
       font-size: 0.76rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      opacity: 0.72;
+      color: rgba(255, 122, 24, 0.65);
     }
 
     .chat-fab strong {
       font-size: 1rem;
       line-height: 1.15;
+      color: #fff;
     }
 
     .chat-panel {
@@ -1509,10 +1302,10 @@
       width: 100%;
       border-radius: 22px;
       overflow: hidden;
-      background: rgba(255, 255, 255, 0.98);
-      border: 1px solid rgba(18, 32, 51, 0.10);
-      box-shadow: 0 24px 70px rgba(15, 28, 45, 0.20);
-      backdrop-filter: blur(12px);
+      background: rgba(8, 15, 34, 0.97);
+      border: 1px solid rgba(0, 245, 255, 0.2);
+      box-shadow: 0 0 40px rgba(0, 245, 255, 0.1), 0 24px 70px rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(24px);
       opacity: 0;
       transform: translateY(14px) scale(0.98);
       pointer-events: none;
@@ -1531,14 +1324,14 @@
       align-items: flex-start;
       gap: 12px;
       padding: 18px 18px 16px;
-      border-bottom: 1px solid rgba(18, 32, 51, 0.08);
-      background: linear-gradient(180deg, rgba(247,250,252,0.98), rgba(255,255,255,0.98));
+      border-bottom: 1px solid rgba(0, 245, 255, 0.1);
+      background: rgba(36, 199, 185, 0.06);
     }
 
     .chat-kicker {
       display: block;
       margin-bottom: 4px;
-      color: #1a6f6b;
+      color: var(--accent);
       font-size: 0.74rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
@@ -1548,7 +1341,7 @@
       display: block;
       font-size: 1.08rem;
       line-height: 1.25;
-      color: var(--text);
+      color: #fff;
     }
 
     .chat-subtitle {
@@ -1563,13 +1356,19 @@
       width: 36px;
       height: 36px;
       flex: 0 0 auto;
-      border: 1px solid rgba(18, 32, 51, 0.08);
+      border: 1px solid rgba(0, 245, 255, 0.2);
       border-radius: 50%;
-      background: #fff;
-      color: var(--muted);
+      background: rgba(36, 199, 185, 0.08);
+      color: var(--accent);
       font-size: 1.2rem;
       line-height: 1;
       cursor: pointer;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .chat-close:hover {
+      background: rgba(255, 122, 24, 0.13);
+      border-color: rgba(255, 122, 24, 0.36);
     }
 
     .chat-body {
@@ -1578,7 +1377,7 @@
       padding: 18px;
       display: grid;
       gap: 14px;
-      background: linear-gradient(180deg, rgba(247,250,252,0.98), rgba(241,245,250,0.98));
+      background: rgba(8, 15, 34, 0.75);
     }
 
     .chat-message {
@@ -1592,14 +1391,15 @@
     }
 
     .chat-message.bot {
-      background: #fff;
-      border: 1px solid rgba(18, 32, 51, 0.08);
-      color: #000;
+      background: rgba(36, 199, 185, 0.08);
+      border: 1px solid rgba(255, 122, 24, 0.14);
+      color: var(--text);
       justify-self: start;
     }
 
     .chat-message.user {
-      background: linear-gradient(135deg, #244563, #355d7e);
+      background: linear-gradient(135deg, rgba(36, 199, 185, 0.18), rgba(36, 199, 185, 0.22));
+      border: 1px solid rgba(0, 245, 255, 0.2);
       color: #fff;
       justify-self: end;
     }
@@ -1607,9 +1407,9 @@
     .chat-summary {
       padding: 15px 16px;
       border-radius: 18px;
-      background: #eefaf8;
-      border: 1px solid rgba(20, 130, 122, 0.28);
-      color: #102033;
+      background: rgba(36, 199, 185, 0.08);
+      border: 1px solid rgba(255, 122, 24, 0.22);
+      color: var(--text);
       font-size: 0.98rem;
       line-height: 1.58;
     }
@@ -1618,7 +1418,7 @@
       display: block;
       margin-bottom: 6px;
       font-size: 1.02rem;
-      color: #0f2938;
+      color: var(--accent);
     }
 
     .chat-actions {
@@ -1626,25 +1426,27 @@
       flex-wrap: wrap;
       gap: 8px;
       padding: 0 18px 12px;
-      background: rgba(247,250,252,0.98);
+      background: rgba(8, 15, 34, 0.55);
     }
 
     .chat-chip {
-      border: 1px solid rgba(18, 32, 51, 0.22);
-      background: #ffffff;
-      color: #122033;
+      border: 1px solid rgba(0, 245, 255, 0.22);
+      background: rgba(36, 199, 185, 0.08);
+      color: var(--accent);
       padding: 9px 11px;
       border-radius: 999px;
       font-size: 0.84rem;
       font-weight: 700;
       line-height: 1.2;
       cursor: pointer;
+      transition: background 0.18s, border-color 0.18s, box-shadow 0.18s;
     }
 
     .chat-chip:hover,
     .chat-chip:focus-visible {
-      background: rgba(36, 199, 185, 0.10);
-      border-color: rgba(36, 199, 185, 0.28);
+      background: rgba(255, 122, 24, 0.13);
+      border-color: rgba(255, 122, 24, 0.40);
+      box-shadow: 0 0 12px rgba(0, 245, 255, 0.2);
       outline: none;
     }
 
@@ -1652,16 +1454,16 @@
       display: flex;
       gap: 8px;
       padding: 14px 18px 16px;
-      background: rgba(247,250,252,0.98);
-      border-top: 1px solid rgba(18, 32, 51, 0.08);
+      background: rgba(8, 15, 34, 0.65);
+      border-top: 1px solid rgba(0, 245, 255, 0.1);
     }
 
     .chat-input {
       flex: 1;
       min-width: 0;
-      border: 1px solid rgba(18, 32, 51, 0.12);
-      background: #fff;
-      color: #122033;
+      border: 1px solid rgba(0, 245, 255, 0.2);
+      background: rgba(36, 199, 185, 0.06);
+      color: var(--text);
       border-radius: 14px;
       padding: 13px 14px;
       font-size: 1rem;
@@ -1672,27 +1474,40 @@
       overflow: auto;
       white-space: pre-wrap;
       overflow-wrap: anywhere;
+      transition: border-color 0.18s, box-shadow 0.18s;
+    }
+
+    .chat-input:focus {
+      outline: none;
+      border-color: rgba(255, 122, 24, 0.40);
+      box-shadow: 0 0 14px rgba(255, 122, 24, 0.14);
     }
 
     .chat-input::placeholder {
-      color: #7b8796;
+      color: rgba(255, 122, 24, 0.32);
     }
 
     .chat-send {
       border: 0;
       border-radius: 14px;
-      background: linear-gradient(135deg, #1f5f76, #2f7a95);
-      color: #fff;
-      font-weight: 700;
+      background: linear-gradient(135deg, #ff7a18, #24c7b9);
+      color: #02080e;
+      font-weight: 800;
       padding: 0 15px;
       min-width: 92px;
       cursor: pointer;
+      box-shadow: 0 0 16px rgba(255, 122, 24, 0.28);
+      transition: box-shadow 0.2s;
+    }
+
+    .chat-send:hover {
+      box-shadow: 0 0 28px rgba(255, 122, 24, 0.45);
     }
 
     .chat-hint {
       padding: 0 18px 15px;
-      background: rgba(247,250,252,0.98);
-      color: #516173;
+      background: rgba(8, 15, 34, 0.55);
+      color: rgba(255, 122, 24, 0.36);
       font-size: 0.85rem;
       line-height: 1.35;
     }
@@ -1975,41 +1790,163 @@
         display: none !important;
       }
     }
+
+    /* ── LIGHT-THEME OVERRIDES ─────────────────────────────────
+       Fixes per elementi che vivono su sfondo scuro (hero, intro)
+       ma ereditano var(--text) che ora è dark (#122033)
+    ────────────────────────────────────────────────────────── */
+
+    /* hero-copy e hero-panel: testo sempre chiaro */
+    .hero-copy h1,
+    .hero-copy .lead,
+    .hero-copy .hero-microcopy,
+    .hero-copy .hero-microcopy span {
+      color: #e8f4ff;
+    }
+    .hero-copy p.lead { color: rgba(232,244,255,.82); }
+    .hero-copy .hero-microcopy { color: rgba(232,244,255,.78); }
+
+    .hero-panel .panel-title { color: #e8f4ff; }
+    .hero-panel > p { color: rgba(232,244,255,.80); }
+
+    /* stat-card dentro hero-panel: testo chiaro + dimensioni compatte */
+    .hero-panel .stat-card {
+      padding: 13px 14px;
+      background: rgba(255,255,255,.06);
+      border-color: rgba(255,255,255,.10);
+    }
+    .hero-panel .stat-card strong {
+      font-size: 1.05rem;
+      color: #e8f4ff;
+    }
+    .hero-panel .stat-card span {
+      font-size: 0.88rem;
+      color: #8fb3cc;
+    }
+
+    /* hero-panel: allineamento uniforme + padding top maggiore */
+    .hero-panel {
+      gap: 14px;
+      padding: 24px;
+      padding-top: 48px;
+      align-items: flex-start;
+      text-align: left;
+    }
+    .hero-panel > * {
+      width: 100%;
+      text-align: left;
+    }
+    .hero-panel .panel-label {
+      display: block;
+      width: 100%;
+    }
+    .hero-panel .panel-title {
+      width: 100%;
+    }
+    .stats-grid {
+      gap: 10px;
+      width: 100%;
+      align-items: stretch;
+    }
+    .hero-panel .ecg-box {
+      width: 100%;
+    }
+
+    /* ecg-box dentro hero-panel */
+    .hero-panel .ecg-box { padding: 14px; }
+    .ecg-topline strong { color: #e8f4ff; }
+
+    /* service-tag: no inline-flex, consenti wrapping */
+    .service-tag {
+      display: block;
+      white-space: normal;
+      line-height: 1.4;
+    }
+
+    /* steps-list li: su sfondo bianco (steps-card ora è white) */
+    .steps-list li {
+      background: rgba(18,32,51,.04);
+      border-color: rgba(18,32,51,.08);
+    }
+    .step-number {
+      border-color: rgba(36,199,185,.30);
+      background: rgba(36,199,185,.12);
+    }
+
+    /* list-panel, territory-panel, competence-panel: testo su bianco */
+    .list-panel li,
+    .competence-list li,
+    .contact-list li {
+      color: var(--text);
+    }
+    .list-panel li::before,
+    .competence-list li::before,
+    .contact-list li::before {
+      background: var(--accent);
+      box-shadow: 0 0 0 4px rgba(255,122,24,.12);
+    }
+
+    /* territory-tag su sfondo bianco */
+    .territory-tag {
+      background: rgba(36,199,185,.08);
+      border-color: rgba(36,199,185,.25);
+      color: #0f6b60;
+    }
+
+    /* benefit-card, competence-panel, faq-item su bianco */
+    .benefit-card p,
+    .service-card p,
+    .competence-panel p,
+    .faq-item p {
+      color: var(--muted);
+    }
+    .benefit-card h3,
+    .service-card h3,
+    .competence-panel h3,
+    .faq-item h3 {
+      color: var(--text);
+    }
+
+    /* icon-wrap su sfondo bianco */
+    .icon-wrap {
+      background: linear-gradient(180deg, rgba(255,122,24,.12), rgba(36,199,185,.08));
+      border-color: rgba(18,32,51,.10);
+      color: var(--accent-strong);
+    }
+
+    /* cta-banner testo */
+    .cta-banner h2,
+    .cta-banner p { color: #e8f4ff; }
+
+    /* footer */
+    .footer-shell { border-top-color: var(--line); }
+    .footer small, .footer p { color: var(--muted); }
+
+    /* intro overlay: mantiene dark (non toccare) */
+    .intro-overlay { background: #0f1d2f; }
+
+    /* chat-fab: dark navy con accent orange */
+    .chat-fab {
+      background: rgba(15,29,47,.94);
+      border-color: rgba(255,122,24,.35);
+      box-shadow: 0 0 20px rgba(255,122,24,.15), 0 18px 34px rgba(0,0,0,.35);
+    }
+    .chat-fab:hover, .chat-fab:focus-visible {
+      border-color: rgba(255,122,24,.60);
+      box-shadow: 0 0 28px rgba(255,122,24,.25), 0 22px 38px rgba(0,0,0,.45);
+    }
+    .chat-fab span { color: var(--accent); }
+
   </style>
 </head>
   <body>
     <div class="intro-overlay" aria-hidden="true">
-      <div class="intro-signal-field">
-        <div class="intro-panorama">
-          <svg viewBox="0 0 1920 320" preserveAspectRatio="none" aria-hidden="true">
-            <path id="intro-ecg-panorama-trail" class="intro-panorama-trail" d="M0 160 L1920 160"></path>
-            <path id="intro-ecg-panorama-main" class="intro-panorama-main" d="M0 160 L1920 160"></path>
-          </svg>
-        </div>
-    </div>
-    <div class="intro-inner">
-      <div class="intro-label">
-        <span class="intro-label-mark">RA</span>
-        <span>Angelo Rosso</span>
-      </div>
-      <div class="intro-monitor">
-        <div class="intro-monitor-head">
-          <span class="intro-monitor-tag">Tracciato ECG</span>
-          <span class="intro-monitor-state">Monitor attivo</span>
-        </div>
-        <p class="intro-title">Servizi a domicilio tra Francofonte, Lentini e Carlentini</p>
-        <div class="intro-traces">
-          <svg viewBox="0 0 1440 108" preserveAspectRatio="none" aria-hidden="true">
-            <path id="intro-ecg-line-main" d="M0 54 L1440 54"></path>
-          </svg>
-        </div>
-        <div class="intro-monitor-foot">
-          <span>Francofonte &middot; Lentini &middot; Carlentini</span>
-          <span>Servizio domiciliare</span>
-        </div>
+      <canvas id="ecg-splash" aria-hidden="true"></canvas>
+      <div class="intro-name">
+        <strong>Angelo Rosso</strong>
+        <span>Infermiere Professionale</span>
       </div>
     </div>
-  </div>
   <div class="page-shell">
     <header class="site-header">
       <div class="container header-inner">
@@ -2046,12 +1983,11 @@
               <span class="hero-pill"><strong>Servizio</strong> a domicilio</span>
             </div>
 
-            <p class="eyebrow">Infermieristica domiciliare professionale</p>
-            <h1>ECG, Holter e assistenza infermieristica a domicilio, con un riferimento diretto e locale.</h1>
+            <p class="eyebrow">Infermiere libero professionista · OPI Siracusa</p>
+            <h1>Elettrocardiogramma a 12 derivazioni, Holter ECG e Holter pressorio direttamente al tuo domicilio.</h1>
             <p class="lead">
-              Per chi vive a <strong>Francofonte</strong>, <strong>Lentini</strong> o <strong>Carlentini</strong>:
-              un servizio infermieristico domiciliare strutturato, con strumentazione dedicata, refertazione digitale
-              e un referente locale raggiungibile direttamente — senza intermediari, senza attese inutili.
+              A <strong>Francofonte</strong>, <strong>Lentini</strong> e <strong>Carlentini</strong>.
+              Diagnostica cardiologica non invasiva e assistenza infermieristica domiciliare con referto digitale entro 24–48 ore.
             </p>
 
             <div class="hero-actions">
@@ -2169,29 +2105,29 @@
 
           <div class="services-grid">
             <article class="service-card reveal">
-              <span class="service-tag">ECG a domicilio</span>
+              <span class="service-tag">elettrocardiogramma a domicilio</span>
               <h3>Elettrocardiogramma eseguito al domicilio del paziente</h3>
               <p>
-                Indicato per chi necessita di un ECG senza affrontare code o spostamenti.
+                Indicato per chi necessita di un elettrocardiogramma senza affrontare code o spostamenti.
                 Il tracciato viene acquisito con strumentazione dedicata e il referto consegnato in formato digitale.
               </p>
             </article>
 
             <article class="service-card reveal">
               <span class="service-tag">Holter ECG</span>
-              <h3>Monitoraggio cardiaco continuativo secondo indicazione medica</h3>
+              <h3>Registrazione elettrocardiografica continua delle 24 ore</h3>
               <p>
-                Indicato per l'approfondimento di palpitazioni, alterazioni del ritmo o controlli prescritti.
-                Applicazione, monitoraggio e gestione del percorso direttamente a domicilio.
+                Indicato per la valutazione di aritmie parossistiche, sintomi sospetti come palpitazioni o sincopi,
+                e per il monitoraggio dell'efficacia della terapia antiaritmica su prescrizione cardiologica.
               </p>
             </article>
 
             <article class="service-card reveal">
               <span class="service-tag">Holter pressorio</span>
-              <h3>Monitoraggio pressorio delle 24 ore a domicilio</h3>
+              <h3>Monitoraggio dinamico della pressione arteriosa nelle 24 ore (ABPM)</h3>
               <p>
-                Permette una valutazione completa dell'andamento pressorio nell'arco della giornata.
-                Applicazione del dispositivo, istruzioni operative e raccolta dati gestiti direttamente al domicilio.
+                Rilevazioni ogni 15 minuti diurne e ogni 30 minuti notturne, per identificare
+                ipertensione mascherata, profilo non-dipper o effetto camice bianco.
               </p>
             </article>
 
@@ -2363,16 +2299,18 @@
             <article class="faq-item reveal">
               <h3>Come viene consegnato il referto?</h3>
               <p>
-                Il referto viene trasmesso in formato digitale secondo le modalità e i tempi
-                definiti in fase di organizzazione del servizio.
+                Invio PDF su WhatsApp o via email entro 24–48 ore dall'esame.
+                Per Holter ECG e Holter pressorio il tracciato viene prima refertato da un cardiologo convenzionato:
+                ricevi referto strumentale e lettura specialistica insieme.
               </p>
             </article>
 
             <article class="faq-item reveal">
               <h3>Il servizio si limita agli esami cardiologici?</h3>
               <p>
-                No. ECG, Holter ECG e Holter pressorio rappresentano le prestazioni principali,
-                ma è disponibile anche assistenza infermieristica domiciliare completa.
+                No. Oltre alla diagnostica cardiologica eseguo: medicazioni semplici e avanzate,
+                terapie iniettive ed endovenose su prescrizione, gestione cateteri vescicali,
+                gestione stomie, controllo glicemico capillare e supporto post-dimissione ospedaliera.
               </p>
             </article>
 
@@ -2580,9 +2518,6 @@
   <script>
     const ecgLine = document.getElementById("ecg-line");
     const ecgStatus = document.getElementById("ecg-status");
-    const introPanoramaLineTrail = document.getElementById("intro-ecg-panorama-trail");
-    const introPanoramaLineMain = document.getElementById("intro-ecg-panorama-main");
-    const introEcgLineMain = document.getElementById("intro-ecg-line-main");
     const revealNodes = document.querySelectorAll(".reveal");
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     const ecgViewWidth = 420;
@@ -2590,10 +2525,7 @@
     const ecgStep = 1;
     const ecgCycleWidth = 122;
     const ecgScrollSpeed = 142;
-    const introDurationMs = 3600;
-    const introPanoramaWidth = 1920;
-    const introPanoramaBaseline = 160;
-    const introPanoramaStep = 3;
+    const introDurationMs = 10200;
     const ecgBeatProfiles = [
       { p: 2.6, q: 1.7, r: 31.5, s: 9.2, t: 6.8, st: 0.26, drift: 0.10 },
       { p: 2.4, q: 1.9, r: 30.8, s: 9.7, t: 6.4, st: 0.22, drift: -0.06 },
@@ -2701,31 +2633,303 @@
 
       ecgLine.setAttribute("d", buildEcgPath(ecgViewWidth, ecgBaseline, ecgStep, offset));
 
-      if (!pageActivated) {
-        if (introPanoramaLineTrail && introPanoramaLineMain) {
-          const introPanoramaOffset = (elapsedSeconds * 118) % signalSpan;
-          const introPanoramaTrailOffset = (elapsedSeconds * 92 + 22) % signalSpan;
-
-          introPanoramaLineTrail.setAttribute(
-            "d",
-            buildEcgPath(introPanoramaWidth, introPanoramaBaseline, introPanoramaStep, introPanoramaTrailOffset, 0.58, 0.18)
-          );
-          introPanoramaLineMain.setAttribute(
-            "d",
-            buildEcgPath(introPanoramaWidth, introPanoramaBaseline, introPanoramaStep, introPanoramaOffset, 1.06, 0.34)
-          );
-        }
-
-        if (introEcgLineMain) {
-          const introMainOffset = (elapsedSeconds * 86) % signalSpan;
-          introEcgLineMain.setAttribute("d", buildEcgPath(1440, 54, 4, introMainOffset, 1.02, 0.28));
-        }
-      }
 
       window.requestAnimationFrame(animateEcg);
     }
 
     window.requestAnimationFrame(animateEcg);
+
+    // ─── ECG SPLASH CANVAS ────────────────────────────────────────────────────────
+    (function initSplashCanvas() {
+      const canvas = document.getElementById("ecg-splash");
+      if (!canvas) return;
+      const ctx = canvas.getContext("2d");
+
+      const SERVICES = ["E.C.G.", "Holter E.C.G.", "Holter Pressorio", "Assistenza Infermieristica"];
+      const COLOR = "#ff7a18";
+      const MARGIN_X = 0.08; // fraction of width
+      const START_DELAY = 600; // ms before first row
+
+      // Per-row timing (ms)
+      const T_FLAT_BEFORE = 700;   // flat line draws before complex
+      const T_COMPLEX    = 950;    // PQRST complex draws
+      const T_FLAT_AFTER = 350;    // flat line after complex
+      const T_DRAW_END   = T_FLAT_BEFORE + T_COMPLEX + T_FLAT_AFTER; // 2000ms: ECG fully drawn
+      const T_ECG_FADE   = 500;    // ECG fades out over 500ms
+      const T_ROW_DONE   = T_DRAW_END + T_ECG_FADE; // 2500ms: row complete
+
+      // Label appears when drawing cursor reaches R peak (~55% through complex)
+      const T_LABEL_IN   = T_FLAT_BEFORE + T_COMPLEX * 0.52;
+      const T_LABEL_FADE = 380; // ms for label fade-in
+
+      // Next row starts as soon as current ECG starts fading
+      const ROW_OFFSET   = T_DRAW_END; // 2000ms between row starts
+
+      function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+      resize();
+      window.addEventListener("resize", resize);
+
+      function pqrstSample(phase) {
+        // phase 0..1 → y offset in normalised units (positive = up)
+        const p = phase * 122;
+        return -sampleEcgOffset(p, 0, 1.0, 0.0);
+      }
+
+      // Draw ECG row with separate opacity for line and label
+      function drawRow(rowY, amplitude, rowElapsed) {
+        const W = canvas.width;
+        const left  = W * MARGIN_X;
+        const right = W * (1 - MARGIN_X);
+        const rowW  = right - left;
+
+        // Where the complex sits within the row
+        const cxStart = left + rowW * 0.22;
+        const cxWidth = rowW * 0.44;
+        const cxEnd   = cxStart + cxWidth;
+
+        // --- Progress ratios within the draw phase ---
+        const flatBeforeRatio = T_FLAT_BEFORE / T_DRAW_END;
+        const complexRatio    = T_COMPLEX    / T_DRAW_END;
+
+        const drawProgress = Math.min(rowElapsed / T_DRAW_END, 1); // 0→1 while drawing
+
+        // ECG line opacity: 1 while drawing, then fades out
+        let ecgAlpha = 1;
+        if (rowElapsed > T_DRAW_END) {
+          ecgAlpha = Math.max(0, 1 - (rowElapsed - T_DRAW_END) / T_ECG_FADE);
+        }
+
+        // Label opacity: fades in at R peak, stays at 1 forever
+        let labelAlpha = 0;
+        if (rowElapsed >= T_LABEL_IN) {
+          labelAlpha = Math.min((rowElapsed - T_LABEL_IN) / T_LABEL_FADE, 1);
+        }
+
+        // ── Draw ECG line ──
+        if (ecgAlpha > 0) {
+          ctx.save();
+          ctx.globalAlpha = ecgAlpha;
+          ctx.strokeStyle = COLOR;
+          ctx.lineWidth = 2.2;
+          ctx.lineCap = "round";
+          ctx.lineJoin = "round";
+          ctx.shadowColor = COLOR;
+          ctx.shadowBlur = 18;
+
+          if (drawProgress <= flatBeforeRatio) {
+            // Flat line before complex
+            const xCur = left + (cxStart - left) * (drawProgress / flatBeforeRatio);
+            ctx.beginPath();
+            ctx.moveTo(left, rowY);
+            ctx.lineTo(xCur, rowY);
+            ctx.stroke();
+          } else if (drawProgress <= flatBeforeRatio + complexRatio) {
+            // Flat before (complete) + partial PQRST
+            ctx.beginPath();
+            ctx.moveTo(left, rowY);
+            ctx.lineTo(cxStart, rowY);
+            ctx.stroke();
+
+            const cprog = (drawProgress - flatBeforeRatio) / complexRatio;
+            const STEPS = 140;
+            ctx.beginPath();
+            ctx.shadowBlur = 22;
+            for (let i = 0; i <= Math.floor(STEPS * cprog); i++) {
+              const ph = i / STEPS;
+              const x  = cxStart + cxWidth * ph;
+              const y  = rowY - pqrstSample(ph) * amplitude;
+              i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+            }
+            ctx.stroke();
+          } else {
+            // Full flat + full complex + partial flat after
+            ctx.beginPath();
+            ctx.moveTo(left, rowY);
+            ctx.lineTo(cxStart, rowY);
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.shadowBlur = 22;
+            for (let i = 0; i <= 140; i++) {
+              const ph = i / 140;
+              const x  = cxStart + cxWidth * ph;
+              const y  = rowY - pqrstSample(ph) * amplitude;
+              i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+            }
+            ctx.stroke();
+
+            const afterRatio = 1 - flatBeforeRatio - complexRatio;
+            const ap = (drawProgress - flatBeforeRatio - complexRatio) / afterRatio;
+            const xEnd = cxEnd + (right - cxEnd) * Math.min(ap, 1);
+            ctx.beginPath();
+            ctx.shadowBlur = 18;
+            ctx.moveTo(cxEnd, rowY);
+            ctx.lineTo(xEnd, rowY);
+            ctx.stroke();
+          }
+
+          ctx.restore();
+        }
+
+        // ── Draw label ──
+        if (labelAlpha > 0) {
+          // R peak is at ~49% of complex (phase ≈ 0.49)
+          const rPeakX = cxStart + cxWidth * 0.49;
+          const rPeakY = rowY - pqrstSample(0.49) * amplitude;
+          const labelX = rPeakX + 18;
+          const fontSize = Math.max(16, Math.min(W * 0.028, 42));
+
+          ctx.save();
+          ctx.globalAlpha = labelAlpha;
+          ctx.font = `700 ${fontSize}px 'Aptos','Segoe UI',sans-serif`;
+          ctx.fillStyle = "#ffffff";
+          ctx.shadowColor = COLOR;
+          ctx.shadowBlur = 24;
+          ctx.fillText(SERVICES[0], 0, 0); // warm up (ignored)
+          ctx.fillText("", 0, 0);
+          ctx.restore();
+
+          ctx.save();
+          ctx.globalAlpha = labelAlpha;
+          ctx.font = `700 ${fontSize}px 'Aptos','Segoe UI',sans-serif`;
+          ctx.fillStyle = "#ffffff";
+          ctx.shadowColor = COLOR;
+          ctx.shadowBlur = 24;
+          // Use the service text passed via the outer loop
+          ctx.restore();
+        }
+
+        return { labelAlpha, rPeakX: cxStart + cxWidth * 0.49, rPeakY: rowY - pqrstSample(0.49) * amplitude };
+      }
+
+      let splashStart = null;
+
+      function renderSplash(timestamp) {
+        if (!splashStart) splashStart = timestamp;
+        const elapsed = timestamp - splashStart - START_DELAY;
+
+        const W = canvas.width;
+        const H = canvas.height;
+
+        ctx.clearRect(0, 0, W, H);
+
+        // Grid
+        ctx.save();
+        ctx.strokeStyle = "rgba(0,245,255,0.035)";
+        ctx.lineWidth = 0.5;
+        const gs = 44;
+        for (let x = 0; x < W; x += gs) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke(); }
+        for (let y = 0; y < H; y += gs) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke(); }
+        ctx.restore();
+
+        const topPad = H * 0.22;
+        const usable = H * 0.56;
+        const rowGap = usable / (SERVICES.length - 1);
+        const amplitude = Math.min(rowGap * 0.40, 58);
+        const fontSize = Math.max(16, Math.min(W * 0.028, 42));
+
+        SERVICES.forEach(function(service, i) {
+          const rowStart = i * ROW_OFFSET;
+          const rowElapsed = elapsed - rowStart;
+          if (rowElapsed < 0) return;
+
+          const rowY = topPad + i * rowGap;
+          const W2 = canvas.width;
+          const left  = W2 * MARGIN_X;
+          const right = W2 * (1 - MARGIN_X);
+          const rowW  = right - left;
+          const cxStart = left + rowW * 0.22;
+          const cxWidth = rowW * 0.44;
+
+          // ECG opacity
+          let ecgAlpha = 1;
+          if (rowElapsed > T_DRAW_END) {
+            ecgAlpha = Math.max(0, 1 - (rowElapsed - T_DRAW_END) / T_ECG_FADE);
+          }
+
+          // Label opacity
+          let labelAlpha = 0;
+          if (rowElapsed >= T_LABEL_IN) {
+            labelAlpha = Math.min((rowElapsed - T_LABEL_IN) / T_LABEL_FADE, 1);
+          }
+
+          const drawProgress = Math.min(rowElapsed / T_DRAW_END, 1);
+          const flatBeforeRatio = T_FLAT_BEFORE / T_DRAW_END;
+          const complexRatio    = T_COMPLEX    / T_DRAW_END;
+          const cxEnd = cxStart + cxWidth;
+
+          // ── ECG line ──
+          if (ecgAlpha > 0) {
+            ctx.save();
+            ctx.globalAlpha = ecgAlpha;
+            ctx.strokeStyle = COLOR;
+            ctx.lineWidth = 2.2;
+            ctx.lineCap = "round";
+            ctx.lineJoin = "round";
+            ctx.shadowColor = COLOR;
+            ctx.shadowBlur = 18;
+
+            if (drawProgress <= flatBeforeRatio) {
+              const xCur = left + (cxStart - left) * (drawProgress / flatBeforeRatio);
+              ctx.beginPath(); ctx.moveTo(left, rowY); ctx.lineTo(xCur, rowY); ctx.stroke();
+            } else if (drawProgress <= flatBeforeRatio + complexRatio) {
+              ctx.beginPath(); ctx.moveTo(left, rowY); ctx.lineTo(cxStart, rowY); ctx.stroke();
+              const cprog = (drawProgress - flatBeforeRatio) / complexRatio;
+              const STEPS = 140;
+              ctx.beginPath(); ctx.shadowBlur = 22;
+              for (let j = 0; j <= Math.floor(STEPS * cprog); j++) {
+                const ph = j / STEPS;
+                const x = cxStart + cxWidth * ph;
+                const y = rowY - pqrstSample(ph) * amplitude;
+                j === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+              }
+              ctx.stroke();
+            } else {
+              ctx.beginPath(); ctx.moveTo(left, rowY); ctx.lineTo(cxStart, rowY); ctx.stroke();
+              ctx.beginPath(); ctx.shadowBlur = 22;
+              for (let j = 0; j <= 140; j++) {
+                const ph = j / 140;
+                const x = cxStart + cxWidth * ph;
+                const y = rowY - pqrstSample(ph) * amplitude;
+                j === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+              }
+              ctx.stroke();
+              const afterRatio = 1 - flatBeforeRatio - complexRatio;
+              const ap = Math.min((drawProgress - flatBeforeRatio - complexRatio) / afterRatio, 1);
+              const xEnd = cxEnd + (right - cxEnd) * ap;
+              ctx.beginPath(); ctx.shadowBlur = 18;
+              ctx.moveTo(cxEnd, rowY); ctx.lineTo(xEnd, rowY); ctx.stroke();
+            }
+            ctx.restore();
+          }
+
+          // ── Label ──
+          if (labelAlpha > 0) {
+            // Fixed position: aligned to complex start X, fixed offset above baseline
+            const labelX = cxStart;
+            const labelY = rowY - amplitude - 14;
+            ctx.save();
+            ctx.globalAlpha = labelAlpha;
+            ctx.font = `700 ${fontSize}px 'Aptos','Segoe UI',sans-serif`;
+            ctx.fillStyle = "#ffffff";
+            ctx.shadowColor = COLOR;
+            ctx.shadowBlur = 28;
+            ctx.fillText(service, labelX, labelY);
+            ctx.restore();
+          }
+        });
+
+        window.requestAnimationFrame(renderSplash);
+      }
+
+      if (!prefersReducedMotion.matches) {
+        window.requestAnimationFrame(renderSplash);
+      }
+    })();
+    // ─────────────────────────────────────────────────────────────────────────────
 
     if (prefersReducedMotion.matches) {
       activatePage(true);
@@ -2998,7 +3202,7 @@
 
     function answerEcg() {
       addBotMessage(
-        "L'ECG, cioè elettrocardiogramma, registra l'attività elettrica del cuore in quel momento.\n\n" +
+        "L'elettrocardiogramma registra l'attività elettrica del cuore in quel momento.\n\n" +
         "Può essere utile quando il medico vuole controllare ritmo, frequenza e alcuni segnali da valutare clinicamente. Non fa diagnosi da solo e non sostituisce una visita.\n\n" +
         "Se ci sono dolore al petto, difficoltà a respirare, svenimento o sintomi improvvisi importanti, chiama subito 112/118."
       );

@@ -16,8 +16,17 @@ server-err.log
 
 # File temporanei Windows
 Nuovo Documento di testo.txt
+Nuovo Documento di testo (2).txt
 Thumbs.db
 desktop.ini
+
+# Chiavi API — NON committare
+Api Key Brevo.txt
+*.key.txt
+
+# File temporanei progetto
+landing-onefile.BACKUP.html
+preview-palette.html
 
 # Editor
 .vscode/
