@@ -304,7 +304,8 @@ function jsonResponse(obj) {
 function setupClaudeKey() {
   // Sostituisci la stringa qui sotto con la tua API key da console.anthropic.com
   // Poi esegui questa funzione UNA VOLTA e cancella la chiave dal codice.
-  PropertiesService.getScriptProperties().setProperty("CLAUDE_API_KEY", "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");
+  // Incolla la tua API key da console.anthropic.com tra le virgolette, esegui UNA VOLTA, poi cancellala.
+  PropertiesService.getScriptProperties().setProperty("CLAUDE_API_KEY", "INCOLLA_QUI_LA_TUA_CLAUDE_API_KEY");
   console.log("Claude API key salvata in Script Properties.");
 }
 
