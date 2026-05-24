@@ -23,6 +23,10 @@ desktop.ini
 # Chiavi API — NON committare
 Api Key Brevo.txt
 *.key.txt
+run_agent.bat
+
+# Log agente
+agent_prenotazioni.log
 
 # File temporanei progetto
 landing-onefile.BACKUP.html
