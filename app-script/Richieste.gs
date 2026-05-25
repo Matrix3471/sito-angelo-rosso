@@ -12,9 +12,9 @@ function doGet(e) {
       sheet = ss.getSheetByName("Newsletter");
       if (!sheet) {
         sheet = ss.insertSheet("Newsletter");
-        sheet.appendRow(["Data", "Nome", "Email"]);
+        sheet.appendRow(["Nome", "Email", "Comune", "Data"]);
       }
-      sheet.appendRow([data.data, data.nome, data.email]);
+      sheet.appendRow([data.nome, data.email, data.comune, data.data]);
     } else {
       sheet = ss.getSheetByName("Richieste");
       if (!sheet) {

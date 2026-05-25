@@ -2567,6 +2567,10 @@
             Email
             <input type="email" name="email" placeholder="nome@email.it" required="">
           </label>
+          <label>
+            Comune
+            <input type="text" name="comune" placeholder="Es. Francofonte" required="">
+          </label>
           <label class="newsletter-consent">
             <input type="checkbox" required="">
             <span>Accetto di ricevere comunicazioni informative e prendo atto dell’<a href="#" onclick="event.preventDefault();document.getElementById(‘privacy-modal’).hidden=false" style="color:var(--accent);">informativa privacy</a>.</span>
@@ -2839,13 +2843,15 @@
     if (!form) return;
     form.addEventListener('submit', (e) => {
       e.preventDefault();
-      const nome  = form.querySelector('input[name="nome"]').value.trim();
-      const email = form.querySelector('input[name="email"]').value.trim();
+      const nome   = form.querySelector('input[name="nome"]').value.trim();
+      const email  = form.querySelector('input[name="email"]').value.trim();
+      const comune = form.querySelector('input[name="comune"]').value.trim();
       new Image().src = SHEET_URL + "?payload=" + encodeURIComponent(JSON.stringify({
-        type: "newsletter",
-        nome:  nome,
-        email: email,
-        data:  new Date().toISOString().slice(0, 19).replace("T", " ")
+        type:   "newsletter",
+        nome:   nome,
+        email:  email,
+        comune: comune,
+        data:   new Date().toISOString().slice(0, 19).replace("T", " ")
       }));
       success.classList.add('visible');
       form.querySelectorAll('input').forEach(i => { if (i.type !== 'checkbox') i.value = ''; });
