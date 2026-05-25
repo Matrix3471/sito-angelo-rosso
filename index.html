@@ -2831,13 +2831,22 @@
     }, { threshold: 0.12 });
     els.forEach(e => io.observe(e));
   })();
-  // Newsletter mock submit
+  // Newsletter submit → Google Sheets
   (function(){
+    const SHEET_URL = "https://script.google.com/macros/s/AKfycbx9jIDN38OdALDsx9cNCIe0gM9BWXqKf47doQ2rruITImL7wug2sT1XWI7rYw5HcRpu5A/exec";
     const form = document.getElementById('news-form');
     const success = document.getElementById('news-success');
     if (!form) return;
     form.addEventListener('submit', (e) => {
       e.preventDefault();
+      const nome  = form.querySelector('input[name="nome"]').value.trim();
+      const email = form.querySelector('input[name="email"]').value.trim();
+      new Image().src = SHEET_URL + "?payload=" + encodeURIComponent(JSON.stringify({
+        type: "newsletter",
+        nome:  nome,
+        email: email,
+        data:  new Date().toISOString().slice(0, 19).replace("T", " ")
+      }));
       success.classList.add('visible');
       form.querySelectorAll('input').forEach(i => { if (i.type !== 'checkbox') i.value = ''; });
       form.querySelector('button').textContent = 'Iscrizione inviata';
