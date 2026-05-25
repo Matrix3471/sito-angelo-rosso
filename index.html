@@ -371,10 +371,10 @@
   <style>
     /* PALETTE: terracotta (default) */
     :root, body[data-palette="terracotta"] {
-      --bg: #f6f3ec;
-      --bg-warm: #efeae0;
-      --bg-edge: #ebe4d1;
-      --surface: #ffffff;
+      --bg: rgba(246, 243, 236, 0.75);
+      --bg-warm: rgba(239, 234, 224, 0.75);
+      --bg-edge: rgba(235, 228, 209, 0.75);
+      --surface: rgba(255, 255, 255, 0.80);
       --ink: #1a1f2e;
       --ink-soft: #2a3142;
       --muted: #5a6275;
@@ -394,10 +394,10 @@
 
     /* PALETTE: petrolio — più medicale, verde-blu scuro */
     body[data-palette="petrolio"] {
-      --bg: #f1f4f3;
-      --bg-warm: #e6ebea;
-      --bg-edge: #dee5e2;
-      --surface: #ffffff;
+      --bg: rgba(241, 244, 243, 0.75);
+      --bg-warm: rgba(230, 235, 234, 0.75);
+      --bg-edge: rgba(222, 229, 226, 0.75);
+      --surface: rgba(255, 255, 255, 0.80);
       --ink: #0e2429;
       --ink-soft: #1d3a40;
       --muted: #4a6168;
@@ -415,10 +415,10 @@
 
     /* PALETTE: blu profondo — clinico, sobrio */
     body[data-palette="blu"] {
-      --bg: #f3f5f9;
-      --bg-warm: #e7ecf3;
-      --bg-edge: #dde3ed;
-      --surface: #ffffff;
+      --bg: rgba(243, 245, 249, 0.75);
+      --bg-warm: rgba(231, 236, 243, 0.75);
+      --bg-edge: rgba(221, 227, 237, 0.75);
+      --surface: rgba(255, 255, 255, 0.80);
       --ink: #0e1a33;
       --ink-soft: #1d2b4d;
       --muted: #4a5775;
@@ -436,10 +436,10 @@
 
     /* PALETTE: ocra — caldo, accogliente */
     body[data-palette="ocra"] {
-      --bg: #f7f3e9;
-      --bg-warm: #efe8d6;
-      --bg-edge: #ede4c8;
-      --surface: #ffffff;
+      --bg: rgba(247, 243, 233, 0.75);
+      --bg-warm: rgba(239, 232, 214, 0.75);
+      --bg-edge: rgba(237, 228, 200, 0.75);
+      --surface: rgba(255, 255, 255, 0.80);
       --ink: #1f1a14;
       --ink-soft: #332b21;
       --muted: #5d5448;
@@ -481,10 +481,7 @@
       font-size: 16.5px;
       line-height: 1.6;
       color: var(--ink);
-      background:
-        radial-gradient(circle at 18% 6%, rgba(184, 90, 42, 0.10), transparent 30%),
-        radial-gradient(circle at 86% 16%, rgba(59, 107, 120, 0.10), transparent 34%),
-        linear-gradient(180deg, #f8f5ee 0%, var(--bg) 46%, var(--bg-warm) 100%);
+      background: url("Nuova cartella/mano.jpg") center / cover fixed no-repeat;
       -webkit-font-smoothing: antialiased;
       text-rendering: optimizeLegibility;
       overflow-x: clip;
@@ -494,21 +491,7 @@
     /* ─── Chiaroscuro "pagina" sui bordi laterali (solo desktop) ─── */
     @media (min-width: 900px) {
       body {
-        background-color: var(--bg-edge);
-        background-image:
-          radial-gradient(circle at 16% 8%, rgba(184, 90, 42, 0.12), transparent 30%),
-          radial-gradient(circle at 86% 18%, rgba(59, 107, 120, 0.11), transparent 34%),
-          linear-gradient(
-            to right,
-            var(--bg-edge) 0,
-            var(--bg) 140px,
-            var(--bg) calc(100% - 140px),
-            var(--bg-edge) 100%
-          );
-        background-attachment: fixed;
-        background-size: 100% 760px, 100% 980px, 100% 100%;
-        background-position: center top;
-        background-repeat: no-repeat;
+        background: url("Nuova cartella/mano.jpg") center / cover fixed no-repeat;
       }
     }
 
@@ -574,18 +557,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background:
-        linear-gradient(180deg,
-          rgba(255,255,255,0.50) 0%,
-          transparent 10%,
-          transparent 86%,
-          rgba(0,0,0,0.07) 100%
-        ),
-        radial-gradient(ellipse 90% 65% at 50% 48%,
-          transparent 30%,
-          rgba(0,0,0,0.03) 68%,
-          rgba(0,0,0,0.07) 100%
-        );
+      background: none;
       pointer-events: none;
       z-index: 1;
     }
@@ -593,73 +565,43 @@
     /* SERVIZI — crema calda: radiale dal centro chiaro verso bordi caldi scuri */
     #servizi {
       background: radial-gradient(ellipse 80% 55% at 50% 50%,
-        #f8f4ed 0%, #f0ebe2 45%, #e5dccb 100%
+        rgba(248,244,237,0.75) 0%, rgba(240,235,226,0.75) 45%, rgba(229,220,203,0.75) 100%
       );
-      box-shadow:
-        0 -8px 40px rgba(50,28,8,0.07),
-        0  8px 40px rgba(50,28,8,0.06),
-        inset 0 1px 0 rgba(255,255,255,0.70),
-        inset 0 -1px 0 rgba(0,0,0,0.05);
     }
 
     /* PROCESSO — teal tenue: radiale dal bianco-ghiaccio verso bordi teal */
     #processo {
       background: radial-gradient(ellipse 80% 55% at 50% 50%,
-        #eef6f8 0%, #d8ecf0 45%, #c2dce4 100%
+        rgba(238,246,248,0.75) 0%, rgba(216,236,240,0.75) 45%, rgba(194,220,228,0.75) 100%
       );
-      box-shadow:
-        0 -10px 48px rgba(28,72,84,0.09),
-        0  10px 48px rgba(28,72,84,0.08),
-        inset 0 1px 0 rgba(255,255,255,0.65),
-        inset 0 -1px 0 rgba(0,0,0,0.05);
     }
 
     /* PREZZI — crema terracotta: radiale al centro caldo, bordi ambra */
     #prezzi {
       background: radial-gradient(ellipse 80% 55% at 50% 50%,
-        #f8f2e8 0%, #f2ece0 45%, #e7ddc9 100%
+        rgba(248,242,232,0.75) 0%, rgba(242,236,224,0.75) 45%, rgba(231,221,201,0.75) 100%
       );
-      box-shadow:
-        0 -8px 40px rgba(50,28,8,0.07),
-        0  8px 40px rgba(50,28,8,0.07),
-        inset 0 1px 0 rgba(255,255,255,0.70),
-        inset 0 -1px 0 rgba(0,0,0,0.05);
     }
 
     /* FAQ (no id, non nascosta) — teal più profondo: radiale acqua chiara → bordi teal */
     main > .section:not([id]):not([style]) {
       background: radial-gradient(ellipse 80% 55% at 50% 50%,
-        #edf6f8 0%, #d9eef2 45%, #c3dfe8 100%
+        rgba(237,246,248,0.75) 0%, rgba(217,238,242,0.75) 45%, rgba(195,223,232,0.75) 100%
       );
-      box-shadow:
-        0 -10px 48px rgba(28,72,84,0.08),
-        0  10px 48px rgba(28,72,84,0.09),
-        inset 0 1px 0 rgba(255,255,255,0.65),
-        inset 0 -1px 0 rgba(0,0,0,0.05);
     }
 
     /* NEWSLETTER — terracotta CTA: radiale dal crema-albicocca verso ruggine */
     #newsletter {
       background: radial-gradient(ellipse 80% 55% at 50% 50%,
-        #f6e8d8 0%, #f0e4d4 40%, #e3cdb5 100%
+        rgba(246,232,216,0.75) 0%, rgba(240,228,212,0.75) 40%, rgba(227,205,181,0.75) 100%
       );
-      box-shadow:
-        0 -8px 40px rgba(80,38,10,0.08),
-        0  8px 40px rgba(80,38,10,0.07),
-        inset 0 1px 0 rgba(255,255,255,0.60),
-        inset 0 -1px 0 rgba(0,0,0,0.05);
     }
 
     /* CONTATTI — crema neutra: radiale bianco-panna verso bordi sabbia scura */
     #contatti {
       background: radial-gradient(ellipse 80% 55% at 50% 50%,
-        #f5f1ea 0%, #eeeadf 45%, #e1d9c8 100%
+        rgba(245,241,234,0.75) 0%, rgba(238,234,223,0.75) 45%, rgba(225,217,200,0.75) 100%
       );
-      box-shadow:
-        0 -8px 36px rgba(50,28,8,0.06),
-        0  6px 28px rgba(50,28,8,0.04),
-        inset 0 1px 0 rgba(255,255,255,0.70),
-        inset 0 -1px 0 rgba(0,0,0,0.04);
     }
 
     /* ─── Header ─── */
@@ -760,7 +702,7 @@
       background:
         radial-gradient(circle at 10% 12%, rgba(184, 90, 42, 0.14), transparent 28%),
         radial-gradient(circle at 88% 18%, rgba(59, 107, 120, 0.12), transparent 32%),
-        linear-gradient(135deg, rgba(246, 243, 236, 0.96), rgba(239, 234, 224, 0.82));
+        linear-gradient(135deg, rgba(246, 243, 236, 0.72), rgba(239, 234, 224, 0.60));
       border-bottom: 1px solid var(--hair-soft);
     }
     .hero > .container { position: relative; z-index: 1; }
@@ -820,11 +762,11 @@
 
     /* ECG card */
     .ecg-card {
-      background: linear-gradient(160deg, #ffffff 0%, #fbfaf6 58%, rgba(59, 107, 120, 0.08) 100%);
-      border: 1px solid var(--hair);
-      border-radius: var(--radius-lg);
+      background: none;
+      border: none;
+      border-radius: 0;
       padding: 24px;
-      box-shadow: var(--shadow-md);
+      box-shadow: none;
     }
     .ecg-head {
       display: flex;
@@ -861,16 +803,10 @@
     .ecg-screen {
       height: 130px;
       margin-top: 14px;
-      border-radius: var(--radius-sm);
+      border-radius: 0;
       padding: 12px;
-      background:
-        linear-gradient(var(--ecg-grid) 1px, transparent 1px),
-        linear-gradient(90deg, var(--ecg-grid) 1px, transparent 1px),
-        linear-gradient(var(--ecg-grid-strong) 1px, transparent 1px),
-        linear-gradient(90deg, var(--ecg-grid-strong) 1px, transparent 1px),
-        #fbfaf6;
-      background-size: 10px 10px, 10px 10px, 50px 50px, 50px 50px, auto;
-      border: 1px solid var(--hair);
+      background: none;
+      border: none;
       overflow: hidden;
     }
     .ecg-screen svg {
@@ -902,13 +838,13 @@
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 1px;
-      background: var(--hair);
-      border: 1px solid var(--hair);
-      border-radius: var(--radius-lg);
+      background: transparent;
+      border: none;
+      border-radius: 0;
       overflow: hidden;
     }
     .service-card {
-      background: linear-gradient(180deg, #ffffff 0%, #fbfaf6 100%);
+      background: none;
       padding: 36px 32px;
       display: flex;
       flex-direction: column;
@@ -953,12 +889,12 @@
       margin: 4px 0 0;
       display: grid;
       gap: 1px;
-      background: var(--hair);
-      border-top: 1px solid var(--hair);
-      border-bottom: 1px solid var(--hair);
+      background: transparent;
+      border-top: none;
+      border-bottom: none;
     }
     .service-list li {
-      background: var(--surface);
+      background: none;
       padding: 9px 0 9px 22px;
       position: relative;
       color: var(--ink-soft);
@@ -974,8 +910,8 @@
       font-weight: 600;
     }
     .abpm-visual {
-      background: linear-gradient(135deg, rgba(59,107,120,0.07) 0%, rgba(248,244,240,0.6) 100%);
-      border-radius: var(--radius-md);
+      background: none;
+      border-radius: 0;
       padding: 14px 10px 8px;
       margin-top: auto;
     }
@@ -1021,9 +957,9 @@
     /* ─── Territory ─── */
     .territory {
       padding: 36px;
-      background: var(--bg-warm);
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--hair);
+      background: none;
+      border-radius: 0;
+      border: none;
     }
     .territory h2 { margin-bottom: 16px; }
     .area-list {
@@ -1066,12 +1002,12 @@
       margin: 24px 0 0;
       display: grid;
       gap: 1px;
-      background: var(--hair);
-      border-top: 1px solid var(--hair);
-      border-bottom: 1px solid var(--hair);
+      background: transparent;
+      border-top: none;
+      border-bottom: none;
     }
     .list-panel li {
-      background: var(--bg);
+      background: none;
       padding: 14px 0 14px 28px;
       position: relative;
       color: var(--ink-soft);
@@ -1094,14 +1030,14 @@
       display: grid;
       grid-template-columns: minmax(0, 1fr) minmax(280px, 0.72fr);
       gap: 1px;
-      background: var(--hair);
-      border: 1px solid var(--hair);
-      border-radius: var(--radius-lg);
+      background: transparent;
+      border: none;
+      border-radius: 0;
       overflow: hidden;
-      box-shadow: var(--shadow-sm);
+      box-shadow: none;
     }
     .cost-note > div {
-      background: var(--bg-warm);
+      background: none;
       padding: 26px 28px;
     }
     .cost-note h3 {
@@ -1139,11 +1075,11 @@
     }
 
     .pricing {
-      background: var(--surface);
-      border: 1px solid var(--hair);
-      border-radius: var(--radius-lg);
+      background: none;
+      border: none;
+      border-radius: 0;
       overflow: hidden;
-      box-shadow: var(--shadow-sm);
+      box-shadow: none;
     }
     .pricing table {
       width: 100%;
@@ -1158,7 +1094,7 @@
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--muted);
-      background: var(--bg-warm);
+      background: none;
       border-bottom: 1px solid var(--hair);
     }
     .pricing thead th:last-child { text-align: right; }
@@ -1179,7 +1115,7 @@
       white-space: nowrap;
     }
     .pricing tr.cat td {
-      background: #fbfaf6;
+      background: none;
       padding: 12px 28px;
       font-size: 0.76rem;
       letter-spacing: 0.14em;
@@ -1210,9 +1146,9 @@
     /* ─── Testimonial placeholder ─── */
     .testi-placeholder {
       padding: 56px;
-      border: 1px dashed var(--accent-line);
-      border-radius: var(--radius-lg);
-      background: var(--accent-soft);
+      border: none;
+      border-radius: 0;
+      background: none;
       text-align: center;
       color: var(--accent-ink);
     }
@@ -1234,7 +1170,7 @@
       background:
         radial-gradient(circle at 14% 10%, rgba(184, 90, 42, 0.30), transparent 30%),
         radial-gradient(circle at 92% 18%, rgba(59, 107, 120, 0.24), transparent 34%),
-        linear-gradient(135deg, var(--ink) 0%, #242b3b 58%, #1f3842 100%);
+        linear-gradient(135deg, rgba(26,31,46,0.78) 0%, rgba(36,43,59,0.78) 58%, rgba(31,56,66,0.78) 100%);
       border-radius: var(--radius-lg);
       padding: 56px;
       color: #f4f1e9;
@@ -1292,11 +1228,9 @@
 
     /* ─── Newsletter ─── */
     .newsletter {
-      background:
-        radial-gradient(circle at 12% 0%, rgba(184, 90, 42, 0.10), transparent 32%),
-        linear-gradient(135deg, var(--bg-warm), #fbfaf6 72%);
-      border: 1px solid var(--hair);
-      border-radius: var(--radius-lg);
+      background: none;
+      border: none;
+      border-radius: 0;
       padding: 48px;
       display: grid;
       grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
@@ -1313,9 +1247,9 @@
     }
     .newsletter-topic {
       padding: 14px 16px;
-      background: var(--surface);
-      border: 1px solid var(--hair);
-      border-radius: var(--radius-sm);
+      background: none;
+      border: none;
+      border-radius: 0;
     }
     .newsletter-topic strong {
       display: block;
@@ -1332,9 +1266,9 @@
       line-height: 1.5;
     }
     .newsletter-form {
-      background: var(--surface);
-      border: 1px solid var(--hair);
-      border-radius: var(--radius-md);
+      background: none;
+      border: none;
+      border-radius: 0;
       padding: 28px;
       display: grid;
       gap: 14px;
@@ -1360,7 +1294,7 @@
       padding: 11px 13px;
       border: 1px solid var(--hair);
       border-radius: var(--radius-xs);
-      background: var(--bg);
+      background: transparent;
       color: var(--ink);
       transition: border-color 0.15s;
     }
@@ -1798,7 +1732,7 @@
     }
     .priv-overlay[hidden] { display: none; }
     .priv-dialog {
-      background: var(--surface);
+      background: #ffffff;
       border-radius: var(--radius-lg);
       max-width: 620px; width: 100%;
       max-height: 88vh; overflow-y: auto;

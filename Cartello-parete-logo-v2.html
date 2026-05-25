@@ -1,0 +1,505 @@
+<!doctype html>
+<html lang="it"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cartello da parete | Telemedicina e assistenza domiciliare</title>
+  <meta name="description" content="Cartello A3 verticale informativo su telemedicina, assistenza domiciliare integrata e utilità per pazienti e caregiver.">
+  <meta name="theme-color" content="#f6f3ec">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&amp;family=Inter+Tight:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:rgba(246,243,236,0.75);
+      --bg-warm:rgba(239,234,224,0.75);
+      --bg-edge:rgba(235,228,209,0.75);
+      --paper:rgba(255,255,255,0.80);
+      --paper-soft:rgba(251,250,246,0.75);
+      --text:#1a1f2e;
+      --text-soft:#2a3142;
+      --muted:#5a6275;
+      --muted-2:#8a8f9c;
+      --line:rgba(26,31,46,.10);
+      --line-soft:rgba(26,31,46,.06);
+      --dark:#1a1f2e;
+      --dark-2:#242b3b;
+      --accent:#b85a2a;
+      --accent-ink:#8a3d18;
+      --accent-soft:rgba(184,90,42,.08);
+      --accent-line:rgba(184,90,42,.25);
+      --ecg:#3b6b78;
+      --ecg-grid:rgba(59,107,120,.10);
+      --ecg-grid-strong:rgba(59,107,120,.18);
+      --shadow-sm:0 1px 2px rgba(26,31,46,.04),0 2px 8px rgba(26,31,46,.04);
+      --shadow:0 8px 24px rgba(26,31,46,.06),0 32px 72px rgba(26,31,46,.12);
+      --font-display:"Newsreader","Iowan Old Style",Georgia,serif;
+      --font-body:"Inter Tight",system-ui,-apple-system,"Segoe UI",sans-serif;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      min-height:100vh;
+      padding:24px;
+      font-family:var(--font-body);
+      color:var(--text);
+      background: #2a2826;
+      -webkit-font-smoothing:antialiased;
+      text-rendering:optimizeLegibility;
+    }
+    .poster{
+      width:min(297mm,100%);
+      min-height:420mm;
+      margin:0 auto;
+      background: url("Nuova cartella/mano.jpg") center / cover no-repeat;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+      border-radius:22px;
+      overflow:hidden;
+      box-shadow:var(--shadow);
+      border:1px solid var(--line);
+      display:flex;
+      flex-direction:column;
+    }
+    .hero{
+      padding:34px 38px 28px;
+      background:none;
+      color:var(--text);
+      border-bottom:1px solid rgba(255,255,255,0.15);
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      margin-bottom:18px;
+    }
+    .mark{
+      width:44px;height:44px;border-radius:0;display:grid;place-items:center;
+      background:transparent;
+      flex:0 0 auto;
+      line-height:0;
+    }
+    .mark svg{width:44px;height:44px}
+    .brand strong{
+      display:block;
+      font-size:.95rem;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+    .brand span{
+      display:block;
+      margin-top:3px;
+      font-size:.86rem;
+      color:var(--muted);
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.35fr .85fr;
+      gap:24px;
+      align-items:end;
+    }
+    h1,h2,h3,p{margin:0}
+    h1,h2,h3{
+      font-family:var(--font-display);
+      font-weight:500;
+      letter-spacing:-.02em;
+      text-wrap:balance;
+    }
+    h1{
+      font-size:clamp(3rem,5vw,5.1rem);
+      line-height:.96;
+      letter-spacing:-.045em;
+      max-width:11ch;
+      margin-bottom:14px;
+    }
+    .lead{
+      font-size:1.05rem;
+      line-height:1.6;
+      max-width:44ch;
+      color:var(--text-soft);
+    }
+    .panel{
+      border-radius:16px;
+      padding:20px;
+      background:none;
+      border:none;
+      box-shadow:none;
+    }
+    .panel strong{
+      display:block;
+      font-size:1rem;
+      margin-bottom:8px;
+    }
+    .panel p{
+      color:var(--muted);
+      font-size:.95rem;
+      line-height:1.56;
+    }
+    .signal{
+      margin-top:16px;
+      padding:14px 14px 12px;
+      border-radius:12px;
+      background: none;
+      border: none;
+    }
+    .signal svg{
+      width:100%;
+      height:74px;
+      display:block;
+      color:var(--ecg);
+    }
+    .signal path{
+      fill:none;
+      stroke:currentColor;
+      stroke-width:2.3;
+      stroke-linecap:round;
+      stroke-linejoin:round;
+    }
+    .device-figure{
+      margin-top:16px;
+      border-radius:16px;
+      overflow:hidden;
+      background:none;
+      border:none;
+      box-shadow:none;
+    }
+    .device-rows{
+      display:grid;
+      gap:1px;
+      background:var(--line);
+    }
+    .device-row{
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:12px;
+      align-items:baseline;
+      padding:12px 14px;
+      background:none;
+    }
+    .device-row span{
+      color:var(--muted);
+      font-size:.82rem;
+      line-height:1.35;
+    }
+    .device-row strong{
+      font-family:var(--font-display);
+      font-weight:500;
+      color:var(--text);
+      font-size:.98rem;
+      text-align:right;
+      letter-spacing:-.01em;
+    }
+    .device-figure figcaption{
+      padding:10px 12px;
+      color:var(--muted);
+      background:var(--paper-soft);
+      border-top:1px solid var(--line);
+      font-size:.82rem;
+      line-height:1.4;
+    }
+    .main{
+      padding:28px 38px 30px;
+      display:grid;
+      gap:16px;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+    }
+    .card{
+      padding:20px 18px 18px;
+      border-radius:16px;
+      background:none;
+      border:none;
+      min-height:250px;
+      display:flex;
+      flex-direction:column;
+      box-shadow:none;
+    }
+    .card h2{
+      font-size:1.32rem;
+      letter-spacing:-.03em;
+      margin-bottom:10px;
+    }
+    .card p{
+      color:var(--muted);
+      line-height:1.58;
+      font-size:.96rem;
+    }
+    .bullets{
+      list-style:none;
+      padding:0;
+      margin:14px 0 0;
+      display:grid;
+      gap:10px;
+    }
+    .bullets li{
+      position:relative;
+      line-height:1.45;
+      font-size:.92rem;
+      color:var(--text-soft);
+      padding:8px 0 8px 20px;
+      border-bottom:1px solid var(--line-soft);
+    }
+    .bullets li:last-child{border-bottom:none}
+    .bullets li::before{
+      content:"+";
+      position:absolute;
+      left:0;
+      top:8px;
+      color:var(--accent);
+      font-weight:600;
+      font-size:1rem;
+      line-height:1;
+    }
+    .mini-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+    .mini-card{padding:12px;border-radius:12px;background:none;border:none}
+    .mini-card strong{display:block;font-size:.9rem;margin-bottom:5px}
+    .mini-card span{display:block;color:var(--muted);font-size:.82rem;line-height:1.42}
+    .info-strip{margin-top:14px;padding:14px;border-radius:14px;background:none;border:none}
+    .info-strip strong{display:block;margin-bottom:6px;font-size:.94rem}
+    .info-strip p{color:var(--muted);font-size:.85rem;line-height:1.46}
+    .callout{
+      padding:16px;border-radius:16px;background:none;
+      border:none
+    }
+    .callout strong{display:block;margin-bottom:8px;font-size:.98rem}
+    .callout p{color:var(--muted);font-size:.88rem;line-height:1.48}
+    .contact-box{
+      padding:16px;border-radius:16px;background:rgba(26,31,46,0.85);color:#f4f1e9;border:1px solid rgba(244,241,233,.14)
+    }
+    .contact-box h3{font-size:1.05rem;margin-bottom:8px}
+    .contact-box p{color:rgba(244,241,233,.72);font-size:.9rem;line-height:1.5;margin-bottom:12px}
+    .site-box{
+      padding:16px 18px;
+      border-radius:14px;
+      background:rgba(244,241,233,.04);
+      border:1px solid rgba(244,241,233,.16);
+      text-align:center;
+    }
+    .site-box small{
+      display:block;
+      color:rgba(244,241,233,.55);
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      font-size:.72rem;
+      margin-bottom:6px;
+    }
+    .site-box strong{
+      display:block;
+      margin-bottom:4px;
+    }
+    .site-box span{
+      display:block;
+      font-size:.9rem;
+      line-height:1.4;
+      color:rgba(244,241,233,.72);
+    }
+    .examples{
+      padding:0 38px 16px;
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:16px;
+    }
+    .example-box{
+      padding:18px 18px 16px;
+      border-radius:16px;
+      background:none;
+      border:none;
+      text-align:left;
+      box-shadow:none;
+    }
+    .example-box h3{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      margin-bottom:8px;
+      font-size:1.02rem;
+    }
+    .example-box h3::before{
+      content:"+";
+      width:auto;
+      height:auto;
+      border-radius:0;
+      background:none;
+      box-shadow:none;
+      color:var(--accent);
+      font-family:var(--font-body);
+      font-weight:600;
+      flex:0 0 auto;
+    }
+    .example-box p{
+      max-width:none;
+      margin:0;
+      color:var(--muted);
+      line-height:1.55;
+      font-size:.94rem;
+    }
+    .footer{
+      margin-top:auto;
+      padding:20px 38px 34px;
+      background:rgba(26,31,46,0.85);
+      color:#f4f1e9;
+    }
+    .footer-grid{
+      display:grid;
+      grid-template-columns:1.3fr .7fr;
+      gap:18px;
+      align-items:center;
+      text-align:left;
+    }
+    .footer strong{
+      display:block;
+      font-size:1.06rem;
+      margin-bottom:6px;
+    }
+    .footer p{
+      color:rgba(244,241,233,.72);
+      font-size:.95rem;
+      line-height:1.55;
+    }
+    /* Text shadow: leggibilità su foto */
+    h1,h2,h3,p,li,.lead,.eyebrow,
+    .brand strong,.brand span,
+    .device-row span,.device-row strong,
+    .bullets li,.example-box p {
+      text-shadow: 0 1px 5px rgba(255,255,255,0.88), 0 0 14px rgba(255,255,255,0.55);
+    }
+    .footer strong,.footer p,
+    .contact-box h3,.contact-box p,
+    .site-box small,.site-box strong,.site-box span {
+      text-shadow: 0 1px 4px rgba(0,0,0,0.75);
+    }
+    @media (max-width: 1100px){
+      .hero-grid,.main,.footer-grid{grid-template-columns:1fr}
+      .card{min-height:auto}
+    }
+    @media (max-width: 720px){
+      body{padding:0}
+      .poster{border-radius:0;min-height:auto}
+      .hero,.main,.footer{padding-left:18px;padding-right:18px}
+      .main{grid-template-columns:1fr}
+      .mini-grid{grid-template-columns:1fr}
+      .examples{grid-template-columns:1fr;padding:0 18px 16px}
+    }
+    @media print{
+      body{padding:0;background:#fff}
+      .poster{width:297mm;min-height:420mm;border-radius:0;box-shadow:none}
+    }
+  </style>
+</head>
+<body>
+  <main class="poster">
+    <section class="hero">
+      <div class="brand">
+        <div class="mark" aria-hidden="true">
+          <svg width="44" height="44" viewBox="0 0 64 64" fill="none" aria-label="Logo AR"><rect width="64" height="64" rx="13" fill="#1a7fa8"/><text x="32" y="40" text-anchor="middle" fill="white" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif" font-weight="800" font-size="24" letter-spacing="-0.5">AR</text><polyline points="7,53 13,53 16,47 19,59 22,53 28,53" fill="none" stroke="rgba(255,255,255,0.48)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div>
+          <strong>Informazioni utili</strong>
+          <span>Telemedicina, ADI e assistenza domiciliare</span>
+        </div>
+      </div>
+      <div class="hero-grid">
+        <div>
+          <h1>Telemedicina e assistenza domiciliare: quando possono essere utili</h1>
+          <p class="lead">
+            La telemedicina e i servizi domiciliari possono offrire più comodità, meno spostamenti e tempi più rapidi
+            per alcuni controlli e prestazioni, con un vantaggio concreto per pazienti, famiglie e caregiver.
+          </p>
+        </div>
+        <div class="panel">
+          <strong>In sintesi</strong>
+          <p>
+            Non sostituiscono sempre la visita medica, ma possono affiancarla quando serve una gestione più pratica,
+            con un supporto organizzativo più semplice.
+          </p>
+          <div class="signal" aria-hidden="true">
+            <svg viewBox="0 0 800 120" preserveAspectRatio="none">
+              <path d="M0,60 C52,60 90,60 122,60 L158,60 C172,60 180,58 186,54 C192,50 197,42 200,30 C204,44 209,60 216,60 C222,60 230,60 237,60 C244,60 252,60 260,60 C266,60 272,59 278,58 C285,58 291,59 299,60 L335,60 C349,60 360,59 366,55 C373,51 378,43 382,29 C386,43 390,59 397,60 C403,60 409,60 416,60 C422,60 429,60 436,60 C442,60 448,60 454,60 C461,60 468,59 474,58 C481,58 488,59 496,60 L532,60 C546,60 557,59 563,55 C570,51 575,43 579,28 C583,42 587,59 594,60 C600,60 606,60 612,60 C619,60 625,60 632,60 C638,60 644,59 650,58 C657,58 664,59 672,60 L708,60 C731,60 755,60 800,60"></path>
+            </svg>
+          </div>
+          <figure class="device-figure">
+            <div class="device-rows" aria-hidden="true">
+              <div class="device-row">
+                <span>ECG a domicilio</span>
+                <strong>Referto PDF</strong>
+              </div>
+              <div class="device-row">
+                <span>Holter ECG / pressorio</span>
+                <strong>24 ore</strong>
+              </div>
+              <div class="device-row">
+                <span>Assistenza infermieristica</span>
+                <strong>A casa</strong>
+              </div>
+            </div>
+            <figcaption>Modulo informativo, coerente con brochure e cartello Telemedicina, senza immagini esterne mancanti.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="main">
+      <article class="card">
+        <h2>Quando può essere utile</h2>
+        <p>Alcuni servizi domiciliari possono aiutare quando servono comodità, rapidità e meno spostamenti.</p>
+        <ul class="bullets">
+          <li><span><strong>Meno spostamenti:</strong> utile per chi ha poca mobilità o una gestione familiare complessa.</span></li>
+          <li><span><strong>Tempi più celeri:</strong> alcuni controlli possono essere organizzati con più semplicità.</span></li>
+          <li><span><strong>Maggiore comodità:</strong> il paziente resta nel proprio ambiente, con meno stress organizzativo.</span></li>
+          <li><span><strong>Supporto al caregiver:</strong> aiuta chi assiste un familiare nel coordinare le cure.</span></li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <h2>ADI e continuità di cura</h2>
+        <p>L'assistenza domiciliare integrata e la telemedicina possono affiancare il percorso di cura quando serve una gestione più vicina al territorio.</p>
+        <ul class="bullets">
+          <li><span>Aiutano a seguire meglio alcune necessità assistenziali.</span></li>
+          <li><span>Rendono più semplice l'organizzazione dei controlli.</span></li>
+          <li><span>Supportano paziente e caregiver nel percorso quotidiano.</span></li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <h2>Informazioni e aggiornamenti</h2>
+        <p>Il progetto prevede anche comunicazioni informative su assistenza, ADI, telemedicina, sanità e altri argomenti di interesse generale collegati alla salute.</p>
+        <ul class="bullets">
+          <li><span>Contenuti divulgativi, non diagnosi online.</span></li>
+          <li><span>Aggiornamenti su servizi territoriali e sanità digitale.</span></li>
+          <li><span>Consigli pratici per pazienti, famiglie e caregiver.</span></li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="examples">
+      <div class="example-box">
+        <h3>Per chi è pensato</h3>
+        <p>
+          Per pazienti, familiari e caregiver che vogliono capire meglio quando la telemedicina può essere utile e come può semplificare alcuni passaggi.
+        </p>
+      </div>
+      <div class="example-box">
+        <h3>Messaggio chiave</h3>
+        <p>
+          Più comodità, meno spostamenti e prestazioni più facili da organizzare.
+        </p>
+      </div>
+    </section>
+
+    <section class="footer">
+      <div class="footer-grid">
+        <div>
+          <strong>Per informazioni e aggiornamenti</strong>
+          <p>
+            Visita il sito per approfondire telemedicina, assistenza domiciliare e servizi collegati.
+          </p>
+        </div>
+        <div class="site-box">
+          <small>Sito web</small>
+          <strong>Telemedicina e assistenza</strong>
+          <span>Informazioni e aggiornamenti sui servizi collegati.</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+
+</body></html>

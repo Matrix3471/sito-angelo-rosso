@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brochure · Angelo Rosso — Infermiere domiciliare a Francofonte</title>
+  <meta name="description" content="ECG, Holter e assistenza infermieristica a domicilio a Francofonte. Brochure informativa stampabile A4 a 3 ante.">
+  <meta name="theme-color" content="#f6f3ec">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ─── Palette terracotta (sito v3) ─── */
+    :root {
+      --bg: rgba(246, 243, 236, 0.75);
+      --bg-warm: rgba(239, 234, 224, 0.75);
+      --bg-edge: rgba(235, 228, 209, 0.75);
+      --surface: rgba(255, 255, 255, 0.80);
+      --ink: #1a1f2e;
+      --ink-soft: #2a3142;
+      --muted: #5a6275;
+      --muted-2: #8a8f9c;
+      --hair: rgba(26, 31, 46, 0.10);
+      --hair-soft: rgba(26, 31, 46, 0.06);
+
+      --accent: #b85a2a;
+      --accent-ink: #8a3d18;
+      --accent-soft: rgba(184, 90, 42, 0.08);
+      --accent-line: rgba(184, 90, 42, 0.25);
+
+      --ecg: #3b6b78;
+      --ecg-grid: rgba(59, 107, 120, 0.10);
+      --ecg-grid-strong: rgba(59, 107, 120, 0.18);
+
+      --radius-xs: 8px;
+      --radius-sm: 12px;
+      --radius-md: 16px;
+      --radius-lg: 22px;
+
+      --shadow-sm: 0 1px 2px rgba(26, 31, 46, 0.04), 0 2px 8px rgba(26, 31, 46, 0.04);
+      --shadow-md: 0 1px 2px rgba(26, 31, 46, 0.04), 0 6px 24px rgba(26, 31, 46, 0.06);
+      --shadow-page: 0 8px 24px rgba(26, 31, 46, 0.06), 0 24px 56px rgba(26, 31, 46, 0.10);
+
+      --font-display: "Newsreader", "Iowan Old Style", Georgia, serif;
+      --font-body: "Inter Tight", system-ui, -apple-system, "Segoe UI", sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font-body);
+      font-size: 13px;
+      line-height: 1.5;
+      color: var(--ink);
+      background: #2a2826;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      padding: 36px 24px 56px;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img, svg { display: block; max-width: 100%; }
+    ul { margin: 0; padding: 0; list-style: none; }
+    h1, h2, h3, h4 {
+      font-family: var(--font-display);
+      font-weight: 500;
+      color: var(--ink);
+      letter-spacing: -0.015em;
+      line-height: 1.12;
+      margin: 0;
+      text-wrap: balance;
+    }
+    p { margin: 0; color: var(--muted); }
+
+    /* ─── Document wrapper ─── */
+    .doc {
+      width: min(1280px, 100%);
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    .print-label {
+      text-align: center;
+      color: var(--muted-2);
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+    }
+    .print-label strong { color: var(--ink-soft); font-weight: 600; }
+
+    /* ─── Sheet = una facciata A4 landscape, 3 ante ─── */
+    .sheet {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      background: url("Nuova cartella/mano.jpg") center / cover no-repeat;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-page);
+      border: 1px solid var(--hair);
+      aspect-ratio: 297 / 210; /* A4 landscape */
+    }
+
+    /* ─── Panel base ─── */
+    .panel {
+      position: relative;
+      padding: 30px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      background: none;
+      border-right: 1px dashed rgba(255,255,255,0.15);
+      overflow: hidden;
+    }
+    .panel:last-child { border-right: none; }
+    .panel.warm { background: none; }
+    .panel.dark {
+      background: rgba(26, 31, 46, 0.82);
+      color: #f4f1e9;
+    }
+    .panel.dark h1, .panel.dark h2, .panel.dark h3, .panel.dark strong { color: #f4f1e9; }
+    .panel.dark p { color: rgba(244, 241, 233, 0.72); }
+
+    /* Override: dentro l'ECG card (sfondo bianco) i testi tornano scuri */
+    .panel.dark .ecg-card,
+    .panel.dark .ecg-card h1,
+    .panel.dark .ecg-card h2,
+    .panel.dark .ecg-card h3,
+    .panel.dark .ecg-card strong { color: var(--ink); }
+    .panel.dark .ecg-card p { color: var(--muted); }
+    .panel.dark .ecg-card .ecg-meta div span { color: var(--muted-2); }
+
+    .spacer { flex: 1 1 auto; min-height: 8px; }
+
+    /* ─── Brand ─── */
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .brand-mark {
+      width: 42px; height: 42px;
+      display: grid; place-items: center;
+      border-radius: 11px;
+      background: transparent;
+      line-height: 0;
+    }
+    .panel:not(.dark) .brand-mark {
+      background: transparent;
+    }
+    .brand-copy strong {
+      display: block;
+      font-weight: 600;
+      font-size: 1.02rem;
+      color: inherit;
+    }
+    .brand-copy span {
+      display: block;
+      font-size: 0.78rem;
+      color: var(--muted);
+      letter-spacing: 0.01em;
+    }
+    .panel.dark .brand-copy span { color: rgba(244, 241, 233, 0.6); }
+
+    /* ─── Eyebrow ─── */
+    .eyebrow {
+      display: inline-block;
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .panel.dark .eyebrow { color: var(--accent); opacity: 0.95; }
+
+    /* ─── Section headings ─── */
+    .sec-h {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .sec-h h2 {
+      font-size: 1.78rem;
+      letter-spacing: -0.022em;
+      line-height: 1.08;
+    }
+    .sec-h p {
+      font-size: 0.9rem;
+      line-height: 1.55;
+      max-width: 38ch;
+    }
+
+    /* Hero panel ha gap più stretto per riempire senza overflow */
+    .panel.dark { gap: 14px; }
+    .panel.dark .spacer { flex: 0 0 0; min-height: 0; }
+
+    /* ─── Hero contact strip (copertina) ─── */
+    .hero-contact {
+      margin-top: auto;
+      padding-top: 14px;
+      border-top: 1px solid rgba(244, 241, 233, 0.16);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .hero-contact .eyebrow {
+      font-size: 0.66rem;
+      letter-spacing: 0.16em;
+      color: rgba(244, 241, 233, 0.55);
+    }
+    .hero-contact-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+    .hero-contact-phone {
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 1.4rem;
+      letter-spacing: -0.015em;
+      color: #f4f1e9;
+      line-height: 1;
+    }
+    .hero-contact-wa {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 13px;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      line-height: 1.05;
+      letter-spacing: -0.025em;
+      color: inherit;
+      font-weight: 500;
+    }
+    .hero-lead {
+      font-size: 0.96rem;
+      line-height: 1.5;
+      color: rgba(244, 241, 233, 0.78);
+      max-width: 36ch;
+    }
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .hero-tag {
+      display: inline-flex;
+      padding: 7px 13px;
+      border-radius: 999px;
+      border: 1px solid rgba(244, 241, 233, 0.18);
+      background: rgba(244, 241, 233, 0.04);
+      font-size: 0.8rem;
+      letter-spacing: 0.04em;
+      color: #f4f1e9;
+    }
+
+    /* ─── ECG card (più grande nella brochure) ─── */
+    .ecg-card {
+      background: none;
+      border: none;
+      border-radius: var(--radius-md);
+      padding: 14px;
+      color: var(--ink);
+    }
+    .ecg-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 4px;
+    }
+    .ecg-head strong {
+      font-family: var(--font-display);
+      font-size: 1.02rem;
+      font-weight: 500;
+      color: var(--ink);
+    }
+    .ecg-head .pulse {
+      font-size: 0.66rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ecg);
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .ecg-head .pulse::before {
+      content: "";
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--ecg);
+      box-shadow: 0 0 0 3px rgba(59, 107, 120, 0.18);
+      animation: pulse 1.6s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 1; }
+    }
+    .ecg-screen {
+      height: 82px;
+      margin-top: 8px;
+      border-radius: 8px;
+      padding: 8px;
+      background: none;
+      border: none;
+      overflow: hidden;
+    }
+    .ecg-screen svg {
+      width: 100%; height: 100%;
+      color: var(--ecg);
+    }
+    .ecg-screen path {
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.6;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      vector-effect: non-scaling-stroke;
+    }
+    .ecg-meta {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid var(--hair);
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      font-size: 0.78rem;
+    }
+    .ecg-meta div span { display: block; color: var(--muted-2); font-size: 0.66rem; margin-bottom: 1px; letter-spacing: 0.04em; text-transform: uppercase; }
+    .ecg-meta div strong { font-weight: 500; color: var(--ink); font-size: 0.84rem; }
+
+    /* ─── Service cards ─── */
+    .svc-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: repeat(4, 1fr);
+      gap: 1px;
+      background: none;
+      border: none;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      flex: 1 1 auto;
+      min-height: 0;
+    }
+    .svc {
+      background: none;
+      padding: 16px 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+    }
+    .svc .tag {
+      font-size: 0.66rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .svc strong {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+    }
+    .svc p {
+      font-size: 0.82rem;
+      line-height: 1.5;
+      color: var(--muted);
+    }
+
+    /* ─── Steps ─── */
+    .steps {
+      counter-reset: step;
+      display: grid;
+      grid-template-rows: repeat(4, 1fr);
+      flex: 1 1 auto;
+      min-height: 0;
+    }
+    .step {
+      counter-increment: step;
+      display: grid;
+      grid-template-columns: 40px 1fr;
+      gap: 14px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--hair);
+      align-items: center;
+    }
+    .step:last-child { border-bottom: none; }
+    .step::before {
+      content: counter(step, decimal-leading-zero);
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: var(--accent);
+      letter-spacing: -0.01em;
+      line-height: 1;
+      padding-top: 3px;
+    }
+    .step h3 {
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 1.02rem;
+      letter-spacing: -0.01em;
+      margin-bottom: 4px;
+    }
+    .step p {
+      font-size: 0.82rem;
+      line-height: 1.5;
+    }
+
+    /* ─── Bullet list (vantaggi / prestazioni) ─── */
+    .bullet-list {
+      display: grid;
+      grid-template-rows: repeat(13, 1fr);
+      flex: 1 1 auto;
+      min-height: 0;
+    }
+    .bullet-list li {
+      padding: 5px 0 5px 20px;
+      position: relative;
+      color: var(--ink-soft);
+      font-size: 0.82rem;
+      line-height: 1.25;
+      border-bottom: 1px solid var(--hair-soft);
+      display: flex;
+      align-items: center;
+    }
+    .bullet-list li:last-child { border-bottom: none; }
+    .bullet-list li::before {
+      content: "+";
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--accent);
+      font-weight: 600;
+      font-size: 1rem;
+      line-height: 1;
+    }
+
+    /* ─── Territory mini-card ─── */
+    .territory-card {
+      padding: 18px 18px;
+      background: none;
+      border: none;
+      border-radius: var(--radius-sm);
+    }
+    .territory-card .eyebrow { margin-bottom: 8px; }
+    .territory-card strong {
+      display: block;
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 1.3rem;
+      letter-spacing: -0.015em;
+      color: var(--ink);
+      margin-bottom: 3px;
+    }
+    .territory-card span {
+      display: block;
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    /* ─── FAQ ─── */
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+    }
+    .faq-q {
+      padding: 5px 0;
+      border-bottom: 1px solid var(--hair);
+    }
+    .faq-q:last-child { border-bottom: none; }
+    .faq-q h3 {
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 0.8rem;
+      color: var(--ink);
+      margin-bottom: 2px;
+      letter-spacing: -0.005em;
+    }
+    .faq-q p {
+      font-size: 0.7rem;
+      line-height: 1.4;
+      color: var(--muted);
+    }
+
+    /* ─── Contact block ─── */
+    .contact-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .contact-row {
+      padding: 7px 11px;
+      border: 1px solid rgba(244, 241, 233, 0.16);
+      border-radius: var(--radius-sm);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+    .contact-row .lbl {
+      font-size: 0.66rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(244, 241, 233, 0.55);
+      display: block;
+      margin-bottom: 2px;
+    }
+    .contact-row .val {
+      display: block;
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 0.95rem;
+      color: #f4f1e9;
+      letter-spacing: -0.01em;
+      word-break: break-word;
+    }
+    .contact-row .arrow {
+      font-family: var(--font-display);
+      color: var(--accent);
+      font-size: 1.15rem;
+      flex: 0 0 auto;
+    }
+
+    .legal {
+      padding-top: 8px;
+      margin-top: auto;
+      border-top: 1px solid rgba(244, 241, 233, 0.14);
+    }
+    .legal p {
+      font-size: 0.66rem;
+      line-height: 1.45;
+      color: rgba(244, 241, 233, 0.6);
+    }
+    .legal strong {
+      color: #f4f1e9;
+      font-weight: 600;
+    }
+
+    /* ─── Promemoria appuntamento (FAQ panel) ─── */
+    .memo {
+      padding: 8px 11px;
+      border: 1px dashed rgba(244, 241, 233, 0.22);
+      border-radius: var(--radius-sm);
+      background: rgba(244, 241, 233, 0.03);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .memo-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 8px;
+      margin-bottom: 2px;
+    }
+    .memo-head strong {
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 0.86rem;
+      color: #f4f1e9;
+      letter-spacing: -0.005em;
+    }
+    .memo-head span {
+      font-size: 0.58rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 600;
+    }
+    .memo-row {
+      display: grid;
+      grid-template-columns: 70px 1fr;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.68rem;
+      min-height: 16px;
+    }
+    .memo-row span {
+      color: rgba(244, 241, 233, 0.55);
+      letter-spacing: 0.04em;
+    }
+    .memo-row .line {
+      height: 1px;
+      background: repeating-linear-gradient(to right, rgba(244, 241, 233, 0.25) 0 4px, transparent 4px 8px);
+    }
+
+    /* ─── Vantaggi mini-cards (warm panel) ─── */
+    .perks {
+      display: grid;
+      grid-template-rows: repeat(3, 1fr);
+      gap: 12px;
+      flex: 1 1 auto;
+      min-height: 0;
+    }
+    .perk {
+      padding: 18px 18px;
+      background: none;
+      border: none;
+      border-radius: var(--radius-sm);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .perk strong {
+      display: block;
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 1.05rem;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      margin-bottom: 4px;
+    }
+    .perk span {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* ─── Text shadow: leggibilità su foto ─── */
+    h1, h2, h3, p, li, .eyebrow, .brand-copy strong, .brand-copy span,
+    .svc .tag, .step h3, .bullet-list li {
+      text-shadow: 0 1px 5px rgba(255,255,255,0.88), 0 0 14px rgba(255,255,255,0.55);
+    }
+    .panel.dark h1, .panel.dark h2, .panel.dark h3, .panel.dark p,
+    .panel.dark strong, .panel.dark span, .panel.dark .eyebrow,
+    .panel.dark li, .hero-lead, .hero-title, .hero-contact-phone {
+      text-shadow: 0 1px 4px rgba(0,0,0,0.75);
+    }
+
+    /* ─── Responsive (preview only — print resta A4) ─── */
+    @media (max-width: 960px) {
+      body { padding: 16px 12px 32px; font-size: 13px; }
+      .sheet {
+        grid-template-columns: 1fr;
+        aspect-ratio: auto;
+      }
+      .panel {
+        border-right: none;
+        border-bottom: 1px dashed var(--hair);
+        min-height: auto;
+      }
+      .panel:last-child { border-bottom: none; }
+      .doc { gap: 18px; }
+    }
+
+    /* ─── Print: A4 landscape, fronte-retro ─── */
+    @media print {
+      body {
+        background: #fff;
+        padding: 0;
+        font-size: 10pt;
+      }
+      .doc {
+        width: 297mm;
+        gap: 0;
+      }
+      .print-label, .footer-note { display: none; }
+      .sheet {
+        width: 297mm;
+        height: 210mm;
+        border-radius: 0;
+        box-shadow: none;
+        border: none;
+        page-break-after: always;
+        break-after: page;
+        aspect-ratio: auto;
+      }
+      .sheet:last-child { page-break-after: auto; break-after: auto; }
+      .panel {
+        padding: 12mm 9mm;
+      }
+      .panel.dark { color: #f4f1e9; }
+      .ecg-head .pulse::before { animation: none; }
+      @page { size: A4 landscape; margin: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<main class="doc">
+  <p class="print-label"><strong>Brochure pieghevole A4</strong> a 3 ante · stampa fronte-retro · piega a portafoglio sui tracciati interni</p>
+
+  <!-- ════════════════════════════ FRONTE ════════════════════════════ -->
+  <section class="sheet" aria-label="Fronte brochure">
+
+    <!-- Ante sx (esterno chiuso → 4ª di copertina): VANTAGGI + TERRITORIO -->
+    <article class="panel warm">
+      <p class="eyebrow">Perché sceglierci</p>
+      <div class="sec-h">
+        <h2>Non guardare solo il prezzo: guarda il costo reale dell'attesa.</h2>
+        <p>Quando la sanità pubblica allunga i tempi, un controllo può costare molto più del ticket: spostamenti, carburante, permessi, accompagnatori, stress e giornate da riorganizzare. Il servizio privato a domicilio serve proprio a evitare questo percorso.</p>
+      </div>
+
+      <div class="perks">
+        <div class="perk">
+          <strong>Costo chiaro prima di decidere</strong>
+          <span>Contatto diretto con l'infermiere: disponibilità, tempi e tariffa chiariti subito, senza sorprese.</span>
+        </div>
+        <div class="perk">
+          <strong>Strumentazione professionale</strong>
+          <span>ECG, Holter ECG e Holter pressorio con dispositivi dedicati al domicilio.</span>
+        </div>
+        <div class="perk">
+          <strong>Referto digitale 24–48h</strong>
+          <span>PDF su WhatsApp o email. Per gli Holter, refertazione del cardiologo convenzionato.</span>
+        </div>
+      </div>
+
+      <div class="territory-card">
+        <p class="eyebrow">Area operativa</p>
+        <strong>Francofonte</strong>
+        <span>Servizio attivo sul territorio comunale</span>
+      </div>
+    </article>
+
+    <!-- Ante centrale: SERVIZI -->
+    <article class="panel">
+      <p class="eyebrow">Prestazioni</p>
+      <div class="sec-h">
+        <h2>Diagnostica cardiologica e assistenza infermieristica.</h2>
+      </div>
+
+      <div class="svc-grid">
+        <article class="svc">
+          <span class="tag">Elettrocardiogramma</span>
+          <strong>ECG a domicilio</strong>
+          <p>Tracciato acquisito con strumentazione professionale, referto PDF entro 24–48 ore.</p>
+        </article>
+        <article class="svc">
+          <span class="tag">Holter ECG</span>
+          <strong>Registrazione 24 ore</strong>
+          <p>Monitoraggio continuo per aritmie, palpitazioni, sincopi o controllo terapia.</p>
+        </article>
+        <article class="svc">
+          <span class="tag">Holter pressorio (ABPM)</span>
+          <strong>Pressione 24 ore</strong>
+          <p>Rilevazioni ogni 15 min di giorno, 30 di notte: ipertensione, profilo non-dipper.</p>
+        </article>
+        <article class="svc">
+          <span class="tag">Assistenza infermieristica</span>
+          <strong>Cure a domicilio</strong>
+          <p>Medicazioni, terapie iniettive, gestione cateteri e stomie, supporto post-dimissione.</p>
+        </article>
+      </div>
+    </article>
+
+    <!-- Ante dx (esterno chiuso → 1ª di copertina): HERO + ECG -->
+    <article class="panel dark">
+      <div class="brand">
+        <span class="brand-mark"><svg width="42" height="42" viewBox="0 0 64 64" fill="none" aria-label="Logo AR"><rect width="64" height="64" rx="13" fill="#1a7fa8"/><text x="32" y="40" text-anchor="middle" fill="white" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif" font-weight="800" font-size="24" letter-spacing="-0.5">AR</text><polyline points="7,53 13,53 16,47 19,59 22,53 28,53" fill="none" stroke="rgba(255,255,255,0.48)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <span class="brand-copy">
+          <strong>Angelo Rosso</strong>
+          <span>Infermiere domiciliare · OPI Siracusa</span>
+        </span>
+      </div>
+
+      <p class="eyebrow" style="margin-top:6px">Francofonte</p>
+
+      <h1 class="hero-title">Quando attendere costa, il controllo arriva a casa.</h1>
+
+      <p class="hero-lead">Il punto non è pubblico contro privato: è capire quanto pesano davvero attesa, trasferta, carburante, permessi e stress. Con il servizio a domicilio conosci prima la tariffa, eviti il viaggio e ricevi il referto digitale entro 24–48 ore.</p>
+
+      <div class="hero-tags">
+        <span class="hero-tag">A domicilio</span>
+        <span class="hero-tag">Referto digitale</span>
+        <span class="hero-tag">Contatto diretto</span>
+      </div>
+
+      <div class="spacer"></div>
+
+      <div class="ecg-card" aria-hidden="true">
+        <div class="ecg-head">
+          <strong>Tracciato ECG</strong>
+          <span class="pulse">in registrazione</span>
+        </div>
+        <div class="ecg-screen">
+          <svg viewBox="0 0 420 76" preserveAspectRatio="none">
+            <path d="M0,38 L60,38 L70,38 L78,30 L86,46 L94,12 L102,60 L110,38 L150,38 L210,38 L218,30 L226,46 L234,12 L242,60 L250,38 L300,38 L360,38 L368,30 L376,46 L384,12 L392,60 L400,38 L420,38"/>
+          </svg>
+        </div>
+        <div class="ecg-meta">
+          <div><span>Frequenza</span><strong>72 bpm</strong></div>
+          <div><span>Durata</span><strong>10 sec</strong></div>
+          <div><span>Modalità</span><strong>12 derivazioni</strong></div>
+          <div><span>Referto</span><strong>Cardiologo</strong></div>
+        </div>
+      </div>
+
+      <div class="hero-contact">
+        <span class="eyebrow">Per informazioni e appuntamenti</span>
+        <div class="hero-contact-row">
+          <span class="hero-contact-phone">331 567 7922</span>
+          <span class="hero-contact-wa">WhatsApp →</span>
+        </div>
+      </div>
+    </article>
+
+  </section><!-- /fronte -->
+
+  <!-- ════════════════════════════ RETRO ════════════════════════════ -->
+  <section class="sheet" aria-label="Retro brochure">
+
+    <!-- Ante sx: PROCESSO -->
+    <article class="panel">
+      <p class="eyebrow">Come funziona</p>
+      <div class="sec-h">
+        <h2>Dal primo contatto all'intervento, in quattro passaggi.</h2>
+      </div>
+
+      <div class="steps">
+        <div class="step">
+          <div>
+            <h3>Primo contatto</h3>
+            <p>Scrivi su WhatsApp o chiama. Spieghi la prestazione richiesta e ricevi risposta su disponibilità, tempi e tariffa prima di decidere.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div>
+            <h3>Valutazione e conferma</h3>
+            <p>Verifichiamo zona, prestazione richiesta ed eventuale necessità di prescrizione medica.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div>
+            <h3>Intervento al domicilio</h3>
+            <p>L'infermiere si presenta nei tempi concordati, con strumentazione professionale dedicata.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div>
+            <h3>Referto e follow-up</h3>
+            <p>Referto digitale via WhatsApp o email. Per gli Holter è incluso il referto cardiologico.</p>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Ante centrale: PRESTAZIONI INFERMIERISTICHE COMPLETE -->
+    <article class="panel warm">
+      <p class="eyebrow">Assistenza infermieristica</p>
+      <div class="sec-h">
+        <h2>Tutte le prestazioni disponibili a domicilio.</h2>
+        <p>Interventi utili nella gestione quotidiana del paziente e del caregiver.</p>
+      </div>
+
+      <ul class="bullet-list">
+        <li>Medicazioni semplici, complesse e avanzate</li>
+        <li>Iniezioni intramuscolari e sottocutanee</li>
+        <li>Terapie endovenose su prescrizione</li>
+        <li>Trasfusioni a domicilio</li>
+        <li>Gestione e posizionamento ago di Huber e CVC</li>
+        <li>Posizionamento e gestione del SNG</li>
+        <li>Gestione e medicazione PEG</li>
+        <li>Gestione catetere vescicale e stomie</li>
+        <li>Controllo glicemia capillare e parametri vitali</li>
+        <li>Prelievi venosi e prelievo arterioso</li>
+        <li>Raccolta campioni biologici</li>
+        <li>Assistenza post-dimissione ospedaliera</li>
+        <li>Educazione sanitaria a famiglia e caregiver</li>
+      </ul>
+    </article>
+
+    <!-- Ante dx: FAQ + CONTATTI -->
+    <article class="panel dark" style="padding:22px 22px; gap:12px">
+      <p class="eyebrow">Domande frequenti</p>
+      <div class="sec-h" style="gap:4px">
+        <h2 style="font-size:1.2rem">Chiarimenti utili prima di contattarci.</h2>
+      </div>
+
+      <div class="faq-list">
+        <div class="faq-q">
+          <h3>Serve la prescrizione medica?</h3>
+          <p>Non per ECG, Holter e visita infermieristica. Serve invece per terapie iniettive, endovenose e sostituzione catetere.</p>
+        </div>
+        <div class="faq-q">
+          <h3>Come avviene il pagamento?</h3>
+          <p>A fine prestazione, contanti o bonifico. Ricevuta fiscale valida per la detrazione.</p>
+        </div>
+        <div class="faq-q">
+          <h3>Il privato costa davvero molto di più?</h3>
+          <p>Non sempre, se fai il conto completo. Una prestazione pubblica può sembrare più economica, ma lista d'attesa, viaggio, carburante, permessi dal lavoro, accompagnatore e stress riducono spesso la differenza reale.</p>
+        </div>
+        <div class="faq-q">
+          <h3>Cosa devo preparare in casa?</h3>
+          <p>Una superficie piana per sdraiarsi. Per gli Holter, evita creme sul torace nelle ore precedenti. Tieni a portata di mano la terapia in corso.</p>
+        </div>
+        <div class="faq-q">
+          <h3>I miei dati sono protetti?</h3>
+          <p>Sì. Trattamento dei referti nel rispetto del GDPR, invio solo ai recapiti indicati. Nessuna condivisione con terzi.</p>
+        </div>
+      </div>
+
+      <p class="eyebrow" style="margin-top:4px">Contatti</p>
+      <div class="contact-list">
+        <div class="contact-row">
+          <div>
+            <span class="lbl">Telefono · WhatsApp</span>
+            <span class="val">331 567 7922</span>
+          </div>
+          <span class="arrow">→</span>
+        </div>
+        <div class="contact-row">
+          <div>
+            <span class="lbl">Email</span>
+            <span class="val"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ff9e91989a9390d18d908c8c90cfc8ccbf98929e9693d19c9092">[email&#160;protected]</a></span>
+          </div>
+          <span class="arrow">→</span>
+        </div>
+      </div>
+
+      <div class="memo" aria-hidden="true">
+        <div class="memo-head">
+          <strong>Promemoria appuntamento</strong>
+          <span>Da compilare</span>
+        </div>
+        <div class="memo-row"><span>Data</span><span class="line"></span></div>
+        <div class="memo-row"><span>Ora</span><span class="line"></span></div>
+        <div class="memo-row"><span>Prestazione</span><span class="line"></span></div>
+      </div>
+
+      <div class="legal">
+        <p><strong>Angelo Rosso</strong> — Infermiere Professionale<br>
+        Iscritto OPI Siracusa · Francofonte (SR)<br>
+        Servizio privato di assistenza domiciliare. Le prestazioni non sostituiscono il parere medico.</p>
+      </div>
+    </article>
+
+  </section><!-- /retro -->
+
+  <p class="print-label footer-note">Stampa fronte-retro su A4 orizzontale · piega in 3 ante a portafoglio</p>
+</main>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+</html>
