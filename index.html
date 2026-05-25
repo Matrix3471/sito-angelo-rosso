@@ -3061,7 +3061,7 @@
     function startBooking() {
       state.mode="consent";
       renderChips("consent");
-      addBot("Prima di procedere devo raccogliere alcuni tuoi dati, compresi quelli relativi alla salute (art. 9 GDPR): nome, telefono, email e il motivo della richiesta. Leggi l'informativa completa cliccando sul chip, poi digita "Accetto" per procedere.");
+      addBot(`Prima di procedere devo raccogliere alcuni tuoi dati, compresi quelli relativi alla salute (art. 9 GDPR): nome, telefono, email e il motivo della richiesta. Leggi l'informativa completa cliccando sul chip, poi digita "Accetto" per procedere.`);
       input.focus();
     }
     function startBookingAfterConsent() {
@@ -3169,7 +3169,7 @@
         if(n.includes("accett")||n==="si"||n==="sì"||n==="ok"||n.includes("prosegu")){startBookingAfterConsent();}
         else if(n.includes("informativ")||n.includes("leggi")||n.includes("privacy")){document.getElementById('privacy-modal').hidden=false;}
         else if(n.includes("non accett")||n==="no"||n.includes("rifiut")){state.mode="idle";renderChips("idle");addBot("Ok, nessun problema. Puoi sempre contattarmi su WhatsApp per qualsiasi informazione.");}
-        else{addBot("Digita "Accetto e proseguo" per continuare con la prenotazione, oppure "Non accetto" per annullare.");}
+        else{addBot(`Digita "Accetto e proseguo" per continuare con la prenotazione, oppure "Non accetto" per annullare.`);}
         return;
       }
       if(state.mode==="booking"){handleBooking(text);return;}
