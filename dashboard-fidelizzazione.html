@@ -693,13 +693,15 @@
       { day: 90, key: 'soft_reminder', label: '90 giorni', type: 'Promemoria soft' }
     ];
 
-    const fileMap = {
-      patients: 'Pazienti.csv',
-      payments: 'bilanci.csv',
-      chatbot: 'chatbot_interactions.csv',
-      consultations: 'consultazioni.csv',
-      newsletter: 'newsletter.csv',
-      requests: 'richieste_contatto.csv'
+    const SHEET_READ_URL = "https://script.google.com/macros/s/AKfycbx9jIDN38OdALDsx9cNCIe0gM9BWXqKf47doQ2rruITImL7wug2sT1XWI7rYw5HcRpu5A/exec";
+
+    const sheetMap = {
+      patients:      'Pazienti',
+      payments:      'Bilanci',
+      chatbot:       'Chatbot',
+      consultations: 'Consultazioni',
+      newsletter:    'Newsletter',
+      requests:      'Richieste'
     };
 
     const els = {
@@ -1232,30 +1234,34 @@
       renderTriggers();
     }
 
+    async function loadSheetData(sheetName) {
+      try {
+        const res = await fetch(
+          SHEET_READ_URL + '?action=read&sheet=' + encodeURIComponent(sheetName),
+          { cache: 'no-store' }
+        );
+        if (!res.ok) return [];
+        const json = await res.json();
+        if (!json.headers || !json.rows || !json.headers.length) return [];
+        const headers = json.headers.map(normalizeHeader);
+        return json.rows
+          .filter(row => row.some(cell => String(cell).trim()))
+          .map(row => {
+            const obj = {};
+            headers.forEach((h, i) => { obj[h] = String(row[i] ?? ''); });
+            return obj;
+          });
+      } catch (_) {
+        return [];
+      }
+    }
+
     async function loadCsvFiles() {
-      const entries = Object.entries(fileMap);
-      const optionalFiles = new Set(['requests']);
-      const results = await Promise.all(entries.map(async ([key, path]) => {
-        try {
-          const response = await fetch(path, { cache: 'no-store' });
-          if (!response.ok && optionalFiles.has(key)) return [key, []];
-          if (!response.ok) throw new Error(`File non trovato: ${path}`);
-          const text = await response.text();
-          try {
-            const json = JSON.parse(text);
-            if (json.csv !== undefined) return [key, parseCsv(json.csv)];
-          } catch (_) {}
-          return [key, parseCsv(text)];
-        } catch (err) {
-          if (optionalFiles.has(key)) return [key, []];
-          throw err;
-        }
-      }));
-
-      results.forEach(([key, rows]) => {
-        state[key] = rows;
-      });
-
+      els.loadStatus.textContent = 'Caricamento dati dal foglio Google...';
+      const results = await Promise.all(
+        Object.entries(sheetMap).map(async ([key, sheet]) => [key, await loadSheetData(sheet)])
+      );
+      results.forEach(([key, rows]) => { state[key] = rows; });
       els.loadStatus.textContent = `Dati caricati: ${state.patients.length} clienti, ${state.consultations.length} prestazioni, ${state.requests.length} richieste`;
       populateFilters();
       render();

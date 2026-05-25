@@ -1,6 +1,34 @@
 var SPREADSHEET_ID = "1UQLmx1gkFRDkhjEQKQPznaZNVML04rmzhI8VVCn9SPs";
 
 function doGet(e) {
+  if (e.parameter.action === "read") {
+    return handleRead(e);
+  }
+  return handleWrite(e);
+}
+
+function handleRead(e) {
+  try {
+    var sheetName = e.parameter.sheet || "";
+    if (!sheetName) {
+      return jsonOut({ error: "sheet param missing" });
+    }
+    var ss = SpreadsheetApp.openById(SPREADSHEET_ID);
+    var sheet = ss.getSheetByName(sheetName);
+    if (!sheet) {
+      return jsonOut({ headers: [], rows: [] });
+    }
+    var values = sheet.getDataRange().getValues();
+    if (values.length === 0) {
+      return jsonOut({ headers: [], rows: [] });
+    }
+    return jsonOut({ headers: values[0], rows: values.slice(1) });
+  } catch (err) {
+    return jsonOut({ error: err.message });
+  }
+}
+
+function handleWrite(e) {
   try {
     var raw = e.parameter.payload;
     if (!raw) return ContentService.createTextOutput("no payload");
@@ -30,7 +58,21 @@ function doGet(e) {
       ]);
     }
     return ContentService.createTextOutput("ok");
-  } catch(err) {
+  } catch (err) {
     return ContentService.createTextOutput("error: " + err.message);
+  }
+}
+
+function jsonOut(obj) {
+  return ContentService.createTextOutput(JSON.stringify(obj))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+
+function setupNewsletter() {
+  var ss = SpreadsheetApp.openById(SPREADSHEET_ID);
+  var sheet = ss.getSheetByName("Newsletter");
+  if (!sheet) {
+    sheet = ss.insertSheet("Newsletter");
+    sheet.appendRow(["Nome", "Email", "Comune", "Data"]);
   }
 }
