@@ -6,8 +6,6 @@
   <meta name="description" content="ECG, Holter e assistenza infermieristica a domicilio. Tariffe chiare e tempi certi per evitare attese, spostamenti e stress.">
   <meta name="theme-color" content="#f6f3ec">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <style>/* cyrillic-ext */
 @font-face {
   font-family: 'Inter Tight';
@@ -1791,6 +1789,39 @@
       line-height: 1.6;
     }
 
+    /* ─── Privacy modal ─── */
+    .priv-overlay {
+      position: fixed; inset: 0; z-index: 9000;
+      background: rgba(18,32,51,0.55);
+      display: flex; align-items: center; justify-content: center;
+      padding: 16px;
+    }
+    .priv-overlay[hidden] { display: none; }
+    .priv-dialog {
+      background: var(--surface);
+      border-radius: var(--radius-lg);
+      max-width: 620px; width: 100%;
+      max-height: 88vh; overflow-y: auto;
+      padding: 40px 36px 36px;
+      position: relative;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.20);
+    }
+    .priv-close {
+      position: absolute; top: 14px; right: 18px;
+      background: none; border: none;
+      font-size: 1.6rem; line-height: 1;
+      cursor: pointer; color: var(--muted);
+      padding: 4px 8px;
+    }
+    .priv-close:hover { color: var(--ink); }
+    .priv-dialog h2 { font-size: 1.1rem; color: var(--ink); margin-bottom: 4px; padding-right: 32px; }
+    .priv-sub { font-size: 0.8rem; color: var(--muted); margin-bottom: 24px; }
+    .priv-dialog h3 { font-size: 0.88rem; font-weight: 700; color: var(--accent); margin: 22px 0 6px; text-transform: uppercase; letter-spacing: .04em; }
+    .priv-dialog p, .priv-dialog li { font-size: 0.84rem; color: var(--muted); line-height: 1.7; }
+    .priv-dialog ul { padding-left: 18px; margin: 6px 0 10px; }
+    .priv-dialog a { color: var(--accent); }
+    @media (max-width: 600px) { .priv-dialog { padding: 28px 20px 24px; } }
+
     /* ─── Reveal ─── */
     .reveal { opacity: 0; transform: translateY(14px); transition: opacity 0.6s ease, transform 0.6s ease; }
     .reveal.in { opacity: 1; transform: none; }
@@ -2589,7 +2620,7 @@
           </label>
           <label class="newsletter-consent">
             <input type="checkbox" required="">
-            <span>Accetto di ricevere comunicazioni informative e prendo atto dell’informativa privacy.</span>
+            <span>Accetto di ricevere comunicazioni informative e prendo atto dell’<a href="#" onclick="event.preventDefault();document.getElementById(‘privacy-modal’).hidden=false" style="color:var(--accent);">informativa privacy</a>.</span>
           </label>
           <button type="submit" class="btn btn-primary">Iscrivimi</button>
           <div class="newsletter-success" id="news-success">
@@ -2648,10 +2679,59 @@
       Le prestazioni non sostituiscono il parere medico.</small>
     </div>
     <div>
-      <small>© 2026 Angelo Rosso · Tutti i diritti riservati</small>
+      <small>© 2026 Angelo Rosso · Tutti i diritti riservati<br>
+      <a href="#" onclick="event.preventDefault();document.getElementById('privacy-modal').hidden=false" style="color:var(--accent);text-decoration:underline;">Informativa Privacy</a></small>
     </div>
   </div>
 </footer>
+
+<!-- ── Privacy Policy Modal ── -->
+<div id="privacy-modal" class="priv-overlay" role="dialog" aria-modal="true" aria-labelledby="priv-title" hidden>
+  <div class="priv-dialog">
+    <button class="priv-close" onclick="document.getElementById('privacy-modal').hidden=true" aria-label="Chiudi">×</button>
+    <h2 id="priv-title">Informativa sul trattamento dei dati personali</h2>
+    <p class="priv-sub">Ai sensi degli artt. 13–14 del Regolamento UE 2016/679 (GDPR)</p>
+
+    <h3>Titolare del trattamento</h3>
+    <p>Angelo Rosso · Infermiere Professionale · Iscritto OPI Siracusa<br>
+    Francofonte (SR) · <a href="mailto:angelo.rosso073@gmail.com">angelo.rosso073@gmail.com</a></p>
+
+    <h3>Dati trattati e finalità</h3>
+    <p>Per gestire le richieste di prenotazione, vengono raccolti:</p>
+    <ul>
+      <li><strong>Dati identificativi:</strong> nome e cognome del richiedente e del paziente</li>
+      <li><strong>Dati di contatto:</strong> numero di telefono, indirizzo e-mail</li>
+      <li><strong>Dati relativi alla salute (art. 9 GDPR):</strong> motivo della richiesta, servizio sanitario richiesto, età del paziente</li>
+      <li><strong>Dati logistici:</strong> comune di residenza, note pratiche sull'accesso</li>
+    </ul>
+    <p>I dati sono raccolti esclusivamente per la gestione dell'appuntamento e la prestazione del servizio infermieristico domiciliare.</p>
+
+    <h3>Base giuridica</h3>
+    <ul>
+      <li><strong>Dati comuni:</strong> esecuzione di un contratto o misure precontrattuali (art. 6, par. 1, lett. b, GDPR)</li>
+      <li><strong>Dati relativi alla salute:</strong> consenso esplicito dell'interessato (art. 9, par. 2, lett. a, GDPR)</li>
+    </ul>
+
+    <h3>Destinatari</h3>
+    <ul>
+      <li><strong>Google LLC</strong> – Google Sheets, per la registrazione delle prenotazioni; trasferimento extra-UE regolato da Clausole Contrattuali Standard</li>
+      <li><strong>Cardiologo convenzionato</strong> – per la refertazione di Holter ECG e Holter pressorio</li>
+      <li><strong>Meta Platforms / WhatsApp</strong> – per la comunicazione diretta con il paziente</li>
+    </ul>
+    <p>Nessun dato viene venduto o ceduto a terzi per finalità commerciali o di profilazione.</p>
+
+    <h3>Conservazione</h3>
+    <p>I dati sono conservati per il tempo strettamente necessario alla prestazione e, successivamente, per un massimo di <strong>5 anni</strong> in ottemperanza agli obblighi deontologici e normativi applicabili alle professioni sanitarie.</p>
+
+    <h3>Diritti dell'interessato</h3>
+    <p>Hai il diritto di richiedere l'accesso, la rettifica, la cancellazione, la limitazione del trattamento e la portabilità dei tuoi dati. Puoi esercitare tali diritti scrivendo a: <a href="mailto:angelo.rosso073@gmail.com">angelo.rosso073@gmail.com</a></p>
+    <p>Hai il diritto di proporre reclamo al Garante per la protezione dei dati personali (<a href="https://www.garanteprivacy.it" target="_blank" rel="noopener">www.garanteprivacy.it</a>).</p>
+
+    <h3>Cookie e tracciamento</h3>
+    <p>Questo sito non utilizza cookie di profilazione né strumenti di tracciamento di terze parti. I caratteri tipografici sono caricati localmente. Non vengono installati cookie tecnici né di sessione per la navigazione.</p>
+  </div>
+</div>
+
 
 <!-- CHAT WIDGET -->
 <button class="chat-fab" id="chat-fab" aria-label="Apri assistente">
@@ -2835,7 +2915,8 @@
 
     const quickMenus = {
       idle: ["ECG", "Holter ECG", "Holter pressorio", "Assistenza", "Prezzi", "Orari", "Zona", "Prenotare"],
-      booking: ["Annulla", "Prezzi", "Servizi", "Prescrizione"]
+      booking: ["Annulla", "Prezzi", "Servizi", "Prescrizione"],
+      consent: ["Accetto e proseguo", "Leggi informativa", "Non accetto"]
     };
 
     function normalize(v) {
@@ -2978,6 +3059,12 @@
       if(!silent) addBot("Va bene. Sono di nuovo nel menu principale.");
     }
     function startBooking() {
+      state.mode="consent";
+      renderChips("consent");
+      addBot("Prima di procedere devo raccogliere alcuni tuoi dati, compresi quelli relativi alla salute (art. 9 GDPR): nome, telefono, email e il motivo della richiesta. Leggi l'informativa completa cliccando sul chip, poi digita "Accetto" per procedere.");
+      input.focus();
+    }
+    function startBookingAfterConsent() {
       state.mode="booking"; state.bookingStep=0; state.booking=createEmptyBooking();
       renderChips("booking");
       addBot("Ti aiuto a preparare una richiesta WhatsApp ordinata. Non scrivere dati sanitari non necessari: bastano le informazioni essenziali.");
@@ -3077,7 +3164,14 @@
       if(!text) return;
       addUser(text);
       const n=normalize(text);
-      if(hasUrgent(n)){if(state.mode==="booking")resetBooking(true);answerEmergency();return;}
+      if(hasUrgent(n)){if(state.mode==="booking"||state.mode==="consent")resetBooking(true);answerEmergency();return;}
+      if(state.mode==="consent"){
+        if(n.includes("accett")||n==="si"||n==="sì"||n==="ok"||n.includes("prosegu")){startBookingAfterConsent();}
+        else if(n.includes("informativ")||n.includes("leggi")||n.includes("privacy")){document.getElementById('privacy-modal').hidden=false;}
+        else if(n.includes("non accett")||n==="no"||n.includes("rifiut")){state.mode="idle";renderChips("idle");addBot("Ok, nessun problema. Puoi sempre contattarmi su WhatsApp per qualsiasi informazione.");}
+        else{addBot("Digita "Accetto e proseguo" per continuare con la prenotazione, oppure "Non accetto" per annullare.");}
+        return;
+      }
       if(state.mode==="booking"){handleBooking(text);return;}
       if(n.includes("prenot")||n.includes("appunt")||n.includes("richied")||n==="prenotare"){startBooking();return;}
       if(n.includes("prezz")||n.includes("costo")||n.includes("tariff")){answerPrices();return;}
@@ -3100,11 +3194,13 @@
 
     fab.addEventListener('click', () => panel.classList.toggle('open'));
     closeBtn.addEventListener('click', () => panel.classList.remove('open'));
+    document.addEventListener('keydown', e => { if(e.key==="Escape") document.getElementById('privacy-modal').hidden=true; });
 
     chips.addEventListener('click', (e) => {
       const btn=e.target.closest('.chat-chip');
       if(!btn) return;
       const label=btn.textContent.trim();
+      if(label==="Leggi informativa"){document.getElementById('privacy-modal').hidden=false;return;}
       setTimeout(()=>input.focus(),80);
       processInput(label);
     });
