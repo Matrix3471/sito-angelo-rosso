@@ -3048,8 +3048,6 @@
       5: "Qual \u00e8 l'et\u00e0 indicativa del paziente?",
       6: "Qual \u00e8 il motivo della richiesta, in una frase breve? Per privacy, scrivi solo l'essenziale.",
       7: "Hai una prescrizione o indicazione medica? Puoi rispondere: s\u00ec, no o non so.",
-      8: "Per quale giorno vorresti l'appuntamento? Puoi scrivere es. 10/06/2026, domani o 15 giugno.",
-      9: "A che ora vorresti l'appuntamento? (Orario: lun\u2013sab 9:00\u201313:00 e 15:00\u201318:00) Es. 09:00, 10:30 o 15:45.",
       10: "Ci sono note pratiche utili? Es. difficolt\u00e0 di movimento, piano senza ascensore, paziente allettato. Se non serve, scrivi 'no'.",
       11: "Lascia un numero di telefono per essere ricontattato.",
       12: "Se vuoi, puoi lasciare anche un'email. Se non vuoi, scrivi 'no'.",
@@ -3069,8 +3067,8 @@
       title.textContent="Riepilogo richiesta";
       const text=document.createElement("div");
       text.style.whiteSpace="pre-wrap";
-      text.innerHTML=[`Richiedente: ${escHtml(d.name)}`,d.patientName?`Paziente: ${escHtml(d.patientName)}`:null,`Rapporto: ${escHtml(d.relation)}`,`Servizio: ${escHtml(d.service)}`,`Comune: ${escHtml(d.city)}`,`Et\u00e0 indicativa: ${escHtml(d.age)}`,`Motivo: ${escHtml(d.reason)}`,`Prescrizione: ${escHtml(d.prescription)}`,`Giorno: ${escHtml(fmtDate(d.date))}`,`Orario preferito: ${escHtml(d.time)}`,d.note?`Note: ${escHtml(d.note)}`:"Note: nessuna",`Telefono: ${escHtml(d.phone)}`,d.email?`Email: ${escHtml(d.email)}`:null].filter(Boolean).join("<br>");
-      const waMsg=["Buongiorno, vorrei prenotare un servizio.",`Richiedente: ${d.name}`,d.patientName?`Paziente: ${d.patientName}`:null,`Rapporto: ${d.relation}`,`Servizio: ${d.service}`,`Comune: ${d.city}`,`Et\u00e0 indicativa: ${d.age}`,`Motivo: ${d.reason}`,`Prescrizione: ${d.prescription}`,`Giorno: ${fmtDate(d.date)}`,`Orario preferito: ${d.time}`,d.note?`Note: ${d.note}`:"Note: nessuna",`Telefono: ${d.phone}`,d.email?`Email: ${d.email}`:null].filter(Boolean).join("\n");
+      text.innerHTML=[`Richiedente: ${escHtml(d.name)}`,d.patientName?`Paziente: ${escHtml(d.patientName)}`:null,`Rapporto: ${escHtml(d.relation)}`,`Servizio: ${escHtml(d.service)}`,`Comune: ${escHtml(d.city)}`,`Et\u00e0 indicativa: ${escHtml(d.age)}`,`Motivo: ${escHtml(d.reason)}`,`Prescrizione: ${escHtml(d.prescription)}`,d.note?`Note: ${escHtml(d.note)}`:"Note: nessuna",`Telefono: ${escHtml(d.phone)}`,d.email?`Email: ${escHtml(d.email)}`:null].filter(Boolean).join("<br>");
+      const waMsg=["Buongiorno, vorrei prenotare un servizio.",`Richiedente: ${d.name}`,d.patientName?`Paziente: ${d.patientName}`:null,`Rapporto: ${d.relation}`,`Servizio: ${d.service}`,`Comune: ${d.city}`,`Et\u00e0 indicativa: ${d.age}`,`Motivo: ${d.reason}`,`Prescrizione: ${d.prescription}`,d.note?`Note: ${d.note}`:"Note: nessuna",`Telefono: ${d.phone}`,d.email?`Email: ${d.email}`:null].filter(Boolean).join("\n");
       const row=document.createElement("div");
       row.className="chat-action-row";
       const calLink=document.createElement("a");
@@ -3116,9 +3114,7 @@
       else if(step===4){s.patientName=cleanPersonName(text);state.bookingStep=5;}
       else if(step===5){s.age=text.trim();state.bookingStep=6;}
       else if(step===6){s.reason=stripNoise(text);state.bookingStep=7;}
-      else if(step===7){s.prescription=cleanPrescription(text);state.bookingStep=8;}
-      else if(step===8){const d=normalizeDate(text);s.date=d||text;if(!d)addBot(`Ok, segnato come "${text}". Angelo verificher\u00e0 la disponibilit\u00e0 al contatto diretto.`);state.bookingStep=9;}
-      else if(step===9){const t=normalizeTime(text);s.time=t||text;state.bookingStep=10;}
+      else if(step===7){s.prescription=cleanPrescription(text);state.bookingStep=10;}
       else if(step===10){s.note=n==="no"?"":stripNoise(text);state.bookingStep=11;}
       else if(step===11){const ph=text.replace(/[^\d+]/g,"");if(ph.length<6){addBot("Numero troppo corto. Scrivi un numero di telefono valido.");return;}s.phone=ph;state.bookingStep=12;}
       else if(step===12){s.email=n==="no"?"":text.trim();state.bookingStep=13;}
