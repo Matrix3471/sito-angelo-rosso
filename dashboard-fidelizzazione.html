@@ -1270,7 +1270,8 @@
         Object.entries(sheetMap).map(async ([key, sheet]) => [key, await loadSheetData(sheet)])
       );
       results.forEach(([key, rows]) => { state[key] = rows; });
-      els.loadStatus.textContent = `Dati caricati: ${state.patients.length} clienti, ${state.consultations.length} prestazioni, ${state.requests.length} richieste`;
+      if (!state.patients.length) state.patients = state.requests;
+      els.loadStatus.textContent = `Dati caricati: ${state.requests.length} richieste, ${state.newsletter.length} iscritti newsletter`;
       populateFilters();
       render();
     }
