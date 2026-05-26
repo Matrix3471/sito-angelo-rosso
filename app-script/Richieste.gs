@@ -67,12 +67,3 @@ function jsonOut(obj) {
   return ContentService.createTextOutput(JSON.stringify(obj))
     .setMimeType(ContentService.MimeType.JSON);
 }
-
-function setupNewsletter() {
-  var ss = SpreadsheetApp.openById(SPREADSHEET_ID);
-  var sheet = ss.getSheetByName("Newsletter");
-  if (!sheet) {
-    sheet = ss.insertSheet("Newsletter");
-    sheet.appendRow(["Nome", "Email", "Comune", "Data"]);
-  }
-}
