@@ -630,7 +630,6 @@
                 <th>Contatto</th>
                 <th>Comune</th>
                 <th>Servizio</th>
-                <th>Appuntamento</th>
                 <th>Disponibilita</th>
                 <th>Consenso</th>
                 <th>Stato</th>
@@ -1107,8 +1106,6 @@
         const patient = field(item, ['nome_paziente', 'paziente']);
         const phone = field(item, ['telefono']);
         const email = field(item, ['email']);
-        const requestedDay = field(item, ['giorno_richiesto', 'giorno']);
-        const requestedTime = field(item, ['orario_richiesto', 'orario_preferito', 'orario']);
         const availability = field(item, ['esito_disponibilita']) || '-';
         const alternatives = field(item, ['alternative_proposte']);
         const availabilityClass = availability.toLowerCase().includes('disponibile') ? 'green' : availability.toLowerCase().includes('occupato') ? 'red' : 'blue';
@@ -1118,7 +1115,6 @@
             <td>${phone || '-'}<br><span class="subtitle">${email || 'Email assente'}</span></td>
             <td>${field(item, ['comune', 'citta']) || '-'}</td>
             <td>${field(item, ['servizio_richiesto', 'servizio']) || '-'}</td>
-            <td>${requestedDay || '-'}<br><span class="subtitle">${requestedTime || 'Orario assente'}</span></td>
             <td>${availability}${alternatives ? `<br><span class="subtitle">${alternatives}</span>` : ''}</td>
             <td><span class="tag ${consentOk ? 'green' : 'red'}">${consentOk ? 'Si' : 'No'}</span></td>
             <td><span class="tag ${status.toLowerCase() === 'da verificare' ? 'amber' : 'blue'}">${status}</span></td>
@@ -1127,7 +1123,7 @@
         `;
       }).join('') : `
         <tr>
-          <td colspan="9">
+          <td colspan="8">
             <strong>Nessuna richiesta importata.</strong><br>
             <span class="subtitle">Esporta Airtable in CSV e sostituisci richieste_contatto.csv per visualizzare i nuovi contatti.</span>
           </td>
