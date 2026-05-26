@@ -1234,26 +1234,40 @@
       renderTriggers();
     }
 
-    async function loadSheetData(sheetName) {
-      try {
-        const res = await fetch(
-          SHEET_READ_URL + '?action=read&sheet=' + encodeURIComponent(sheetName),
-          { cache: 'no-store' }
-        );
-        if (!res.ok) return [];
-        const json = await res.json();
-        if (!json.headers || !json.rows || !json.headers.length) return [];
-        const headers = json.headers.map(normalizeHeader);
-        return json.rows
-          .filter(row => row.some(cell => String(cell).trim()))
-          .map(row => {
-            const obj = {};
-            headers.forEach((h, i) => { obj[h] = String(row[i] ?? ''); });
-            return obj;
-          });
-      } catch (_) {
-        return [];
-      }
+    function loadSheetData(sheetName) {
+      return new Promise(function(resolve) {
+        var cbName = '_gs' + Date.now() + Math.random().toString(36).slice(2);
+        var script = document.createElement('script');
+        var done = false;
+        var timer = setTimeout(function() {
+          if (done) return; done = true;
+          delete window[cbName];
+          if (script.parentNode) script.parentNode.removeChild(script);
+          resolve([]);
+        }, 12000);
+        window[cbName] = function(json) {
+          if (done) return; done = true;
+          clearTimeout(timer);
+          delete window[cbName];
+          if (script.parentNode) script.parentNode.removeChild(script);
+          if (!json || !json.headers || !json.rows || !json.headers.length) { resolve([]); return; }
+          var headers = json.headers.map(normalizeHeader);
+          var rows = json.rows
+            .filter(function(row) { return row.some(function(c) { return String(c).trim(); }); })
+            .map(function(row) {
+              var obj = {};
+              headers.forEach(function(h, i) { obj[h] = String(row[i] != null ? row[i] : ''); });
+              return obj;
+            });
+          resolve(rows);
+        };
+        script.onerror = function() {
+          if (done) return; done = true;
+          clearTimeout(timer); delete window[cbName]; resolve([]);
+        };
+        script.src = SHEET_READ_URL + '?action=read&sheet=' + encodeURIComponent(sheetName) + '&callback=' + cbName;
+        document.head.appendChild(script);
+      });
     }
 
     async function loadCsvFiles() {

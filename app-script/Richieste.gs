@@ -2,29 +2,29 @@ var SPREADSHEET_ID = "1UQLmx1gkFRDkhjEQKQPznaZNVML04rmzhI8VVCn9SPs";
 
 function doGet(e) {
   if (e.parameter.action === "read") {
-    return handleRead(e);
+    var result = readSheet(e.parameter.sheet || "");
+    var callback = e.parameter.callback;
+    if (callback) {
+      return ContentService.createTextOutput(callback + "(" + JSON.stringify(result) + ")")
+        .setMimeType(ContentService.MimeType.JAVASCRIPT);
+    }
+    return ContentService.createTextOutput(JSON.stringify(result))
+      .setMimeType(ContentService.MimeType.JSON);
   }
   return handleWrite(e);
 }
 
-function handleRead(e) {
+function readSheet(sheetName) {
   try {
-    var sheetName = e.parameter.sheet || "";
-    if (!sheetName) {
-      return jsonOut({ error: "sheet param missing" });
-    }
+    if (!sheetName) return { error: "sheet param missing" };
     var ss = SpreadsheetApp.openById(SPREADSHEET_ID);
     var sheet = ss.getSheetByName(sheetName);
-    if (!sheet) {
-      return jsonOut({ headers: [], rows: [] });
-    }
+    if (!sheet) return { headers: [], rows: [] };
     var values = sheet.getDataRange().getValues();
-    if (values.length === 0) {
-      return jsonOut({ headers: [], rows: [] });
-    }
-    return jsonOut({ headers: values[0], rows: values.slice(1) });
+    if (values.length === 0) return { headers: [], rows: [] };
+    return { headers: values[0], rows: values.slice(1) };
   } catch (err) {
-    return jsonOut({ error: err.message });
+    return { error: err.message };
   }
 }
 
@@ -61,9 +61,4 @@ function handleWrite(e) {
   } catch (err) {
     return ContentService.createTextOutput("error: " + err.message);
   }
-}
-
-function jsonOut(obj) {
-  return ContentService.createTextOutput(JSON.stringify(obj))
-    .setMimeType(ContentService.MimeType.JSON);
 }
