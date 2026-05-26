@@ -648,7 +648,7 @@
           <div class="progress-list" id="cityBars"></div>
         </article>
         <article class="card">
-          <h2>Stato contatti</h2>
+          <h2>Servizi richiesti</h2>
           <div class="progress-list" id="statusBars"></div>
         </article>
       </section>
@@ -658,13 +658,12 @@
           <table>
             <thead>
               <tr>
-                <th>Cliente</th>
+                <th>Nome</th>
                 <th>Comune</th>
-                <th>Stato</th>
-                <th>Ultimo servizio</th>
-                <th>Ultimo contatto</th>
+                <th>Servizio</th>
+                <th>Data richiesta</th>
+                <th>Telefono</th>
                 <th>Consenso</th>
-                <th>Da seguire</th>
               </tr>
             </thead>
             <tbody id="contactsTable"></tbody>
@@ -950,21 +949,19 @@
       renderBars(els.chatbotStats, counts);
     }
 
-    function renderContactsTable(patients) {
-      els.contactsTable.innerHTML = patients.map((patient) => {
-        const follow = patient.giorni_da_servizio !== null && patient.giorni_da_servizio >= 7;
-        return `
-          <tr>
-            <td><strong>${patient.nome} ${patient.cognome}</strong><br><span class="subtitle">${patient.email || 'Email assente'}</span></td>
-            <td>${patient.comune || '-'}</td>
-            <td>${patient.stato || '-'}</td>
-            <td>${patient.ultimo_servizio}<br><span class="subtitle">${patient.data_ultimo_servizio || '-'}</span></td>
-            <td>${patient.data_ultimo_contatto || '-'}</td>
-            <td><span class="tag ${patient.consenso_ok ? 'green' : 'red'}">${patient.consenso_ok ? 'Sì' : 'No'}</span></td>
-            <td><span class="tag ${follow ? 'amber' : 'blue'}">${follow ? 'Verifica' : 'Non urgente'}</span></td>
-          </tr>
-        `;
-      }).join('');
+    function renderContactsTable(requests) {
+      els.contactsTable.innerHTML = requests.length ? requests.map(function(r) {
+        var consentOk = String(r.consenso || '').toLowerCase().indexOf('s') === 0;
+        var dataStr = r.data ? r.data.slice(0, 10) : (r.giorno || '-');
+        return '<tr>' +
+          '<td><strong>' + (r.nome || '-') + '</strong><br><span class="subtitle">' + (r.email || 'Email assente') + '</span></td>' +
+          '<td>' + (r.citta || '-') + '</td>' +
+          '<td>' + (r.servizio || '-') + '</td>' +
+          '<td>' + dataStr + '</td>' +
+          '<td>' + (r.telefono || '-') + '</td>' +
+          '<td><span class="tag ' + (consentOk ? 'green' : 'red') + '">' + (r.consenso || 'No') + '</span></td>' +
+          '</tr>';
+      }).join('') : '<tr><td colspan="6" style="text-align:center;color:var(--muted)">Nessuna richiesta.</td></tr>';
     }
 
     function getTriggerDebug(patient) {
@@ -1224,10 +1221,10 @@
       const patients = getFilteredPatients();
       renderKpis(patients);
       renderBars(els.serviceBars, groupCount(patients, (patient) => patient.ultimo_servizio));
-      renderBars(els.cityBars, groupCount(patients, (patient) => patient.comune));
-      renderBars(els.statusBars, groupCount(patients, (patient) => patient.stato));
+      renderBars(els.cityBars, groupCount(state.requests, function(r) { return r.citta; }));
+      renderBars(els.statusBars, groupCount(state.requests, function(r) { return r.servizio; }));
       renderChatbot();
-      renderContactsTable(patients);
+      renderContactsTable(state.requests);
       renderDebugTable(patients);
       renderNewsletter();
       renderRequests();
