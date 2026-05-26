@@ -520,7 +520,7 @@
           </select>
         </div>
         <div class="field">
-          <label for="statusFilter">Stato</label>
+          <label for="statusFilter">Consenso</label>
           <select id="statusFilter">
             <option value="">Tutti</option>
           </select>
@@ -832,24 +832,21 @@
     }
 
     function getFilteredPatients() {
+      return enrichPatients();
+    }
+
+    function getFilteredRequests() {
       const search = els.searchInput.value.trim().toLowerCase();
       const city = els.cityFilter.value;
       const service = els.serviceFilter.value;
       const status = els.statusFilter.value;
 
-      return enrichPatients().filter((patient) => {
-        const haystack = [
-          patient.nome,
-          patient.cognome,
-          patient.comune,
-          patient.email,
-          patient.telefono
-        ].join(' ').toLowerCase();
-
+      return state.requests.filter(function(r) {
+        const haystack = [r.nome, r.paziente, r.citta, r.email, r.telefono].join(' ').toLowerCase();
         return (!search || haystack.includes(search))
-          && (!city || patient.comune === city)
-          && (!service || patient.ultimo_servizio === service)
-          && (!status || patient.stato === status);
+          && (!city || r.citta === city)
+          && (!service || r.servizio === service)
+          && (!status || r.consenso === status);
       });
     }
 
@@ -1205,10 +1202,9 @@
     }
 
     function populateFilters() {
-      const patients = enrichPatients();
-      fillSelect(els.cityFilter, [...new Set(patients.map((patient) => patient.comune).filter(Boolean))]);
-      fillSelect(els.serviceFilter, [...new Set(patients.map((patient) => patient.ultimo_servizio).filter(Boolean))]);
-      fillSelect(els.statusFilter, [...new Set(patients.map((patient) => patient.stato).filter(Boolean))]);
+      fillSelect(els.cityFilter, [...new Set(state.requests.map(function(r) { return r.citta; }).filter(Boolean))]);
+      fillSelect(els.serviceFilter, [...new Set(state.requests.map(function(r) { return r.servizio; }).filter(Boolean))]);
+      fillSelect(els.statusFilter, [...new Set(state.requests.map(function(r) { return r.consenso; }).filter(Boolean))]);
     }
 
     function fillSelect(select, values) {
@@ -1220,11 +1216,12 @@
     function render() {
       const patients = getFilteredPatients();
       renderKpis(patients);
-      renderBars(els.serviceBars, groupCount(patients, (patient) => patient.ultimo_servizio));
-      renderBars(els.cityBars, groupCount(state.requests, function(r) { return r.citta; }));
-      renderBars(els.statusBars, groupCount(state.requests, function(r) { return r.servizio; }));
+      var filtered = getFilteredRequests();
+      renderBars(els.serviceBars, groupCount(filtered, function(r) { return r.servizio; }));
+      renderBars(els.cityBars, groupCount(filtered, function(r) { return r.citta; }));
+      renderBars(els.statusBars, groupCount(filtered, function(r) { return r.servizio; }));
       renderChatbot();
-      renderContactsTable(state.requests);
+      renderContactsTable(filtered);
       renderDebugTable(patients);
       renderNewsletter();
       renderRequests();
