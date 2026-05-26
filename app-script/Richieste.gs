@@ -28,6 +28,10 @@ function readSheet(sheetName) {
   }
 }
 
+function ensureHeader(sheet, headers) {
+  if (sheet.getLastRow() === 0) sheet.appendRow(headers);
+}
+
 function handleWrite(e) {
   try {
     var raw = e.parameter.payload;
@@ -38,24 +42,41 @@ function handleWrite(e) {
 
     if (data.type === "newsletter") {
       sheet = ss.getSheetByName("Newsletter");
-      if (!sheet) {
-        sheet = ss.insertSheet("Newsletter");
-        sheet.appendRow(["Nome", "Email", "Comune", "Data"]);
-      }
+      if (!sheet) sheet = ss.insertSheet("Newsletter");
+      ensureHeader(sheet, ["Nome", "Email", "Comune", "Data"]);
       sheet.appendRow([data.nome, data.email, data.comune, data.data]);
     } else {
       sheet = ss.getSheetByName("Richieste");
-      if (!sheet) {
-        sheet = ss.insertSheet("Richieste");
-        sheet.appendRow(["data", "nome", "paziente", "servizio", "citta", "relazione", "eta", "motivo", "prescrizione", "note", "telefono", "email", "consenso"]);
-      }
+      if (!sheet) sheet = ss.insertSheet("Richieste");
+      ensureHeader(sheet, ["data", "nome", "paziente", "servizio", "citta", "relazione", "eta", "motivo", "prescrizione", "note", "telefono", "email", "consenso"]);
       sheet.appendRow([
         new Date().toISOString(),
         data.name, data.patientName, data.service, data.city,
         data.relation, data.age, data.reason, data.prescription,
-        data.note, data.phone,
-        data.email, data.consentContact
+        data.note, data.phone, data.email, data.consentContact
       ]);
+
+      var pSheet = ss.getSheetByName("Pazienti");
+      if (!pSheet) pSheet = ss.insertSheet("Pazienti");
+      ensureHeader(pSheet, ["id", "nome", "cognome", "email", "consenso_email", "non_contattare"]);
+      var fullName = (data.patientName || data.name || "").trim();
+      var parts = fullName.split(/\s+/);
+      var pNome = parts[0] || "";
+      var pCognome = parts.slice(1).join(" ") || "";
+      var pEmail = data.email || "";
+      var consenso = data.consentContact || "No";
+      if (pEmail) {
+        var pData = pSheet.getDataRange().getValues();
+        var existingRow = -1;
+        for (var i = 1; i < pData.length; i++) {
+          if (pData[i][3] === pEmail) { existingRow = i + 1; break; }
+        }
+        if (existingRow === -1) {
+          pSheet.appendRow(["P" + new Date().getTime(), pNome, pCognome, pEmail, consenso, "No"]);
+        } else {
+          pSheet.getRange(existingRow, 5).setValue(consenso);
+        }
+      }
     }
     return ContentService.createTextOutput("ok");
   } catch (err) {
@@ -69,10 +90,8 @@ function doPost(e) {
     var p = body.payload || body;
     var ss = SpreadsheetApp.openById(SPREADSHEET_ID);
     var sheet = ss.getSheetByName("Prenotazioni");
-    if (!sheet) {
-      sheet = ss.insertSheet("Prenotazioni");
-      sheet.appendRow(["data_ricezione", "nome", "email", "inizio", "fine", "servizio", "note_cliente", "uid", "evento"]);
-    }
+    if (!sheet) sheet = ss.insertSheet("Prenotazioni");
+    ensureHeader(sheet, ["data_ricezione", "nome", "email", "inizio", "fine", "servizio", "note_cliente", "uid", "evento"]);
     var attendee = (p.attendees && p.attendees[0]) || {};
     sheet.appendRow([
       new Date().toISOString(),
