@@ -1085,7 +1085,7 @@
     function renderRequests() {
       const activeRequests = state.requests.filter((item) => Object.values(item).some(Boolean));
       const toVerify = activeRequests.filter((item) => String(field(item, ['stato']) || '').toLowerCase() === 'da verificare');
-      const withConsent = activeRequests.filter((item) => isYes(field(item, ['consenso_ricontatto'])));
+      const withConsent = activeRequests.filter((item) => isYes(field(item, ['consenso_ricontatto', 'consenso'])));
       const booked = activeRequests.filter((item) => String(field(item, ['stato']) || '').toLowerCase() === 'prenotato');
 
       const kpis = [
@@ -1104,28 +1104,28 @@
       `).join('');
 
       els.requestsTable.innerHTML = activeRequests.length ? activeRequests.map((item) => {
-        const consentOk = isYes(field(item, ['consenso_ricontatto']));
+        const consentOk = isYes(field(item, ['consenso_ricontatto', 'consenso']));
         const status = field(item, ['stato']) || 'Da verificare';
-        const requester = field(item, ['nome_richiedente']);
-        const patient = field(item, ['nome_paziente']);
+        const requester = field(item, ['nome_richiedente', 'nome']);
+        const patient = field(item, ['nome_paziente', 'paziente']);
         const phone = field(item, ['telefono']);
         const email = field(item, ['email']);
-        const requestedDay = field(item, ['giorno_richiesto']);
-        const requestedTime = field(item, ['orario_richiesto', 'orario_preferito']);
-        const availability = field(item, ['esito_disponibilita']) || 'Da verificare';
+        const requestedDay = field(item, ['giorno_richiesto', 'giorno']);
+        const requestedTime = field(item, ['orario_richiesto', 'orario_preferito', 'orario']);
+        const availability = field(item, ['esito_disponibilita']) || '-';
         const alternatives = field(item, ['alternative_proposte']);
-        const availabilityClass = availability.toLowerCase().includes('disponibile') ? 'green' : availability.toLowerCase().includes('occupato') ? 'red' : 'amber';
+        const availabilityClass = availability.toLowerCase().includes('disponibile') ? 'green' : availability.toLowerCase().includes('occupato') ? 'red' : 'blue';
         return `
           <tr>
             <td><strong>${requester || '-'}</strong><br><span class="subtitle">${patient ? `Paziente: ${patient}` : 'Paziente non indicato'}</span></td>
             <td>${phone || '-'}<br><span class="subtitle">${email || 'Email assente'}</span></td>
-            <td>${field(item, ['comune']) || '-'}</td>
-            <td>${field(item, ['servizio_richiesto']) || '-'}</td>
+            <td>${field(item, ['comune', 'citta']) || '-'}</td>
+            <td>${field(item, ['servizio_richiesto', 'servizio']) || '-'}</td>
             <td>${requestedDay || '-'}<br><span class="subtitle">${requestedTime || 'Orario assente'}</span></td>
-            <td><span class="tag ${availabilityClass}">${availability}</span>${alternatives ? `<br><span class="subtitle">${alternatives}</span>` : ''}</td>
+            <td>${availability}${alternatives ? `<br><span class="subtitle">${alternatives}</span>` : ''}</td>
             <td><span class="tag ${consentOk ? 'green' : 'red'}">${consentOk ? 'Si' : 'No'}</span></td>
             <td><span class="tag ${status.toLowerCase() === 'da verificare' ? 'amber' : 'blue'}">${status}</span></td>
-            <td>${field(item, ['note_pratiche', 'motivo_breve', 'note_operatore']) || '-'}</td>
+            <td>${field(item, ['note_pratiche', 'motivo_breve', 'note_operatore', 'motivo', 'note']) || '-'}</td>
           </tr>
         `;
       }).join('') : `
