@@ -84,6 +84,50 @@ function handleWrite(e) {
   }
 }
 
+function syncRichiesteToConsultazioni() {
+  var ss = SpreadsheetApp.openById(SPREADSHEET_ID);
+
+  var rSheet = ss.getSheetByName("Richieste");
+  if (!rSheet || rSheet.getLastRow() < 2) return;
+
+  var pSheet = ss.getSheetByName("Pazienti");
+  var pEmailToId = {};
+  if (pSheet && pSheet.getLastRow() >= 2) {
+    var pData = pSheet.getDataRange().getValues();
+    for (var i = 1; i < pData.length; i++) {
+      if (pData[i][3]) pEmailToId[String(pData[i][3]).trim().toLowerCase()] = String(pData[i][0]);
+    }
+  }
+
+  var cSheet = ss.getSheetByName("Consultazioni");
+  if (!cSheet) cSheet = ss.insertSheet("Consultazioni");
+  ensureHeader(cSheet, ["id_paziente", "data_consultazione", "tipo_servizio", "email_richiedente"]);
+
+  var existing = {};
+  if (cSheet.getLastRow() >= 2) {
+    var cData = cSheet.getDataRange().getValues();
+    for (var j = 1; j < cData.length; j++) {
+      var key = cData[j][0] + "|" + String(cData[j][1]).slice(0, 10) + "|" + cData[j][2];
+      existing[key] = true;
+    }
+  }
+
+  var rData = rSheet.getDataRange().getValues();
+  // headers: data(0) nome(1) paziente(2) servizio(3) citta(4) relazione(5) eta(6) motivo(7) prescrizione(8) note(9) telefono(10) email(11) consenso(12)
+  for (var k = 1; k < rData.length; k++) {
+    var row = rData[k];
+    var email = String(row[11] || "").trim().toLowerCase();
+    var servizio = String(row[3] || "").trim();
+    var dataStr = String(row[0] || "").slice(0, 10);
+    if (!email || !servizio || !dataStr) continue;
+    var patientId = pEmailToId[email] || email;
+    var key = patientId + "|" + dataStr + "|" + servizio;
+    if (existing[key]) continue;
+    cSheet.appendRow([patientId, dataStr, servizio, email]);
+    existing[key] = true;
+  }
+}
+
 function doPost(e) {
   try {
     var body = JSON.parse(e.postData.contents);
