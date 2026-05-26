@@ -62,3 +62,31 @@ function handleWrite(e) {
     return ContentService.createTextOutput("error: " + err.message);
   }
 }
+
+function doPost(e) {
+  try {
+    var body = JSON.parse(e.postData.contents);
+    var p = body.payload || body;
+    var ss = SpreadsheetApp.openById(SPREADSHEET_ID);
+    var sheet = ss.getSheetByName("Prenotazioni");
+    if (!sheet) {
+      sheet = ss.insertSheet("Prenotazioni");
+      sheet.appendRow(["data_ricezione", "nome", "email", "inizio", "fine", "servizio", "note_cliente", "uid", "evento"]);
+    }
+    var attendee = (p.attendees && p.attendees[0]) || {};
+    sheet.appendRow([
+      new Date().toISOString(),
+      attendee.name || "",
+      attendee.email || "",
+      p.startTime || "",
+      p.endTime || "",
+      p.title || "",
+      p.additionalNotes || "",
+      p.uid || "",
+      body.triggerEvent || ""
+    ]);
+    return ContentService.createTextOutput("ok");
+  } catch (err) {
+    return ContentService.createTextOutput("error: " + err.message);
+  }
+}
