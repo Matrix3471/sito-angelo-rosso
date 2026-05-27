@@ -11,7 +11,45 @@ function doGet(e) {
     return ContentService.createTextOutput(JSON.stringify(result))
       .setMimeType(ContentService.MimeType.JSON);
   }
+  if (e.parameter.action === "update_row") {
+    var updates = JSON.parse(decodeURIComponent(e.parameter.updates || "{}"));
+    var result = updateRow(e.parameter.sheet, e.parameter.id_col, e.parameter.id_val, updates);
+    return ContentService.createTextOutput(JSON.stringify(result))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
   return handleWrite(e);
+}
+
+function updateRow(sheetName, idCol, idVal, updates) {
+  try {
+    var ss = SpreadsheetApp.openById(SPREADSHEET_ID);
+    var sheet = ss.getSheetByName(sheetName);
+    if (!sheet) return { error: "sheet not found: " + sheetName };
+    var data = sheet.getDataRange().getValues();
+    if (data.length < 2) return { error: "sheet empty" };
+    var headers = data[0].map(function(h) { return String(h || "").trim().toLowerCase().replace(/\s+/g, "_"); });
+    var idIdx = headers.indexOf(String(idCol).toLowerCase());
+    if (idIdx === -1) return { error: "column not found: " + idCol };
+    for (var i = 1; i < data.length; i++) {
+      if (String(data[i][idIdx]).trim() === String(idVal).trim()) {
+        for (var col in updates) {
+          var colIdx = headers.indexOf(String(col).toLowerCase());
+          if (colIdx === -1) {
+            // aggiunge nuova colonna se non esiste
+            var newCol = sheet.getLastColumn() + 1;
+            sheet.getRange(1, newCol).setValue(col);
+            sheet.getRange(i + 1, newCol).setValue(updates[col]);
+          } else {
+            sheet.getRange(i + 1, colIdx + 1).setValue(updates[col]);
+          }
+        }
+        return { ok: true, row: i + 1 };
+      }
+    }
+    return { error: "row not found", id_col: idCol, id_val: idVal };
+  } catch (err) {
+    return { error: err.message };
+  }
 }
 
 function readSheet(sheetName) {
