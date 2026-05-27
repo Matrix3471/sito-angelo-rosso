@@ -37,7 +37,7 @@ set BREVO_API_KEY=$BrevoKey
 set APPS_SCRIPT_URL=$AppsScriptUrl
 "$PythonPath" "$ScriptPath"
 "@
-Set-Content -Path $WrapperPath -Value $BatchContent -Encoding UTF8
+[System.IO.File]::WriteAllText($WrapperPath, $BatchContent, [System.Text.Encoding]::ASCII)
 
 # Rimuovi task esistente se presente
 if (Get-ScheduledTask -TaskName $TaskName -ErrorAction SilentlyContinue) {

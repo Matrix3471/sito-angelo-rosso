@@ -38,7 +38,7 @@ except ImportError:
 
 BASE_DIR        = Path(__file__).parent
 LOG_FILE        = BASE_DIR / "agent_prenotazioni.log"
-APPS_SCRIPT_URL = os.environ.get("APPS_SCRIPT_URL", "")
+APPS_SCRIPT_URL = os.environ.get("APPS_SCRIPT_URL", "").strip()
 
 BREVO_API_URL = "https://api.brevo.com/v3"
 SENDER_EMAIL  = "angelo.rosso073@gmail.com"
