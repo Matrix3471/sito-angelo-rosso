@@ -1,50 +1,68 @@
-﻿<!DOCTYPE html>
-<html lang="it">
-<head>
+<!doctype html>
+<html lang="it"><head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cartello da parete | Telemedicina e assistenza domiciliare</title>
   <meta name="description" content="Cartello A3 verticale informativo su telemedicina, assistenza domiciliare integrata e utilità per pazienti e caregiver.">
+  <meta name="theme-color" content="#f6f3ec">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&amp;family=Inter+Tight:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg:#eef3f8;
-      --paper:#ffffff;
-      --paper-soft:#f7fafc;
-      --text:#122033;
-      --muted:#5b687a;
-      --line:rgba(18,32,51,.10);
-      --dark:#0f1d2f;
-      --dark-2:#162842;
-      --accent:#ff7a18;
-      --accent-2:#24c7b9;
-      --shadow:0 26px 70px rgba(15,28,45,.14);
+      --bg:#f6f3ec;
+      --bg-warm:#efeae0;
+      --bg-edge:#ebe4d1;
+      --surface:#ffffff;
+      --surface-soft:#fbfaf6;
+      --ink:#1a1f2e;
+      --ink-soft:#2a3142;
+      --muted:#5a6275;
+      --muted-2:#8a8f9c;
+      --hair:rgba(26,31,46,.10);
+      --hair-soft:rgba(26,31,46,.06);
+      --accent:#b85a2a;
+      --accent-ink:#8a3d18;
+      --accent-soft:rgba(184,90,42,.08);
+      --accent-line:rgba(184,90,42,.25);
+      --ecg:#3b6b78;
+      --ecg-grid:rgba(59,107,120,.10);
+      --ecg-grid-strong:rgba(59,107,120,.18);
+      --shadow-sm:0 1px 2px rgba(26,31,46,.04),0 2px 8px rgba(26,31,46,.04);
+      --shadow:0 8px 24px rgba(26,31,46,.06),0 32px 72px rgba(26,31,46,.12);
+      --font-display:"Newsreader","Iowan Old Style",Georgia,serif;
+      --font-body:"Inter Tight",system-ui,-apple-system,"Segoe UI",sans-serif;
     }
     *{box-sizing:border-box}
     body{
       margin:0;
       min-height:100vh;
       padding:24px;
-      font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-      color:var(--text);
-      background:linear-gradient(180deg,#fbfcfe 0%, #eef3f8 100%);
+      font-family:var(--font-body);
+      color:var(--ink);
+      background:
+        linear-gradient(to right, var(--bg-edge) 0, var(--bg) 160px, var(--bg) calc(100% - 160px), var(--bg-edge) 100%);
+      background-attachment:fixed;
+      -webkit-font-smoothing:antialiased;
+      text-rendering:optimizeLegibility;
     }
     .poster{
       width:min(297mm,100%);
       min-height:420mm;
       margin:0 auto;
-      background:var(--paper);
-      border-radius:26px;
+      background:var(--bg);
+      border-radius:22px;
       overflow:hidden;
       box-shadow:var(--shadow);
-      border:1px solid rgba(18,32,51,.08);
+      border:1px solid var(--hair);
       display:flex;
       flex-direction:column;
     }
     .hero{
       padding:34px 38px 28px;
-      background:linear-gradient(135deg, rgba(15,29,47,.98), rgba(22,40,66,.98));
-      color:#f7fbff;
-      border-bottom:1px solid rgba(255,255,255,.08);
+      background:var(--bg-warm);
+      color:var(--ink);
+      border-bottom:1px solid var(--hair);
     }
     .brand{
       display:flex;
@@ -53,12 +71,13 @@
       margin-bottom:18px;
     }
     .mark{
-      width:44px;height:44px;border-radius:16px;display:grid;place-items:center;
-      background:linear-gradient(135deg,var(--accent),#ffb66b);
-      box-shadow:0 10px 22px rgba(255,122,24,.24);
+      width:44px;height:44px;border-radius:12px;display:grid;place-items:center;
+      background:var(--ink);
+      color:var(--bg);
+      box-shadow:var(--shadow-sm);
       flex:0 0 auto;
     }
-    .mark svg{width:24px;height:24px;color:#fff}
+    .mark svg{width:24px;height:24px;color:currentColor}
     .brand strong{
       display:block;
       font-size:.95rem;
@@ -69,7 +88,7 @@
       display:block;
       margin-top:3px;
       font-size:.86rem;
-      color:rgba(247,251,255,.76);
+      color:var(--muted);
     }
     .hero-grid{
       display:grid;
@@ -78,10 +97,16 @@
       align-items:end;
     }
     h1,h2,h3,p{margin:0}
+    h1,h2,h3{
+      font-family:var(--font-display);
+      font-weight:500;
+      letter-spacing:-.02em;
+      text-wrap:balance;
+    }
     h1{
       font-size:clamp(3rem,5vw,5.1rem);
       line-height:.96;
-      letter-spacing:-.06em;
+      letter-spacing:-.045em;
       max-width:11ch;
       margin-bottom:14px;
     }
@@ -89,13 +114,14 @@
       font-size:1.05rem;
       line-height:1.6;
       max-width:44ch;
-      color:rgba(247,251,255,.86);
+      color:var(--ink-soft);
     }
     .panel{
-      border-radius:22px;
+      border-radius:16px;
       padding:20px;
-      background:rgba(255,255,255,.07);
-      border:1px solid rgba(255,255,255,.12);
+      background:var(--surface);
+      border:1px solid var(--hair);
+      box-shadow:var(--shadow-sm);
     }
     .panel strong{
       display:block;
@@ -103,23 +129,28 @@
       margin-bottom:8px;
     }
     .panel p{
-      color:rgba(247,251,255,.82);
+      color:var(--muted);
       font-size:.95rem;
       line-height:1.56;
     }
     .signal{
       margin-top:16px;
       padding:14px 14px 12px;
-      border-radius:18px;
-      background:linear-gradient(180deg, #09111b 0%, #0b1421 100%);
-      border:1px solid rgba(36,199,185,.18);
+      border-radius:12px;
+      background:
+        linear-gradient(var(--ecg-grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--ecg-grid) 1px, transparent 1px),
+        linear-gradient(var(--ecg-grid-strong) 1px, transparent 1px),
+        linear-gradient(90deg, var(--ecg-grid-strong) 1px, transparent 1px),
+        var(--surface-soft);
+      background-size:10px 10px,10px 10px,50px 50px,50px 50px,auto;
+      border:1px solid var(--hair);
     }
     .signal svg{
       width:100%;
       height:74px;
       display:block;
-      color:var(--accent-2);
-      filter:drop-shadow(0 0 8px rgba(36,199,185,.22));
+      color:var(--ecg);
     }
     .signal path{
       fill:none;
@@ -130,22 +161,43 @@
     }
     .device-figure{
       margin-top:16px;
-      border-radius:20px;
+      border-radius:16px;
       overflow:hidden;
       background:#ffffff;
-      border:1px solid rgba(255,255,255,.14);
-      box-shadow:0 14px 30px rgba(0,0,0,.18);
+      border:1px solid var(--hair);
+      box-shadow:var(--shadow-sm);
     }
-    .device-figure img{
-      display:block;
-      width:100%;
-      height:auto;
+    .device-rows{
+      display:grid;
+      gap:1px;
+      background:var(--hair);
+    }
+    .device-row{
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:12px;
+      align-items:baseline;
+      padding:12px 14px;
+      background:var(--surface);
+    }
+    .device-row span{
+      color:var(--muted);
+      font-size:.82rem;
+      line-height:1.35;
+    }
+    .device-row strong{
+      font-family:var(--font-display);
+      font-weight:500;
+      color:var(--ink);
+      font-size:.98rem;
+      text-align:right;
+      letter-spacing:-.01em;
     }
     .device-figure figcaption{
       padding:10px 12px;
-      color:rgba(247,251,255,.82);
-      background:rgba(15,29,47,.82);
-      border-top:1px solid rgba(255,255,255,.12);
+      color:var(--muted);
+      background:var(--surface-soft);
+      border-top:1px solid var(--hair);
       font-size:.82rem;
       line-height:1.4;
     }
@@ -157,15 +209,16 @@
     }
     .card{
       padding:20px 18px 18px;
-      border-radius:20px;
-      background:linear-gradient(180deg, rgba(255,255,255,.98), rgba(247,250,252,.96));
-      border:1px solid var(--line);
+      border-radius:16px;
+      background:var(--surface);
+      border:1px solid var(--hair);
       min-height:250px;
       display:flex;
       flex-direction:column;
+      box-shadow:var(--shadow-sm);
     }
     .card h2{
-      font-size:1.18rem;
+      font-size:1.32rem;
       letter-spacing:-.03em;
       margin-bottom:10px;
     }
@@ -182,50 +235,52 @@
       gap:10px;
     }
     .bullets li{
-      display:flex;
-      gap:10px;
-      align-items:flex-start;
+      position:relative;
       line-height:1.45;
       font-size:.92rem;
-      color:var(--text);
+      color:var(--ink-soft);
+      padding:8px 0 8px 20px;
+      border-bottom:1px solid var(--hair-soft);
     }
+    .bullets li:last-child{border-bottom:none}
     .bullets li::before{
-      content:"";
-      width:9px;height:9px;
-      margin-top:6px;
-      border-radius:50%;
-      flex:0 0 auto;
-      background:linear-gradient(135deg,var(--accent),#ffb66b);
-      box-shadow:0 0 0 4px rgba(255,122,24,.10);
+      content:"+";
+      position:absolute;
+      left:0;
+      top:8px;
+      color:var(--accent);
+      font-weight:600;
+      font-size:1rem;
+      line-height:1;
     }
     .mini-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
-    .mini-card{padding:12px;border-radius:16px;background:var(--paper-soft);border:1px solid rgba(18,32,51,.08)}
+    .mini-card{padding:12px;border-radius:12px;background:var(--surface-soft);border:1px solid var(--hair)}
     .mini-card strong{display:block;font-size:.9rem;margin-bottom:5px}
     .mini-card span{display:block;color:var(--muted);font-size:.82rem;line-height:1.42}
-    .info-strip{margin-top:14px;padding:14px;border-radius:18px;background:rgba(36,199,185,.08);border:1px solid rgba(36,199,185,.16)}
+    .info-strip{margin-top:14px;padding:14px;border-radius:14px;background:var(--accent-soft);border:1px solid var(--accent-line)}
     .info-strip strong{display:block;margin-bottom:6px;font-size:.94rem}
     .info-strip p{color:var(--muted);font-size:.85rem;line-height:1.46}
     .callout{
-      padding:16px;border-radius:20px;background:linear-gradient(135deg, rgba(255,122,24,.14), rgba(36,199,185,.08)), var(--paper-soft);
-      border:1px solid rgba(255,122,24,.18)
+      padding:16px;border-radius:16px;background:var(--bg-warm);
+      border:1px solid var(--hair)
     }
     .callout strong{display:block;margin-bottom:8px;font-size:.98rem}
     .callout p{color:var(--muted);font-size:.88rem;line-height:1.48}
     .contact-box{
-      padding:16px;border-radius:20px;background:linear-gradient(135deg,var(--dark),var(--dark-2));color:#f7fbff;border:1px solid rgba(255,255,255,.08)
+      padding:16px;border-radius:16px;background:var(--ink);color:#f4f1e9;border:1px solid rgba(244,241,233,.14)
     }
     .contact-box h3{font-size:1.05rem;margin-bottom:8px}
-    .contact-box p{color:rgba(247,251,255,.82);font-size:.9rem;line-height:1.5;margin-bottom:12px}
+    .contact-box p{color:rgba(244,241,233,.72);font-size:.9rem;line-height:1.5;margin-bottom:12px}
     .site-box{
       padding:16px 18px;
-      border-radius:18px;
-      background:rgba(255,255,255,.08);
-      border:1px solid rgba(255,255,255,.12);
+      border-radius:14px;
+      background:rgba(244,241,233,.04);
+      border:1px solid rgba(244,241,233,.16);
       text-align:center;
     }
     .site-box small{
       display:block;
-      color:rgba(247,251,255,.72);
+      color:rgba(244,241,233,.55);
       text-transform:uppercase;
       letter-spacing:.08em;
       font-size:.72rem;
@@ -239,7 +294,7 @@
       display:block;
       font-size:.9rem;
       line-height:1.4;
-      color:rgba(247,251,255,.82);
+      color:rgba(244,241,233,.72);
     }
     .examples{
       padding:0 38px 16px;
@@ -249,11 +304,11 @@
     }
     .example-box{
       padding:18px 18px 16px;
-      border-radius:20px;
-      background:var(--paper-soft);
-      border:1px solid var(--line);
+      border-radius:16px;
+      background:var(--surface-soft);
+      border:1px solid var(--hair);
       text-align:left;
-      box-shadow:0 10px 24px rgba(15,28,45,.05);
+      box-shadow:var(--shadow-sm);
     }
     .example-box h3{
       display:flex;
@@ -263,12 +318,15 @@
       font-size:1.02rem;
     }
     .example-box h3::before{
-      content:"";
-      width:9px;
-      height:9px;
-      border-radius:50%;
-      background:linear-gradient(135deg,var(--accent),#ffb66b);
-      box-shadow:0 0 0 4px rgba(255,122,24,.10);
+      content:"+";
+      width:auto;
+      height:auto;
+      border-radius:0;
+      background:none;
+      box-shadow:none;
+      color:var(--accent);
+      font-family:var(--font-body);
+      font-weight:600;
       flex:0 0 auto;
     }
     .example-box p{
@@ -281,8 +339,8 @@
     .footer{
       margin-top:auto;
       padding:20px 38px 34px;
-      background:linear-gradient(135deg, var(--dark), var(--dark-2));
-      color:#f7fbff;
+      background:var(--ink);
+      color:#f4f1e9;
     }
     .footer-grid{
       display:grid;
@@ -297,7 +355,7 @@
       margin-bottom:6px;
     }
     .footer p{
-      color:rgba(247,251,255,.82);
+      color:rgba(244,241,233,.72);
       font-size:.95rem;
       line-height:1.55;
     }
@@ -353,8 +411,21 @@
             </svg>
           </div>
           <figure class="device-figure">
-            <img src="assets/brochure/ecg-holter-pressorio.png" alt="Strumenti per ECG e Holter pressorio a domicilio">
-            <figcaption>Strumenti utili per alcuni servizi di telemedicina e monitoraggio domiciliare.</figcaption>
+            <div class="device-rows" aria-hidden="true">
+              <div class="device-row">
+                <span>ECG a domicilio</span>
+                <strong>Referto PDF</strong>
+              </div>
+              <div class="device-row">
+                <span>Holter ECG / pressorio</span>
+                <strong>24 ore</strong>
+              </div>
+              <div class="device-row">
+                <span>Assistenza infermieristica</span>
+                <strong>A casa</strong>
+              </div>
+            </div>
+            <figcaption>Modulo informativo, coerente con brochure e cartello Telemedicina, senza immagini esterne mancanti.</figcaption>
           </figure>
         </div>
       </div>
@@ -424,5 +495,6 @@
       </div>
     </section>
   </main>
-</body>
-</html>
+
+
+</body></html>

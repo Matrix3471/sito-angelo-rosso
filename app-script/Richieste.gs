@@ -11,6 +11,11 @@ function doGet(e) {
     return ContentService.createTextOutput(JSON.stringify(result))
       .setMimeType(ContentService.MimeType.JSON);
   }
+  if (e.parameter.action === "sync_consultazioni") {
+    syncRichiesteToConsultazioni();
+    return ContentService.createTextOutput(JSON.stringify({ ok: true }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
   if (e.parameter.action === "update_row") {
     var updates = JSON.parse(decodeURIComponent(e.parameter.updates || "{}"));
     var result = updateRow(e.parameter.sheet, e.parameter.id_col, e.parameter.id_val, updates);
@@ -142,13 +147,22 @@ function syncRichiesteToConsultazioni() {
 
   var cSheet = ss.getSheetByName("Consultazioni");
   if (!cSheet) cSheet = ss.insertSheet("Consultazioni");
-  ensureHeader(cSheet, ["id_paziente", "data_consultazione", "tipo_servizio", "email_richiedente"]);
+
+  // Forza header corretto anche se già presente (fix typo id_pazienti -> id_paziente)
+  var correctHeaders = ["id_paziente", "data_consultazione", "tipo_servizio", "email_richiedente"];
+  if (cSheet.getLastRow() === 0) {
+    cSheet.appendRow(correctHeaders);
+  } else {
+    cSheet.getRange(1, 1, 1, correctHeaders.length).setValues([correctHeaders]);
+  }
 
   var existing = {};
   if (cSheet.getLastRow() >= 2) {
     var cData = cSheet.getDataRange().getValues();
     for (var j = 1; j < cData.length; j++) {
-      existing[cData[j][0] + "|" + String(cData[j][1]).slice(0, 10) + "|" + cData[j][2]] = true;
+      var d = cData[j][1];
+      var dStr = d instanceof Date ? d.toISOString().slice(0, 10) : String(d).slice(0, 10);
+      existing[cData[j][0] + "|" + dStr + "|" + cData[j][2]] = true;
     }
   }
 
@@ -178,13 +192,14 @@ function doPost(e) {
     if (!sheet) sheet = ss.insertSheet("Prenotazioni");
     ensureHeader(sheet, ["data_ricezione", "nome", "email", "inizio", "fine", "servizio", "note_cliente", "uid", "evento"]);
     var attendee = (p.attendees && p.attendees[0]) || {};
+    var servizio = (p.eventType && p.eventType.title) || p.type || p.title || "";
     sheet.appendRow([
       new Date().toISOString(),
       attendee.name || "",
       attendee.email || "",
       p.startTime || "",
       p.endTime || "",
-      p.title || "",
+      servizio,
       p.additionalNotes || "",
       p.uid || "",
       body.triggerEvent || ""

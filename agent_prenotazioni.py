@@ -83,6 +83,10 @@ def sheets_read(sheet_name: str) -> list[dict]:
             allow_redirects=True,
         )
         r.raise_for_status()
+        raw = r.text.strip()
+        if not raw:
+            log.error(f"sheets_read({sheet_name}): risposta vuota (status={r.status_code}, url={r.url[:80]})")
+            return []
         data = r.json()
         if "error" in data or not data.get("headers"):
             return []
@@ -94,7 +98,7 @@ def sheets_read(sheet_name: str) -> list[dict]:
                 rows.append(obj)
         return rows
     except Exception as e:
-        log.error(f"sheets_read({sheet_name}): {e}")
+        log.error(f"sheets_read({sheet_name}): {e} | body={r.text[:120] if 'r' in dir() else 'n/a'}")
         return []
 
 
@@ -432,6 +436,8 @@ def process_triggers() -> None:
             if pid not in latest_by_patient or d > latest_by_patient[pid]["data_consultazione"]:
                 latest_by_patient[pid] = c
 
+    log.info(f"  Pazienti trovati: {len(patients)} | Consultazioni: {len(consultations)} | ID unici in consult.: {list(latest_by_patient.keys())[:5]}")
+
     triggered = 0
     for patient in patients:
         pid          = str(patient.get("id", "")).strip()
@@ -455,10 +461,11 @@ def process_triggers() -> None:
         if not latest:
             continue
 
-        service_date_str = latest.get("data_consultazione", "").strip()
+        service_date_str = latest.get("data_consultazione", "").strip()[:10]
         try:
             service_date = date.fromisoformat(service_date_str)
         except ValueError:
+            log.warning(f"  data_consultazione non parsabile: {service_date_str!r} — skip {pid}")
             continue
 
         days_since = (today - service_date).days
