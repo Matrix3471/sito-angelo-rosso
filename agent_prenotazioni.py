@@ -124,6 +124,24 @@ def sheets_update_row(sheet_name: str, id_col: str, id_val: str, updates: dict) 
 def is_yes(value: str) -> bool:
     return str(value or "").strip().lower() in ("si", "sì", "yes", "1", "true")
 
+
+def _parse_sheet_date(val) -> str:
+    """Normalizza data da Google Sheets a YYYY-MM-DD.
+    Sheets restituisce date come oggetti Date serializzati in ISO UTC (es. '2026-05-28T22:00:00.000Z')
+    che rappresentano la mezzanotte del fuso italiano. Aggiungendo 2h si ottiene la data corretta.
+    """
+    s = str(val or "").strip()
+    if not s:
+        return ""
+    if "T" in s:
+        try:
+            from datetime import timezone, timedelta as td
+            dt = datetime.fromisoformat(s.replace("Z", "+00:00"))
+            return (dt + td(hours=2)).date().isoformat()
+        except Exception:
+            pass
+    return s[:10]
+
 # ─── TOOL FUNCTIONS ──────────────────────────────────────────────────────────
 
 def check_availability(data_richiesta: str, orario_preferito: str = "") -> dict:
@@ -143,7 +161,7 @@ def check_availability(data_richiesta: str, orario_preferito: str = "") -> dict:
             stato_slot = slot.get("stato", slot.get("status", "")).strip().lower()
             if stato_slot not in ("libero", "free", "disponibile"):
                 continue
-            slot_date = slot.get("data", "").strip()
+            slot_date = _parse_sheet_date(slot.get("data", ""))
             slot_ora  = slot.get("ora", slot.get("ora_inizio", "")).strip()
             if slot_date < today_str:
                 continue
@@ -446,7 +464,7 @@ def process_triggers() -> None:
         email        = patient.get("email", "").strip()
         consenso     = patient.get("consenso_email", "").strip()
         no_contact   = patient.get("non_contattare", "").strip()
-        last_contact = patient.get("data_ultimo_contatto", "").strip()
+        last_contact = _parse_sheet_date(patient.get("data_ultimo_contatto", ""))
 
         if not is_yes(consenso):
             continue
@@ -461,7 +479,7 @@ def process_triggers() -> None:
         if not latest:
             continue
 
-        service_date_str = latest.get("data_consultazione", "").strip()[:10]
+        service_date_str = _parse_sheet_date(latest.get("data_consultazione", ""))
         try:
             service_date = date.fromisoformat(service_date_str)
         except ValueError:

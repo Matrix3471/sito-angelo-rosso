@@ -2625,7 +2625,8 @@
   <div class="container footer-inner">
     <div>
       <small><strong style="color:var(--ink);font-weight:600">Angelo Rosso</strong> · Infermiere Professionale<br>
-      Iscritto OPI Siracusa · Francofonte (SR)</small>
+      Iscritto OPI Siracusa n. 2609 · P.IVA 00000000000<br>
+      Via Enrico Gaudioso 20, 96015 Francofonte (SR)</small>
     </div>
     <div>
       <small>Servizio privato di assistenza domiciliare.<br>
@@ -2649,8 +2650,8 @@
     <p class="priv-sub">Ai sensi degli artt. 13–14 del Regolamento UE 2016/679 (GDPR)</p>
 
     <h3>Titolare del trattamento</h3>
-    <p>Angelo Rosso · Infermiere Professionale · Iscritto OPI Siracusa<br>
-    Francofonte (SR) · <a href="mailto:angelo.rosso073@gmail.com">angelo.rosso073@gmail.com</a></p>
+    <p>Angelo Rosso · Infermiere Professionale · Iscritto OPI Siracusa n. 2609 · P.IVA 00000000000<br>
+    Via Enrico Gaudioso 20 · 96015 Francofonte (SR) · <a href="mailto:angelo.rosso073@gmail.com">angelo.rosso073@gmail.com</a></p>
 
     <h3>Dati trattati e finalità</h3>
     <p>Per gestire le richieste di prenotazione, vengono raccolti:</p>
@@ -2673,6 +2674,7 @@
       <li><strong>Google LLC</strong> – Google Sheets, per la registrazione delle prenotazioni; trasferimento extra-UE regolato da Clausole Contrattuali Standard</li>
       <li><strong>Cardiologo convenzionato</strong> – per la refertazione di Holter ECG e Holter pressorio</li>
       <li><strong>Meta Platforms / WhatsApp</strong> – per la comunicazione diretta con il paziente</li>
+      <li><strong>Brevo SAS</strong> – per l'invio di comunicazioni email (conferme, follow-up); responsabile del trattamento ai sensi dell'art. 28 GDPR; sede in Francia, adeguatamente convenzionata</li>
     </ul>
     <p>Nessun dato viene venduto o ceduto a terzi per finalità commerciali o di profilazione.</p>
 
@@ -2926,7 +2928,7 @@
     }
 
     function createEmptyBooking() {
-      return { name:"", patientName:"", service:"", city:"", relation:"", age:"", reason:"", prescription:"", note:"", phone:"", email:"", consentContact:"" };
+      return { name:"", patientName:"", service:"", city:"", relation:"", age:"", reason:"", prescription:"", note:"", phone:"", email:"", consentHealth:"", consentContact:"" };
     }
 
     // \u2500\u2500 text utilities \u2500\u2500
@@ -3051,7 +3053,8 @@
       10: "Ci sono note pratiche utili? Es. difficolt\u00e0 di movimento, piano senza ascensore, paziente allettato. Se non serve, scrivi 'no'.",
       11: "Lascia un numero di telefono per essere ricontattato.",
       12: "Se vuoi, puoi lasciare anche un'email. Se non vuoi, scrivi 'no'.",
-      13: "Acconsenti a essere ricontattato per questa richiesta? Rispondi s\u00ec o no."
+      13: "I dati che hai fornito includono informazioni sulla salute (servizio richiesto, motivo, et\u00e0). Acconsenti al loro trattamento ai sensi dell\u2019art. 9 GDPR? Rispondi s\u00ec o no.",
+      14: "Acconsenti a essere ricontattato per questa richiesta? Rispondi s\u00ec o no."
     };
     function promptStep() { if(prompts[state.bookingStep]) addBot(prompts[state.bookingStep]); }
 
@@ -3118,7 +3121,8 @@
       else if(step===10){s.note=n==="no"?"":stripNoise(text);state.bookingStep=11;}
       else if(step===11){const ph=text.replace(/[^\d+]/g,"");if(ph.length<6){addBot("Numero troppo corto. Scrivi un numero di telefono valido.");return;}s.phone=ph;state.bookingStep=12;}
       else if(step===12){s.email=n==="no"?"":text.trim();state.bookingStep=13;}
-      else if(step===13){s.consentContact=(n==="si"||n==="s\u00ec"||n==="yes"||n==="ok")?"S\u00ec":"No";state.mode="summary";state.bookingStep=null;sendToSheet(s);renderChips("idle");addSummaryCard(s);addBot("Clicca 'Scegli data e orario' per prenotare il tuo slot. Per qualsiasi dubbio puoi anche contattarmi su WhatsApp.");return;}
+      else if(step===13){s.consentHealth=(n==="si"||n==="s\u00ec"||n==="yes"||n==="ok")?"S\u00ec":"No";state.bookingStep=14;}
+      else if(step===14){s.consentContact=(n==="si"||n==="s\u00ec"||n==="yes"||n==="ok")?"S\u00ec":"No";state.mode="summary";state.bookingStep=null;sendToSheet(s);renderChips("idle");addSummaryCard(s);addBot("Clicca 'Scegli data e orario' per prenotare il tuo slot. Per qualsiasi dubbio puoi anche contattarmi su WhatsApp.");return;}
       promptStep();
     }
 

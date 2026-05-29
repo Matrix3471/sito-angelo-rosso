@@ -11,9 +11,23 @@ function doGet(e) {
     return ContentService.createTextOutput(JSON.stringify(result))
       .setMimeType(ContentService.MimeType.JSON);
   }
+  if (e.parameter.action === "append_row") {
+    var ss = SpreadsheetApp.openById(SPREADSHEET_ID);
+    var sheet = ss.getSheetByName(e.parameter.sheet);
+    if (!sheet) sheet = ss.insertSheet(e.parameter.sheet);
+    var row = JSON.parse(decodeURIComponent(e.parameter.row || "[]"));
+    sheet.appendRow(row);
+    return ContentService.createTextOutput(JSON.stringify({ ok: true }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
   if (e.parameter.action === "sync_consultazioni") {
     syncRichiesteToConsultazioni();
     return ContentService.createTextOutput(JSON.stringify({ ok: true }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+  if (e.parameter.action === "clean_consultazioni") {
+    var result = cleanConsultazioni();
+    return ContentService.createTextOutput(JSON.stringify(result))
       .setMimeType(ContentService.MimeType.JSON);
   }
   if (e.parameter.action === "update_row") {
@@ -161,7 +175,7 @@ function syncRichiesteToConsultazioni() {
     var cData = cSheet.getDataRange().getValues();
     for (var j = 1; j < cData.length; j++) {
       var d = cData[j][1];
-      var dStr = d instanceof Date ? d.toISOString().slice(0, 10) : String(d).slice(0, 10);
+      var dStr = d instanceof Date ? Utilities.formatDate(d, Session.getScriptTimeZone(), "yyyy-MM-dd") : String(d).slice(0, 10);
       existing[cData[j][0] + "|" + dStr + "|" + cData[j][2]] = true;
     }
   }
@@ -181,6 +195,33 @@ function syncRichiesteToConsultazioni() {
     cSheet.appendRow([patientId, dataStr, servizio, email]);
     existing[key] = true;
   }
+}
+
+function cleanConsultazioni() {
+  var ss = SpreadsheetApp.openById(SPREADSHEET_ID);
+  var sheet = ss.getSheetByName("Consultazioni");
+  if (!sheet || sheet.getLastRow() < 2) return { ok: true, removed: 0 };
+  var data = sheet.getDataRange().getValues();
+  var headers = data[0];
+  var rows = data.slice(1);
+  var seen = {};
+  var toKeep = [headers];
+  var removed = 0;
+  for (var i = 0; i < rows.length; i++) {
+    var row = rows[i];
+    var d = row[1];
+    var dStr = d instanceof Date ? Utilities.formatDate(d, Session.getScriptTimeZone(), "yyyy-MM-dd") : String(d).slice(0, 10);
+    var key = String(row[0]) + "|" + dStr + "|" + String(row[2]);
+    if (!seen[key]) {
+      seen[key] = true;
+      toKeep.push(row);
+    } else {
+      removed++;
+    }
+  }
+  sheet.clearContents();
+  sheet.getRange(1, 1, toKeep.length, toKeep[0].length).setValues(toKeep);
+  return { ok: true, removed: removed };
 }
 
 function doPost(e) {
