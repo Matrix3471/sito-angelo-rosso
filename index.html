@@ -759,6 +759,25 @@
       letter-spacing: -0.02em;
       margin-bottom: 4px;
     }
+    .hero-bio {
+      margin-top: 56px;
+      padding-top: 40px;
+      border-top: 1px solid var(--hair);
+    }
+    .hero-bio-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      margin-top: 20px;
+    }
+    .hero-bio p {
+      font-size: 0.97rem;
+      line-height: 1.70;
+      color: var(--ink-soft);
+      margin-top: 14px;
+    }
+    .hero-bio p:first-child { margin-top: 0; }
+    @media (max-width: 768px) { .hero-bio-inner { grid-template-columns: 1fr; gap: 24px; } }
 
     /* ECG card */
     .ecg-card {
@@ -2075,6 +2094,22 @@
           <div><span>Referto</span><strong>Cardiologo conv.</strong></div>
         </div>
       </aside>
+    </div>
+
+    <div class="container hero-bio reveal">
+      <p class="eyebrow">Chi sono</p>
+      <div class="hero-bio-inner">
+        <div>
+          <p>Mi chiamo Angelo Rosso, sono un infermiere di Francofonte.</p>
+          <p>Ho lavorato per anni in strutture residenziali, poi sempre di pi&ugrave; sul territorio, a casa delle persone. Ed &egrave; l&igrave; che ho capito qualcosa che conoscevo gi&agrave;, ma che da vicino pesa diversamente: c&rsquo;&egrave; chi aspetta sei mesi per un ECG, chi rimanda una medicazione perch&eacute; organizzarsi &egrave; complicato, chi lascia perdere un controllo che invece non andrebbe rimandato.</p>
+          <p>Non &egrave; sfortuna. &Egrave; quello che succede quando il servizio pubblico si ritira dal territorio e le persone restano a gestirsi da sole.</p>
+        </div>
+        <div>
+          <p>Ho avviato questo servizio per rispondere a un bisogno semplice: che chi vive qui non debba scegliere tra aspettare mesi o rinunciare. E che non debba sobbarcarsi il costo nascosto di una mattinata persa, il carburante, il permesso al lavoro, l&rsquo;accompagnatore &mdash; per un esame che si pu&ograve; fare a casa in venti minuti.</p>
+          <p>Non voglio sostituire il servizio pubblico. Voglio stare vicino alle persone, con tariffe chiare comunicate prima dell&rsquo;appuntamento. Senza sorprese.</p>
+          <p>Sono iscritto all&rsquo;OPI (Ordine delle Professioni Infermieristiche) di Siracusa e lavoro con strumentazione professionale. Per gli Holter, ogni tracciato viene refertato da un cardiologo e il documento arriva in formato digitale entro 24&ndash;48 ore.</p>
+        </div>
+      </div>
     </div>
   </section>
 
