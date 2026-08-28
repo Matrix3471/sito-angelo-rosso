@@ -481,7 +481,7 @@
       font-size: 16.5px;
       line-height: 1.6;
       color: var(--ink);
-      background: url("Nuova cartella/mano.jpg") center / cover fixed no-repeat;
+      background: url("assets/mano.jpg") center / cover fixed no-repeat;
       -webkit-font-smoothing: antialiased;
       text-rendering: optimizeLegibility;
       overflow-x: clip;
@@ -491,7 +491,7 @@
     /* ─── Chiaroscuro "pagina" sui bordi laterali (solo desktop) ─── */
     @media (min-width: 900px) {
       body {
-        background: url("Nuova cartella/mano.jpg") center / cover fixed no-repeat;
+        background: url("assets/mano.jpg") center / cover fixed no-repeat;
       }
     }
 
@@ -1559,6 +1559,11 @@
       transition: opacity 0.15s;
     }
     .chat-send:hover { opacity: 0.85; }
+    .chat-msg.bot.typing { display:flex; gap:5px; align-items:center; min-height:38px; }
+    .chat-msg.bot.typing span { width:7px; height:7px; border-radius:50%; background:var(--muted); animation:blink 1.2s ease-in-out infinite; }
+    .chat-msg.bot.typing span:nth-child(2) { animation-delay:.2s; }
+    .chat-msg.bot.typing span:nth-child(3) { animation-delay:.4s; }
+    @keyframes blink { 0%,60%,100%{opacity:.3;transform:scale(.85)} 30%{opacity:1;transform:scale(1)} }
     .chat-summary {
       padding: 13px 14px;
       background: var(--bg-warm);
@@ -2071,7 +2076,7 @@
             Permesso lavoro, viaggio e sala d&rsquo;aspetto: il costo che non appare sul ticket
           </div>
           <div>
-            <strong>€35–65</strong>
+            <strong>€30–48</strong>
             Tariffa domiciliare completa, comunicata prima dell&rsquo;appuntamento
           </div>
         </div>
@@ -2479,13 +2484,15 @@
           </thead>
           <tbody>
             <tr class="cat"><td colspan="2">Diagnostica cardiologica</td></tr>
-            <tr><td>Elettrocardiogramma (ECG) a domicilio</td><td class="price">€35</td></tr>
-            <tr><td>Holter ECG 24h — applicazione e referto</td><td class="price">€60</td></tr>
-            <tr><td>Holter pressorio 24h (ABPM)</td><td class="price">€65</td></tr>
+            <tr><td>Elettrocardiogramma (ECG) a domicilio</td><td class="price">€30</td></tr>
+            <tr><td>Holter ECG 24h — applicazione e referto</td><td class="price">€48</td></tr>
+            <tr><td>Holter pressorio 24h (ABPM)</td><td class="price">€42</td></tr>
             <tr class="cat"><td colspan="2">Assistenza infermieristica</td></tr>
             <tr><td>Visita infermieristica domiciliare</td><td class="price">€35</td></tr>
-            <tr><td>Medicazione semplice o avanzata</td><td class="price">€25</td></tr>
-            <tr><td>Iniezione intramuscolare o prelievo</td><td class="price">€20</td></tr>
+            <tr><td>Medicazione semplice</td><td class="price">€13</td></tr>
+            <tr><td>Medicazione complessa</td><td class="price">€20</td></tr>
+            <tr><td>Iniezione intramuscolare</td><td class="price">€8</td></tr>
+            <tr><td>Prelievo ematico</td><td class="price">€10</td></tr>
           </tbody>
         </table>
       </div>
@@ -2736,14 +2743,14 @@
 <div class="chat-panel" id="chat-panel" role="dialog" aria-label="Assistente">
   <div class="chat-head">
     <div>
-      <span class="kicker">Assistente virtuale automatico</span>
-      <strong>Come posso aiutarti?</strong>
-      <p>Informazioni e prenotazioni — lun–sab 9–13 e 15–18.<br><small style="opacity:.7">Stai interagendo con un sistema automatizzato, non con un operatore umano (AI Act art. 50).</small></p>
+      <span class="kicker">Assistente virtuale • Sofia</span>
+      <strong>Come posso aiutarLa?</strong>
+      <p>Informazioni e prenotazioni — lun–sab 8–12 e 15–19.<br><small style="opacity:.7">Stai interagendo con un sistema automatizzato, non con un operatore umano (AI Act art. 50).</small></p>
     </div>
     <button class="chat-close" id="chat-close" aria-label="Chiudi">×</button>
   </div>
   <div class="chat-body" id="chat-body">
-    <div class="chat-msg bot">Ciao! Posso darti informazioni su <strong>ECG</strong>, <strong>Holter</strong> e assistenza, oppure prepararti una richiesta di prenotazione. Scegli un argomento o scrivi qui sotto:</div>
+    <div class="chat-msg bot" id="sofia-welcome">Buongiorno! Sono Sofia, l'assistente virtuale di Angelo Rosso.<br>Posso darLe informazioni su <strong>ECG</strong>, <strong>Holter</strong> e assistenza infermieristica, oppure aiutarLa a prenotare. Come posso esserLe utile?</div>
   </div>
   <div class="chat-chips" id="chat-chips"></div>
   <form class="chat-form" id="chat-form" autocomplete="off">
@@ -3048,7 +3055,7 @@
     function answerHolterEcg() { addBot("L'Holter ECG registra il ritmo del cuore per 24 ore o pi\u00f9. Utile per palpitazioni, battiti irregolari o episodi da valutare che non compaiono durante un ECG breve."); addBot("Vuoi richiedere questo servizio a domicilio? Scrivi 'prenotare' oppure clicca il pulsante."); }
     function answerHolterPressorio() { addBot("L'Holter pressorio misura la pressione pi\u00f9 volte durante giorno e notte. Aiuta il medico a capire l'andamento della pressione senza basarsi su una sola misurazione."); addBot("Vuoi richiedere questo servizio a domicilio? Scrivi 'prenotare' oppure clicca il pulsante."); }
     function answerAssistance() { addBot("L'assistenza infermieristica a domicilio pu\u00f2 includere: medicazioni, parametri vitali, iniezioni quando appropriate, gestione catetere, stomie, glicemia e supporto post-dimissione.\nAlcune prestazioni richiedono prescrizione o indicazione medica."); addBot("Vuoi richiedere assistenza a domicilio? Scrivi 'prenotare' oppure clicca il pulsante."); }
-    function answerPrices() { addBot("Tariffe:\n- ECG: \u20ac35\n- Holter ECG: \u20ac60\n- Holter pressorio: \u20ac65\n- Visita infermieristica: \u20ac35\n- Medicazione: \u20ac25\n- Iniezione/prelievo: \u20ac20\n\nTariffe private note prima dell'appuntamento."); }
+    function answerPrices() { addBot("Tariffe:\n- ECG: \u20ac30\n- Holter ECG: \u20ac48\n- Holter pressorio: \u20ac42\n- Visita infermieristica: \u20ac35\n- Medicazione semplice: \u20ac13\n- Medicazione complessa: \u20ac20\n- Iniezione intramuscolare: \u20ac8\n- Prelievo ematico: \u20ac10\n\nTariffe private note prima dell'appuntamento."); }
     function answerZone() { addBot("Operativit\u00e0 su Francofonte, Lentini e Carlentini. Per altri comuni verifica direttamente via WhatsApp."); }
     function answerTimings() { addBot("Orario operativo: luned\u00ec\u2013sabato, 9:00\u201313:00 e 15:00\u201318:00.\nI tempi esatti si confermano al primo contatto, in base alla prestazione, al comune e alla disponibilit\u00e0."); }
     function answerPrescription() { addBot("Alcune prestazioni richiedono prescrizione o indicazione medica. Se non sai se serve, scrivi 'non so': verr\u00e0 verificato al contatto diretto."); }
@@ -3191,29 +3198,148 @@
       answerFallback();
     }
 
+    // \u2500\u2500 Sofia AI engine \u2500\u2500
+    const SOFIA_URL = "https://script.google.com/macros/s/AKfycbwikSK21Dzv5sQyyAWvRinmAdoqdd8d2c_4S7qDz2xBIfJmDEgWOrtgA3SAwNj8vrr4/exec";
+
+    let sofiaHistory = [];
+    let clientEmail  = localStorage.getItem("sofia_email") || "";
+
+    function escHtml(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+    function scrollBottom(){ body.scrollTop = body.scrollHeight; }
+
+    function addBotHtml(html){
+      const d = document.createElement("div");
+      d.className = "chat-msg bot";
+      d.innerHTML = html;
+      body.appendChild(d);
+      scrollBottom();
+    }
+    function addUser(txt){
+      const d = document.createElement("div");
+      d.className = "chat-msg user";
+      d.textContent = txt;
+      body.appendChild(d);
+      scrollBottom();
+    }
+    function showTyping(){
+      const d = document.createElement("div");
+      d.className = "chat-msg bot typing";
+      d.id = "sofia-typing";
+      d.innerHTML = "<span></span><span></span><span></span>";
+      body.appendChild(d);
+      scrollBottom();
+    }
+    function removeTyping(){
+      const t = document.getElementById("sofia-typing");
+      if(t) t.remove();
+    }
+
+    const QUICK_CHIPS = [
+      { label: "Prenota ECG",            msg: "Vorrei prenotare un ECG domiciliare" },
+      { label: "Prenota Holter",          msg: "Vorrei prenotare un Holter" },
+      { label: "Assistenza infermieristica", msg: "Ho bisogno di assistenza infermieristica" },
+      { label: "Prezzi",                  msg: "Quali sono i prezzi?" },
+      { label: "Orari e zona",            msg: "Quali sono gli orari e la zona di servizio?" },
+    ];
+
+    function renderSofiaChips(){
+      chips.innerHTML = "";
+      QUICK_CHIPS.forEach(c => {
+        const b = document.createElement("button");
+        b.className = "chat-chip";
+        b.textContent = c.label;
+        b.dataset.msg = c.msg;
+        chips.appendChild(b);
+      });
+    }
+
+    function sendToSheet(data){
+      if(!SOFIA_URL || SOFIA_URL.includes("SOFIA_DEPLOYMENT_ID")) return;
+      const sheetUrl = typeof SHEET_URL !== "undefined" ? SHEET_URL : "";
+      if(!sheetUrl) return;
+      const payload = Object.assign({}, data, { type: "booking" });
+      fetch(sheetUrl + "?payload=" + encodeURIComponent(JSON.stringify(payload))).catch(()=>{});
+    }
+
+    function addSummaryCard(d){
+      if(d.email) localStorage.setItem("sofia_email", d.email);
+      const name    = escHtml(d.name    || "");
+      const service = escHtml(d.service || "");
+      const phone   = escHtml(d.phone   || "");
+      const waUrl   = "https://wa.me/" + whatsappNumber + "?text=" +
+        encodeURIComponent("Prenotazione: " + service + " - " + name + " - tel: " + phone);
+      addBotHtml(
+        '<div class="chat-summary">' +
+        '<strong>Riepilogo prenotazione</strong><br>' +
+        (name    ? "Nome: "     + name    + "<br>" : "") +
+        (service ? "Servizio: " + service + "<br>" : "") +
+        (phone   ? "Tel: "      + phone            : "") +
+        '</div>' +
+        '<br>Scelga data e orario, oppure ci contatti su WhatsApp.<br>' +
+        '<a href="' + calComUrl + '" target="_blank" rel="noopener" ' +
+        'style="display:inline-block;margin-top:8px;margin-right:6px;padding:8px 16px;background:var(--accent);color:#fff;border-radius:20px;text-decoration:none;font-size:.88rem">' +
+        'Scegli data e orario</a>' +
+        '<a href="' + waUrl + '" target="_blank" rel="noopener" ' +
+        'style="display:inline-block;margin-top:8px;padding:8px 16px;background:transparent;color:var(--accent);border:1.5px solid var(--accent);border-radius:20px;text-decoration:none;font-size:.88rem">' +
+        'WhatsApp</a>'
+      );
+      sendToSheet(d);
+    }
+
+    async function askSofia(userMessage){
+      showTyping();
+      try {
+        const res = await fetch(SOFIA_URL, {
+          method:  "POST",
+          headers: { "Content-Type": "text/plain" },
+          body:    JSON.stringify({ message: userMessage, history: sofiaHistory, email: clientEmail })
+        });
+        const json = await res.json();
+        removeTyping();
+        if(json.error){ addBotHtml("Errore: " + escHtml(json.error)); return; }
+
+        const raw   = json.reply || "";
+        const match = raw.match(/BOOKING_COMPLETE:(\{[\s\S]*\})\s*$/);
+        if(match){
+          const text = raw.slice(0, match.index).trim();
+          if(text) addBotHtml(text.replace(/\n/g,"<br>"));
+          try { addSummaryCard(JSON.parse(match[1])); } catch(e){ addBotHtml(escHtml(raw)); }
+          sofiaHistory = [];
+        } else {
+          addBotHtml(raw.replace(/\n/g,"<br>"));
+          sofiaHistory.push({ role:"user",      content: userMessage });
+          sofiaHistory.push({ role:"assistant", content: raw         });
+          if(sofiaHistory.length > 20) sofiaHistory = sofiaHistory.slice(-20);
+        }
+      } catch(err){
+        removeTyping();
+        addBotHtml("Connessione non riuscita. Riprovi o scriva su <a href='https://wa.me/" + whatsappNumber + "' target='_blank'>WhatsApp</a>.");
+      }
+    }
+
     // \u2500\u2500 init \u2500\u2500
-    state.booking = createEmptyBooking();
-    renderChips("idle");
+    renderSofiaChips();
 
     fab.addEventListener('click', () => panel.classList.toggle('open'));
     closeBtn.addEventListener('click', () => panel.classList.remove('open'));
     document.addEventListener('keydown', e => { if(e.key==="Escape") document.getElementById('privacy-modal').hidden=true; });
 
     chips.addEventListener('click', (e) => {
-      const btn=e.target.closest('.chat-chip');
+      const btn = e.target.closest('.chat-chip');
       if(!btn) return;
-      const label=btn.textContent.trim();
-      if(label==="Leggi informativa"){document.getElementById('privacy-modal').hidden=false;return;}
-      setTimeout(()=>input.focus(),80);
-      processInput(label);
+      const msg = btn.dataset.msg || btn.textContent.trim();
+      addUser(msg);
+      setTimeout(()=>input.focus(), 80);
+      askSofia(msg);
     });
 
     form.addEventListener('submit', (e) => {
       e.preventDefault();
-      const val=input.value.trim();
+      const val = input.value.trim();
       if(!val) return;
-      input.value="";
-      processInput(val);
+      input.value = "";
+      addUser(val);
+      askSofia(val);
     });
   })();
 
