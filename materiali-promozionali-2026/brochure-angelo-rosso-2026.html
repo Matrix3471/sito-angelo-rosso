@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brochure 2026 - Angelo Rosso Infermiere</title>
+  <style>
+    :root {
+      --bg: #f6f3ec;
+      --bg-warm: #efeae0;
+      --surface: rgba(255,255,255,0.88);
+      --ink: #1a1f2e;
+      --ink-soft: #2a3142;
+      --muted: #5a6275;
+      --deep: #071827;
+      --deep-2: #102436;
+      --accent: #b85a2a;
+      --accent-ink: #8a3d18;
+      --petrol: #1f6b78;
+      --green: #245a28;
+      --hair: rgba(26,31,46,0.14);
+      --photo-bg: #f6f3ec;
+      --font-display: "Newsreader", Georgia, serif;
+      --font-body: "Inter Tight", "Segoe UI", Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: #c8c8c8;
+      color: var(--ink);
+      font-family: var(--font-body);
+      line-height: 1.45;
+    }
+
+    .sheet {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 18px auto;
+      background: var(--bg);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 18px 46px rgba(0,0,0,0.20);
+      page-break-after: always;
+    }
+
+    .sheet::before,
+    .sheet::after {
+      content: "";
+      display: none;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 18mm;
+      z-index: 1;
+      opacity: 0.22;
+      background-color: transparent;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 82 230'%3E%3Crect x='38' y='22' width='7' height='180' rx='4' fill='%23c07932'/%3E%3Cpath d='M44 45 C68 64 18 82 40 104 C64 128 18 146 40 172' fill='none' stroke='%230b1c11' stroke-width='12' stroke-linecap='round'/%3E%3Cpath d='M44 45 C68 64 18 82 40 104 C64 128 18 146 40 172' fill='none' stroke='%23245a28' stroke-width='8' stroke-linecap='round'/%3E%3Ccircle cx='45' cy='40' r='8' fill='%23245a28'/%3E%3C/svg%3E");
+      background-repeat: repeat-y;
+      background-size: 15mm auto;
+      background-position: center top;
+    }
+
+    .sheet::before { left: 0; }
+    .sheet::after { right: 0; transform: scaleX(-1); }
+
+    .content {
+      position: relative;
+      z-index: 2;
+      min-height: 297mm;
+      padding: 14mm 24mm;
+    }
+
+    .cover {
+      background-image: url("../assets/brand/mano.jpg");
+      background-color: #071827;
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      color: #fff;
+    }
+
+    .cover .content {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .brand-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 18px;
+      border-bottom: 1px solid rgba(255,255,255,0.22);
+      padding-bottom: 14px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .mark {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: var(--deep);
+      color: var(--bg);
+      font-family: var(--font-display);
+      font-size: 25px;
+      font-weight: 700;
+    }
+
+    .brand strong {
+      display: block;
+      color: #fff;
+      font-size: 22px;
+    }
+
+    .brand span,
+    .meta {
+      display: block;
+      color: rgba(255,255,255,0.65);
+      font-size: 13px;
+    }
+
+    .meta {
+      text-align: right;
+      line-height: 1.45;
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 0;
+      font-family: var(--font-display);
+      line-height: 1.04;
+      letter-spacing: -0.025em;
+      color: inherit;
+    }
+
+    h1 {
+      max-width: 690px;
+      font-size: 62px;
+    }
+
+    h2 {
+      font-size: 34px;
+      margin-bottom: 10px;
+    }
+
+    h3 {
+      font-size: 21px;
+      margin-bottom: 6px;
+    }
+
+    p {
+      margin: 0;
+      color: rgba(255,255,255,0.80);
+      font-size: 15px;
+    }
+
+    .cover-lead {
+      max-width: 650px;
+      color: rgba(255,255,255,0.92);
+      font-size: 23px;
+      line-height: 1.38;
+    }
+
+    .hero-block {
+      margin-top: 16mm;
+      display: grid;
+      gap: 20px;
+    }
+
+    .cta-card {
+      width: min(100%, 610px);
+      margin-top: auto;
+      background: rgba(255,255,255,0.88);
+      color: var(--ink);
+      border-radius: 18px;
+      padding: 20px;
+      display: grid;
+      grid-template-columns: 1fr 110px;
+      gap: 18px;
+      align-items: center;
+      border: 1px solid rgba(255,255,255,0.55);
+    }
+
+    .cta-card span {
+      color: var(--accent-ink);
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .cta-card strong {
+      display: block;
+      font-size: 40px;
+      line-height: 1;
+      letter-spacing: -0.03em;
+      color: var(--ink);
+      margin: 4px 0 8px;
+    }
+
+    .cta-card p {
+      color: var(--ink-soft);
+      font-size: 14px;
+    }
+
+    .cta-card .site-url {
+      display: block;
+      margin-top: 6px;
+      color: var(--ink);
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1.25;
+      overflow-wrap: anywhere;
+    }
+
+    .qr {
+      width: 110px;
+      min-height: 110px;
+      border: 0;
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 10px;
+      padding: 7px;
+      background: #fff;
+      text-decoration: none;
+    }
+
+    .qr img {
+      width: 82px;
+      height: 82px;
+      display: block;
+    }
+
+    .qr .qr-label {
+      color: var(--ink-soft);
+      font-size: 9px;
+      font-weight: 700;
+      line-height: 1.1;
+    }
+
+    .trust-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .trust {
+      background: rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 14px;
+      padding: 13px;
+      color: rgba(255,255,255,0.78);
+      font-size: 12px;
+    }
+
+    .trust strong {
+      display: block;
+      color: #fff;
+      font-size: 18px;
+      margin-bottom: 3px;
+    }
+
+    .info .content {
+      background-image: url("../assets/brand/mano.jpg");
+      background-color: #071827;
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      color: #fff;
+    }
+
+    .info h2,
+    .info h3 {
+      color: #fff;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    .panel {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 16px;
+      padding: 16px;
+    }
+
+    .panel.dark {
+      background: rgba(7,24,39,0.80);
+      border-color: rgba(255,255,255,0.12);
+    }
+
+    .panel.dark h2,
+    .panel.dark p,
+    .panel.dark li {
+      color: #fff;
+    }
+
+    .panel.dark p,
+    .panel.dark li {
+      color: rgba(255,255,255,0.78);
+    }
+
+    .list {
+      margin: 10px 0 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 7px;
+    }
+
+    .list li {
+      position: relative;
+      padding-left: 17px;
+      color: rgba(255,255,255,0.88);
+      font-size: 13.8px;
+    }
+
+    .list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.62em;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    .services {
+      margin-top: 14px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .service {
+      border-top: 1px solid rgba(255,255,255,0.15);
+      padding-top: 10px;
+    }
+
+    .service h3 {
+      color: #f4a060;
+      font-size: 18px;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .step {
+      border-radius: 12px;
+      padding: 10px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.14);
+    }
+
+    .step b {
+      display: block;
+      color: var(--accent);
+      font-size: 17px;
+      margin-bottom: 3px;
+    }
+
+    .step span {
+      color: rgba(255,255,255,0.82);
+      font-size: 11.6px;
+      line-height: 1.32;
+    }
+
+    .note {
+      margin-top: 13px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      background: rgba(184,90,42,0.22);
+      border: 1px solid rgba(184,90,42,0.42);
+      color: #f4b080;
+      font-size: 12px;
+    }
+
+    .small {
+      margin-top: 7px;
+      font-size: 11.5px;
+      color: rgba(255,255,255,0.50);
+    }
+
+    @media print {
+      body { background: #fff; }
+      .sheet {
+        margin: 0;
+        width: 210mm;
+        min-height: 297mm;
+        box-shadow: none;
+      }
+      @page { size: A4; margin: 0; }
+    }
+  </style>
+</head>
+<body>
+  <section class="sheet cover">
+    <div class="content">
+      <header class="brand-row">
+        <div class="brand">
+          <div class="mark">AR</div>
+          <div>
+            <strong>Angelo Rosso</strong>
+            <span>Infermiere domiciliare · OPI Siracusa n. 2609</span>
+          </div>
+        </div>
+        <div class="meta">Francofonte (SR)<br>Servizi privati a domicilio</div>
+      </header>
+
+      <div class="hero-block">
+        <h1>Prestazioni sanitarie a domicilio, organizzate con chiarezza.</h1>
+        <p class="cover-lead">ECG, Holter, medicazioni e assistenza infermieristica privata a domicilio. Un contatto diretto per capire cosa serve, come organizzarlo e quali costi valutare prima di confermare.</p>
+      </div>
+
+      <div class="trust-row">
+        <div class="trust"><strong>A domicilio</strong> La prestazione viene organizzata a casa, riducendo spostamenti e attese logistiche.</div>
+        <div class="trust"><strong>Contatto diretto</strong> Parli con il professionista, spieghi il bisogno e ricevi indicazioni pratiche.</div>
+        <div class="trust"><strong>Prima chiarezza</strong> Modalità, disponibilità e tariffa vengono chiarite prima di confermare.</div>
+      </div>
+
+      <div class="cta-card">
+        <div>
+          <span>WhatsApp e telefono</span>
+          <strong>331 567 7922</strong>
+          <p>Scrivi o chiama indicando servizio richiesto, comune e preferenze organizzative. Modalità e tariffa vengono chiarite prima di confermare.<b class="site-url">angelo-infermiere.github.io/TelemedicinaFrancofonte/</b></p>
+        </div>
+        <a class="qr" href="https://angelo-infermiere.github.io/TelemedicinaFrancofonte/" aria-label="Apri il sito Angelo Rosso">
+          <img src="assets/qrcode-sito-angelo-rosso.svg" alt="QR code per aprire il sito Angelo Rosso">
+          <span class="qr-label">Scansiona il sito</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sheet info">
+    <div class="content">
+      <div class="grid-2">
+        <article class="panel">
+          <h2>Chi sono</h2>
+          <p>Mi chiamo Angelo Rosso, sono un infermiere di Francofonte, iscritto all'OPI di Siracusa n. 2609. Lavoro a domicilio con persone anziane, famiglie e caregiver che hanno bisogno di organizzare una prestazione sanitaria in modo semplice e tracciabile.</p>
+        </article>
+        <article class="panel dark">
+          <h2>Chi sceglie questo servizio</h2>
+          <ul class="list">
+            <li>Famiglie che devono organizzare una prestazione senza spostare una persona anziana.</li>
+            <li>Caregiver che cercano un contatto diretto e istruzioni pratiche prima dell'appuntamento.</li>
+            <li>Persone che preferiscono valutare in anticipo modalità, tempi organizzativi e tariffa.</li>
+            <li>Chi vuole un servizio privato domiciliare chiaro, senza passaggi inutili.</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="services">
+        <div class="service">
+          <h3>Assistenza infermieristica</h3>
+          <p>Medicazioni, iniezioni, prelievi, controllo parametri e supporto infermieristico programmato, quando appropriato.</p>
+        </div>
+        <div class="service">
+          <h3>ECG a domicilio</h3>
+          <p>Registrazione del tracciato direttamente a domicilio, con strumentazione dedicata e gestione digitale dei documenti quando prevista.</p>
+        </div>
+        <div class="service">
+          <h3>Holter ECG</h3>
+          <p>Applicazione e rimozione dell'Holter organizzate a domicilio, con indicazioni pratiche prima della prestazione.</p>
+        </div>
+        <div class="service">
+          <h3>Holter pressorio</h3>
+          <p>Applicazione del dispositivo per il monitoraggio pressorio, con istruzioni chiare su uso, tempi e riconsegna.</p>
+        </div>
+      </div>
+
+      <div class="grid-2" style="margin-top:14px">
+        <article class="panel">
+          <h2>Perché a domicilio</h2>
+          <p>Per molte famiglie il problema non è solo prenotare una prestazione, ma organizzare spostamenti, accompagnatore, tempi e documenti. Il domicilio riduce la parte più faticosa: il servizio viene concordato direttamente, con informazioni chiare prima dell'appuntamento.</p>
+        </article>
+        <article class="panel">
+          <h2>Telemedicina</h2>
+          <p>Quando previsto, tracciati e documenti vengono gestiti in formato digitale. La prestazione infermieristica resta distinta dalla valutazione medica e non sostituisce il medico curante o lo specialista.</p>
+        </article>
+      </div>
+
+      <div style="margin-top:14px">
+        <h2>Come funziona</h2>
+        <div class="steps">
+          <div class="step"><b>1</b><span>Scrivi o chiama.</span></div>
+          <div class="step"><b>2</b><span>Indichi servizio, comune e informazioni utili.</span></div>
+          <div class="step"><b>3</b><span>Chiarisci modalità, disponibilità e tariffa.</span></div>
+          <div class="step"><b>4</b><span>Concordi l'appuntamento a domicilio.</span></div>
+          <div class="step"><b>5</b><span>Ricevi indicazioni e documenti previsti.</span></div>
+        </div>
+      </div>
+
+      <p class="note"><strong>Nota sanitaria.</strong> Le prestazioni non sostituiscono il medico curante, lo specialista o il Pronto Soccorso. In caso di dolore al petto, difficoltà a respirare, svenimento, sintomi improvvisi o situazione urgente, chiamare subito 112 o 118.</p>
+      <p class="small">WhatsApp e telefono: 331 567 7922 · Sito: angelo-infermiere.github.io/TelemedicinaFrancofonte/ · Email: angelo.rosso073@gmail.com · Via Enrico Gaudioso 20, 96015 Francofonte (SR)</p>
+    </div>
+  </section>
+</body>
+</html>

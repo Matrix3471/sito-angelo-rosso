@@ -1,6 +1,7 @@
 # AGENTS.md — Sito Angelo Rosso
 
-**Repo GitHub**: https://github.com/Matrix3471/sito-angelo-rosso (privato)
+**Repo GitHub**: https://github.com/angelo-infermiere/TelemedicinaFrancofonte (pubblico)
+**Sito live**: https://angelo-infermiere.github.io/TelemedicinaFrancofonte/ (GitHub Pages, branch `master`, root `/`)
 
 > Contesto per agenti AI (Codex, Claude Code, ecc.) che lavorano su questo progetto.
 
@@ -13,8 +14,8 @@ Area operativa: **Francofonte, Lentini, Carlentini** (SR, Sicilia).
 ## Stack tecnico
 
 - **100% statico**: HTML + CSS + JS vanilla. Niente framework, niente backend, niente Node.
-- `landing-onefile.html` — homepage definitiva (file principale, ~169KB)
-- `index.html` — redirect a `landing-onefile.html`
+- `index.html` — homepage definitiva, servita da GitHub Pages come sito in produzione (file principale, self-contained)
+- `landing-onefile.BACKUP.html` — vecchia versione, non più in uso (index.html non fa più redirect, contiene la pagina intera)
 - `styles.css` — fogli stile separati (alcune pagine li usano, landing-onefile è self-contained)
 - CSV locali: `Pazienti.csv`, `consultazioni.csv`, `bilanci.csv`, `newsletter.csv`, `chatbot_interactions.csv`, `richieste_contatto.csv`, `agenda_disponibilita.csv`
 - Mirror Excel: cartella `excel/` (stessi dati in .xlsx)
@@ -24,8 +25,7 @@ Area operativa: **Francofonte, Lentini, Carlentini** (SR, Sicilia).
 
 | File | Ruolo |
 |------|-------|
-| `landing-onefile.html` | Homepage definitiva — tutto inline (CSS + JS + HTML) |
-| `index.html` | Redirect a landing-onefile.html |
+| `index.html` | Homepage definitiva IN PRODUZIONE — tutto inline (CSS + JS + HTML) |
 | `dashboard-fidelizzazione.html` | Dashboard che legge i CSV locali |
 | `brochure-definitiva.html` | Brochure stampabile servizi |
 | `cartello-parete-definitivo.html` | Cartello A3 per studi/farmacie |
@@ -43,20 +43,17 @@ Area operativa: **Francofonte, Lentini, Carlentini** (SR, Sicilia).
 - Holter cardiaco a domicilio
 - Assistenza infermieristica: visita domiciliare, medicazione, iniezione/prelievo
 
-## Stato attuale (2026-05-07)
+## Stato attuale (2026-08-27)
 
-- Chatbot rule-based funzionante (dentro `landing-onefile.html`) — non AI
-- `airtableRequestFormUrl` — variabile JS presente nel codice, da compilare con URL form reale
-- Airtable: struttura documentata in `docs/airtable-raccolta-dati.md`, **non ancora collegata**
-- Sito **non ancora pubblicato** su dominio/hosting
+- Sito **pubblicato e live** su GitHub Pages: https://angelo-infermiere.github.io/TelemedicinaFrancofonte/
+- `index.html` = unico file servito in produzione (branch `master`, root `/`)
+- Altri file HTML in root (`landing-v3.html`, `Senza titoloCodice.html`, `mpiglr53-...html`, `landing-onefile.BACKUP.html`, `dashboard-fidelizzazione.html`, file in `materiali-promozionali-2026/`) sono bozze/backup/materiali stampa, NON collegati alla build Pages
 - Dashboard fidelizzazione creata ma non testata su dati reali
 
 ## Prossimi step prioritari
 
-1. Collegare Airtable form (`airtableRequestFormUrl` → URL form Airtable)
-2. Migliorare chatbot: riconoscimento sintomi urgenti + raccolta dati → WhatsApp
-3. Pubblicare su hosting statico (Netlify/Vercel/GitHub Pages) + dominio
-4. Validare promesse operative nel copy (tempi risposta, prezzi) prima del lancio
+1. Validare promesse operative nel copy (tempi risposta, prezzi) prima di ogni modifica
+2. Ripulire root dai file HTML non più in uso (bozze/backup) per evitare confusione su quale sia il file live
 
 ## Regole OBBLIGATORIE per ogni modifica
 
@@ -70,7 +67,7 @@ Area operativa: **Francofonte, Lentini, Carlentini** (SR, Sicilia).
 ## Convenzioni codice
 
 - JS vanilla: no import, no require, no bundler
-- CSS inline in `landing-onefile.html` — non separare in file esterno
+- CSS inline in `index.html` — non separare in file esterno
 - Variabili JS configurabili raccolte in blocco `// CONFIG` all'inizio degli script
 - Niente dipendenze npm — file singoli autocontenuti
 - Commenti in italiano

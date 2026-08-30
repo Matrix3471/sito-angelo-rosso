@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Locandina Ambulatorio Medico 2026 - Angelo Rosso</title>
+  <style>
+    :root {
+      --bg: #f6f3ec;
+      --surface: #ffffff;
+      --ink: #1a1f2e;
+      --muted: #5a6275;
+      --hair: rgba(26, 31, 46, 0.14);
+      --accent: #b85a2a;
+      --accent-ink: #8a3d18;
+      --petrol: #1f6b78;
+      --petrol-soft: rgba(31, 107, 120, 0.10);
+      --font-display: "Newsreader", Georgia, serif;
+      --font-body: "Inter Tight", "Segoe UI", Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: #d8d8d8;
+      color: var(--ink);
+      font-family: var(--font-body);
+    }
+
+    .poster {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 18px auto;
+      padding: 18mm;
+      background:
+        radial-gradient(circle at 100% 0%, rgba(31, 107, 120, 0.18), transparent 34%),
+        linear-gradient(180deg, #f6f3ec 0%, #efeae0 100%);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.16);
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+    }
+
+    .top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 18px;
+      border-bottom: 1px solid var(--hair);
+      padding-bottom: 14px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .mark {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: var(--ink);
+      color: var(--bg);
+      font-family: var(--font-display);
+      font-size: 25px;
+      font-weight: 700;
+    }
+
+    .brand strong {
+      display: block;
+      font-size: 21px;
+    }
+
+    .brand span,
+    .area {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .area {
+      text-align: right;
+      line-height: 1.4;
+    }
+
+    h1,
+    h2 {
+      font-family: var(--font-display);
+      letter-spacing: -0.025em;
+      margin: 0;
+      line-height: 1.04;
+      color: var(--ink);
+    }
+
+    h1 {
+      font-size: 62px;
+      max-width: 690px;
+    }
+
+    h2 {
+      font-size: 30px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.45;
+    }
+
+    .lead {
+      font-size: 24px;
+      color: #2a3142;
+      max-width: 690px;
+    }
+
+    .services {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .service {
+      background: rgba(255,255,255,0.72);
+      border: 1px solid var(--hair);
+      border-radius: 16px;
+      padding: 18px;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .benefits {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .box {
+      border-radius: 18px;
+      padding: 18px;
+      border: 1px solid var(--hair);
+      background: rgba(255,255,255,0.78);
+    }
+
+    .box.medico {
+      background: var(--petrol-soft);
+      border-color: rgba(31, 107, 120, 0.25);
+    }
+
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 10px;
+    }
+
+    li {
+      color: #2a3142;
+      font-size: 18px;
+      padding-left: 22px;
+      position: relative;
+    }
+
+    li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.58em;
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+
+    .cta {
+      margin-top: auto;
+      background: var(--ink);
+      color: #fff;
+      border-radius: 22px;
+      padding: 22px;
+      display: grid;
+      grid-template-columns: 1fr 110px;
+      gap: 18px;
+      align-items: center;
+    }
+
+    .cta span {
+      display: block;
+      color: rgba(255,255,255,0.74);
+      font-size: 17px;
+      margin-bottom: 3px;
+    }
+
+    .cta strong {
+      display: block;
+      color: #fff;
+      font-size: 48px;
+      letter-spacing: -0.025em;
+    }
+
+    .cta small {
+      display: block;
+      color: rgba(255,255,255,0.72);
+      font-size: 14px;
+      margin-top: 6px;
+    }
+
+    .qr {
+      width: 110px;
+      height: 110px;
+      border: 2px dashed rgba(255,255,255,0.50);
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      color: #fff;
+      font-size: 11px;
+      padding: 10px;
+    }
+
+    .note {
+      font-size: 13px;
+      color: var(--accent-ink);
+      background: rgba(184, 90, 42, 0.10);
+      border: 1px solid rgba(184, 90, 42, 0.24);
+      border-radius: 14px;
+      padding: 12px 14px;
+    }
+
+    @media print {
+      body { background: #fff; }
+      .poster {
+        margin: 0;
+        width: 210mm;
+        min-height: 297mm;
+        box-shadow: none;
+      }
+      @page { size: A4; margin: 0; }
+    }
+  </style>
+</head>
+<body>
+  <main class="poster">
+    <header class="top">
+      <div class="brand">
+        <div class="mark">AR</div>
+        <div>
+          <strong>Angelo Rosso</strong>
+          <span>Infermiere · OPI Siracusa n. 2609</span>
+        </div>
+      </div>
+      <div class="area">Francofonte<br>Lentini<br>Carlentini</div>
+    </header>
+
+    <section>
+      <h1>ECG, Holter e assistenza infermieristica a domicilio.</h1>
+      <p class="lead">Una soluzione pratica per pazienti che hanno difficoltà a spostarsi o devono organizzare una prestazione programmata senza lunghe attese e viaggi inutili.</p>
+    </section>
+
+    <section class="services" aria-label="Servizi principali">
+      <div class="service">ECG a domicilio</div>
+      <div class="service">Holter ECG</div>
+      <div class="service">Holter pressorio</div>
+      <div class="service">Assistenza infermieristica</div>
+      <div class="service">Medicazioni</div>
+      <div class="service">Parametri vitali</div>
+    </section>
+
+    <section class="benefits">
+      <article class="box">
+        <h2>Per il paziente</h2>
+        <ul>
+          <li>Meno spostamenti.</li>
+          <li>Meno stress organizzativo.</li>
+          <li>Servizio a casa.</li>
+          <li>Informazioni chiare prima dell'appuntamento.</li>
+        </ul>
+      </article>
+
+      <article class="box medico">
+        <h2>Per il medico</h2>
+        <p>Un riferimento domiciliare pratico per orientare il paziente quando la prestazione è appropriata e non urgente, nel rispetto delle indicazioni cliniche.</p>
+      </article>
+    </section>
+
+    <section class="cta">
+      <div>
+        <span>WhatsApp e telefono</span>
+        <strong>331 567 7922</strong>
+        <small>Scansiona il QR o invia un messaggio con servizio richiesto e comune.</small>
+      </div>
+      <div class="qr">QR WhatsApp o sito</div>
+    </section>
+
+    <p class="note"><strong>Nota sanitaria.</strong> Il servizio non sostituisce il medico curante, lo specialista o il 112/118 in caso di urgenza.</p>
+  </main>
+</body>
+</html>

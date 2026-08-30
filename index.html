@@ -1042,6 +1042,28 @@
       font-size: 1rem;
     }
 
+    /* Credito Salute SQ: logo affiancato al titolo della sezione */
+    .csq-heading-row {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+    .csq-heading-row h2 {
+      margin: 0;
+    }
+    .csq-heading-logo {
+      flex-shrink: 0;
+      width: clamp(96px, 14vw, 170px);
+      height: auto;
+    }
+    @media (max-width: 768px) {
+      .csq-heading-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+      }
+    }
+
     /* ─── Pricing table ─── */
     /* Cost reality note */
     .cost-note {
@@ -2556,6 +2578,49 @@
           <p>I dati sanitari e i referti sono trattati nel rispetto del GDPR. La trasmissione via WhatsApp o email avviene esclusivamente verso i recapiti indicati dal paziente o dal familiare di riferimento. Nessun dato viene condiviso con terzi al di fuori del cardiologo convenzionato per la refertazione degli Holter.</p>
         </div>
 
+      </div>
+    </div>
+  </section>
+
+  <!-- CREDITO SALUTE SQ -->
+  <section class="section" id="credito-salute-sq">
+    <div class="container">
+      <div class="section-heading reveal">
+        <p class="eyebrow">Credito Salute SQ</p>
+        <div class="csq-heading-row">
+          <h2>La spesa di ogni giorno pu&ograve; diventare un accesso reale alla salute.</h2>
+          <img src="assets/brand/credito-salute-sq-logo.png" alt="Credito Salute SQ" class="csq-heading-logo" width="884" height="230" loading="lazy">
+        </div>
+        <p>Un progetto pilota nato da un&rsquo;idea semplice: il valore di un sistema si misura da dove mette la persona, non da dove mette il profitto.</p>
+      </div>
+
+      <div class="hero-bio-inner reveal">
+        <div>
+          <p>Troppo spesso il criterio che decide chi accede a una cura, e quando, non &egrave; il bisogno della persona ma il ritorno che quella cura genera per qualcun altro. Chi ha meno mezzi aspetta di pi&ugrave;, rinuncia prima, si cura peggio. Non &egrave; una fatalit&agrave;: &egrave; il risultato di una logica che mette il fine economico prima dell&rsquo;essere umano.</p>
+          <p>Credito Salute SQ nasce per invertire questo ordine. Non aggiunge un ennesimo prodotto da vendere: trasforma qualcosa che gi&agrave; fai ogni giorno &mdash; fare la spesa, andare in farmacia &mdash; in un canale diretto verso la cura.</p>
+        </div>
+        <div>
+          <p>Il principio &egrave; semplice: la salute non dovrebbe essere un costo che si sottrae al resto della vita, ma qualcosa che nasce dagli stessi gesti quotidiani. Ogni euro speso vicino a casa pu&ograve; diventare un euro investito nella propria salute, invece di sparire senza lasciare nulla a chi lo ha speso.</p>
+          <p>&Egrave; un progetto piccolo, nato sul territorio, pensato per restituire centralit&agrave; alla persona in un ambito dove troppo spesso viene trattata come ultima voce di un bilancio.</p>
+        </div>
+      </div>
+
+      <div class="cost-note reveal">
+        <div>
+          <h3>Come funziona, in pratica.</h3>
+          <p>Il progetto pilota &egrave; attivo nella zona di Francofonte, in collaborazione con bar e farmacie aderenti. Nessun costo aggiuntivo: il credito nasce da spese che faresti comunque.</p>
+        </div>
+        <div>
+          <ul class="cost-list">
+            <li>Carichi lo scontrino dopo un acquisto presso un esercizio aderente</li>
+            <li>Ricevi un credito pari al 15% dell&rsquo;importo speso</li>
+            <li>Il credito &egrave; spendibile sulle prestazioni di Salute Quotidiana (es. servizi di telemedicina)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="reveal" style="text-align:center;margin-top:32px">
+        <a class="btn btn-primary btn-lg" href="https://angelorosso073-cyber.github.io/credito-salute-sq-app/" target="_blank" rel="noopener">Scopri Credito Salute SQ</a>
       </div>
     </div>
   </section>

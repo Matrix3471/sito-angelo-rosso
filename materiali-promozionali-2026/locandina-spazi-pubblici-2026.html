@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Locandina Spazi Pubblici 2026 - Angelo Rosso</title>
+  <style>
+    :root {
+      --bg: #f6f3ec;
+      --surface: rgba(255,255,255,0.90);
+      --ink: #1a1f2e;
+      --ink-soft: #2a3142;
+      --muted: #5a6275;
+      --deep: #071827;
+      --accent: #b85a2a;
+      --accent-ink: #8a3d18;
+      --petrol: #1f6b78;
+      --hair: rgba(26,31,46,0.14);
+      --photo-bg: #f6f3ec;
+      --font-display: "Newsreader", Georgia, serif;
+      --font-body: "Inter Tight", "Segoe UI", Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: #c8c8c8;
+      color: var(--ink);
+      font-family: var(--font-body);
+    }
+
+    .poster {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 18px auto;
+      background-image: url("../assets/brand/mano.jpg");
+      background-color: #071827;
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 18px 46px rgba(0,0,0,0.20);
+      display: flex;
+      flex-direction: column;
+      padding: 17mm 25mm;
+      color: #fff;
+    }
+
+    .poster::before,
+    .poster::after {
+      content: "";
+      display: none;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 17mm;
+      z-index: 1;
+      opacity: 0.22;
+      background-color: transparent;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 82 230'%3E%3Crect x='38' y='22' width='7' height='180' rx='4' fill='%23c07932'/%3E%3Cpath d='M44 45 C68 64 18 82 40 104 C64 128 18 146 40 172' fill='none' stroke='%230b1c11' stroke-width='12' stroke-linecap='round'/%3E%3Cpath d='M44 45 C68 64 18 82 40 104 C64 128 18 146 40 172' fill='none' stroke='%23245a28' stroke-width='8' stroke-linecap='round'/%3E%3Ccircle cx='45' cy='40' r='8' fill='%23245a28'/%3E%3C/svg%3E");
+      background-repeat: repeat-y;
+      background-size: 15mm auto;
+      background-position: center top;
+    }
+
+    .poster::before { left: 0; }
+    .poster::after { right: 0; transform: scaleX(-1); }
+
+    .poster > * {
+      position: relative;
+      z-index: 2;
+    }
+
+    .brand-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+      border-bottom: 1px solid rgba(255,255,255,0.22);
+      padding-bottom: 14px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .mark {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: var(--deep);
+      color: var(--bg);
+      font-family: var(--font-display);
+      font-size: 25px;
+      font-weight: 700;
+    }
+
+    .brand strong {
+      display: block;
+      font-size: 22px;
+      color: #fff;
+    }
+
+    .brand span,
+    .area {
+      display: block;
+      color: rgba(255,255,255,0.65);
+      font-size: 13px;
+    }
+
+    h1,
+    h2 {
+      margin: 0;
+      font-family: var(--font-display);
+      line-height: 0.98;
+      letter-spacing: -0.035em;
+      color: #fff;
+    }
+
+    h1 {
+      font-size: 82px;
+      max-width: 720px;
+      margin-top: 22mm;
+    }
+
+    h2 {
+      font-size: 38px;
+      line-height: 1.05;
+    }
+
+    p {
+      margin: 0;
+      color: rgba(255,255,255,0.88);
+      font-size: 22px;
+      line-height: 1.34;
+    }
+
+    .lead {
+      margin-top: 14px;
+      max-width: 710px;
+      color: rgba(255,255,255,0.92);
+      font-size: 31px;
+      line-height: 1.22;
+    }
+
+    .services {
+      margin-top: 22px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 11px;
+    }
+
+    .service {
+      min-height: 67px;
+      padding: 16px;
+      border-radius: 15px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.20);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      font-size: 24px;
+      font-weight: 800;
+    }
+
+    .claim {
+      margin-top: 20px;
+      border-radius: 18px;
+      padding: 20px;
+      background: rgba(31,107,120,0.92);
+      border: 1px solid rgba(31,107,120,0.28);
+    }
+
+    .claim p {
+      margin-top: 8px;
+      color: rgba(255,255,255,0.80);
+      font-size: 20px;
+    }
+
+    .cta {
+      margin-top: auto;
+      display: grid;
+      grid-template-columns: 1fr 124px;
+      gap: 20px;
+      align-items: center;
+      background: rgba(255,255,255,0.92);
+      color: var(--ink);
+      border-radius: 22px;
+      padding: 23px;
+    }
+
+    .cta span {
+      display: block;
+      color: var(--accent-ink);
+      font-size: 19px;
+      font-weight: 800;
+      margin-bottom: 5px;
+    }
+
+    .cta strong {
+      display: block;
+      color: var(--ink);
+      font-size: 62px;
+      line-height: 1;
+      letter-spacing: -0.04em;
+    }
+
+    .cta small {
+      display: block;
+      color: var(--ink-soft);
+      font-size: 15px;
+      margin-top: 9px;
+    }
+
+    .cta .site-url {
+      display: block;
+      margin-top: 7px;
+      color: var(--ink);
+      font-size: 12.5px;
+      font-weight: 800;
+      line-height: 1.25;
+      overflow-wrap: anywhere;
+    }
+
+    .qr {
+      width: 124px;
+      min-height: 124px;
+      border: 0;
+      border-radius: 14px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 12px;
+      padding: 8px;
+      background: #fff;
+      text-decoration: none;
+    }
+
+    .qr img {
+      width: 94px;
+      height: 94px;
+      display: block;
+    }
+
+    .qr .qr-label {
+      color: var(--ink-soft);
+      font-size: 9.5px;
+      font-weight: 800;
+      line-height: 1.1;
+    }
+
+    .note {
+      margin-top: 12px;
+      font-size: 13px;
+      color: #f4b080;
+      background: rgba(184,90,42,0.22);
+      border: 1px solid rgba(184,90,42,0.42);
+      border-radius: 12px;
+      padding: 11px 13px;
+    }
+
+    @media print {
+      body { background: #fff; }
+      .poster {
+        margin: 0;
+        width: 210mm;
+        min-height: 297mm;
+        box-shadow: none;
+      }
+      @page { size: A4; margin: 0; }
+    }
+  </style>
+</head>
+<body>
+  <main class="poster">
+    <header class="brand-row">
+      <div class="brand">
+        <div class="mark">AR</div>
+        <div>
+          <strong>Angelo Rosso</strong>
+          <span>Infermiere · OPI Siracusa n. 2609</span>
+        </div>
+      </div>
+      <div class="area">Francofonte (SR)</div>
+    </header>
+
+    <section>
+      <h1>Hai bisogno di una prestazione sanitaria non urgente a domicilio?</h1>
+      <p class="lead">ECG, Holter, medicazioni e assistenza infermieristica privata direttamente a casa. Una soluzione pratica per chi vuole organizzarsi senza spostamenti inutili.</p>
+    </section>
+
+    <section class="services" aria-label="Servizi disponibili">
+      <div class="service">ECG a domicilio</div>
+      <div class="service">Holter ECG</div>
+      <div class="service">Holter pressorio</div>
+      <div class="service">Assistenza infermieristica</div>
+      <div class="service">Documenti digitali quando previsto</div>
+      <div class="service">Medicazioni e parametri</div>
+    </section>
+
+    <section class="claim">
+      <h2>Più semplice da organizzare, più comodo da gestire.</h2>
+      <p>Per anziani, famiglie e caregiver, anche una prestazione semplice può diventare complicata se richiede spostamenti, accompagnatori e attese. Con il servizio domiciliare chiarisci prima modalità e tariffa, poi decidi se confermare.</p>
+    </section>
+
+    <section class="cta">
+      <div>
+        <span>Scrivi su WhatsApp o chiama</span>
+        <strong>331 567 7922</strong>
+        <small>Indica servizio richiesto e comune. Ricevi informazioni pratiche su modalità, disponibilità e tariffa prima di confermare.<b class="site-url">angelo-infermiere.github.io/TelemedicinaFrancofonte/</b></small>
+      </div>
+      <a class="qr" href="https://angelo-infermiere.github.io/TelemedicinaFrancofonte/" aria-label="Apri il sito Angelo Rosso">
+        <img src="assets/qrcode-sito-angelo-rosso.svg" alt="QR code per aprire il sito Angelo Rosso">
+        <span class="qr-label">Scansiona il sito</span>
+      </a>
+    </section>
+
+    <p class="note"><strong>Nota sanitaria.</strong> Per urgenze o sintomi improvvisi chiamare subito 112 o 118. Le prestazioni non sostituiscono medico curante, specialista o Pronto Soccorso.</p>
+  </main>
+</body>
+</html>

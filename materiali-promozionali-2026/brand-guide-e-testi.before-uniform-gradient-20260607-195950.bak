@@ -1,0 +1,355 @@
+# Materiali promozionali 2026 - Angelo Rosso
+
+## 1. Diagnosi sintetica
+
+Fonte principale richiesta nel brief: `https://angeloinfermiere.github.io/telemedicina-francofonte/`.
+
+Esito verifica: l'URL restituisce 404. Per coerenza con la versione effettivamente vista e confermata, il riferimento operativo usato per l'aggiornamento è:
+
+`https://angelo-infermiere.github.io/TelemedicinaFrancofonte/`
+
+Elementi visivi principali del sito pubblicato verificato:
+
+- sfondo fotografico cardiologico-digitale `assets/brand/mano.jpg`, copiato dal file `C:\Users\angel\Downloads\mano.jpg`;
+- cuore anatomico stilizzato con rete digitale;
+- palette scura blu/petrolio con accenti terracotta e azzurri;
+- due rail laterali con bastone di Asclepio ripetuto verticalmente;
+- pannelli chiari semi-trasparenti sopra lo sfondo.
+
+File promozionali trovati:
+
+- Non sono presenti nella cartella i vecchi file citati in `AGENTS.md`: `brochure-definitiva.html`, `cartello-parete-definitivo.html`, `cartello-bancone.html`, `volantino-francofonte.html`, `one-pager-francofonte.html`.
+- `git status` mostra però diversi file promozionali già cancellati nella working tree, tra cui `Brochure-Angelo-Rosso-v2.html`, `Cartello-ambulatorio-v2.html` e `Cartello-parete-v2.html`. Sono stati letti da `HEAD` solo per analisi, senza ripristinarli e senza modificarli.
+- Sono presenti asset utili: `assets/brand/mano.jpg`, copiato dal Download e usato come sfondo coordinato, e `assets/brochure/ecg-holter-pressorio.png`, con dispositivi ECG e Holter pressorio.
+
+Incoerenze o rischi rilevati rispetto alla linea richiesta:
+
+1. Il sito usa una comunicazione forte sul costo nascosto delle attese. Funziona online, ma nei materiali cartacei va resa più prudente e meno polemica, soprattutto in ambulatori medici.
+2. I servizi principali sono chiari sul sito, ma nei materiali brevi vanno ridotti a pochi blocchi leggibili: assistenza infermieristica, ECG, Holter ECG, Holter pressorio, telemedicina.
+3. La distinzione tra infermiere, telemedicina e refertazione medica deve essere sempre esplicita.
+4. Il contatto WhatsApp è centrale e va reso molto più visibile nei materiali stampati.
+5. Serve una nota sanitaria sempre presente: il servizio non sostituisce medico curante, specialista o 112/118.
+6. Nei materiali per spazi pubblici il messaggio deve essere più semplice: difficoltà a spostarsi, attese lunghe, servizio a domicilio, contatto diretto.
+7. Nei materiali per ambulatorio medico il tono deve rispettare il ruolo del medico: il servizio aiuta l'organizzazione del paziente quando appropriato, non sostituisce indicazioni cliniche.
+8. La vecchia brochure ha già una buona struttura a passaggi e una CTA chiara, ma il tono "quando attendere costa" e "sanità pubblica allunga i tempi" va ammorbidito per evitare una percezione polemica.
+9. Il vecchio cartello ambulatorio usa un titolo troppo sistemico: "Sanità pubblica sotto pressione". In uno studio medico è più efficace e rispettoso parlare di soluzione domiciliare pratica per prestazioni non urgenti.
+10. Il vecchio cartello parete è prudente e divulgativo, ma risulta meno commerciale: il numero e l'azione da fare devono diventare molto più evidenti.
+11. I materiali 2026 erano coerenti sul testo, ma troppo chiari e cartacei rispetto al sito pubblicato: mancavano sfondo cardiologico digitale e rail laterali Asclepio.
+
+## 2. Nuova linea comunicativa unica
+
+### Messaggio guida
+
+Portiamo assistenza sanitaria e telemedicina direttamente a casa tua, riducendo attese, spostamenti e difficoltà organizzative.
+
+### Variante brochure
+
+ECG, Holter, telemedicina e assistenza infermieristica a domicilio, con informazioni chiare prima dell'appuntamento.
+
+### Variante ambulatorio medico
+
+Una soluzione domiciliare pratica per ECG, Holter e assistenza infermieristica, nel rispetto del percorso indicato dal medico.
+
+### Variante spazi pubblici
+
+Hai difficoltà a spostarti? ECG, Holter e assistenza infermieristica arrivano a domicilio.
+
+## 3. Mini brand guide
+
+### Identità
+
+- Nome da usare: Angelo Rosso - Infermiere
+- Specifica professionale: Infermiere Professionale, iscritto OPI Siracusa n. 2609
+- Area: Francofonte, Lentini, Carlentini
+- Contatto principale: WhatsApp e telefono 331 567 7922
+
+### Colori
+
+- Fondo caldo chiaro: `#f6f3ec`
+- Fondo secondario: `#efeae0`
+- Fondo scuro cardiologico: `#071827`
+- Testo principale: `#1a1f2e`
+- Testo secondario: `#5a6275`
+- Terracotta CTA: `#b85a2a`
+- Terracotta scuro: `#8a3d18`
+- Petrolio sanitario: `#1f6b78`
+- Verde Asclepio: `#245a28`
+- Linee leggere: `rgba(26, 31, 46, 0.12)`
+- Pannelli chiari sopra immagine: `rgba(255, 255, 255, 0.80-0.90)`
+
+### Tipografia
+
+- Titoli: Newsreader o Georgia, per continuità con il sito.
+- Testi: Inter Tight o Segoe UI, molto leggibile.
+- Evitare tutto maiuscolo nei testi lunghi.
+- Titoli grandi ma brevi, soprattutto nelle locandine.
+
+### Stile grafico
+
+- Pulito, sanitario, digitale, locale.
+- Sfondo cardiologico scuro richiamato in modo controllato, con pannelli chiari leggibili.
+- Rail laterali Asclepio come elemento identitario, da usare con opacità bassa nei materiali stampati.
+- Accento terracotta per inviti all'azione.
+- Petrolio per elementi sanitari e blocchi informativi.
+- Immagini consigliate: cuore/telemedicina, strumentazione ECG/Holter, contesto domiciliare credibile. Evitare foto stock fredde da clinica.
+
+### Tono di voce
+
+- Umano, professionale, diretto.
+- Frasi brevi.
+- Nessun attacco al Servizio Sanitario Nazionale.
+- Nessuna promessa clinica.
+- Nessun linguaggio allarmistico.
+- Parlare di comodità, chiarezza, tempi organizzativi, domicilio.
+
+### CTA
+
+Struttura consigliata:
+
+1. Azione: Scrivi su WhatsApp oppure Chiama.
+2. Numero visibile: 331 567 7922.
+3. Microcopy: Spiega il servizio richiesto e il comune.
+4. Nota: prima di confermare ricevi informazioni su disponibilità e tariffa.
+
+## 4. Testo revisionato completo - brochure
+
+### Copertina
+
+Angelo Rosso - Infermiere
+
+ECG, Holter, telemedicina e assistenza infermieristica direttamente a domicilio
+
+Un supporto sanitario concreto per chi ha difficoltà a spostarsi, tempi di attesa lunghi o bisogno di organizzare una prestazione senza stress.
+
+Francofonte, Lentini, Carlentini
+
+WhatsApp e telefono: 331 567 7922
+
+### Chi sono
+
+Mi chiamo Angelo Rosso, sono un infermiere di Francofonte, iscritto all'OPI di Siracusa n. 2609.
+
+Lavoro sul territorio con servizi sanitari a domicilio pensati per persone anziane, pazienti fragili, familiari caregiver e cittadini che hanno bisogno di una soluzione pratica, chiara e vicina.
+
+Il mio obiettivo è aiutare le persone a gestire prestazioni semplici o programmate senza spostamenti inutili, con informazioni chiare prima dell'appuntamento.
+
+### Cosa offro
+
+- Assistenza infermieristica domiciliare
+- ECG a domicilio
+- Holter ECG
+- Holter pressorio
+- Telemedicina e gestione digitale dei documenti quando prevista
+- Controllo parametri vitali
+- Medicazioni
+- Supporto a pazienti fragili, anziani e famiglie
+
+### Per chi è utile
+
+Il servizio è utile se:
+
+- hai difficoltà a spostarti;
+- devi accompagnare un familiare anziano o fragile;
+- vuoi evitare viaggi, file e attese organizzative;
+- hai bisogno di una prestazione programmata a casa;
+- vuoi sapere prima tempi, modalità e tariffa.
+
+### Perché scegliere il domicilio
+
+Una prestazione privata a domicilio non è sempre più costosa di quanto sembra.
+
+Quando valuti una prestazione devi considerare anche:
+
+- tempo perso;
+- carburante;
+- spostamenti fuori zona;
+- ticket;
+- permessi dal lavoro;
+- accompagnatore;
+- stress per anziani e familiari.
+
+Il domicilio può essere una scelta intelligente quando vuoi ridurre difficoltà organizzative e ricevere un servizio chiaro, concordato e vicino.
+
+### ECG a domicilio
+
+L'ECG registra l'attività elettrica del cuore in quel momento.
+
+La prestazione viene eseguita a domicilio con strumentazione professionale. Il tracciato viene gestito in formato digitale e consegnato secondo le modalità concordate.
+
+L'ECG non sostituisce una visita medica e non deve essere usato in caso di sintomi urgenti.
+
+### Holter ECG
+
+L'Holter ECG registra il ritmo del cuore per un periodo prolungato, di solito 24 ore.
+
+È utile quando il medico vuole osservare l'andamento del ritmo cardiaco durante la vita quotidiana. L'applicazione e la rimozione possono essere organizzate a domicilio.
+
+Per gli Holter, la refertazione medica è distinta dalla prestazione infermieristica e viene gestita tramite cardiologo convenzionato quando previsto.
+
+### Holter pressorio
+
+L'Holter pressorio misura la pressione più volte durante il giorno e la notte.
+
+Aiuta il medico a valutare l'andamento pressorio nell'arco delle 24 ore, senza basarsi su una singola misurazione.
+
+Il servizio comprende applicazione, indicazioni pratiche e gestione del dispositivo secondo le modalità concordate.
+
+### Assistenza infermieristica domiciliare
+
+Prestazioni disponibili:
+
+- medicazioni;
+- controllo parametri vitali;
+- supporto post-dimissione;
+- educazione pratica a paziente e caregiver;
+- gestione di bisogni infermieristici programmati;
+- altre prestazioni infermieristiche da valutare in base al caso e, quando necessario, su prescrizione medica.
+
+### Come funziona
+
+1. Scrivi su WhatsApp o chiama.
+2. Indichi servizio richiesto, comune e necessità principali.
+3. Ricevi informazioni su disponibilità, modalità e tariffa.
+4. Se appropriato, viene concordato l'appuntamento a domicilio.
+5. Dopo la prestazione ricevi le indicazioni organizzative e i documenti previsti.
+
+### Contatti
+
+WhatsApp e telefono: 331 567 7922
+
+Email: angelo.rosso073@gmail.com
+
+Area operativa: Francofonte, Lentini, Carlentini
+
+QR code: spazio predisposto per WhatsApp o sito ufficiale.
+
+### Nota sanitaria
+
+Le prestazioni non sostituiscono il medico curante, lo specialista o il Pronto Soccorso. In caso di dolore al petto, difficoltà a respirare, svenimento, sintomi improvvisi o situazione urgente, chiamare subito 112 o 118.
+
+## 5. Testo revisionato completo - locandina ambulatorio medico
+
+Angelo Rosso - Infermiere
+
+ECG, Holter e assistenza infermieristica a domicilio
+
+Una soluzione pratica per prestazioni programmate e non urgenti, utile per pazienti che hanno difficoltà a spostarsi o devono evitare viaggi inutili.
+
+Servizi principali:
+
+- ECG a domicilio
+- Holter ECG
+- Holter pressorio
+- Assistenza infermieristica
+- Telemedicina
+- Medicazioni e parametri vitali
+- Supporto a pazienti fragili, anziani e famiglie
+
+Per il paziente:
+
+- meno spostamenti;
+- meno stress organizzativo;
+- servizio a casa;
+- informazioni chiare prima dell'appuntamento.
+
+Per il medico:
+
+un riferimento domiciliare pratico da indicare al paziente quando la prestazione è appropriata, programmata e compatibile con il percorso deciso dal medico curante.
+
+WhatsApp e telefono: 331 567 7922
+
+Francofonte, Lentini, Carlentini
+
+QR code: scansiona per aprire WhatsApp o il sito.
+
+Nota sanitaria: il servizio non sostituisce medico curante, specialista o Pronto Soccorso. In caso di urgenza chiamare subito 112 o 118.
+
+## 6. Testo revisionato completo - locandina spazi pubblici
+
+Hai difficoltà a spostarti?
+
+ECG, Holter, telemedicina e assistenza infermieristica arrivano a domicilio.
+
+Un servizio pratico per anziani, pazienti fragili, famiglie e persone che vogliono evitare viaggi, attese e difficoltà organizzative.
+
+Puoi richiedere:
+
+- ECG a domicilio
+- Holter ECG
+- Holter pressorio
+- Assistenza infermieristica
+- Telemedicina
+- Medicazioni e controllo parametri vitali
+
+Meno attese, meno spostamenti, più comodità.
+
+Scrivi su WhatsApp o chiama:
+
+331 567 7922
+
+Angelo Rosso - Infermiere
+
+Francofonte, Lentini, Carlentini
+
+QR code: scansiona per contattare subito.
+
+Nota sanitaria: per urgenze o sintomi improvvisi chiamare subito 112 o 118. Le prestazioni non sostituiscono medico curante, specialista o Pronto Soccorso.
+
+## 7. Suggerimenti grafici specifici
+
+### Brochure
+
+1. Formato: A4 verticale, 2 pagine stampabili oppure PDF fronte-retro.
+2. Prima pagina: headline, richiamo allo sfondo cardiologico digitale, foto strumenti, contatto grande, area operativa.
+3. Seconda pagina: servizi, spiegazioni semplici, vantaggi, nota sanitaria.
+4. Inserire QR in basso a destra, vicino al numero.
+5. Usare massimo 3 accenti: terracotta per CTA, petrolio per sezioni sanitarie, verde Asclepio solo come decorazione leggera.
+
+### Locandina ambulatorio medico
+
+1. Formato: A3 o A4 verticale.
+2. Titolo molto leggibile da lontano.
+3. Pochi blocchi, niente paragrafi lunghi.
+4. Mettere il beneficio per il medico in un box discreto.
+5. CTA grande in basso: numero e WhatsApp.
+6. Tono rispettoso: evitare qualsiasi frase che sembri sostituire il medico.
+7. Rail laterali Asclepio presenti ma leggeri, senza rubare attenzione al numero.
+
+### Locandina spazi pubblici
+
+1. Formato: A3 verticale.
+2. Headline popolare e immediata: "Hai difficoltà a spostarti?"
+3. Numero molto grande.
+4. Servizi in elenco breve.
+5. QR grande.
+6. Linguaggio semplice, adatto anche a lettura veloce.
+7. Sfondo cardiologico-digitale presente ma schermato: deve comunicare modernità, non ridurre la leggibilità.
+
+## 8. File generati
+
+Sono stati creati file aggiornati e sono state mantenute copie di backup `.bak` nella stessa cartella:
+
+- `materiali-promozionali-2026/brochure-angelo-rosso-2026.html`
+- `materiali-promozionali-2026/locandina-ambulatorio-medico-2026.html`
+- `materiali-promozionali-2026/locandina-spazi-pubblici-2026.html`
+- `materiali-promozionali-2026/brand-guide-e-testi.md`
+
+Modifica grafica applicata nel redesign finale:
+
+- brochure trasformata in 2 pagine: copertina scura coerente con il sito + pagina informativa chiara;
+- locandina ambulatorio trasformata in formato con hero scuro istituzionale e corpo chiaro per medici/pazienti;
+- locandina spazi pubblici trasformata in poster scuro più immediato, con numero molto dominante;
+- usato `../assets/brand/mano.jpg` come immagine identitaria;
+- aggiunti rail laterali Asclepio semplificati in SVG/CSS;
+- mantenuti pannelli chiari e opachi dove serve leggibilità;
+- mantenuto il numero WhatsApp/telefono come CTA principale.
+
+## 9. Consigli di integrazione futura
+
+Da non inserire nei materiali finché non sono confermati operativamente:
+
+- QR code definitivo verso sito pubblicato o WhatsApp.
+- P.IVA reale al posto del placeholder presente nel sito.
+- Eventuali tempi di risposta garantiti.
+- Eventuali comuni aggiuntivi oltre Francofonte, Lentini e Carlentini.
+- Eventuali convenzioni con farmacie, studi medici o cardiologi, solo se formalizzate.

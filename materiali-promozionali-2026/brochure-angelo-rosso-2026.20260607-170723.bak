@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brochure 2026 - Angelo Rosso Infermiere</title>
+  <style>
+    :root {
+      --bg: #f6f3ec;
+      --bg-warm: #efeae0;
+      --surface: #ffffff;
+      --ink: #1a1f2e;
+      --ink-soft: #2a3142;
+      --muted: #5a6275;
+      --hair: rgba(26, 31, 46, 0.14);
+      --accent: #b85a2a;
+      --accent-ink: #8a3d18;
+      --accent-soft: rgba(184, 90, 42, 0.10);
+      --petrol: #1f6b78;
+      --petrol-soft: rgba(31, 107, 120, 0.10);
+      --radius: 18px;
+      --font-display: "Newsreader", Georgia, serif;
+      --font-body: "Inter Tight", "Segoe UI", Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: #d8d8d8;
+      color: var(--ink);
+      font-family: var(--font-body);
+      line-height: 1.45;
+    }
+
+    .sheet {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 18px auto;
+      background: var(--bg);
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.16);
+      page-break-after: always;
+    }
+
+    .sheet::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 95% 0%, rgba(31, 107, 120, 0.18), transparent 36%),
+        linear-gradient(135deg, rgba(255,255,255,0.76), transparent 46%);
+      pointer-events: none;
+    }
+
+    .content {
+      position: relative;
+      z-index: 1;
+      padding: 18mm;
+    }
+
+    .brand-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: flex-start;
+      border-bottom: 1px solid var(--hair);
+      padding-bottom: 12px;
+      margin-bottom: 22px;
+    }
+
+    .mark {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: var(--ink);
+      color: var(--bg);
+      font-family: var(--font-display);
+      font-size: 23px;
+      font-weight: 700;
+      flex: 0 0 auto;
+    }
+
+    .brand {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .brand strong {
+      display: block;
+      font-size: 19px;
+      letter-spacing: -0.01em;
+    }
+
+    .brand span,
+    .meta {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .meta {
+      text-align: right;
+      max-width: 230px;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: var(--font-display);
+      letter-spacing: -0.02em;
+      margin: 0;
+      color: var(--ink);
+      line-height: 1.05;
+    }
+
+    h1 {
+      max-width: 640px;
+      font-size: 58px;
+      margin-bottom: 14px;
+    }
+
+    h2 {
+      font-size: 31px;
+      margin-bottom: 12px;
+    }
+
+    h3 {
+      font-size: 20px;
+      margin-bottom: 8px;
+    }
+
+    p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .lead {
+      max-width: 650px;
+      color: var(--ink-soft);
+      font-size: 19px;
+      line-height: 1.45;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 24px;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    .hero-image {
+      border: 1px solid var(--hair);
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: #fff;
+      min-height: 235px;
+    }
+
+    .hero-image img {
+      width: 100%;
+      height: 100%;
+      min-height: 235px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .cta-strip {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 18px;
+      align-items: center;
+      background: var(--ink);
+      color: #fff;
+      border-radius: var(--radius);
+      padding: 18px 20px;
+      margin: 20px 0 28px;
+    }
+
+    .cta-strip p,
+    .cta-strip span {
+      color: rgba(255, 255, 255, 0.76);
+    }
+
+    .cta-strip strong {
+      display: block;
+      font-size: 31px;
+      color: #fff;
+      letter-spacing: -0.02em;
+    }
+
+    .qr {
+      width: 88px;
+      height: 88px;
+      border: 2px dashed rgba(255, 255, 255, 0.5);
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      color: #fff;
+      font-size: 10px;
+      padding: 8px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .card,
+    .note {
+      background: rgba(255, 255, 255, 0.78);
+      border: 1px solid var(--hair);
+      border-radius: var(--radius);
+      padding: 17px;
+    }
+
+    .card.petrol {
+      background: var(--petrol-soft);
+      border-color: rgba(31, 107, 120, 0.22);
+    }
+
+    .list {
+      margin: 10px 0 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 7px;
+    }
+
+    .list li {
+      position: relative;
+      padding-left: 18px;
+      color: var(--ink-soft);
+      font-size: 14px;
+    }
+
+    .list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.62em;
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+
+    .section {
+      margin-top: 18px;
+    }
+
+    .services {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .service {
+      border-top: 1px solid var(--hair);
+      padding-top: 11px;
+    }
+
+    .service h3 {
+      font-size: 18px;
+      color: var(--accent-ink);
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .step {
+      border: 1px solid var(--hair);
+      border-radius: 14px;
+      padding: 11px;
+      background: rgba(255, 255, 255, 0.62);
+    }
+
+    .step b {
+      display: block;
+      color: var(--accent);
+      font-size: 18px;
+      margin-bottom: 4px;
+    }
+
+    .step span {
+      display: block;
+      color: var(--ink-soft);
+      font-size: 12px;
+      line-height: 1.35;
+    }
+
+    .footer-note {
+      margin-top: 18px;
+      padding: 14px 16px;
+      border-radius: 14px;
+      background: var(--accent-soft);
+      border: 1px solid rgba(184, 90, 42, 0.24);
+      color: var(--accent-ink);
+      font-size: 12.5px;
+    }
+
+    .small {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    @media print {
+      body { background: #fff; }
+      .sheet {
+        margin: 0;
+        width: 210mm;
+        min-height: 297mm;
+        box-shadow: none;
+      }
+      @page { size: A4; margin: 0; }
+    }
+  </style>
+</head>
+<body>
+  <section class="sheet">
+    <div class="content">
+      <header class="brand-row">
+        <div class="brand">
+          <div class="mark">AR</div>
+          <div>
+            <strong>Angelo Rosso</strong>
+            <span>Infermiere domiciliare · OPI Siracusa n. 2609</span>
+          </div>
+        </div>
+        <div class="meta">Francofonte · Lentini · Carlentini<br>Servizi privati a domicilio</div>
+      </header>
+
+      <div class="hero">
+        <div>
+          <h1>La salute arriva a casa tua.</h1>
+          <p class="lead">ECG, Holter, telemedicina e assistenza infermieristica direttamente a domicilio, per ridurre attese, spostamenti e difficoltà organizzative.</p>
+        </div>
+        <figure class="hero-image">
+          <img src="../assets/brochure/ecg-holter-pressorio.png" alt="Strumentazione per ECG e Holter pressorio a domicilio">
+        </figure>
+      </div>
+
+      <div class="cta-strip">
+        <div>
+          <span>WhatsApp e telefono</span>
+          <strong>331 567 7922</strong>
+          <p>Scrivi il servizio richiesto e il comune. Prima di confermare ricevi informazioni su disponibilità e tariffa.</p>
+        </div>
+        <div class="qr">QR WhatsApp o sito</div>
+      </div>
+
+      <div class="grid-2">
+        <article class="card">
+          <h2>Chi sono</h2>
+          <p>Mi chiamo Angelo Rosso, sono un infermiere di Francofonte, iscritto all'OPI di Siracusa n. 2609. Lavoro sul territorio con servizi sanitari a domicilio pensati per persone anziane, pazienti fragili, familiari caregiver e cittadini che hanno bisogno di una soluzione pratica e vicina.</p>
+        </article>
+        <article class="card petrol">
+          <h2>Per chi è utile</h2>
+          <ul class="list">
+            <li>Persone con difficoltà a spostarsi.</li>
+            <li>Famiglie che assistono un anziano o un paziente fragile.</li>
+            <li>Chi vuole evitare viaggi, file e stress organizzativo.</li>
+            <li>Chi vuole conoscere modalità e tariffa prima dell'appuntamento.</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="section">
+        <h2>Servizi principali</h2>
+        <div class="services">
+          <div class="service">
+            <h3>Assistenza infermieristica domiciliare</h3>
+            <p>Medicazioni, controllo parametri vitali, supporto post-dimissione e bisogni infermieristici programmati, quando appropriati.</p>
+          </div>
+          <div class="service">
+            <h3>ECG a domicilio</h3>
+            <p>Registrazione dell'attività elettrica del cuore in quel momento, con strumentazione professionale e invio digitale del tracciato.</p>
+          </div>
+          <div class="service">
+            <h3>Holter ECG</h3>
+            <p>Registrazione del ritmo cardiaco per un periodo prolungato, di solito 24 ore. Applicazione e rimozione organizzate a domicilio.</p>
+          </div>
+          <div class="service">
+            <h3>Holter pressorio</h3>
+            <p>Misurazione della pressione più volte durante giorno e notte per aiutare il medico a valutare l'andamento pressorio.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="section grid-2">
+        <article class="card">
+          <h2>Perché il domicilio</h2>
+          <p>Una prestazione privata a domicilio può essere più conveniente di quanto sembri quando consideri tempo perso, carburante, ticket, accompagnatore, permessi dal lavoro e stress organizzativo.</p>
+        </article>
+        <article class="card">
+          <h2>Telemedicina</h2>
+          <p>Quando previsto, tracciati e documenti vengono gestiti in formato digitale. Per gli Holter, la refertazione medica è distinta dalla prestazione infermieristica e viene gestita tramite cardiologo convenzionato. Il servizio non sostituisce la valutazione del medico.</p>
+        </article>
+      </div>
+
+      <div class="section">
+        <h2>Come funziona</h2>
+        <div class="steps">
+          <div class="step"><b>1</b><span>Scrivi o chiama.</span></div>
+          <div class="step"><b>2</b><span>Indichi servizio, comune e necessità.</span></div>
+          <div class="step"><b>3</b><span>Ricevi modalità, disponibilità e tariffa.</span></div>
+          <div class="step"><b>4</b><span>Concordi l'appuntamento a domicilio.</span></div>
+          <div class="step"><b>5</b><span>Ricevi indicazioni e documenti previsti.</span></div>
+        </div>
+      </div>
+
+      <p class="footer-note"><strong>Nota sanitaria.</strong> Le prestazioni non sostituiscono il medico curante, lo specialista o il Pronto Soccorso. In caso di dolore al petto, difficoltà a respirare, svenimento, sintomi improvvisi o situazione urgente, chiamare subito 112 o 118.</p>
+      <p class="small">Email: angelo.rosso073@gmail.com · Via Enrico Gaudioso 20, 96015 Francofonte (SR)</p>
+    </div>
+  </section>
+</body>
+</html>
